@@ -1,0 +1,2357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aspen Grove Solutions - AI-Powered Document Processing</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --sage-green: #7A918D;
+            --amber-gold: #D4AF37;
+            --forest-green: #2F4F4F;
+            --light-sage: #E8EDEC;
+            --white: #FFFFFF;
+            --hover-green: #5A7A75;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Georgia', 'Times New Roman', serif;
+        }
+
+        body {
+            background-color: var(--light-sage);
+            color: var(--forest-green);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        /* Navigation Styles */
+        .navbar {
+            background-color: var(--white);
+            box-shadow: 0 4px 15px var(--shadow-color);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            height: 70px;
+            transition: all 0.3s ease;
+        }
+
+        .navbar.sticky {
+            height: 60px;
+            background-color: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .navbar.sticky .logo img {
+            height: 32px;
+        }
+
+        .logo-text {
+            font-weight: 700;
+            font-size: 1.4em;
+            color: var(--forest-green);
+            transition: all 0.3s ease;
+        }
+
+        .navbar.sticky .logo-text {
+            font-size: 1.2em;
+        }
+
+        .main-menu {
+            display: flex;
+            list-style: none;
+        }
+
+        .menu-item {
+            position: relative;
+            margin: 0 5px;
+        }
+
+        .menu-item > a {
+            display: block;
+            padding: 25px 15px;
+            color: var(--forest-green);
+            text-decoration: none;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .navbar.sticky .menu-item > a {
+            padding: 20px 15px;
+        }
+
+        .menu-item > a:hover {
+            color: var(--amber-gold);
+        }
+
+        .menu-item > a::after {
+            content: '';
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background-color: var(--amber-gold);
+            transition: width 0.3s ease;
+        }
+
+        .navbar.sticky .menu-item > a::after {
+            bottom: 12px;
+        }
+
+        .menu-item > a:hover::after,
+        .menu-item.active > a::after {
+            width: 30px;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: var(--white);
+            min-width: 280px;
+            box-shadow: 0 5px 15px var(--shadow-color);
+            border-radius: 0 0 4px 4px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            padding: 10px 0;
+            z-index: 100;
+        }
+
+        .menu-item:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            display: flex;
+            padding: 12px 15px;
+            color: var(--forest-green);
+            text-decoration: none;
+            font-size: 0.9em;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            align-items: center;
+        }
+
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-item .item-icon {
+            margin-right: 12px;
+            color: var(--sage-green);
+            font-size: 1.1em;
+            transition: all 0.2s ease;
+            width: 20px;
+            text-align: center;
+        }
+
+        .dropdown-item .item-content {
+            flex: 1;
+        }
+
+        .dropdown-item .item-title {
+            font-weight: 600;
+            margin-bottom: 3px;
+        }
+
+        .dropdown-item .item-description {
+            font-size: 0.85em;
+            color: var(--sage-green);
+            line-height: 1.3;
+        }
+
+        .dropdown-item:hover {
+            background-color: rgba(122, 145, 141, 0.1);
+            color: var(--amber-gold);
+            padding-left: 20px;
+        }
+
+        .dropdown-item:hover .item-icon {
+            color: var(--amber-gold);
+        }
+
+        .dropdown-header {
+            display: block;
+            padding: 10px 15px;
+            font-weight: 600;
+            color: var(--sage-green);
+            font-size: 0.85em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            background-color: rgba(122, 145, 141, 0.05);
+        }
+
+        .nav-cta {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-cta-item {
+            position: relative;
+            margin-left: 5px;
+        }
+
+        .nav-cta-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: var(--white);
+            min-width: 240px;
+            box-shadow: 0 5px 15px var(--shadow-color);
+            border-radius: 0 0 4px 4px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+
+        .nav-cta-item:hover .nav-cta-dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(5px);
+        }
+
+        .mobile-menu {
+            display: none;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95em;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .btn-secondary {
+            color: var(--forest-green);
+            border: 1px solid var(--sage-green);
+            background-color: transparent;
+            margin-right: 10px;
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(122, 145, 141, 0.1);
+            border-color: var(--forest-green);
+            transform: translateY(-2px);
+        }
+
+        .btn-primary {
+            background-color: var(--amber-gold);
+            color: var(--white);
+            border: none;
+            box-shadow: 0 4px 10px rgba(212, 175, 55, 0.2);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--forest-green);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(47, 79, 79, 0.2);
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5em;
+            color: var(--forest-green);
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 70px;
+            background: linear-gradient(135deg, var(--forest-green), var(--sage-green));
+            color: var(--white);
+            padding: 70px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
+            gap: 40px;
+        }
+
+        .hero-content {
+            flex: 1;
+            max-width: 600px;
+        }
+
+        .hero-heading {
+            font-size: 2.8em;
+            margin-bottom: 25px;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .hero-highlight {
+            color: var(--amber-gold);
+        }
+
+        .hero-subheading {
+            font-size: 1.3em;
+            margin-bottom: 20px;
+            line-height: 1.4;
+            opacity: 0.9;
+        }
+
+        .hero-benefits {
+            margin: 30px 0;
+        }
+
+        .benefit-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .benefit-icon {
+            flex-shrink: 0;
+            width: 24px;
+            height: 24px;
+            margin-right: 15px;
+            margin-top: 3px;
+            color: var(--amber-gold);
+        }
+
+        .benefit-text {
+            font-size: 1.1em;
+            opacity: 0.95;
+        }
+
+        .benefit-text strong {
+            color: var(--amber-gold);
+            font-weight: 600;
+        }
+
+        .hero-form {
+            display: flex;
+            margin-top: 30px;
+            max-width: 450px;
+        }
+
+        .hero-form input {
+            flex: 1;
+            padding: 14px 20px;
+            border: none;
+            border-radius: 6px 0 0 6px;
+            font-size: 1em;
+            outline: none;
+        }
+
+        .hero-form .btn {
+            border-radius: 0 6px 6px 0;
+            padding: 14px 25px;
+        }
+
+        .hero-visual {
+            flex: 1;
+            max-width: 500px;
+        }
+
+        .visual-placeholder {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            height: 350px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255, 255, 255, 0.6);
+            text-align: center;
+            padding: 20px;
+            border: 1px dashed rgba(255, 255, 255, 0.3);
+        }
+
+        .aspen-logo-small {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 15px;
+        }
+
+        @media (max-width: 960px) {
+            .hero-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .benefit-item {
+                text-align: left;
+            }
+            
+            .hero-form {
+                margin-left: auto;
+                margin-right: auto;
+            }
+            
+            .hero-visual {
+                margin-top: 40px;
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-heading {
+                font-size: 2.3em;
+            }
+        }
+
+        /* Features Section */
+        .features-section {
+            background-color: var(--white);
+            padding: 100px 0 80px;
+        }
+
+        .section-title {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 60px;
+        }
+
+        .section-title h2 {
+            font-size: 2.4em;
+            color: var(--forest-green);
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 3px;
+            background-color: var(--amber-gold);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .section-title p {
+            color: var(--sage-green);
+            font-size: 1.1em;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .feature-card {
+            background-color: var(--white);
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            border: 1px solid var(--light-sage);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
+            border-color: var(--amber-gold);
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background-color: var(--amber-gold);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover::before {
+            opacity: 1;
+        }
+
+        .feature-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 70px;
+            height: 70px;
+            background-color: rgba(122, 145, 141, 0.1);
+            border-radius: 50%;
+            margin-bottom: 25px;
+            color: var(--amber-gold);
+            font-size: 1.8em;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover .feature-icon {
+            background-color: var(--amber-gold);
+            color: var(--white);
+            transform: scale(1.1);
+        }
+
+        .feature-card h3 {
+            color: var(--forest-green);
+            font-size: 1.4em;
+            margin-bottom: 15px;
+        }
+
+        .feature-card p {
+            color: var(--sage-green);
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .feature-stat {
+            display: flex;
+            align-items: center;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid var(--light-sage);
+        }
+
+        .stat-value {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: var(--amber-gold);
+            margin-right: 10px;
+        }
+
+        .stat-label {
+            color: var(--sage-green);
+            font-size: 0.9em;
+            line-height: 1.2;
+        }
+
+        /* HIPAA & Security Section Styles */
+        .security-section {
+            background: linear-gradient(to bottom, var(--white), var(--light-sage));
+            padding: 100px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .security-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 300px;
+            background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='50' cy='50' r='3' fill='%232F4F4F' opacity='0.05'/%3E%3C/svg%3E") repeat;
+            opacity: 0.3;
+            z-index: 0;
+        }
+
+        .hipaa-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hipaa-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .hipaa-content h2 {
+            font-size: 2.4em;
+            color: var(--forest-green);
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .hipaa-content h2::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 3px;
+            background-color: var(--amber-gold);
+            bottom: -10px;
+            left: 0;
+        }
+
+        .hipaa-content p {
+            margin-bottom: 25px;
+            font-size: 1.1em;
+            color: var(--forest-green);
+            line-height: 1.6;
+        }
+
+        .security-badges {
+            display: flex;
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .security-badge {
+            background: var(--white);
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            width: 180px;
+        }
+
+        .badge-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(122, 145, 141, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--forest-green);
+            font-size: 1.3em;
+        }
+
+        .badge-text {
+            font-size: 0.85em;
+            font-weight: 600;
+            color: var(--forest-green);
+        }
+
+        .security-features {
+            margin-top: 40px;
+        }
+
+        .security-feature {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .security-feature i {
+            color: var(--amber-gold);
+            margin-right: 15px;
+            font-size: 1.2em;
+            margin-top: 2px;
+        }
+
+        .security-feature-text {
+            flex: 1;
+        }
+
+        .security-feature-text h4 {
+            margin-bottom: 5px;
+            color: var(--forest-green);
+            font-size: 1.1em;
+        }
+
+        .security-feature-text p {
+            margin-bottom: 0;
+            font-size: 0.95em;
+            color: var(--sage-green);
+        }
+
+        .aspen-visual {
+            position: relative;
+        }
+
+        .aspen-roots {
+            width: 100%;
+            height: 400px;
+            background-color: var(--white);
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .aspen-roots::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                rgba(255, 255, 255, 0.9), 
+                rgba(255, 255, 255, 0.5)
+            ), 
+            url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,50 C20,20 80,80 100,50 C80,80 20,20 0,50 Z' stroke='%237A918D' fill='none' stroke-width='0.5'/%3E%3C/svg%3E") repeat;
+            opacity: 0.3;
+        }
+
+        /* ROI Calculator Styles */
+        .calculator-container {
+            max-width: 1000px;
+            margin: 40px auto 20px;
+            background: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+            transition: all 0.5s ease;
+            animation: glow 3s infinite alternate;
+        }
+
+        @keyframes glow {
+            from { box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15); }
+            to { box-shadow: 0 12px 40px rgba(212, 175, 55, 0.25); }
+        }
+
+        .calculator-header {
+            background: var(--forest-green);
+            color: var(--white);
+            padding: 15px 25px;
+            position: relative;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .calculator-title {
+            text-align: left;
+        }
+
+        .calculator-header h3 {
+            font-size: 1.4em;
+            margin-bottom: 4px;
+        }
+
+        .calculator-header p {
+            font-size: 0.9em;
+            opacity: 0.9;
+            margin: 0;
+        }
+
+        .calculator-toggles {
+            display: flex;
+            gap: 15px;
+        }
+
+        .toggle-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .toggle-label {
+            font-size: 0.8em;
+            opacity: 0.8;
+            margin-bottom: 5px;
+        }
+
+        .toggle-options {
+            display: flex;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 30px;
+            padding: 2px;
+            min-width: 120px;
+        }
+
+        .toggle-option {
+            flex: 1;
+            text-align: center;
+            padding: 5px 10px;
+            font-size: 0.8em;
+            font-weight: 500;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: var(--white);
+        }
+
+        .toggle-option.active {
+            background: var(--amber-gold);
+            color: var(--white);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .calculator-body {
+            padding: 20px 25px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+
+        .calculator-inputs {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .metric-group {
+            padding: 15px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            border: 1px solid var(--light-sage);
+            position: relative;
+        }
+
+        .metric-group:nth-child(1) {
+            border-left: 4px solid var(--sage-green);
+        }
+
+        .metric-group:nth-child(2) {
+            border-left: 4px solid var(--amber-gold);
+        }
+
+        .metric-group:hover {
+            border-color: var(--amber-gold);
+            background: rgba(232, 237, 236, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .metric-label {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .metric-label span {
+            color: var(--forest-green);
+            font-size: 0.95em;
+            font-weight: 600;
+        }
+
+        .metric-value {
+            color: var(--sage-green);
+            font-size: 1em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            min-width: 80px;
+            text-align: right;
+        }
+
+        .slider-container {
+            position: relative;
+            margin: 12px 0 5px;
+        }
+
+        .calculator-results {
+            background: linear-gradient(135deg, var(--white), var(--light-sage));
+            border: 2px solid var(--amber-gold);
+            border-radius: 10px;
+            padding: 20px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .calculator-results::before {
+            content: 'With Aspen Grove AI';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--amber-gold);
+            color: var(--white);
+            padding: 4px 15px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .result-primary {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .result-value {
+            font-size: 2.2em;
+            font-weight: 700;
+            color: var(--amber-gold);
+            margin: 0 0 5px;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .result-label {
+            color: var(--forest-green);
+            font-size: 0.95em;
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 5px;
+        }
+
+        .result-metric {
+            text-align: center;
+            padding: 8px;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 8px;
+        }
+
+        .result-metric-value {
+            font-size: 1.2em;
+            font-weight: 700;
+            color: var(--forest-green);
+        }
+
+        .result-metric-label {
+            font-size: 0.8em;
+            color: var(--sage-green);
+        }
+
+        .calculator-cta {
+            margin-top: 15px;
+            display: flex;
+            justify-content: center;
+        }
+
+        @media (max-width: 920px) {
+            .calculator-body {
+                grid-template-columns: 1fr;
+            }
+            
+            .calculator-header {
+                flex-direction: column;
+                text-align: center;
+                padding: 15px;
+            }
+            
+            .calculator-title {
+                text-align: center;
+                margin-bottom: 10px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .calculator-toggles {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+
+        /* Responsive styles */
+        @media (max-width: 1100px) {
+            .hero-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .hero-content {
+                padding-right: 0;
+                margin-bottom: 40px;
+            }
+            
+            .hero-form {
+                justify-content: center;
+            }
+            
+            .hero-visual {
+                order: -1;
+                margin-bottom: 30px;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .main-menu {
+                display: none;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background-color: var(--white);
+                flex-direction: column;
+                box-shadow: 0 5px 15px var(--shadow-color);
+                padding-bottom: 15px;
+            }
+
+            .navbar.sticky .main-menu {
+                top: 60px;
+            }
+
+            .main-menu.active {
+                display: flex;
+            }
+
+            .menu-item {
+                margin: 0;
+                border-bottom: 1px solid rgba(0,0,0,0.05);
+            }
+
+            .menu-item > a {
+                padding: 15px 20px;
+            }
+            
+            .navbar.sticky .menu-item > a {
+                padding: 15px 20px;
+            }
+
+            .menu-item > a::after {
+                display: none;
+            }
+
+            .dropdown-menu {
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                box-shadow: none;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s ease;
+                padding: 0;
+            }
+
+            .menu-item.active .dropdown-menu {
+                max-height: 1000px;
+            }
+
+            .dropdown-item {
+                padding: 12px 20px 12px 40px;
+            }
+
+            .dropdown-header {
+                padding: 10px 20px 10px 40px;
+            }
+
+            .hamburger {
+                display: block;
+                cursor: pointer;
+                font-size: 1.5em;
+                color: var(--forest-green);
+            }
+
+            .nav-cta {
+                display: none;
+            }
+
+            .mobile-menu {
+                display: flex;
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                background-color: var(--white);
+                box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+                z-index: 999;
+            }
+
+            .mobile-menu-item {
+                flex: 1;
+                text-align: center;
+                padding: 12px 5px;
+                color: var(--forest-green);
+                text-decoration: none;
+                font-size: 0.8em;
+                transition: all 0.3s ease;
+                border-right: 1px solid rgba(0,0,0,0.05);
+            }
+
+            .mobile-menu-item:last-child {
+                border-right: none;
+            }
+
+            .mobile-menu-item i {
+                display: block;
+                font-size: 1.5em;
+                margin-bottom: 5px;
+            }
+
+            .mobile-menu-item.active {
+                color: var(--amber-gold);
+                background-color: rgba(122, 145, 141, 0.05);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero {
+                padding: 60px 0;
+            }
+            
+            .hero-heading {
+                font-size: 2.2em;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .toggle-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .toggle-section {
+                width: 100%;
+            }
+        }
+
+        /* Footer Styles */
+        .footer {
+            background-color: var(--forest-green);
+            color: var(--white);
+            padding: 70px 0 30px;
+            position: relative;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background: linear-gradient(to right, var(--sage-green), var(--amber-gold), var(--sage-green));
+            opacity: 0.7;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .footer-top {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 50px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 40px;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .footer-logo-img {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .footer-logo-text {
+            font-size: 1.5em;
+            font-weight: 700;
+        }
+
+        .footer-tagline {
+            color: var(--light-sage);
+            margin-bottom: 20px;
+            font-size: 0.95em;
+            opacity: 0.9;
+            max-width: 300px;
+        }
+
+        .footer-compliance {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .compliance-badge {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 6px 12px;
+            font-size: 0.8em;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .compliance-badge i {
+            color: var(--amber-gold);
+        }
+
+        .footer-column h4 {
+            font-size: 1.1em;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h4::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 30px;
+            height: 2px;
+            background-color: var(--amber-gold);
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: var(--light-sage);
+            text-decoration: none;
+            font-size: 0.9em;
+            transition: color 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .footer-links a:hover {
+            color: var(--amber-gold);
+        }
+
+        .footer-links a i {
+            color: var(--amber-gold);
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 20px;
+        }
+
+        .footer-legal {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            font-size: 0.85em;
+            color: var(--light-sage);
+        }
+
+        .footer-legal a {
+            color: var(--light-sage);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-legal a:hover {
+            color: var(--amber-gold);
+        }
+
+        .highlighted-link {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: var(--white) !important;
+        }
+
+        .highlighted-link i {
+            color: var(--amber-gold);
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 15px;
+        }
+
+        .footer-social a {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+        }
+
+        .footer-social a:hover {
+            background-color: var(--amber-gold);
+            transform: translateY(-3px);
+        }
+
+        @media (max-width: 992px) {
+            .footer-top {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            .footer-column:first-child {
+                grid-column: span 2;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .footer-top {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-column:first-child {
+                grid-column: span 1;
+            }
+            
+            .footer-bottom {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+            
+            .footer-legal {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar" id="navbar">
+        <div class="logo">
+            <img src="aspen-tree-logo.svg" alt="Aspen Grove Logo">
+            <span class="logo-text">Aspen Grove</span>
+        </div>
+
+        <ul class="main-menu" id="mainMenu">
+            <li class="menu-item">
+                <a href="#">Why Aspen Grove</a>
+                <div class="dropdown-menu">
+                    <a href="#" class="dropdown-item">
+                        <div class="item-icon"><i class="fas fa-chart-line"></i></div>
+                        <div class="item-content">
+                            <div class="item-title">ROI Calculator</div>
+                            <div class="item-description">See how much you can save with our AI solution</div>
+                        </div>
+                    </a>
+                    <a href="#" class="dropdown-item">
+                        <div class="item-icon"><i class="fas fa-network-wired"></i></div>
+                        <div class="item-content">
+                            <div class="item-title">Our Aspen Approach</div>
+                            <div class="item-description">How our interconnected AI grows stronger together</div>
+                        </div>
+                    </a>
+                    <a href="#" class="dropdown-item">
+                        <div class="item-icon"><i class="fas fa-award"></i></div>
+                        <div class="item-content">
+                            <div class="item-title">Success Stories</div>
+                            <div class="item-description">Case studies from our satisfied customers</div>
+                        </div>
+                    </a>
+                    <a href="#" class="dropdown-item">
+                        <div class="item-icon"><i class="fas fa-users"></i></div>
+                        <div class="item-content">
+                            <div class="item-title">About Us</div>
+                            <div class="item-description">Meet our team and company mission</div>
+                        </div>
+                    </a>
+                </div>
+            </li>
+            <li class="menu-item">
+                <a href="#">Industries</a>
+                <div class="dropdown-menu">
+                    <a href="#" class="dropdown-item">
+                        <div class="item-icon"><i class="fas fa-hospital"></i></div>
+                        <div class="item-content">
+                            <div class="item-title">Healthcare</div>
+                            <div class="item-description">HIPAA-compliant solutions for medical records</div>
+                        </div>
+                    </a>
+                    <a href="#" class="dropdown-item">
+                        <div class="item-icon"><i class="fas fa-balance-scale"></i></div>
+                        <div class="item-content">
+                            <div class="item-title">Legal</div>
+                            <div class="item-description">For law firms and legal departments</div>
+                        </div>
+                    </a>
+                    <a href="#" class="dropdown-item">
+                        <div class="item-icon"><i class="fas fa-chart-pie"></i></div>
+                        <div class="item-content">
+                            <div class="item-title">Finance</div>
+                            <div class="item-description">For accounting and financial services</div>
+                        </div>
+                    </a>
+                    <a href="#" class="dropdown-item">
+                        <div class="item-icon"><i class="fas fa-briefcase"></i></div>
+                        <div class="item-content">
+                            <div class="item-title">Business</div>
+                            <div class="item-description">For operations and administration</div>
+                        </div>
+                    </a>
+                    <a href="#" class="dropdown-item">
+                        <div class="item-icon"><i class="fas fa-building"></i></div>
+                        <div class="item-content">
+                            <div class="item-title">Real Estate</div>
+                            <div class="item-description">For property management and transactions</div>
+                        </div>
+                    </a>
+                </div>
+            </li>
+            <li class="menu-item">
+                <a href="#">Features</a>
+                <div class="dropdown-menu">
+                    <a href="#" class="dropdown-item">
+                        <div class="item-icon"><i class="fas fa-robot"></i></div>
+                        <div class="item-content">
+                            <div class="item-title">AI Document Processing</div>
+                            <div class="item-description">Process documents with 99.5% accuracy</div>
+                        </div>
+                    </a>
+                    <a href="#" class="dropdown-item">
+                        <div class="item-icon"><i class="fas fa-cogs"></i></div>
+                        <div class="item-content">
+                            <div class="item-title">Workflow Automation</div>
+                            <div class="item-description">Streamline your document workflows</div>
+                        </div>
+                    </a>
+                    <a href="#" class="dropdown-item">
+                        <div class="item-icon"><i class="fas fa-shield-alt"></i></div>
+                        <div class="item-content">
+                            <div class="item-title">Security & Compliance</div>
+                            <div class="item-description">HIPAA-compliant protection for your data</div>
+                        </div>
+                    </a>
+                    <a href="#" class="dropdown-item">
+                        <div class="item-icon"><i class="fas fa-plug"></i></div>
+                        <div class="item-content">
+                            <div class="item-title">Integrations</div>
+                            <div class="item-description">Connect with your existing systems</div>
+                        </div>
+                    </a>
+                </div>
+            </li>
+            <li class="menu-item">
+                <a href="#">Pricing</a>
+                <div class="dropdown-menu">
+                    <a href="#" class="dropdown-item">
+                        <div class="item-icon"><i class="fas fa-user"></i></div>
+                        <div class="item-content">
+                            <div class="item-title">For Individuals</div>
+                            <div class="item-description">Perfect for solo practitioners</div>
+                        </div>
+                    </a>
+                    <a href="#" class="dropdown-item">
+                        <div class="item-icon"><i class="fas fa-user-friends"></i></div>
+                        <div class="item-content">
+                            <div class="item-title">For Small Teams</div>
+                            <div class="item-description">Designed for teams up to 10 people</div>
+                        </div>
+                    </a>
+                    <a href="#" class="dropdown-item">
+                        <div class="item-icon"><i class="fas fa-building"></i></div>
+                        <div class="item-content">
+                            <div class="item-title">For Enterprise</div>
+                            <div class="item-description">Custom solutions for large organizations</div>
+                        </div>
+                    </a>
+                    <a href="#" class="dropdown-item">
+                        <div class="item-icon"><i class="fas fa-calculator"></i></div>
+                        <div class="item-content">
+                            <div class="item-title">ROI Calculator</div>
+                            <div class="item-description">Calculate your potential savings</div>
+                        </div>
+                    </a>
+                </div>
+            </li>
+            <li class="menu-item">
+                <a href="#">Resources</a>
+                <div class="dropdown-menu">
+                    <div class="dropdown-header">Learn More</div>
+                    <a href="#" class="dropdown-item">
+                        <div class="item-icon"><i class="fas fa-book"></i></div>
+                        <div class="item-content">
+                            <div class="item-title">Documentation</div>
+                            <div class="item-description">Product guides and tutorials</div>
+                        </div>
+                    </a>
+                    <a href="#" class="dropdown-item">
+                        <div class="item-icon"><i class="fas fa-newspaper"></i></div>
+                        <div class="item-content">
+                            <div class="item-title">Blog</div>
+                            <div class="item-description">Industry insights and updates</div>
+                        </div>
+                    </a>
+                    <div class="dropdown-header">Compliance & Security</div>
+                    <a href="#" class="dropdown-item">
+                        <div class="item-icon"><i class="fas fa-shield-alt"></i></div>
+                        <div class="item-content">
+                            <div class="item-title">HIPAA Compliance</div>
+                            <div class="item-description">How we protect healthcare data</div>
+                        </div>
+                    </a>
+                    <a href="#" class="dropdown-item">
+                        <div class="item-icon"><i class="fas fa-file-contract"></i></div>
+                        <div class="item-content">
+                            <div class="item-title">Security Whitepaper</div>
+                            <div class="item-description">Our security and privacy practices</div>
+                        </div>
+                    </a>
+                    <a href="#" class="dropdown-item">
+                        <div class="item-icon"><i class="fas fa-headset"></i></div>
+                        <div class="item-content">
+                            <div class="item-title">Support Center</div>
+                            <div class="item-description">Get help when you need it</div>
+                        </div>
+                    </a>
+                </div>
+            </li>
+        </ul>
+
+        <div class="nav-cta">
+            <div class="nav-cta-item">
+                <a href="#" class="btn btn-secondary">Contact Sales</a>
+                <div class="nav-cta-dropdown">
+                    <a href="#" class="dropdown-item">
+                        <div class="item-icon"><i class="fas fa-phone"></i></div>
+                        <div class="item-content">
+                            <div class="item-title">Call Us</div>
+                            <div class="item-description">Speak with a representative</div>
+                        </div>
+                    </a>
+                    <a href="#" class="dropdown-item">
+                        <div class="item-icon"><i class="fas fa-envelope"></i></div>
+                        <div class="item-content">
+                            <div class="item-title">Email Us</div>
+                            <div class="item-description">Get a response within 24 hours</div>
+                        </div>
+                    </a>
+                    <a href="#" class="dropdown-item">
+                        <div class="item-icon"><i class="fas fa-calendar-alt"></i></div>
+                        <div class="item-content">
+                            <div class="item-title">Schedule a Call</div>
+                            <div class="item-description">Book time with our team</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <a href="#" class="btn btn-primary">Schedule Demo</a>
+        </div>
+
+        <div class="hamburger" id="hamburgerMenu">
+            <i class="fas fa-bars"></i>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+        <a href="#" class="mobile-menu-item active">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </a>
+        <a href="#" class="mobile-menu-item">
+            <i class="fas fa-calculator"></i>
+            <span>ROI</span>
+        </a>
+        <a href="#" class="mobile-menu-item">
+            <i class="fas fa-phone"></i>
+            <span>Contact</span>
+        </a>
+        <a href="#" class="mobile-menu-item">
+            <i class="fas fa-calendar-check"></i>
+            <span>Demo</span>
+        </a>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1 class="hero-heading">Transform Document Processing with <span class="hero-highlight">Interconnected AI</span></h1>
+                <p class="hero-subheading">Like aspen trees that share a unified root system, our HIPAA-compliant AI creates a seamless network of document intelligence that grows stronger with every document.</p>
+                
+                <div class="hero-benefits">
+                    <div class="benefit-item">
+                        <div class="benefit-icon">
+                            <i class="fas fa-network-wired"></i>
+                        </div>
+                        <div class="benefit-text">
+                            <strong>Interconnected Intelligence</strong> — Our AI works like an aspen grove, sharing knowledge across your entire document ecosystem
+                        </div>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="benefit-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <div class="benefit-text">
+                            <strong>100% HIPAA Compliant</strong> — Enterprise-grade security meets healthcare privacy standards for all sensitive information
+                        </div>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="benefit-icon">
+                            <i class="fas fa-tachometer-alt"></i>
+                        </div>
+                        <div class="benefit-text">
+                            <strong>40-60% Time Savings</strong> — Process more documents in less time with AI-powered assistance
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="hero-form">
+                    <input type="email" placeholder="Enter your email" aria-label="Email input">
+                    <button class="btn btn-primary">Get Started</button>
+                </div>
+            </div>
+            
+            <div class="hero-visual">
+                <div class="visual-placeholder">
+                    <img src="aspen-tree-logo.svg" alt="Aspen Grove Logo" class="aspen-logo-small">
+                    <p>Interconnected AI Document Processing</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- HIPAA Compliance & Security Section -->
+    <section class="security-section">
+        <div class="hipaa-container">
+            <div class="hipaa-grid">
+                <div class="hipaa-content">
+                    <h2>HIPAA Compliance With Interconnected Security</h2>
+                    <p>Like the extensive root system of an aspen grove that provides strength and resilience to the entire forest, our 100% HIPAA-compliant infrastructure creates a secure foundation for your sensitive document processing.</p>
+                    
+                    <p>Every document processed through Aspen Grove is protected by multiple layers of security, while our AI continues to learn and improve – sharing knowledge across the system like aspen trees share nutrients through their interconnected roots.</p>
+                    
+                    <div class="security-badges">
+                        <div class="security-badge">
+                            <div class="badge-icon">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <div class="badge-text">
+                                HIPAA Certified
+                            </div>
+                        </div>
+                        <div class="security-badge">
+                            <div class="badge-icon">
+                                <i class="fas fa-lock"></i>
+                            </div>
+                            <div class="badge-text">
+                                SOC 2 Compliant
+                            </div>
+                        </div>
+                        <div class="security-badge">
+                            <div class="badge-icon">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <div class="badge-text">
+                                256-bit Encryption
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="security-features">
+                        <div class="security-feature">
+                            <i class="fas fa-fingerprint"></i>
+                            <div class="security-feature-text">
+                                <h4>End-to-End Encryption</h4>
+                                <p>All documents are encrypted in transit and at rest, ensuring your data remains secure throughout processing.</p>
+                            </div>
+                        </div>
+                        <div class="security-feature">
+                            <i class="fas fa-user-shield"></i>
+                            <div class="security-feature-text">
+                                <h4>Access Controls & Audit Trails</h4>
+                                <p>Comprehensive user management with detailed audit logs for all document activities.</p>
+                            </div>
+                        </div>
+                        <div class="security-feature">
+                            <i class="fas fa-network-wired"></i>
+                            <div class="security-feature-text">
+                                <h4>Interconnected Intelligence</h4>
+                                <p>Our AI system learns collectively while maintaining strict data isolation, just like aspen trees share strength while maintaining separation.</p>
+                            </div>
+                        </div>
+                        <div class="security-feature">
+                            <i class="fas fa-file-signature"></i>
+                            <div class="security-feature-text">
+                                <h4>Business Associate Agreements</h4>
+                                <p>We offer BAAs to all healthcare customers to support your HIPAA compliance requirements.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="aspen-visual">
+                    <div class="aspen-roots">
+                        <!-- Aspen root system visual will be shown here -->
+                        <svg width="100%" height="100%" viewBox="0 0 500 400" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Main trunk -->
+                            <path d="M250,50 L250,100" stroke="#2F4F4F" stroke-width="8" />
+                            
+                            <!-- Root system -->
+                            <path d="M250,100 C200,150 150,200 100,250" stroke="#2F4F4F" stroke-width="6" fill="none" />
+                            <path d="M250,100 C300,150 350,200 400,250" stroke="#2F4F4F" stroke-width="6" fill="none" />
+                            
+                            <path d="M250,100 C230,130 210,160 190,190" stroke="#2F4F4F" stroke-width="5" fill="none" />
+                            <path d="M250,100 C270,130 290,160 310,190" stroke="#2F4F4F" stroke-width="5" fill="none" />
+                            
+                            <path d="M190,190 C170,210 150,230 130,250" stroke="#2F4F4F" stroke-width="4" fill="none" />
+                            <path d="M190,190 C180,220 170,250 160,280" stroke="#2F4F4F" stroke-width="4" fill="none" />
+                            <path d="M130,250 C120,280 110,310 100,340" stroke="#2F4F4F" stroke-width="3" fill="none" />
+                            <path d="M130,250 C110,270 90,290 70,310" stroke="#2F4F4F" stroke-width="3" fill="none" />
+                            
+                            <path d="M310,190 C330,210 350,230 370,250" stroke="#2F4F4F" stroke-width="4" fill="none" />
+                            <path d="M310,190 C320,220 330,250 340,280" stroke="#2F4F4F" stroke-width="4" fill="none" />
+                            <path d="M370,250 C380,280 390,310 400,340" stroke="#2F4F4F" stroke-width="3" fill="none" />
+                            <path d="M370,250 C390,270 410,290 430,310" stroke="#2F4F4F" stroke-width="3" fill="none" />
+                            
+                            <!-- Data nodes -->
+                            <circle cx="250" cy="50" r="15" fill="#7A918D" />
+                            <circle cx="250" cy="50" r="7" fill="#D4AF37" />
+                            <text x="250" y="55" text-anchor="middle" fill="white" font-size="12">AI</text>
+                            
+                            <circle cx="100" cy="250" r="12" fill="#7A918D" />
+                            <circle cx="100" cy="250" r="6" fill="#D4AF37" />
+                            <text x="100" y="254" text-anchor="middle" fill="white" font-size="8">HIPAA</text>
+                            
+                            <circle cx="400" cy="250" r="12" fill="#7A918D" />
+                            <circle cx="400" cy="250" r="6" fill="#D4AF37" />
+                            <text x="400" y="254" text-anchor="middle" fill="white" font-size="8">SOC2</text>
+                            
+                            <circle cx="130" cy="250" r="10" fill="#7A918D" />
+                            <circle cx="370" cy="250" r="10" fill="#7A918D" />
+                            
+                            <circle cx="100" cy="340" r="10" fill="#7A918D" />
+                            <circle cx="400" cy="340" r="10" fill="#7A918D" />
+                            
+                            <circle cx="70" cy="310" r="8" fill="#7A918D" />
+                            <circle cx="430" cy="310" r="8" fill="#7A918D" />
+                            
+                            <circle cx="160" cy="280" r="8" fill="#7A918D" />
+                            <circle cx="340" cy="280" r="8" fill="#7A918D" />
+                            
+                            <circle cx="190" cy="190" r="10" fill="#7A918D" />
+                            <circle cx="310" cy="190" r="10" fill="#7A918D" />
+                            
+                            <!-- Lock icons -->
+                            <circle cx="190" cy="190" r="5" fill="#D4AF37" />
+                            <circle cx="310" cy="190" r="5" fill="#D4AF37" />
+                            <circle cx="160" cy="280" r="4" fill="#D4AF37" />
+                            <circle cx="340" cy="280" r="4" fill="#D4AF37" />
+                            
+                            <!-- Shield text -->
+                            <text x="250" y="380" text-anchor="middle" fill="#2F4F4F" font-size="18" font-weight="bold">Secure Interconnected Foundation</text>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ROI Calculator Section -->
+    <div class="calculator-container" id="calculator-container">
+        <div class="calculator-header">
+            <div class="calculator-title">
+                <h3>ROI Calculator</h3>
+                <p>See how much you could save with Aspen Grove AI</p>
+            </div>
+            <div class="calculator-toggles">
+                <div class="toggle-section">
+                    <span class="toggle-label">Industry</span>
+                    <div class="toggle-options">
+                        <div class="toggle-option active" id="legal-view">Legal</div>
+                        <div class="toggle-option" id="business-view">Business</div>
+                        <div class="toggle-option" id="finance-view">Finance</div>
+                    </div>
+                </div>
+                <div class="toggle-section">
+                    <span class="toggle-label">Time Frame</span>
+                    <div class="toggle-options">
+                        <div class="toggle-option active" id="monthly-view">Monthly</div>
+                        <div class="toggle-option" id="annual-view">Annual</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="calculator-body">
+            <div class="calculator-inputs">
+                <!-- Document Volume Slider -->
+                <div class="metric-group">
+                    <div class="metric-label">
+                        <span id="volume-label">Monthly Documents</span>
+                        <div class="metric-value" id="volume-value">50 docs</div>
+                    </div>
+                    <div class="slider-container">
+                        <input type="range" id="volume-slider" min="10" max="300" value="50" step="10" aria-label="Monthly document volume">
+                    </div>
+                </div>
+                
+                <!-- Hours Per Document Slider -->
+                <div class="metric-group">
+                    <div class="metric-label">
+                        <span id="hours-label">Hours per Document</span>
+                        <div class="metric-value" id="hours-value">5 hours</div>
+                    </div>
+                    <div class="slider-container">
+                        <input type="range" id="hours-slider" min="2" max="10" value="5" step="1" aria-label="Hours per document">
+                    </div>
+                </div>
+                
+                <!-- Hourly Rate Slider -->
+                <div class="metric-group">
+                    <div class="metric-label">
+                        <span id="rate-label">Hourly Rate</span>
+                        <div class="metric-value" id="rate-value">$250</div>
+                    </div>
+                    <div class="slider-container">
+                        <input type="range" id="rate-slider" min="150" max="600" value="250" step="50" aria-label="Hourly billing rate">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="calculator-results">
+                <div class="result-primary">
+                    <div class="result-value" id="monthly-savings">$12,500</div>
+                    <div class="result-label" id="result-label">Monthly Revenue Increase</div>
+                </div>
+                
+                <div class="results-grid">
+                    <div class="result-metric">
+                        <div class="result-metric-value" id="time-saved">125</div>
+                        <div class="result-metric-label" id="time-label">Hours Saved</div>
+                    </div>
+                    <div class="result-metric">
+                        <div class="result-metric-value" id="docs-increased">25</div>
+                        <div class="result-metric-label" id="docs-label">Extra Capacity</div>
+                    </div>
+                    <div class="result-metric">
+                        <div class="result-metric-value" id="roi-percentage">605%</div>
+                        <div class="result-metric-label">ROI</div>
+                    </div>
+                    <div class="result-metric">
+                        <div class="result-metric-value" id="annual-projection">$150,000</div>
+                        <div class="result-metric-label" id="annual-label">Annual Impact</div>
+                    </div>
+                </div>
+                
+                <div class="calculator-cta">
+                    <a href="enhanced-roi-calculator.html" class="btn btn-primary">Full Analysis</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Features Section -->
+    <section class="features-section">
+        <div class="section-title">
+            <h2>Why Choose Aspen Grove AI</h2>
+            <p>Our AI-powered document processing solution delivers measurable results for legal professionals and businesses</p>
+        </div>
+        
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-network-wired"></i>
+                </div>
+                <h3>Interconnected Intelligence</h3>
+                <p>Like aspen trees that thrive through shared root systems, our AI creates a network of knowledge that grows stronger with each document it processes, while maintaining data isolation.</p>
+                <div class="feature-stat">
+                    <div class="stat-value">50%</div>
+                    <div class="stat-label">More accurate than isolated AI solutions</div>
+                </div>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <h3>Save Valuable Time</h3>
+                <p>Reduce document processing time by 40-60% with our AI-powered assistance. Focus on high-value work while our system handles repetitive tasks.</p>
+                <div class="feature-stat">
+                    <div class="stat-value">60%</div>
+                    <div class="stat-label">Average time savings on document processing</div>
+                </div>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h3>Increase Capacity</h3>
+                <p>Handle more documents with your existing team. Our AI helps your staff process more documents in less time, increasing your overall capacity.</p>
+                <div class="feature-stat">
+                    <div class="stat-value">50%</div>
+                    <div class="stat-label">Average increase in document throughput</div>
+                </div>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-dollar-sign"></i>
+                </div>
+                <h3>Boost Revenue</h3>
+                <p>Convert time savings into additional revenue. Process more billable work with the same resources, directly impacting your bottom line.</p>
+                <div class="feature-stat">
+                    <div class="stat-value">15-20%</div>
+                    <div class="stat-label">Typical annual revenue growth</div>
+                </div>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-search"></i>
+                </div>
+                <h3>Enhance Accuracy</h3>
+                <p>Reduce errors and improve consistency with AI-powered document review. Our system catches mistakes that humans might miss.</p>
+                <div class="feature-stat">
+                    <div class="stat-value">99.5%</div>
+                    <div class="stat-label">Document processing accuracy</div>
+                </div>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3>100% HIPAA Compliant</h3>
+                <p>Our comprehensive security measures ensure full HIPAA compliance for all healthcare-related documents, with industry-leading practices that exceed standard requirements.</p>
+                <div class="feature-stat">
+                    <div class="stat-value">100%</div>
+                    <div class="stat-label">HIPAA compliance for sensitive data</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu toggle
+            const hamburger = document.getElementById('hamburgerMenu');
+            const mainMenu = document.getElementById('mainMenu');
+            
+            hamburger.addEventListener('click', function() {
+                mainMenu.classList.toggle('active');
+                
+                // Toggle hamburger icon
+                const icon = hamburger.querySelector('i');
+                if (mainMenu.classList.contains('active')) {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-times');
+                } else {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            });
+            
+            // Mobile dropdown toggle
+            if (window.innerWidth <= 992) {
+                const menuItems = document.querySelectorAll('.menu-item');
+                
+                menuItems.forEach(item => {
+                    const link = item.querySelector('a');
+                    
+                    link.addEventListener('click', function(e) {
+                        // Check if it has dropdown
+                        const dropdown = this.nextElementSibling;
+                        if (dropdown && dropdown.classList.contains('dropdown-menu')) {
+                            e.preventDefault();
+                            
+                            // Close all other dropdowns first
+                            menuItems.forEach(otherItem => {
+                                if (otherItem !== item) {
+                                    otherItem.classList.remove('active');
+                                }
+                            });
+                            
+                            // Toggle current dropdown
+                            item.classList.toggle('active');
+                        }
+                    });
+                });
+            }
+            
+            // Enhanced calculator functionality
+            const calculator = document.getElementById('calculator-container');
+            const legalView = document.getElementById('legal-view');
+            const businessView = document.getElementById('business-view');
+            const financeView = document.getElementById('finance-view');
+            const monthlyView = document.getElementById('monthly-view');
+            const annualView = document.getElementById('annual-view');
+            
+            const resultLabel = document.getElementById('result-label');
+            const volumeLabel = document.getElementById('volume-label');
+            const hoursLabel = document.getElementById('hours-label');
+            const rateLabel = document.getElementById('rate-label');
+            const timeLabel = document.getElementById('time-label');
+            const docsLabel = document.getElementById('docs-label');
+            const annualLabel = document.getElementById('annual-label');
+            
+            const volumeSlider = document.getElementById('volume-slider');
+            const hoursSlider = document.getElementById('hours-slider');
+            const rateSlider = document.getElementById('rate-slider');
+            const volumeValue = document.getElementById('volume-value');
+            const hoursValue = document.getElementById('hours-value');
+            const rateValue = document.getElementById('rate-value');
+            const monthlySavings = document.getElementById('monthly-savings');
+            const timeSaved = document.getElementById('time-saved');
+            const docsIncreased = document.getElementById('docs-increased');
+            const roiPercentage = document.getElementById('roi-percentage');
+            const annualProjection = document.getElementById('annual-projection');
+            
+            // Industry terminology
+            const industryTerms = {
+                legal: {
+                    volume: "Monthly Documents",
+                    hours: "Hours per Document",
+                    rate: "Hourly Rate",
+                    result: "Revenue Increase",
+                    time: "Hours Saved",
+                    docs: "Extra Cases",
+                    annual: "Annual Revenue"
+                },
+                business: {
+                    volume: "Monthly Documents",
+                    hours: "Processing Hours",
+                    rate: "Cost per Hour",
+                    result: "Cost Savings",
+                    time: "Hours Saved",
+                    docs: "Extra Capacity",
+                    annual: "Annual Savings"
+                },
+                finance: {
+                    volume: "Monthly Reports",
+                    hours: "Analysis Hours",
+                    rate: "Processing Cost",
+                    result: "Efficiency Gains",
+                    time: "Hours Saved",
+                    docs: "Additional Reports",
+                    annual: "Annual Value"
+                }
+            };
+            
+            // Toggle between industry views
+            legalView.addEventListener('click', function() {
+                legalView.classList.add('active');
+                businessView.classList.remove('active');
+                financeView.classList.remove('active');
+                updateIndustryLabels('legal');
+                updateCalculator();
+            });
+            
+            businessView.addEventListener('click', function() {
+                businessView.classList.add('active');
+                legalView.classList.remove('active');
+                financeView.classList.remove('active');
+                updateIndustryLabels('business');
+                updateCalculator();
+            });
+            
+            financeView.addEventListener('click', function() {
+                financeView.classList.add('active');
+                legalView.classList.remove('active');
+                businessView.classList.remove('active');
+                updateIndustryLabels('finance');
+                updateCalculator();
+            });
+            
+            // Update labels based on industry
+            function updateIndustryLabels(industry) {
+                const terms = industryTerms[industry];
+                const timeframe = monthlyView.classList.contains('active') ? 'Monthly' : 'Annual';
+                
+                volumeLabel.textContent = terms.volume;
+                hoursLabel.textContent = terms.hours;
+                rateLabel.textContent = terms.rate;
+                timeLabel.textContent = terms.time;
+                docsLabel.textContent = terms.docs;
+                annualLabel.textContent = terms.annual;
+                resultLabel.textContent = `${timeframe} ${terms.result}`;
+            }
+            
+            // Toggle between monthly and annual view
+            monthlyView.addEventListener('click', function() {
+                monthlyView.classList.add('active');
+                annualView.classList.remove('active');
+                updateTimeframeLabels();
+                updateCalculator();
+            });
+            
+            annualView.addEventListener('click', function() {
+                annualView.classList.add('active');
+                monthlyView.classList.remove('active');
+                updateTimeframeLabels();
+                updateCalculator();
+            });
+            
+            function updateTimeframeLabels() {
+                let industry = 'legal';
+                if (businessView.classList.contains('active')) industry = 'business';
+                if (financeView.classList.contains('active')) industry = 'finance';
+                
+                const timeframe = monthlyView.classList.contains('active') ? 'Monthly' : 'Annual';
+                resultLabel.textContent = `${timeframe} ${industryTerms[industry].result}`;
+            }
+            
+            // Function to calculate ROI and metrics
+            function calculateRoi() {
+                const volume = parseInt(volumeSlider.value);
+                const hours = parseInt(hoursSlider.value);
+                const rate = parseInt(rateSlider.value);
+                
+                let industry = 'legal';
+                if (businessView.classList.contains('active')) industry = 'business';
+                if (financeView.classList.contains('active')) industry = 'finance';
+                
+                const isMonthly = monthlyView.classList.contains('active');
+                
+                // Calculate efficiency based on industry and volume with diminishing returns
+                let baseEfficiencyRate;
+                let minEfficiencyRate;
+                
+                switch(industry) {
+                    case 'legal':
+                        baseEfficiencyRate = 0.6; // 60% improvement for legal
+                        minEfficiencyRate = 0.4;
+                        break;
+                    case 'business':
+                        baseEfficiencyRate = 0.55; // 55% improvement for business
+                        minEfficiencyRate = 0.35;
+                        break;
+                    case 'finance':
+                        baseEfficiencyRate = 0.65; // 65% improvement for finance
+                        minEfficiencyRate = 0.45;
+                        break;
+                    default:
+                        baseEfficiencyRate = 0.6;
+                        minEfficiencyRate = 0.4;
+                }
+                
+                const efficiencyRate = Math.max(
+                    minEfficiencyRate, 
+                    baseEfficiencyRate - (volume / 1000)
+                );
+                
+                // Calculate potential impact
+                const additionalCases = Math.floor(volume * efficiencyRate);
+                const hoursSavedVal = Math.round(volume * hours * efficiencyRate);
+                
+                // Calculate different metrics based on industry
+                let potentialRevenue;
+                
+                switch(industry) {
+                    case 'legal':
+                        potentialRevenue = additionalCases * rate * hours;
+                        break;
+                    case 'business':
+                        potentialRevenue = hoursSavedVal * rate;
+                        break;
+                    case 'finance':
+                        potentialRevenue = (hoursSavedVal * rate) + (additionalCases * rate * 0.5);
+                        break;
+                    default:
+                        potentialRevenue = additionalCases * rate * hours;
+                }
+                
+                // Adjust for annual if needed
+                if (!isMonthly) {
+                    potentialRevenue *= 12;
+                }
+                
+                // Calculate advanced metrics
+                const annualRevenue = isMonthly ? potentialRevenue * 12 : potentialRevenue;
+                const annualCost = 25000; // Assumed annual subscription cost
+                const roi = Math.round((annualRevenue / annualCost) * 100);
+                
+                // Update displays with animation
+                animateValue(monthlySavings, formatCurrency(potentialRevenue));
+                animateValue(timeSaved, isMonthly ? hoursSavedVal : hoursSavedVal * 12);
+                animateValue(docsIncreased, isMonthly ? additionalCases : additionalCases * 12);
+                animateValue(roiPercentage, `${roi}%`);
+                animateValue(annualProjection, formatCurrency(annualRevenue));
+            }
+            
+            // Initialize with legal terminology
+            updateIndustryLabels('legal');
+            
+            // Function to format currency
+            function formatCurrency(amount) {
+                return new Intl.NumberFormat('en-US', {
+                    style: 'currency',
+                    currency: 'USD',
+                    minimumFractionDigits: 0,
+                    maximumFractionDigits: 0
+                }).format(amount);
+            }
+            
+            // Function to update slider appearance
+            function updateSlider(slider, value) {
+                const min = parseInt(slider.min);
+                const max = parseInt(slider.max);
+                const progress = ((value - min) / (max - min)) * 100;
+                slider.style.setProperty('--range-progress', `${progress}%`);
+            }
+            
+            // Function to animate value changes
+            function animateValue(element, newValue) {
+                element.classList.add('animated-value');
+                setTimeout(() => {
+                    element.textContent = newValue;
+                    setTimeout(() => {
+                        element.classList.remove('animated-value');
+                    }, 300);
+                }, 300);
+            }
+            
+            // Update displays and calculate
+            function updateCalculator() {
+                volumeValue.textContent = `${volumeSlider.value} docs`;
+                hoursValue.textContent = `${hoursSlider.value} hours`;
+                rateValue.textContent = `$${rateSlider.value}`;
+                
+                updateSlider(volumeSlider, volumeSlider.value);
+                updateSlider(hoursSlider, hoursSlider.value);
+                updateSlider(rateSlider, rateSlider.value);
+                
+                calculateRoi();
+            }
+            
+            // Add event listeners to sliders
+            volumeSlider.addEventListener('input', updateCalculator);
+            hoursSlider.addEventListener('input', updateCalculator);
+            rateSlider.addEventListener('input', updateCalculator);
+            
+            // Initialize the calculator
+            updateCalculator();
+            
+            // Add animation class for "animated-value"
+            const style = document.createElement('style');
+            style.textContent = `
+                .animated-value {
+                    transition: all 0.3s ease;
+                    transform: scale(1.1);
+                    color: var(--amber-gold);
+                }
+            `;
+            document.head.appendChild(style);
+
+            // Add this to your existing JavaScript for sticky navigation
+            window.addEventListener('scroll', function() {
+                const navbar = document.getElementById('navbar');
+                if (window.scrollY > 50) {
+                    navbar.classList.add('sticky');
+                } else {
+                    navbar.classList.remove('sticky');
+                }
+            });
+        });
+    </script>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-top">
+                <div class="footer-column">
+                    <div class="footer-logo">
+                        <img src="aspen-tree-logo.svg" alt="Aspen Grove Logo" class="footer-logo-img">
+                        <div class="footer-logo-text">Aspen Grove</div>
+                    </div>
+                    <p class="footer-tagline">AI-powered document processing with interconnected intelligence</p>
+                    <div class="footer-compliance">
+                        <div class="compliance-badge">
+                            <i class="fas fa-shield-alt"></i> HIPAA Compliant
+                        </div>
+                        <div class="compliance-badge">
+                            <i class="fas fa-lock"></i> SOC 2
+                        </div>
+                        <div class="compliance-badge">
+                            <i class="fas fa-file-contract"></i> BAA Available
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Solutions</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">For Healthcare</a></li>
+                        <li><a href="#">For Legal</a></li>
+                        <li><a href="#">For Finance</a></li>
+                        <li><a href="#">For Business</a></li>
+                        <li><a href="#">For Real Estate</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Company</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Press</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Resources</h4>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-shield-alt"></i> HIPAA Compliance</a></li>
+                        <li><a href="#">Security Practices</a></li>
+                        <li><a href="#">Documentation</a></li>
+                        <li><a href="#">Support Center</a></li>
+                        <li><a href="#">System Status</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-legal">
+                    <span>&copy; 2023 Aspen Grove Solutions. All rights reserved.</span>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#" class="highlighted-link"><i class="fas fa-file-alt"></i> HIPAA Policy</a>
+                </div>
+                <div class="footer-social">
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

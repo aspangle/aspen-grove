@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Trunk and branches -->
+  <path d="M100 180V80" stroke="#2F4F4F" stroke-width="8" stroke-linecap="round"/>
+  <path d="M100 140C85 120 75 110 65 105" stroke="#2F4F4F" stroke-width="4" stroke-linecap="round"/>
+  <path d="M100 120C115 100 125 90 135 85" stroke="#2F4F4F" stroke-width="4" stroke-linecap="round"/>
+  <path d="M100 100C85 80 75 70 65 65" stroke="#2F4F4F" stroke-width="3" stroke-linecap="round"/>
+  <path d="M100 80C115 60 125 50 135 45" stroke="#2F4F4F" stroke-width="3" stroke-linecap="round"/>
+  
+  <!-- Base of tree -->
+  <path d="M85 180H115" stroke="#2F4F4F" stroke-width="6" stroke-linecap="round"/>
+  
+  <!-- Stylized leaves in different sizes -->
+  <circle cx="65" cy="105" r="12" fill="#7A918D"/>
+  <circle cx="60" cy="90" r="10" fill="#7A918D"/>
+  <circle cx="70" cy="75" r="12" fill="#7A918D"/>
+  
+  <circle cx="135" cy="85" r="12" fill="#7A918D"/>
+  <circle cx="140" cy="70" r="10" fill="#7A918D"/>
+  <circle cx="130" cy="55" r="12" fill="#7A918D"/>
+  
+  <circle cx="65" cy="65" r="10" fill="#7A918D"/>
+  <circle cx="60" cy="50" r="8" fill="#7A918D"/>
+  <circle cx="70" cy="40" r="10" fill="#7A918D"/>
+  
+  <circle cx="135" cy="45" r="10" fill="#7A918D"/>
+  <circle cx="140" cy="30" r="8" fill="#7A918D"/>
+  <circle cx="130" cy="20" r="10" fill="#7A918D"/>
+  
+  <!-- Top crown of the tree -->
+  <circle cx="100" cy="25" r="15" fill="#7A918D"/>
+  <circle cx="85" cy="30" r="12" fill="#7A918D"/>
+  <circle cx="115" cy="30" r="12" fill="#7A918D"/>
+  
+  <!-- Gold accents for the Aspen "quaking" leaves effect -->
+  <circle cx="63" cy="103" r="3" fill="#D4AF37"/>
+  <circle cx="135" cy="83" r="3" fill="#D4AF37"/>
+  <circle cx="67" cy="63" r="3" fill="#D4AF37"/>
+  <circle cx="133" cy="43" r="3" fill="#D4AF37"/>
+  <circle cx="98" cy="23" r="3" fill="#D4AF37"/>
+</svg> 

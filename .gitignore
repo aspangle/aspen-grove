@@ -1,0 +1,22 @@
+# macOS system files
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Windows system files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# IDE files
+*.code-workspace
+.vscode/
+.idea/
+*.sublime*
+
+# Other
+node_modules/
+.env
+*.log 

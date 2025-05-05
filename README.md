@@ -18,7 +18,7 @@ This repository contains the landing page for Aspen Grove Solutions, an AI-power
 ## Viewing the Website
 
 The website is hosted on GitHub Pages and can be accessed at: 
-[https://YOUR-GITHUB-USERNAME.github.io/aspen-grove/](https://YOUR-GITHUB-USERNAME.github.io/aspen-grove/)
+[https://aspangle.github.io/aspen-grove/](https://aspangle.github.io/aspen-grove/)
 
 ## Development
 

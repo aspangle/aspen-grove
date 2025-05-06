@@ -14,6 +14,7 @@
             --white: #FFFFFF;
             --hover-green: #5A7A75;
             --shadow-color: rgba(0, 0, 0, 0.1);
+            --forest-green-light: #4F6F6F;
         }
 
         * {
@@ -392,6 +393,31 @@
             padding: 14px 25px;
         }
 
+        .hero-badges {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .hero-badge {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 8px 15px;
+            border-radius: 6px;
+            font-size: 0.9em;
+        }
+
+        .hero-badge i {
+            color: var(--amber-gold);
+            font-size: 1.2em;
+        }
+
+        .hero-badge-text {
+            font-weight: 600;
+        }
+
         .hero-visual {
             flex: 1;
             max-width: 500px;
@@ -561,7 +587,7 @@
             border-top: 1px solid var(--light-sage);
         }
 
-        .stat-value {
+        .stat-number {
             font-size: 1.8em;
             font-weight: 700;
             color: var(--amber-gold);
@@ -574,160 +600,119 @@
             line-height: 1.2;
         }
 
-        /* HIPAA & Security Section Styles */
-        .security-section {
-            background: linear-gradient(to bottom, var(--white), var(--light-sage));
+        /* HIPAA Compliance Section */
+        .compliance-section {
             padding: 100px 0;
+            background: linear-gradient(135deg, var(--forest-green-light) 0%, var(--sage-green) 100%);
+            color: var(--white);
             position: relative;
             overflow: hidden;
         }
 
-        .security-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 300px;
-            background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='50' cy='50' r='3' fill='%232F4F4F' opacity='0.05'/%3E%3C/svg%3E") repeat;
-            opacity: 0.3;
-            z-index: 0;
+        .compliance-content {
+            display: flex;
+            justify-content: space-between;
+            gap: 50px;
+            align-items: center;
         }
 
-        .hipaa-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
+        .compliance-text {
+            flex: 1;
+        }
+
+        .compliance-title {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .compliance-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 80px;
+            height: 3px;
+            background-color: var(--amber-gold);
+        }
+
+        .compliance-description {
+            font-size: 1.1em;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .compliance-visual {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            position: relative;
+        }
+
+        .aspen-root-system {
+            width: 100%;
+            max-width: 500px;
             position: relative;
             z-index: 1;
         }
 
-        .hipaa-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: center;
-        }
-
-        .hipaa-content h2 {
-            font-size: 2.4em;
-            color: var(--forest-green);
-            margin-bottom: 25px;
-            position: relative;
-        }
-
-        .hipaa-content h2::after {
-            content: '';
+        .aspen-tree {
             position: absolute;
-            width: 80px;
-            height: 3px;
-            background-color: var(--amber-gold);
-            bottom: -10px;
-            left: 0;
+            width: 120px;
+            top: -80px;
+            z-index: 2;
         }
 
-        .hipaa-content p {
-            margin-bottom: 25px;
-            font-size: 1.1em;
-            color: var(--forest-green);
-            line-height: 1.6;
+        .aspen-tree:nth-child(1) {
+            left: 20%;
         }
 
-        .security-badges {
+        .aspen-tree:nth-child(2) {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .aspen-tree:nth-child(3) {
+            right: 20%;
+        }
+
+        .compliance-badges {
             display: flex;
-            gap: 20px;
-            margin-top: 40px;
+            gap: 25px;
+            margin-top: 30px;
         }
 
-        .security-badge {
-            background: var(--white);
-            border-radius: 8px;
-            padding: 15px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        .compliance-badge {
             display: flex;
+            flex-direction: column;
             align-items: center;
-            gap: 15px;
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
             width: 180px;
         }
 
-        .badge-icon {
-            width: 40px;
-            height: 40px;
-            background: rgba(122, 145, 141, 0.1);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--forest-green);
-            font-size: 1.3em;
+        .compliance-badge:hover {
+            transform: translateY(-5px);
+            background-color: rgba(255, 255, 255, 0.2);
         }
 
-        .badge-text {
-            font-size: 0.85em;
-            font-weight: 600;
-            color: var(--forest-green);
-        }
-
-        .security-features {
-            margin-top: 40px;
-        }
-
-        .security-feature {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 20px;
-        }
-
-        .security-feature i {
+        .compliance-badge-icon {
+            font-size: 2.5em;
             color: var(--amber-gold);
-            margin-right: 15px;
-            font-size: 1.2em;
-            margin-top: 2px;
+            margin-bottom: 15px;
         }
 
-        .security-feature-text {
-            flex: 1;
+        .compliance-badge-title {
+            font-weight: 700;
+            margin-bottom: 8px;
         }
 
-        .security-feature-text h4 {
-            margin-bottom: 5px;
-            color: var(--forest-green);
-            font-size: 1.1em;
-        }
-
-        .security-feature-text p {
-            margin-bottom: 0;
-            font-size: 0.95em;
-            color: var(--sage-green);
-        }
-
-        .aspen-visual {
-            position: relative;
-        }
-
-        .aspen-roots {
-            width: 100%;
-            height: 400px;
-            background-color: var(--white);
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .aspen-roots::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(
-                rgba(255, 255, 255, 0.9), 
-                rgba(255, 255, 255, 0.5)
-            ), 
-            url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,50 C20,20 80,80 100,50 C80,80 20,20 0,50 Z' stroke='%237A918D' fill='none' stroke-width='0.5'/%3E%3C/svg%3E") repeat;
-            opacity: 0.3;
+        .compliance-badge-desc {
+            font-size: 0.9em;
+            opacity: 0.9;
         }
 
         /* ROI Calculator Styles */
@@ -1137,19 +1122,7 @@
         .footer {
             background-color: var(--forest-green);
             color: var(--white);
-            padding: 70px 0 30px;
-            position: relative;
-        }
-
-        .footer::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 10px;
-            background: linear-gradient(to right, var(--sage-green), var(--amber-gold), var(--sage-green));
-            opacity: 0.7;
+            padding: 70px 0 40px;
         }
 
         .footer-container {
@@ -1160,17 +1133,20 @@
 
         .footer-top {
             display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 40px;
             margin-bottom: 50px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            padding-bottom: 40px;
+        }
+
+        .footer-column {
+            display: flex;
+            flex-direction: column;
         }
 
         .footer-logo {
             display: flex;
             align-items: center;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
 
         .footer-logo-img {
@@ -1185,122 +1161,101 @@
         }
 
         .footer-tagline {
-            color: var(--light-sage);
-            margin-bottom: 20px;
-            font-size: 0.95em;
+            margin-bottom: 25px;
             opacity: 0.9;
-            max-width: 300px;
+            line-height: 1.5;
         }
 
         .footer-compliance {
             display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 20px;
+            gap: 15px;
+            margin-bottom: 25px;
         }
 
         .compliance-badge {
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            padding: 6px 12px;
-            font-size: 0.8em;
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 8px;
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 8px 15px;
+            border-radius: 6px;
+            font-size: 0.9em;
+            font-weight: 600;
         }
 
         .compliance-badge i {
             color: var(--amber-gold);
         }
 
-        .footer-column h4 {
-            font-size: 1.1em;
+        .footer-heading {
+            font-size: 1.2em;
             margin-bottom: 20px;
-            position: relative;
-            padding-bottom: 10px;
-        }
-
-        .footer-column h4::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 30px;
-            height: 2px;
-            background-color: var(--amber-gold);
+            font-weight: 600;
         }
 
         .footer-links {
-            list-style: none;
-            padding: 0;
-            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
         }
 
-        .footer-links li {
-            margin-bottom: 12px;
-        }
-
-        .footer-links a {
-            color: var(--light-sage);
+        .footer-link {
+            color: var(--white);
+            opacity: 0.8;
             text-decoration: none;
-            font-size: 0.9em;
-            transition: color 0.3s ease;
+            transition: opacity 0.2s ease;
+        }
+
+        .footer-link:hover {
+            opacity: 1;
+            color: var(--amber-gold);
+        }
+
+        .footer-contact-item {
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 10px;
+            margin-bottom: 15px;
         }
 
-        .footer-links a:hover {
+        .footer-contact-icon {
             color: var(--amber-gold);
-        }
-
-        .footer-links a i {
-            color: var(--amber-gold);
+            font-size: 1.2em;
+            width: 20px;
         }
 
         .footer-bottom {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding-top: 20px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9em;
+            opacity: 0.8;
         }
 
-        .footer-legal {
+        .footer-bottom-links {
             display: flex;
-            align-items: center;
-            flex-wrap: wrap;
             gap: 20px;
-            font-size: 0.85em;
-            color: var(--light-sage);
         }
 
-        .footer-legal a {
-            color: var(--light-sage);
+        .footer-bottom-link {
+            color: var(--white);
             text-decoration: none;
-            transition: color 0.3s ease;
+            transition: color 0.2s ease;
         }
 
-        .footer-legal a:hover {
+        .footer-bottom-link:hover {
             color: var(--amber-gold);
         }
 
-        .highlighted-link {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            color: var(--white) !important;
-        }
-
-        .highlighted-link i {
-            color: var(--amber-gold);
-        }
-
-        .footer-social {
+        .social-links {
             display: flex;
             gap: 15px;
+            margin-top: 5px;
         }
 
-        .footer-social a {
+        .social-link {
             width: 36px;
             height: 36px;
             border-radius: 50%;
@@ -1309,44 +1264,12 @@
             align-items: center;
             justify-content: center;
             color: var(--white);
-            font-size: 1.1em;
             transition: all 0.3s ease;
         }
 
-        .footer-social a:hover {
+        .social-link:hover {
             background-color: var(--amber-gold);
             transform: translateY(-3px);
-        }
-
-        @media (max-width: 992px) {
-            .footer-top {
-                grid-template-columns: 1fr 1fr;
-            }
-            
-            .footer-column:first-child {
-                grid-column: span 2;
-            }
-        }
-        
-        @media (max-width: 576px) {
-            .footer-top {
-                grid-template-columns: 1fr;
-            }
-            
-            .footer-column:first-child {
-                grid-column: span 1;
-            }
-            
-            .footer-bottom {
-                flex-direction: column;
-                gap: 20px;
-                text-align: center;
-            }
-            
-            .footer-legal {
-                flex-direction: column;
-                gap: 10px;
-            }
         }
     </style>
 </head>
@@ -1362,32 +1285,34 @@
             <li class="menu-item">
                 <a href="#">Why Aspen Grove</a>
                 <div class="dropdown-menu">
+                    <div class="dropdown-header">Our Approach</div>
                     <a href="#" class="dropdown-item">
-                        <div class="item-icon"><i class="fas fa-chart-line"></i></div>
+                        <div class="item-icon"><i class="fas fa-tree"></i></div>
                         <div class="item-content">
-                            <div class="item-title">ROI Calculator</div>
-                            <div class="item-description">See how much you can save with our AI solution</div>
+                            <div class="item-title">The Aspen Advantage</div>
+                            <div class="item-description">How our interconnected AI creates powerful results</div>
                         </div>
                     </a>
                     <a href="#" class="dropdown-item">
                         <div class="item-icon"><i class="fas fa-network-wired"></i></div>
                         <div class="item-content">
-                            <div class="item-title">Our Aspen Approach</div>
-                            <div class="item-description">How our interconnected AI grows stronger together</div>
+                            <div class="item-title">Root System Technology</div>
+                            <div class="item-description">Our innovative shared-knowledge architecture</div>
+                        </div>
+                    </a>
+                    <div class="dropdown-header">Tools & Results</div>
+                    <a href="#" class="dropdown-item">
+                        <div class="item-icon"><i class="fas fa-chart-line"></i></div>
+                        <div class="item-content">
+                            <div class="item-title">ROI Calculator</div>
+                            <div class="item-description">See your potential savings with Aspen Grove</div>
                         </div>
                     </a>
                     <a href="#" class="dropdown-item">
                         <div class="item-icon"><i class="fas fa-award"></i></div>
                         <div class="item-content">
                             <div class="item-title">Success Stories</div>
-                            <div class="item-description">Case studies from our satisfied customers</div>
-                        </div>
-                    </a>
-                    <a href="#" class="dropdown-item">
-                        <div class="item-icon"><i class="fas fa-users"></i></div>
-                        <div class="item-content">
-                            <div class="item-title">About Us</div>
-                            <div class="item-description">Meet our team and company mission</div>
+                            <div class="item-description">Case studies from our clients</div>
                         </div>
                     </a>
                 </div>
@@ -1435,6 +1360,7 @@
             <li class="menu-item">
                 <a href="#">Features</a>
                 <div class="dropdown-menu">
+                    <div class="dropdown-header">Core Technology</div>
                     <a href="#" class="dropdown-item">
                         <div class="item-icon"><i class="fas fa-robot"></i></div>
                         <div class="item-content">
@@ -1449,13 +1375,7 @@
                             <div class="item-description">Streamline your document workflows</div>
                         </div>
                     </a>
-                    <a href="#" class="dropdown-item">
-                        <div class="item-icon"><i class="fas fa-shield-alt"></i></div>
-                        <div class="item-content">
-                            <div class="item-title">Security & Compliance</div>
-                            <div class="item-description">HIPAA-compliant protection for your data</div>
-                        </div>
-                    </a>
+                    <div class="dropdown-header">Security & Integration</div>
                     <a href="#" class="dropdown-item">
                         <div class="item-icon"><i class="fas fa-plug"></i></div>
                         <div class="item-content">
@@ -1466,34 +1386,34 @@
                 </div>
             </li>
             <li class="menu-item">
-                <a href="#">Pricing</a>
+                <a href="#">HIPAA Compliance</a>
                 <div class="dropdown-menu">
                     <a href="#" class="dropdown-item">
-                        <div class="item-icon"><i class="fas fa-user"></i></div>
+                        <div class="item-icon"><i class="fas fa-shield-alt"></i></div>
                         <div class="item-content">
-                            <div class="item-title">For Individuals</div>
-                            <div class="item-description">Perfect for solo practitioners</div>
+                            <div class="item-title">100% HIPAA Compliant</div>
+                            <div class="item-description">Our comprehensive compliance guarantee</div>
                         </div>
                     </a>
                     <a href="#" class="dropdown-item">
-                        <div class="item-icon"><i class="fas fa-user-friends"></i></div>
+                        <div class="item-icon"><i class="fas fa-file-contract"></i></div>
                         <div class="item-content">
-                            <div class="item-title">For Small Teams</div>
-                            <div class="item-description">Designed for teams up to 10 people</div>
+                            <div class="item-title">Business Associate Agreement</div>
+                            <div class="item-description">How we support your compliance needs</div>
                         </div>
                     </a>
                     <a href="#" class="dropdown-item">
-                        <div class="item-icon"><i class="fas fa-building"></i></div>
+                        <div class="item-icon"><i class="fas fa-lock"></i></div>
                         <div class="item-content">
-                            <div class="item-title">For Enterprise</div>
-                            <div class="item-description">Custom solutions for large organizations</div>
+                            <div class="item-title">Security Architecture</div>
+                            <div class="item-description">Enterprise-grade protection for sensitive data</div>
                         </div>
                     </a>
                     <a href="#" class="dropdown-item">
-                        <div class="item-icon"><i class="fas fa-calculator"></i></div>
+                        <div class="item-icon"><i class="fas fa-clipboard-check"></i></div>
                         <div class="item-content">
-                            <div class="item-title">ROI Calculator</div>
-                            <div class="item-description">Calculate your potential savings</div>
+                            <div class="item-title">Certifications</div>
+                            <div class="item-description">Our compliance credentials and audits</div>
                         </div>
                     </a>
                 </div>
@@ -1598,42 +1518,48 @@
     </div>
 
     <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-container">
+    <section class="hero-section">
+        <div class="container">
             <div class="hero-content">
-                <h1 class="hero-heading">Transform Document Processing with <span class="hero-highlight">Interconnected AI</span></h1>
-                <p class="hero-subheading">Like aspen trees that share a unified root system, our HIPAA-compliant AI creates a seamless network of document intelligence that grows stronger with every document.</p>
-                
+                <h1 class="hero-heading">
+                    <span class="hero-highlight">Interconnected</span> AI Document Processing with <span class="hero-highlight">HIPAA Compliance</span>
+                </h1>
+                <div class="hero-subheading">
+                    Like an aspen grove that thrives through shared roots while maintaining individual strength, our AI system processes your documents through a secure, interconnected network that gets smarter with every file while ensuring complete data isolation and security.
+                </div>
                 <div class="hero-benefits">
                     <div class="benefit-item">
-                        <div class="benefit-icon">
-                            <i class="fas fa-network-wired"></i>
-                        </div>
-                        <div class="benefit-text">
-                            <strong>Interconnected Intelligence</strong> — Our AI works like an aspen grove, sharing knowledge across your entire document ecosystem
-                        </div>
+                        <i class="fas fa-check-circle"></i>
+                        <span>Save 85% of document processing time</span>
                     </div>
                     <div class="benefit-item">
-                        <div class="benefit-icon">
-                            <i class="fas fa-shield-alt"></i>
-                        </div>
-                        <div class="benefit-text">
-                            <strong>100% HIPAA Compliant</strong> — Enterprise-grade security meets healthcare privacy standards for all sensitive information
-                        </div>
+                        <i class="fas fa-check-circle"></i>
+                        <span>99.5% accuracy with AI document extraction</span>
                     </div>
                     <div class="benefit-item">
-                        <div class="benefit-icon">
-                            <i class="fas fa-tachometer-alt"></i>
-                        </div>
-                        <div class="benefit-text">
-                            <strong>40-60% Time Savings</strong> — Process more documents in less time with AI-powered assistance
-                        </div>
+                        <i class="fas fa-check-circle"></i>
+                        <span>Secure 100% HIPAA-compliant processing</span>
                     </div>
                 </div>
                 
                 <div class="hero-form">
                     <input type="email" placeholder="Enter your email" aria-label="Email input">
                     <button class="btn btn-primary">Get Started</button>
+                </div>
+                
+                <div class="hero-badges">
+                    <div class="hero-badge">
+                        <i class="fas fa-shield-alt"></i>
+                        <span class="hero-badge-text">HIPAA Certified</span>
+                    </div>
+                    <div class="hero-badge">
+                        <i class="fas fa-lock"></i>
+                        <span class="hero-badge-text">SOC 2 Compliant</span>
+                    </div>
+                    <div class="hero-badge">
+                        <i class="fas fa-check-circle"></i>
+                        <span class="hero-badge-text">99.9% Uptime</span>
+                    </div>
                 </div>
             </div>
             
@@ -1646,137 +1572,94 @@
         </div>
     </section>
 
-    <!-- HIPAA Compliance & Security Section -->
-    <section class="security-section">
-        <div class="hipaa-container">
-            <div class="hipaa-grid">
-                <div class="hipaa-content">
-                    <h2>HIPAA Compliance With Interconnected Security</h2>
-                    <p>Like the extensive root system of an aspen grove that provides strength and resilience to the entire forest, our 100% HIPAA-compliant infrastructure creates a secure foundation for your sensitive document processing.</p>
+    <!-- HIPAA Compliance Section -->
+    <section class="compliance-section">
+        <div class="container">
+            <div class="compliance-content">
+                <div class="compliance-text">
+                    <h2 class="compliance-title">100% HIPAA Compliant <span style="color: var(--amber-gold);">Security</span></h2>
+                    <p class="compliance-description">
+                        Just like aspen trees thrive through an interconnected root system while maintaining individual strength, 
+                        our AI system processes documents across a secure network while ensuring complete data isolation and HIPAA compliance.
+                    </p>
+                    <p class="compliance-description">
+                        We've built security into every layer of our system, ensuring your sensitive data is protected with military-grade encryption, 
+                        access controls, and comprehensive audit trails. Our HIPAA compliance isn't just a feature—it's the foundation of our platform.
+                    </p>
                     
-                    <p>Every document processed through Aspen Grove is protected by multiple layers of security, while our AI continues to learn and improve – sharing knowledge across the system like aspen trees share nutrients through their interconnected roots.</p>
-                    
-                    <div class="security-badges">
-                        <div class="security-badge">
-                            <div class="badge-icon">
-                                <i class="fas fa-check-circle"></i>
-                            </div>
-                            <div class="badge-text">
-                                HIPAA Certified
-                            </div>
-                        </div>
-                        <div class="security-badge">
-                            <div class="badge-icon">
-                                <i class="fas fa-lock"></i>
-                            </div>
-                            <div class="badge-text">
-                                SOC 2 Compliant
-                            </div>
-                        </div>
-                        <div class="security-badge">
-                            <div class="badge-icon">
+                    <div class="compliance-badges">
+                        <div class="compliance-badge">
+                            <div class="compliance-badge-icon">
                                 <i class="fas fa-shield-alt"></i>
                             </div>
-                            <div class="badge-text">
-                                256-bit Encryption
-                            </div>
+                            <div class="compliance-badge-title">HIPAA Certified</div>
+                            <div class="compliance-badge-desc">Full healthcare data compliance</div>
                         </div>
-                    </div>
-                    
-                    <div class="security-features">
-                        <div class="security-feature">
-                            <i class="fas fa-fingerprint"></i>
-                            <div class="security-feature-text">
-                                <h4>End-to-End Encryption</h4>
-                                <p>All documents are encrypted in transit and at rest, ensuring your data remains secure throughout processing.</p>
+                        
+                        <div class="compliance-badge">
+                            <div class="compliance-badge-icon">
+                                <i class="fas fa-lock"></i>
                             </div>
+                            <div class="compliance-badge-title">End-to-End</div>
+                            <div class="compliance-badge-desc">Military-grade encryption</div>
                         </div>
-                        <div class="security-feature">
-                            <i class="fas fa-user-shield"></i>
-                            <div class="security-feature-text">
-                                <h4>Access Controls & Audit Trails</h4>
-                                <p>Comprehensive user management with detailed audit logs for all document activities.</p>
+                        
+                        <div class="compliance-badge">
+                            <div class="compliance-badge-icon">
+                                <i class="fas fa-file-contract"></i>
                             </div>
-                        </div>
-                        <div class="security-feature">
-                            <i class="fas fa-network-wired"></i>
-                            <div class="security-feature-text">
-                                <h4>Interconnected Intelligence</h4>
-                                <p>Our AI system learns collectively while maintaining strict data isolation, just like aspen trees share strength while maintaining separation.</p>
-                            </div>
-                        </div>
-                        <div class="security-feature">
-                            <i class="fas fa-file-signature"></i>
-                            <div class="security-feature-text">
-                                <h4>Business Associate Agreements</h4>
-                                <p>We offer BAAs to all healthcare customers to support your HIPAA compliance requirements.</p>
-                            </div>
+                            <div class="compliance-badge-title">BAA Ready</div>
+                            <div class="compliance-badge-desc">Business Associate Agreement</div>
                         </div>
                     </div>
                 </div>
                 
-                <div class="aspen-visual">
-                    <div class="aspen-roots">
-                        <!-- Aspen root system visual will be shown here -->
-                        <svg width="100%" height="100%" viewBox="0 0 500 400" xmlns="http://www.w3.org/2000/svg">
-                            <!-- Main trunk -->
-                            <path d="M250,50 L250,100" stroke="#2F4F4F" stroke-width="8" />
-                            
-                            <!-- Root system -->
-                            <path d="M250,100 C200,150 150,200 100,250" stroke="#2F4F4F" stroke-width="6" fill="none" />
-                            <path d="M250,100 C300,150 350,200 400,250" stroke="#2F4F4F" stroke-width="6" fill="none" />
-                            
-                            <path d="M250,100 C230,130 210,160 190,190" stroke="#2F4F4F" stroke-width="5" fill="none" />
-                            <path d="M250,100 C270,130 290,160 310,190" stroke="#2F4F4F" stroke-width="5" fill="none" />
-                            
-                            <path d="M190,190 C170,210 150,230 130,250" stroke="#2F4F4F" stroke-width="4" fill="none" />
-                            <path d="M190,190 C180,220 170,250 160,280" stroke="#2F4F4F" stroke-width="4" fill="none" />
-                            <path d="M130,250 C120,280 110,310 100,340" stroke="#2F4F4F" stroke-width="3" fill="none" />
-                            <path d="M130,250 C110,270 90,290 70,310" stroke="#2F4F4F" stroke-width="3" fill="none" />
-                            
-                            <path d="M310,190 C330,210 350,230 370,250" stroke="#2F4F4F" stroke-width="4" fill="none" />
-                            <path d="M310,190 C320,220 330,250 340,280" stroke="#2F4F4F" stroke-width="4" fill="none" />
-                            <path d="M370,250 C380,280 390,310 400,340" stroke="#2F4F4F" stroke-width="3" fill="none" />
-                            <path d="M370,250 C390,270 410,290 430,310" stroke="#2F4F4F" stroke-width="3" fill="none" />
-                            
-                            <!-- Data nodes -->
-                            <circle cx="250" cy="50" r="15" fill="#7A918D" />
-                            <circle cx="250" cy="50" r="7" fill="#D4AF37" />
-                            <text x="250" y="55" text-anchor="middle" fill="white" font-size="12">AI</text>
-                            
-                            <circle cx="100" cy="250" r="12" fill="#7A918D" />
-                            <circle cx="100" cy="250" r="6" fill="#D4AF37" />
-                            <text x="100" y="254" text-anchor="middle" fill="white" font-size="8">HIPAA</text>
-                            
-                            <circle cx="400" cy="250" r="12" fill="#7A918D" />
-                            <circle cx="400" cy="250" r="6" fill="#D4AF37" />
-                            <text x="400" y="254" text-anchor="middle" fill="white" font-size="8">SOC2</text>
-                            
-                            <circle cx="130" cy="250" r="10" fill="#7A918D" />
-                            <circle cx="370" cy="250" r="10" fill="#7A918D" />
-                            
-                            <circle cx="100" cy="340" r="10" fill="#7A918D" />
-                            <circle cx="400" cy="340" r="10" fill="#7A918D" />
-                            
-                            <circle cx="70" cy="310" r="8" fill="#7A918D" />
-                            <circle cx="430" cy="310" r="8" fill="#7A918D" />
-                            
-                            <circle cx="160" cy="280" r="8" fill="#7A918D" />
-                            <circle cx="340" cy="280" r="8" fill="#7A918D" />
-                            
-                            <circle cx="190" cy="190" r="10" fill="#7A918D" />
-                            <circle cx="310" cy="190" r="10" fill="#7A918D" />
-                            
-                            <!-- Lock icons -->
-                            <circle cx="190" cy="190" r="5" fill="#D4AF37" />
-                            <circle cx="310" cy="190" r="5" fill="#D4AF37" />
-                            <circle cx="160" cy="280" r="4" fill="#D4AF37" />
-                            <circle cx="340" cy="280" r="4" fill="#D4AF37" />
-                            
-                            <!-- Shield text -->
-                            <text x="250" y="380" text-anchor="middle" fill="#2F4F4F" font-size="18" font-weight="bold">Secure Interconnected Foundation</text>
-                        </svg>
-                    </div>
+                <div class="compliance-visual">
+                    <svg class="aspen-root-system" viewBox="0 0 500 400" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Root system illustration -->
+                        <path d="M250,50 C250,50 100,150 50,300" stroke="var(--amber-gold)" stroke-width="8" fill="none" opacity="0.7"/>
+                        <path d="M250,50 C250,50 180,200 200,350" stroke="var(--amber-gold)" stroke-width="10" fill="none" opacity="0.8"/>
+                        <path d="M250,50 C250,50 300,180 350,300" stroke="var(--amber-gold)" stroke-width="8" fill="none" opacity="0.7"/>
+                        <path d="M250,50 C250,50 400,150 450,280" stroke="var(--amber-gold)" stroke-width="7" fill="none" opacity="0.6"/>
+                        
+                        <!-- Data nodes -->
+                        <circle cx="100" cy="200" r="10" fill="var(--white)" opacity="0.9"/>
+                        <circle cx="150" cy="250" r="8" fill="var(--white)" opacity="0.9"/>
+                        <circle cx="200" cy="180" r="12" fill="var(--white)" opacity="0.9"/>
+                        <circle cx="300" cy="220" r="10" fill="var(--white)" opacity="0.9"/>
+                        <circle cx="350" cy="180" r="8" fill="var(--white)" opacity="0.9"/>
+                        <circle cx="380" cy="260" r="12" fill="var(--white)" opacity="0.9"/>
+                        
+                        <!-- Security shields -->
+                        <g transform="translate(100, 200)">
+                            <path d="M0,-5 L4,0 L0,5 L-4,0 Z" fill="var(--amber-gold)"/>
+                        </g>
+                        <g transform="translate(300, 220)">
+                            <path d="M0,-5 L4,0 L0,5 L-4,0 Z" fill="var(--amber-gold)"/>
+                        </g>
+                        <g transform="translate(380, 260)">
+                            <path d="M0,-5 L4,0 L0,5 L-4,0 Z" fill="var(--amber-gold)"/>
+                        </g>
+                    </svg>
+                    
+                    <!-- Aspen trees -->
+                    <svg class="aspen-tree" style="left: 20%" viewBox="0 0 100 200" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="45" y="70" width="10" height="130" fill="var(--white)" opacity="0.9"/>
+                        <circle cx="50" cy="50" r="40" fill="var(--amber-gold)" opacity="0.7"/>
+                        <circle cx="50" cy="50" r="35" fill="var(--forest-green-light)" opacity="0.9"/>
+                    </svg>
+                    
+                    <svg class="aspen-tree" style="left: 50%; transform: translateX(-50%)" viewBox="0 0 100 200" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="45" y="70" width="10" height="130" fill="var(--white)" opacity="0.9"/>
+                        <circle cx="50" cy="50" r="40" fill="var(--amber-gold)" opacity="0.7"/>
+                        <circle cx="50" cy="50" r="35" fill="var(--forest-green-light)" opacity="0.9"/>
+                    </svg>
+                    
+                    <svg class="aspen-tree" style="right: 20%" viewBox="0 0 100 200" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="45" y="70" width="10" height="130" fill="var(--white)" opacity="0.9"/>
+                        <circle cx="50" cy="50" r="40" fill="var(--amber-gold)" opacity="0.7"/>
+                        <circle cx="50" cy="50" r="35" fill="var(--forest-green-light)" opacity="0.9"/>
+                    </svg>
                 </div>
             </div>
         </div>
@@ -1880,7 +1763,7 @@
     <section class="features-section">
         <div class="section-title">
             <h2>Why Choose Aspen Grove AI</h2>
-            <p>Our AI-powered document processing solution delivers measurable results for legal professionals and businesses</p>
+            <p>Our AI-powered document processing solution delivers measurable results for organizations with HIPAA compliance needs</p>
         </div>
         
         <div class="features-grid">
@@ -1889,58 +1772,10 @@
                     <i class="fas fa-network-wired"></i>
                 </div>
                 <h3>Interconnected Intelligence</h3>
-                <p>Like aspen trees that thrive through shared root systems, our AI creates a network of knowledge that grows stronger with each document it processes, while maintaining data isolation.</p>
+                <p>Like aspen trees that thrive through shared root systems, our AI creates a network of knowledge that grows stronger with each document it processes, while maintaining strict data isolation.</p>
                 <div class="feature-stat">
-                    <div class="stat-value">50%</div>
-                    <div class="stat-label">More accurate than isolated AI solutions</div>
-                </div>
-            </div>
-            
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-clock"></i>
-                </div>
-                <h3>Save Valuable Time</h3>
-                <p>Reduce document processing time by 40-60% with our AI-powered assistance. Focus on high-value work while our system handles repetitive tasks.</p>
-                <div class="feature-stat">
-                    <div class="stat-value">60%</div>
-                    <div class="stat-label">Average time savings on document processing</div>
-                </div>
-            </div>
-            
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-chart-line"></i>
-                </div>
-                <h3>Increase Capacity</h3>
-                <p>Handle more documents with your existing team. Our AI helps your staff process more documents in less time, increasing your overall capacity.</p>
-                <div class="feature-stat">
-                    <div class="stat-value">50%</div>
-                    <div class="stat-label">Average increase in document throughput</div>
-                </div>
-            </div>
-            
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-dollar-sign"></i>
-                </div>
-                <h3>Boost Revenue</h3>
-                <p>Convert time savings into additional revenue. Process more billable work with the same resources, directly impacting your bottom line.</p>
-                <div class="feature-stat">
-                    <div class="stat-value">15-20%</div>
-                    <div class="stat-label">Typical annual revenue growth</div>
-                </div>
-            </div>
-            
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-search"></i>
-                </div>
-                <h3>Enhance Accuracy</h3>
-                <p>Reduce errors and improve consistency with AI-powered document review. Our system catches mistakes that humans might miss.</p>
-                <div class="feature-stat">
-                    <div class="stat-value">99.5%</div>
-                    <div class="stat-label">Document processing accuracy</div>
+                    <div class="stat-number">99.5%</div>
+                    <div class="stat-label">Document Accuracy</div>
                 </div>
             </div>
             
@@ -1948,11 +1783,35 @@
                 <div class="feature-icon">
                     <i class="fas fa-shield-alt"></i>
                 </div>
-                <h3>100% HIPAA Compliant</h3>
-                <p>Our comprehensive security measures ensure full HIPAA compliance for all healthcare-related documents, with industry-leading practices that exceed standard requirements.</p>
+                <h3>HIPAA Compliant Security</h3>
+                <p>Our entire platform is built with HIPAA compliance as its foundation, ensuring your sensitive healthcare data is protected with military-grade encryption and strict access controls.</p>
                 <div class="feature-stat">
-                    <div class="stat-value">100%</div>
-                    <div class="stat-label">HIPAA compliance for sensitive data</div>
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">HIPAA Compliant</div>
+                </div>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <h3>Time & Cost Savings</h3>
+                <p>Reduce manual document review time by up to 85% with our AI assistance, allowing your team to focus on higher-value tasks while cutting operational costs significantly.</p>
+                <div class="feature-stat">
+                    <div class="stat-number">85%</div>
+                    <div class="stat-label">Time Saved</div>
+                </div>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-plug"></i>
+                </div>
+                <h3>Seamless Integration</h3>
+                <p>Connect Aspen Grove with your existing systems through our secure API, bringing the power of interconnected AI to your entire document workflow while maintaining compliance.</p>
+                <div class="feature-stat">
+                    <div class="stat-number">30+</div>
+                    <div class="stat-label">Integrations</div>
                 </div>
             </div>
         </div>
@@ -2298,57 +2157,79 @@
                         <div class="compliance-badge">
                             <i class="fas fa-lock"></i> SOC 2
                         </div>
-                        <div class="compliance-badge">
-                            <i class="fas fa-file-contract"></i> BAA Available
-                        </div>
+                    </div>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
                     </div>
                 </div>
                 
                 <div class="footer-column">
-                    <h4>Solutions</h4>
-                    <ul class="footer-links">
-                        <li><a href="#">For Healthcare</a></li>
-                        <li><a href="#">For Legal</a></li>
-                        <li><a href="#">For Finance</a></li>
-                        <li><a href="#">For Business</a></li>
-                        <li><a href="#">For Real Estate</a></li>
-                    </ul>
+                    <h3 class="footer-heading">Solutions</h3>
+                    <div class="footer-links">
+                        <a href="#" class="footer-link">Healthcare Document Processing</a>
+                        <a href="#" class="footer-link">Legal Document Management</a>
+                        <a href="#" class="footer-link">Financial Document Analysis</a>
+                        <a href="#" class="footer-link">Business Operations</a>
+                        <a href="#" class="footer-link">Real Estate Documentation</a>
+                    </div>
                 </div>
                 
                 <div class="footer-column">
-                    <h4>Company</h4>
-                    <ul class="footer-links">
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Careers</a></li>
-                        <li><a href="#">Blog</a></li>
-                        <li><a href="#">Press</a></li>
-                        <li><a href="#">Contact</a></li>
-                    </ul>
+                    <h3 class="footer-heading">Company</h3>
+                    <div class="footer-links">
+                        <a href="#" class="footer-link">About Us</a>
+                        <a href="#" class="footer-link">Careers</a>
+                        <a href="#" class="footer-link">Blog</a>
+                        <a href="#" class="footer-link">Press</a>
+                        <a href="#" class="footer-link">Contact</a>
+                    </div>
                 </div>
                 
                 <div class="footer-column">
-                    <h4>Resources</h4>
-                    <ul class="footer-links">
-                        <li><a href="#"><i class="fas fa-shield-alt"></i> HIPAA Compliance</a></li>
-                        <li><a href="#">Security Practices</a></li>
-                        <li><a href="#">Documentation</a></li>
-                        <li><a href="#">Support Center</a></li>
-                        <li><a href="#">System Status</a></li>
-                    </ul>
+                    <h3 class="footer-heading">Resources</h3>
+                    <div class="footer-links">
+                        <a href="#" class="footer-link">ROI Calculator</a>
+                        <a href="#" class="footer-link">HIPAA Compliance Guide</a>
+                        <a href="#" class="footer-link">Security Whitepaper</a>
+                        <a href="#" class="footer-link">Documentation</a>
+                        <a href="#" class="footer-link">API Reference</a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3 class="footer-heading">Contact Us</h3>
+                    <div class="footer-contact-item">
+                        <div class="footer-contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <a href="mailto:info@aspengroveai.com" class="footer-link">info@aspengroveai.com</a>
+                    </div>
+                    <div class="footer-contact-item">
+                        <div class="footer-contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <a href="tel:+18005551234" class="footer-link">+1 (800) 555-1234</a>
+                    </div>
+                    <div class="footer-contact-item">
+                        <div class="footer-contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <span>123 Innovation Way<br>San Francisco, CA 94103</span>
+                    </div>
                 </div>
             </div>
             
             <div class="footer-bottom">
-                <div class="footer-legal">
-                    <span>&copy; 2023 Aspen Grove Solutions. All rights reserved.</span>
-                    <a href="#">Privacy Policy</a>
-                    <a href="#">Terms of Service</a>
-                    <a href="#" class="highlighted-link"><i class="fas fa-file-alt"></i> HIPAA Policy</a>
+                <div class="copyright">
+                    © 2023 Aspen Grove Solutions. All rights reserved.
                 </div>
-                <div class="footer-social">
-                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                <div class="footer-bottom-links">
+                    <a href="#" class="footer-bottom-link">Privacy Policy</a>
+                    <a href="#" class="footer-bottom-link">Terms of Service</a>
+                    <a href="#" class="footer-bottom-link">HIPAA Policy</a>
+                    <a href="#" class="footer-bottom-link">Security</a>
                 </div>
             </div>
         </div>

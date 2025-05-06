@@ -1,0 +1,74 @@
+TDIU Report Service: Session Management Prompt Template 
+This document provides a comprehensive template for starting new chat sessions with Claude when working on the TDIU Report Service project. The template is designed to provide all necessary context while minimizing chat space usage. 
+Complete Session Start Prompt 
+Example of Filled-In Prompt 
+I'm working on the TDIU Report Service project (Aspen Grove Services), an AWS-based HIPAA-compliant service for generating reports for veterans' attorneys. Here's my current infrastructure as defined in CloudFormation: 
+[PASTE YOUR CLOUDFORMATION TEMPLATE HERE] 
+Previous accomplishments: 
+1. [List 2-3 key things completed in previous sessions] 
+2. [For example: "Set up S3 buckets with proper encryption and security"] 
+3. [For example: "Created Lambda functions for document uploads and processing"] 
+Current focus: 
+I'd like to [your specific goal for this session, e.g., "set up the client portal for document uploads" or "integrate Claude AI via AWS Bedrock"]. 
+Based on my current infrastructure and the project plans, please guide me through the next steps to accomplish this goal.
+Session End Template 
+To maintain continuity between sessions, consider ending each session with a summary that you can reference in your next session: 
+I'm working on the TDIU Report Service project (Aspen Grove Services), an AWS-based HIPAA-compliant service for generating reports for veterans' attorneys. Here's my current infrastructure as defined in CloudFormation: 
+AWSTemplateFormatVersion: '2010-09-09' 
+Description: 'TDIU Report Service Infrastructure' 
+Resources: 
+DocumentStorageBucket: 
+Type: AWS::S3::Bucket 
+Properties: 
+BucketName: tdiu-document-storage 
+BucketEncryption: 
+ServerSideEncryptionConfiguration: 
+- ServerSideEncryptionByDefault: 
+SSEAlgorithm: AES256 
+VersioningConfiguration: 
+Status: Enabled 
+PublicAccessBlockConfiguration: 
+BlockPublicAcls: true 
+BlockPublicPolicy: true 
+IgnorePublicAcls: true 
+RestrictPublicBuckets: true 
+# Additional resources here... 
+Previous accomplishments: 
+1. Set up S3 buckets with proper encryption and security 
+2. Created Lambda functions for document uploads and processing 
+3. Implemented CloudTrail for HIPAA-compliant logging 
+Current focus: 
+I'd like to set up the client portal for document uploads using AWS Amplify. 
+Based on my current infrastructure and the project plans, please guide me through the next steps to accomplish this goal.
+Guidelines for Effective Session Management 
+1. Keep CloudFormation Up to Date: Update your CloudFormation template after each session toreflect new resources 
+2. Be Specific About Goals: Clearly state what you want to accomplish in each session 
+3. Limit Previous Accomplishments: List only the most relevant 2-3 accomplishments from previoussessions 
+4. Include Business Context: Mention if your current focus relates to a specific service from thebusiness plan 
+5. Ask for Step-by-Step Guidance: Request clear, actionable steps that match your technicalknowledge level 
+Additional Context (Optional) 
+If your goal requires specific additional context, you can include it after your main prompt: 
+Variation for Technical Challenges 
+If you're facing a specific technical issue, modify the template: 
+To summarize today's progress: 
+1. We [accomplishment 1] 
+2. We [accomplishment 2] 
+3. We [accomplishment 3] 
+For our next session, we should focus on: 
+1. [Next step 1] 
+2. [Next step 2] 
+3. [Next step 3] 
+I'll update the CloudFormation template with these changes for our next session. 
+Additional context: 
+- I'm implementing the Document Analysis Service as described in the multi-service strategy 
+- The service will analyze medical records using Claude AI via AWS Bedrock 
+- I need to create [specific resource] to support this functionality
+This template provides a comprehensive framework for managing your sessions with Claude while working on the TDIU Report Service, ensuring continuity and efficient communication. 
+I'm working on the TDIU Report Service project. Here's my current CloudFormation infrastructure: 
+[PASTE YOUR CLOUDFORMATION TEMPLATE HERE] 
+I'm encountering an issue with [describe the technical problem]. The specific error message is: 
+[ERROR MESSAGE] 
+I've already tried: 
+1. [Attempted solution 1] 
+2. [Attempted solution 2] 
+Please help me troubleshoot this issue and provide a solution that aligns with our overall architecture.

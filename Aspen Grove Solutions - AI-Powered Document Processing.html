@@ -1,0 +1,2632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aspen Grove Solutions - AI-Powered Document Processing</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --sage-green: #7A918D;
+            --amber-gold: #D4AF37;
+            --forest-green: #2F4F4F;
+            --light-sage: #E8EDEC;
+            --lighter-sage: #F2F5F4; /* New very light sage color */
+            --white: #FFFFFF;
+            --hover-green: #5A7A75;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+            --forest-green-light: #4F6F6F;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Georgia', 'Times New Roman', serif;
+        }
+
+        body {
+            background-color: var(--light-sage);
+            color: var(--forest-green);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 60px 0;
+        }
+
+        /* Navigation Styles */
+        .navbar {
+            background-color: var(--white);
+            box-shadow: 0 4px 15px var(--shadow-color);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            height: 70px;
+            transition: all 0.3s ease;
+        }
+
+        .navbar.sticky {
+            height: 60px;
+            background-color: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .navbar.sticky .logo img {
+            height: 32px;
+        }
+
+        .logo-text {
+            font-weight: 700;
+            font-size: 1.4em;
+            color: var(--forest-green);
+            transition: all 0.3s ease;
+            text-decoration: none; /* Remove any underline from the logo text */
+        }
+
+        a .logo-text, a.logo .logo-text, .logo a {
+            text-decoration: none;
+            border-bottom: none;
+        }
+
+        .navbar.sticky .logo-text {
+            font-size: 1.2em;
+        }
+
+        .main-menu {
+            display: flex;
+            list-style: none;
+        }
+
+        .menu-item {
+            position: relative;
+            margin: 0 5px;
+        }
+
+        .menu-item > a {
+            display: block;
+            padding: 25px 15px;
+            color: var(--forest-green);
+            text-decoration: none;
+            font-size: 1em;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .navbar.sticky .menu-item > a {
+            padding: 20px 15px;
+        }
+
+        .menu-item > a:hover {
+            color: var(--amber-gold);
+        }
+
+        /* Remove the underline animation on menu items */
+        .menu-item > a::after {
+            display: none;
+        }
+
+        .menu-item.active > a {
+            color: var(--amber-gold);
+            font-weight: 600;
+        }
+
+        /* Add fade-in animation for scrolling elements */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(20px);
+            visibility: hidden;
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            will-change: opacity, visibility;
+        }
+        
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+            visibility: visible;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: var(--white);
+            min-width: 280px;
+            box-shadow: 0 5px 15px var(--shadow-color);
+            border-radius: 0 0 4px 4px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            padding: 10px 0;
+            z-index: 100;
+        }
+
+        .menu-item:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            display: flex;
+            padding: 12px 15px;
+            color: var(--forest-green);
+            text-decoration: none;
+            font-size: 0.9em;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            align-items: center;
+        }
+
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-item .item-icon {
+            margin-right: 12px;
+            color: var(--sage-green);
+            font-size: 1.1em;
+            transition: all 0.2s ease;
+            width: 20px;
+            text-align: center;
+        }
+
+        .dropdown-item .item-content {
+            flex: 1;
+        }
+
+        .dropdown-item .item-title {
+            font-weight: 600;
+            margin-bottom: 3px;
+        }
+
+        .dropdown-item .item-description {
+            font-size: 0.85em;
+            color: var(--sage-green);
+            line-height: 1.3;
+        }
+
+        .dropdown-item:hover {
+            background-color: rgba(122, 145, 141, 0.1);
+            color: var(--amber-gold);
+            padding-left: 20px;
+        }
+
+        .dropdown-item:hover .item-icon {
+            color: var(--amber-gold);
+        }
+
+        .dropdown-header {
+            display: block;
+            padding: 10px 15px;
+            font-weight: 600;
+            color: var(--sage-green);
+            font-size: 0.85em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            background-color: rgba(122, 145, 141, 0.05);
+        }
+
+        .nav-cta {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-cta-item {
+            position: relative;
+            margin-left: 5px;
+        }
+
+        .nav-cta-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: var(--white);
+            min-width: 240px;
+            box-shadow: 0 5px 15px var(--shadow-color);
+            border-radius: 0 0 4px 4px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+
+        .nav-cta-item:hover .nav-cta-dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(5px);
+        }
+
+        .mobile-menu {
+            display: none;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95em;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .btn-secondary {
+            color: var(--forest-green);
+            border: 1px solid var(--sage-green);
+            background-color: transparent;
+            margin-right: 10px;
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(122, 145, 141, 0.1);
+            border-color: var(--forest-green);
+            transform: translateY(-2px);
+        }
+
+        .btn-primary {
+            background-color: var(--amber-gold);
+            color: var(--white);
+            border: none;
+            box-shadow: 0 4px 10px rgba(212, 175, 55, 0.2);
+            transition: all 0.3s ease;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--forest-green);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(47, 79, 79, 0.2);
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5em;
+            color: var(--forest-green);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            margin-top: 85px;  /* Increased spacing between menu and hero */
+            background: var(--lighter-sage);
+            color: var(--forest-green);
+            padding: 50px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Root system overlay animation */
+        .root-system-overlay path {
+            animation: rootPulse 5s infinite ease-in-out;
+        }
+        
+        .root-system-overlay path:nth-child(2) {
+            animation-delay: 1s;
+        }
+        
+        .root-system-overlay path:nth-child(3) {
+            animation-delay: 2s;
+        }
+        
+        .root-system-overlay path:nth-child(4) {
+            animation-delay: 3s;
+        }
+        
+        .root-system-overlay circle {
+            animation: nodePulse 5s infinite ease-in-out;
+        }
+        
+        .root-system-overlay circle:nth-child(6) {
+            animation-delay: 1s;
+        }
+        
+        .root-system-overlay circle:nth-child(7) {
+            animation-delay: 2s;
+        }
+        
+        .root-system-overlay circle:nth-child(8) {
+            animation-delay: 3s;
+        }
+        
+        @keyframes rootPulse {
+            0%, 100% { opacity: 0.3; stroke-width: 2px; }
+            50% { opacity: 0.7; stroke-width: 3px; }
+        }
+        
+        @keyframes nodePulse {
+            0%, 100% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 0.9; transform: scale(1.3); }
+        }
+
+        .hero-flex-container {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .hero-content {
+            flex: 1;
+            max-width: 550px;
+        }
+
+        .hero-visual {
+            flex: 1;
+            max-width: 500px;
+        }
+
+        @media (max-width: 992px) {
+            .hero-flex-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .hero-content, 
+            .hero-visual {
+                max-width: 100%;
+                width: 100%;
+            }
+        }
+
+        .hero-heading {
+            font-size: 2.5em;  /* Slightly smaller heading */
+            margin-bottom: 20px;
+            font-weight: 700;
+            line-height: 1.2;
+            color: var(--forest-green);
+        }
+
+        .hero-highlight {
+            color: var(--amber-gold);
+        }
+
+        .hero-subheading {
+            font-size: 1.1em;  /* Smaller subheading */
+            margin-bottom: 25px;
+            line-height: 1.5;
+            opacity: 0.9;
+            color: var(--sage-green);
+            max-width: 95%;
+        }
+
+        .hero-benefits {
+            margin: 30px 0;
+        }
+
+        .benefit-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 18px;
+            color: var(--forest-green);
+        }
+
+        .benefit-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .benefit-item i {
+            color: var(--amber-gold);
+            margin-right: 12px;
+            font-size: 1.1em;
+        }
+
+        .hero-badges {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .hero-badge {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background-color: rgba(122, 145, 141, 0.1);
+            padding: 8px 15px;
+            border-radius: 6px;
+            font-size: 0.9em;
+        }
+
+        .hero-badge i {
+            color: var(--amber-gold);
+            font-size: 1.2em;
+        }
+
+        .hero-badge-text {
+            font-weight: 600;
+            color: var(--forest-green);
+        }
+
+        .visual-container {
+            background: rgba(255, 255, 255, 1);
+            border-radius: 12px;
+            height: 340px;
+            width: 100%;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            border: 1px solid rgba(122, 145, 141, 0.2);
+        }
+
+        .visual-content {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .visual-documents {
+            position: absolute;
+            width: 80%;
+            height: 80%;
+        }
+
+        .document {
+            position: absolute;
+            background: white;
+            border-radius: 4px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 130px;
+            height: 180px;
+            display: flex;
+            flex-direction: column;
+            padding: 10px;
+            border: 1px solid rgba(122, 145, 141, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .document-1 {
+            top: 20px;
+            left: 40px;
+            transform: rotate(-5deg);
+            z-index: 3;
+        }
+
+        .document-2 {
+            top: 50px;
+            right: 50px;
+            transform: rotate(3deg);
+            z-index: 2;
+        }
+
+        .document-3 {
+            bottom: 30px;
+            left: 80px;
+            transform: rotate(8deg);
+            z-index: 1;
+        }
+
+        .document-header {
+            height: 12px;
+            background: linear-gradient(to right, var(--sage-green), rgba(122, 145, 141, 0.3));
+            margin-bottom: 10px;
+            border-radius: 2px;
+        }
+
+        .document-line {
+            height: 6px;
+            background: rgba(122, 145, 141, 0.1);
+            margin-bottom: 8px;
+            border-radius: 2px;
+            width: 90%;
+        }
+
+        .document-line.short {
+            width: 60%;
+        }
+
+        .ai-elements {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 5;
+            pointer-events: none;
+        }
+
+        .scan-line {
+            position: absolute;
+            height: 2px;
+            background: linear-gradient(to right, transparent, var(--amber-gold), transparent);
+            width: 100%;
+            top: 50%;
+            opacity: 0.5;
+            animation: scan 4s infinite ease-in-out;
+        }
+
+        .data-point {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: var(--amber-gold);
+            border-radius: 50%;
+            opacity: 0;
+            animation: pulse 4s infinite;
+        }
+
+        .data-point:nth-child(2) {
+            top: 70px;
+            left: 110px;
+            animation-delay: 0.5s;
+        }
+
+        .data-point:nth-child(3) {
+            top: 150px;
+            right: 90px;
+            animation-delay: 1s;
+        }
+
+        .data-point:nth-child(4) {
+            bottom: 60px;
+            left: 130px;
+            animation-delay: 1.5s;
+        }
+
+        .data-line {
+            position: absolute;
+            background: var(--amber-gold);
+            height: 1px;
+            opacity: 0;
+            transform-origin: left center;
+            animation: drawLine 4s infinite;
+        }
+
+        .data-line:nth-child(5) {
+            top: 74px;
+            left: 114px;
+            width: 60px;
+            transform: rotate(30deg);
+            animation-delay: 0.5s;
+        }
+
+        .data-line:nth-child(6) {
+            top: 154px;
+            right: 94px;
+            width: 70px;
+            transform: rotate(-45deg);
+            animation-delay: 1s;
+            transform-origin: right center;
+        }
+
+        .data-line:nth-child(7) {
+            bottom: 64px;
+            left: 134px;
+            width: 50px;
+            transform: rotate(-15deg);
+            animation-delay: 1.5s;
+        }
+
+        .aspen-logo-visual {
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+            width: 40px;
+            height: 40px;
+            opacity: 0.7;
+        }
+
+        .visual-title {
+            position: absolute;
+            top: 15px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            color: var(--forest-green);
+            font-weight: 600;
+            font-size: 0.9em;
+        }
+
+        @keyframes scan {
+            0%, 100% { top: 30%; opacity: 0; }
+            50% { top: 70%; opacity: 0.5; }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0; }
+            50% { transform: scale(1.3); opacity: 0.5; }
+        }
+
+        @keyframes drawLine {
+            0%, 100% { opacity: 0; transform: scaleX(0.1); }
+            50% { opacity: 0.3; transform: scaleX(1); }
+        }
+
+        @media (max-width: 960px) {
+            .hero-flex-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .benefit-item {
+                text-align: left;
+            }
+            
+            .hero-form {
+                margin-left: auto;
+                margin-right: auto;
+            }
+            
+            .hero-visual {
+                margin-top: 40px;
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-heading {
+                font-size: 2.3em;
+            }
+        }
+
+        /* Features Section */
+        .features-section {
+            background-color: var(--white);
+            padding: 60px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 40px;
+        }
+
+        .section-title h2 {
+            font-size: 2.4em;
+            color: var(--forest-green);
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 3px;
+            background-color: var(--amber-gold);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .section-title p {
+            color: var(--sage-green);
+            font-size: 1.1em;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .feature-card {
+            background-color: var(--white);
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            border: 1px solid var(--light-sage);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
+            border-color: var(--amber-gold);
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background-color: var(--amber-gold);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover::before {
+            opacity: 1;
+        }
+
+        .feature-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 70px;
+            height: 70px;
+            background-color: rgba(122, 145, 141, 0.1);
+            border-radius: 50%;
+            margin-bottom: 25px;
+            color: var(--amber-gold);
+            font-size: 1.8em;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover .feature-icon {
+            background-color: var(--amber-gold);
+            color: var(--white);
+            transform: scale(1.1);
+        }
+
+        .feature-card h3 {
+            color: var(--forest-green);
+            font-size: 1.4em;
+            margin-bottom: 15px;
+        }
+
+        .feature-card p {
+            color: var(--sage-green);
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .feature-stat {
+            display: flex;
+            align-items: center;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid var(--light-sage);
+        }
+
+        .stat-number {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: var(--amber-gold);
+            margin-right: 10px;
+        }
+
+        .stat-label {
+            color: var(--sage-green);
+            font-size: 0.9em;
+            line-height: 1.2;
+        }
+
+        /* HIPAA Compliance Section */
+        .compliance-section {
+            padding: 60px 0;
+            background: linear-gradient(135deg, var(--forest-green-light) 0%, var(--sage-green) 100%);
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .compliance-content {
+            display: flex;
+            justify-content: space-between;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .compliance-text {
+            flex: 1;
+        }
+
+        .compliance-title {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .compliance-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 80px;
+            height: 3px;
+            background-color: var(--amber-gold);
+        }
+
+        .compliance-description {
+            font-size: 1.1em;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .compliance-visual {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            position: relative;
+        }
+
+        .aspen-root-system {
+            width: 100%;
+            max-width: 500px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .aspen-tree {
+            position: absolute;
+            width: 120px;
+            top: -80px;
+            z-index: 2;
+        }
+
+        .aspen-tree:nth-child(1) {
+            left: 20%;
+        }
+
+        .aspen-tree:nth-child(2) {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .aspen-tree:nth-child(3) {
+            right: 20%;
+        }
+
+        .compliance-badges {
+            display: flex;
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .compliance-badge {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            width: 180px;
+        }
+
+        .compliance-badge:hover {
+            transform: translateY(-5px);
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .compliance-badge-icon {
+            font-size: 2.5em;
+            color: var(--amber-gold);
+            margin-bottom: 15px;
+        }
+
+        .compliance-badge-title {
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .compliance-badge-desc {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+
+        /* ROI Calculator Styles */
+        .calculator-container {
+            max-width: 1000px;
+            margin: 20px auto;
+            background: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+            transition: all 0.5s ease;
+            animation: glow 3s infinite alternate;
+        }
+
+        @keyframes glow {
+            from { box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15); }
+            to { box-shadow: 0 12px 40px rgba(212, 175, 55, 0.25); }
+        }
+
+        .calculator-header {
+            background: var(--forest-green);
+            color: var(--white);
+            padding: 12px 20px;
+            position: relative;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .calculator-title {
+            text-align: left;
+        }
+
+        .calculator-header h3 {
+            font-size: 1.4em;
+            margin-bottom: 4px;
+        }
+
+        .calculator-header p {
+            font-size: 0.9em;
+            opacity: 0.9;
+            margin: 0;
+        }
+
+        .calculator-toggles {
+            display: flex;
+            gap: 15px;
+        }
+
+        .toggle-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .toggle-label {
+            font-size: 0.8em;
+            opacity: 0.8;
+            margin-bottom: 5px;
+        }
+
+        .toggle-options {
+            display: flex;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 30px;
+            padding: 2px;
+            min-width: 120px;
+        }
+
+        .toggle-option {
+            flex: 1;
+            text-align: center;
+            padding: 5px 10px;
+            font-size: 0.8em;
+            font-weight: 500;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: var(--white);
+        }
+
+        .toggle-option.active {
+            background: var(--amber-gold);
+            color: var(--white);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .calculator-body {
+            padding: 15px 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .calculator-inputs {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .metric-group {
+            padding: 12px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            border: 1px solid var(--light-sage);
+            position: relative;
+        }
+
+        .metric-group:nth-child(1) {
+            border-left: 4px solid var(--sage-green);
+        }
+
+        .metric-group:nth-child(2) {
+            border-left: 4px solid var(--amber-gold);
+        }
+
+        .metric-group:hover {
+            border-color: var(--amber-gold);
+            background: rgba(232, 237, 236, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .metric-label {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .metric-label span {
+            color: var(--forest-green);
+            font-size: 0.95em;
+            font-weight: 600;
+        }
+
+        .metric-value {
+            color: var(--sage-green);
+            font-size: 1em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            min-width: 80px;
+            text-align: right;
+        }
+
+        .slider-container {
+            position: relative;
+            margin: 12px 0 5px;
+        }
+
+        .calculator-results {
+            background: linear-gradient(135deg, var(--white), var(--light-sage));
+            border: 2px solid var(--amber-gold);
+            border-radius: 10px;
+            padding: 20px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .calculator-results::before {
+            content: 'With Aspen Grove AI';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--amber-gold);
+            color: var(--white);
+            padding: 4px 15px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .result-primary {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .result-value {
+            font-size: 2.2em;
+            font-weight: 700;
+            color: var(--amber-gold);
+            margin: 0 0 5px;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .result-label {
+            color: var(--forest-green);
+            font-size: 0.95em;
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 5px;
+        }
+
+        .result-metric {
+            text-align: center;
+            padding: 8px;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 8px;
+        }
+
+        .result-metric-value {
+            font-size: 1.2em;
+            font-weight: 700;
+            color: var(--forest-green);
+        }
+
+        .result-metric-label {
+            font-size: 0.8em;
+            color: var(--sage-green);
+        }
+
+        .calculator-cta {
+            margin-top: 15px;
+            display: flex;
+            justify-content: center;
+        }
+
+        @media (max-width: 920px) {
+            .calculator-body {
+                grid-template-columns: 1fr;
+            }
+            
+            .calculator-header {
+                flex-direction: column;
+                text-align: center;
+                padding: 15px;
+            }
+            
+            .calculator-title {
+                text-align: center;
+                margin-bottom: 10px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .calculator-toggles {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+
+        /* Responsive styles */
+        @media (max-width: 1100px) {
+            .hero-flex-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .hero-content {
+                padding-right: 0;
+                margin-bottom: 40px;
+            }
+            
+            .hero-form {
+                justify-content: center;
+            }
+            
+            .hero-visual {
+                order: -1;
+                margin-bottom: 30px;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .main-menu {
+                display: none;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background-color: var(--white);
+                flex-direction: column;
+                box-shadow: 0 5px 15px var(--shadow-color);
+                padding-bottom: 15px;
+            }
+
+            .navbar.sticky .main-menu {
+                top: 60px;
+            }
+
+            .main-menu.active {
+                display: flex;
+            }
+
+            .menu-item {
+                margin: 0;
+                border-bottom: 1px solid rgba(0,0,0,0.05);
+            }
+
+            .menu-item > a {
+                padding: 15px 20px;
+            }
+            
+            .navbar.sticky .menu-item > a {
+                padding: 15px 20px;
+            }
+
+            .menu-item > a::after {
+                display: none;
+            }
+
+            .dropdown-menu {
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                box-shadow: none;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s ease;
+                padding: 0;
+            }
+
+            .menu-item.active .dropdown-menu {
+                max-height: 1000px;
+            }
+
+            .dropdown-item {
+                padding: 12px 20px 12px 40px;
+            }
+
+            .dropdown-header {
+                padding: 10px 20px 10px 40px;
+            }
+
+            .hamburger {
+                display: block;
+                cursor: pointer;
+                font-size: 1.5em;
+                color: var(--forest-green);
+            }
+
+            .nav-cta {
+                display: none;
+            }
+
+            .mobile-menu {
+                display: flex;
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                background-color: var(--white);
+                box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+                z-index: 999;
+            }
+
+            .mobile-menu-item {
+                flex: 1;
+                text-align: center;
+                padding: 12px 5px;
+                color: var(--forest-green);
+                text-decoration: none;
+                font-size: 0.8em;
+                transition: all 0.3s ease;
+                border-right: 1px solid rgba(0,0,0,0.05);
+            }
+
+            .mobile-menu-item:last-child {
+                border-right: none;
+            }
+
+            .mobile-menu-item i {
+                display: block;
+                font-size: 1.5em;
+                margin-bottom: 5px;
+            }
+
+            .mobile-menu-item.active {
+                color: var(--amber-gold);
+                background-color: rgba(122, 145, 141, 0.05);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero {
+                padding: 60px 0;
+            }
+            
+            .hero-heading {
+                font-size: 2.2em;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .toggle-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .toggle-section {
+                width: 100%;
+            }
+        }
+
+        /* Footer Styles */
+        .footer {
+            background-color: var(--forest-green);
+            color: var(--white);
+            padding: 50px 0 30px;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .footer-top {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .footer-column {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .footer-logo-img {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .footer-logo-text {
+            font-size: 1.5em;
+            font-weight: 700;
+        }
+
+        .footer-tagline {
+            margin-bottom: 25px;
+            opacity: 0.9;
+            line-height: 1.5;
+        }
+
+        .footer-compliance {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .compliance-badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 8px 15px;
+            border-radius: 6px;
+            font-size: 0.9em;
+            font-weight: 600;
+        }
+
+        .compliance-badge i {
+            color: var(--amber-gold);
+        }
+
+        .footer-heading {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .footer-link {
+            color: var(--white);
+            opacity: 0.8;
+            text-decoration: none;
+            transition: opacity 0.2s ease;
+        }
+
+        .footer-link:hover {
+            opacity: 1;
+            color: var(--amber-gold);
+        }
+
+        .footer-contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .footer-contact-icon {
+            color: var(--amber-gold);
+            font-size: 1.2em;
+            width: 20px;
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
+
+        .footer-bottom-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .footer-bottom-link {
+            color: var(--white);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .footer-bottom-link:hover {
+            color: var(--amber-gold);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 5px;
+        }
+
+        .social-link {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background-color: var(--amber-gold);
+            transform: translateY(-3px);
+        }
+
+        .hero-form {
+            display: flex;
+            margin: 35px 0;
+            max-width: 450px;
+        }
+
+        .hero-form input {
+            flex: 1;
+            padding: 14px 20px;
+            border: 1px solid rgba(122, 145, 141, 0.2);
+            border-radius: 6px 0 0 6px;
+            font-size: 1em;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .hero-form input:focus {
+            border-color: var(--amber-gold);
+            box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.1);
+        }
+
+        .hero-form .btn {
+            border-radius: 0 6px 6px 0;
+            padding: 0 30px;
+            font-size: 1.05em;
+            letter-spacing: 0.5px;
+        }
+
+        .hero-form .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 15px rgba(212, 175, 55, 0.3);
+        }
+
+        .login-btn {
+            color: var(--forest-green);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 10px 20px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .login-btn i {
+            font-size: 1.1em;
+            transition: transform 0.3s ease;
+        }
+
+        .login-btn:hover {
+            color: var(--amber-gold);
+        }
+
+        .login-btn:hover i {
+            transform: translateX(3px);
+        }
+
+        /* AI Capabilities Section */
+        .ai-capabilities-section {
+            background-color: var(--white);
+            padding: 60px 0;
+        }
+
+        .capabilities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        @media (min-width: 992px) {
+            .capabilities-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .capability-card {
+                min-height: 320px;
+            }
+        }
+
+        .capability-card {
+            background-color: var(--white);
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            border: 1px solid var(--light-sage);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .capability-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
+            border-color: var(--amber-gold);
+        }
+
+        .capability-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background-color: var(--amber-gold);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .capability-card:hover::before {
+            opacity: 1;
+        }
+
+        .capability-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 70px;
+            height: 70px;
+            background-color: rgba(122, 145, 141, 0.1);
+            border-radius: 50%;
+            margin-bottom: 25px;
+            color: var(--amber-gold);
+            font-size: 1.8em;
+            transition: all 0.3s ease;
+        }
+
+        .capability-card:hover .capability-icon {
+            background-color: var(--amber-gold);
+            color: var(--white);
+            transform: scale(1.1);
+        }
+
+        .capability-card h3 {
+            color: var(--forest-green);
+            font-size: 1.4em;
+            margin-bottom: 15px;
+        }
+
+        .capability-card p {
+            color: var(--sage-green);
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .capability-stat {
+            display: flex;
+            align-items: center;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid var(--light-sage);
+        }
+
+        .capability-number {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: var(--amber-gold);
+            margin-right: 10px;
+        }
+
+        .capability-label {
+            color: var(--sage-green);
+            font-size: 0.9em;
+            line-height: 1.2;
+        }
+
+        /* Hero Mini Calculator Styles */
+        .hero-mini-calculator {
+            background: var(--white);
+            border-radius: 8px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+            padding: 20px;
+            margin-top: 25px;
+            border: 1px solid rgba(122, 145, 141, 0.2);
+            position: relative;
+        }
+        
+        .mini-calculator-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 15px;
+            color: var(--forest-green);
+            font-weight: 600;
+        }
+        
+        .mini-calculator-title i {
+            color: var(--amber-gold);
+        }
+        
+        .mini-slider {
+            margin-bottom: 15px;
+        }
+        
+        .mini-slider-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+            font-size: 0.9em;
+            color: var(--forest-green);
+        }
+        
+        .mini-slider-value {
+            font-weight: 600;
+            color: var(--amber-gold);
+        }
+        
+        .mini-slider input[type="range"] {
+            width: 100%;
+            height: 6px;
+            border-radius: 3px;
+            background: var(--light-sage);
+            outline: none;
+            -webkit-appearance: none;
+        }
+        
+        .mini-slider input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--amber-gold);
+            cursor: pointer;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+            transition: all 0.2s ease;
+        }
+        
+        .mini-slider input[type="range"]::-webkit-slider-thumb:hover {
+            transform: scale(1.1);
+            background: var(--forest-green);
+        }
+        
+        .mini-slider input[type="range"]::-moz-range-thumb {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--amber-gold);
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+            transition: all 0.2s ease;
+        }
+        
+        .mini-slider input[type="range"]::-moz-range-thumb:hover {
+            transform: scale(1.1);
+            background: var(--forest-green);
+        }
+        
+        .mini-results {
+            text-align: center;
+            padding: 15px 0;
+            border-top: 1px solid rgba(122, 145, 141, 0.2);
+            margin-top: 15px;
+        }
+        
+        .mini-result-value {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: var(--amber-gold);
+        }
+        
+        .mini-result-label {
+            font-size: 0.9em;
+            color: var(--forest-green);
+        }
+        
+        .mini-calculator-cta {
+            text-align: center;
+            margin-top: 10px;
+        }
+        
+        .mini-calculator-cta .btn {
+            padding: 8px 15px;
+            font-size: 0.9em;
+        }
+        
+        .mini-calculator-cta a {
+            font-size: 0.8em;
+            display: block;
+            margin-top: 5px;
+            color: var(--sage-green);
+            text-decoration: none;
+        }
+        
+        .mini-calculator-cta a:hover {
+            color: var(--amber-gold);
+        }
+
+        /* Hero Expandable Calculator Styles */
+        .hero-calculator {
+            background: var(--white);
+            border-radius: 10px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            transition: all 0.4s ease;
+            overflow: hidden;
+            position: relative;
+            border: 1px solid rgba(122, 145, 141, 0.2);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .calculator-header {
+            padding: 15px 20px;
+            background: var(--forest-green);
+            color: var(--white);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .calculator-title h3 {
+            margin: 0;
+            font-size: 1.2em;
+        }
+        
+        .calculator-title p {
+            margin: 5px 0 0;
+            font-size: 0.85em;
+            opacity: 0.9;
+        }
+        
+        .calculator-simple {
+            padding: 20px;
+        }
+        
+        .simple-inputs {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .calc-control {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        
+        .calc-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9em;
+            color: var(--forest-green);
+            font-weight: 500;
+        }
+        
+        .calc-value {
+            color: var(--amber-gold);
+            font-weight: 600;
+        }
+        
+        .industry-selector {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+        
+        .industry-option {
+            flex: 1;
+            padding: 8px 10px;
+            font-size: 0.8em;
+            text-align: center;
+            background: rgba(122, 145, 141, 0.1);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: var(--forest-green);
+            font-weight: 500;
+            user-select: none;
+        }
+        
+        .industry-option.active {
+            background: var(--amber-gold);
+            color: white;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .results-summary {
+            background: linear-gradient(135deg, var(--white), var(--light-sage));
+            padding: 15px;
+            border-radius: 8px;
+            border: 2px solid var(--amber-gold);
+            text-align: center;
+            margin-top: 15px;
+            position: relative;
+        }
+        
+        .results-summary::before {
+            content: 'With Aspen Grove AI';
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--amber-gold);
+            color: var(--white);
+            padding: 3px 12px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        
+        .main-result {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: var(--amber-gold);
+            margin-bottom: 5px;
+        }
+        
+        .result-description {
+            font-size: 0.9em;
+            color: var(--forest-green);
+        }
+        
+        /* Savings explanation styling */
+        .savings-explanation {
+            margin-top: 15px;
+            padding-top: 12px;
+            border-top: 1px dashed rgba(122, 145, 141, 0.3);
+        }
+        
+        .savings-explanation p {
+            font-size: 0.8em;
+            color: var(--sage-green);
+            margin: 0;
+            line-height: 1.4;
+        }
+        
+        .savings-explanation i {
+            color: var(--amber-gold);
+            margin-right: 5px;
+        }
+        
+        .calculator-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+            align-items: center;
+        }
+        
+        .toggle-expand {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: var(--forest-green);
+            font-size: 0.9em;
+            padding: 5px 12px;
+            background: rgba(122, 145, 141, 0.1);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            user-select: none;
+        }
+        
+        .toggle-expand:hover {
+            background: rgba(122, 145, 141, 0.2);
+        }
+        
+        .toggle-expand i {
+            font-size: 0.8em;
+            transition: transform 0.3s ease;
+        }
+        
+        .toggle-expand.expanded i {
+            transform: rotate(180deg);
+        }
+        
+        .calculator-expanded {
+            height: 0;
+            overflow: hidden;
+            transition: height 0.4s ease;
+            background: rgba(242, 245, 244, 0.5);
+            border-top: 1px solid rgba(122, 145, 141, 0.2);
+        }
+        
+        .expanded-content {
+            padding: 20px;
+        }
+        
+        .expanded-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .expanded-inputs {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .expanded-results {
+            background: linear-gradient(135deg, var(--white), var(--light-sage));
+            border: 2px solid var(--amber-gold);
+            border-radius: 8px;
+            padding: 15px;
+            position: relative;
+        }
+        
+        .expanded-result-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .expanded-metric {
+            text-align: center;
+            padding: 8px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 8px;
+        }
+        
+        .expanded-metric-value {
+            font-weight: 700;
+            color: var(--forest-green);
+            font-size: 1.1em;
+        }
+        
+        .expanded-metric-label {
+            font-size: 0.8em;
+            color: var(--sage-green);
+        }
+        
+        @media (max-width: 768px) {
+            .expanded-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Button sizes */
+        .btn-sm {
+            padding: 6px 14px;
+            font-size: 0.85em;
+        }
+        
+        /* Additional hero calculator specific styles */
+        .hero-visual .hero-calculator {
+            max-height: 380px;
+            max-width: 500px;
+            margin-left: auto;
+        }
+        
+        .calculator-expanded.active {
+            height: auto;
+        }
+        
+        /* Slider styling improvements */
+        input[type="range"] {
+            width: 100%;
+            height: 6px;
+            border-radius: 3px;
+            background: var(--light-sage);
+            outline: none;
+            -webkit-appearance: none;
+        }
+        
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--amber-gold);
+            cursor: pointer;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+            transition: all 0.2s ease;
+        }
+        
+        input[type="range"]::-webkit-slider-thumb:hover {
+            transform: scale(1.1);
+            background: var(--forest-green);
+        }
+        
+        input[type="range"]::-moz-range-thumb {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--amber-gold);
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+            transition: all 0.2s ease;
+        }
+        
+        input[type="range"]::-moz-range-thumb:hover {
+            transform: scale(1.1);
+            background: var(--forest-green);
+        }
+        
+        @media (max-width: 992px) {
+            .hero-visual .hero-calculator {
+                margin: 30px auto 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar" id="navbar">
+        <div class="logo">
+            <img src="aspen-tree-logo.svg" alt="Aspen Grove Logo">
+            <span class="logo-text">Aspen Grove</span>
+        </div>
+        
+        <ul class="main-menu">
+            <li class="menu-item active">
+                <a href="#">Home</a>
+            </li>
+            <li class="menu-item">
+                <a href="#">Solutions</a>
+                <div class="dropdown-menu">
+                    <span class="dropdown-header">Industry Solutions</span>
+                    <a href="#" class="dropdown-item">
+                        <div class="item-icon"><i class="fas fa-gavel"></i></div>
+                        <div class="item-content">
+                            <div class="item-title">Legal</div>
+                            <div class="item-description">Contract analysis and document management</div>
+                        </div>
+                    </a>
+                    <a href="#" class="dropdown-item">
+                        <div class="item-icon"><i class="fas fa-heartbeat"></i></div>
+                        <div class="item-content">
+                            <div class="item-title">Healthcare</div>
+                            <div class="item-description">Patient records and HIPAA-compliant processing</div>
+                        </div>
+                    </a>
+                    <a href="#" class="dropdown-item">
+                        <div class="item-icon"><i class="fas fa-chart-line"></i></div>
+                        <div class="item-content">
+                            <div class="item-title">Financial Services</div>
+                            <div class="item-description">Financial document analysis and reporting</div>
+                        </div>
+                    </a>
+                </div>
+            </li>
+            <li class="menu-item">
+                <a href="#">Features</a>
+            </li>
+            <li class="menu-item">
+                <a href="#">Pricing</a>
+            </li>
+            <li class="menu-item">
+                <a href="#">Resources</a>
+            </li>
+        </ul>
+        
+        <div class="nav-cta">
+            <a href="#" class="btn btn-secondary">Login</a>
+            <a href="#" class="btn btn-primary">Get Started</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-flex-container">
+            <div class="hero-content">
+                <h1 class="hero-heading">AI-Powered <span class="hero-highlight">Document Processing</span> for Modern Businesses</h1>
+                <p class="hero-subheading">Streamline operations, increase efficiency, and ensure compliance with our intelligent document processing solutions.</p>
+                
+                <div class="hero-benefits">
+                    <div class="benefit-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Extract and analyze data from any document format</span>
+                    </div>
+                    <div class="benefit-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Reduce processing time by up to 85%</span>
+                    </div>
+                    <div class="benefit-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Ensure HIPAA and SOC 2 compliance</span>
+                    </div>
+                </div>
+                
+                <!-- Mini Calculator -->
+                <div class="mini-calculator">
+                    <div class="mini-calculator-title">Calculate Your Savings</div>
+                    <div class="mini-calculator-content">
+                        <div class="mini-calculator-input">
+                            <label for="mini-docs-slider">Documents processed monthly:</label>
+                            <input type="range" id="mini-docs-slider" min="50" max="1000" step="50" value="300">
+                            <span id="mini-docs-value">300 docs</span>
+                        </div>
+                        <div class="mini-calculator-result">
+                            <div class="mini-result-title">Monthly Savings:</div>
+                            <div id="mini-savings" class="mini-result-value">$37,500</div>
+                        </div>
+                    </div>
+                    <div class="mini-calculator-cta">
+                        <a href="#calculator-container" class="btn btn-primary">See Full ROI Details</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="hero-visual">
+                <!-- Hero Visual Content -->
+                <div class="visual-container">
+                    <div class="visual-title">AI Document Processing</div>
+                    <div class="visual-content">
+                        <div class="visual-documents">
+                            <div class="document document-1">
+                                <div class="document-header"></div>
+                                <div class="document-line"></div>
+                                <div class="document-line"></div>
+                                <div class="document-line short"></div>
+                                <div class="document-line"></div>
+                                <div class="document-line short"></div>
+                            </div>
+                            <div class="document document-2">
+                                <div class="document-header"></div>
+                                <div class="document-line"></div>
+                                <div class="document-line short"></div>
+                                <div class="document-line"></div>
+                                <div class="document-line"></div>
+                                <div class="document-line short"></div>
+                            </div>
+                            <div class="document document-3">
+                                <div class="document-header"></div>
+                                <div class="document-line"></div>
+                                <div class="document-line"></div>
+                                <div class="document-line short"></div>
+                                <div class="document-line"></div>
+                                <div class="document-line short"></div>
+                            </div>
+                        </div>
+                        <div class="ai-elements">
+                            <div class="scan-line"></div>
+                            <div class="data-point"></div>
+                            <div class="data-point"></div>
+                            <div class="data-point"></div>
+                            <div class="data-line"></div>
+                            <div class="data-line"></div>
+                            <div class="data-line"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Calculator Section -->
+    <section id="calculator-container" class="calculator-container">
+        <div class="container">
+            <div class="section-title">
+                <h2>ROI Calculator</h2>
+                <p>Estimate the impact Aspen Grove could have on your business</p>
+            </div>
+            
+            <div class="hero-calculator">
+                <div class="calculator-header">
+                    <div class="industry-selector">
+                        <div class="industry-option active" data-industry="legal">Legal</div>
+                        <div class="industry-option" data-industry="healthcare">Healthcare</div>
+                        <div class="industry-option" data-industry="finance">Finance</div>
+                    </div>
+                </div>
+                
+                <div class="calculator-inputs">
+                    <div class="calculator-input">
+                        <label for="hero-docs-slider">Documents processed monthly:</label>
+                        <input type="range" id="hero-docs-slider" min="100" max="5000" step="100" value="1000">
+                        <span id="hero-docs-value">1000 docs</span>
+                    </div>
+                    
+                    <div class="calculator-input">
+                        <label for="hero-hours-slider">Average hours per document:</label>
+                        <input type="range" id="hero-hours-slider" min="1" max="10" step="1" value="3">
+                        <span id="hero-hours-value">3 hours</span>
+                    </div>
+                    
+                    <div class="calculator-input">
+                        <label for="hero-rate-slider">Hourly rate:</label>
+                        <input type="range" id="hero-rate-slider" min="50" max="500" step="10" value="150">
+                        <span id="hero-rate-value">$150</span>
+                    </div>
+                </div>
+                
+                <div class="calculator-results">
+                    <div class="result-item primary">
+                        <div class="result-label" id="hero-result-label">Monthly Revenue Increase</div>
+                        <div class="result-value" id="hero-savings">$225,000</div>
+                    </div>
+                    
+                    <div id="expand-calculator" class="expand-button">
+                        <i class="fas fa-chevron-down"></i>
+                        <span>View More Details</span>
+                    </div>
+                    
+                    <div id="expanded-calculator" class="expanded-calculator">
+                        <div class="expanded-results">
+                            <div class="result-item">
+                                <div class="result-label" id="hero-hours-label">Hours per Case</div>
+                                <div class="result-value" id="hero-time-saved">1,500</div>
+                            </div>
+                            
+                            <div class="result-item">
+                                <div class="result-label" id="hero-capacity-label">Additional Cases</div>
+                                <div class="result-value" id="hero-capacity">500</div>
+                            </div>
+                            
+                            <div class="result-item">
+                                <div class="result-label" id="hero-expanded-label">Monthly Revenue Increase</div>
+                                <div class="result-value" id="hero-expanded-savings">$225,000</div>
+                            </div>
+                            
+                            <div class="result-item">
+                                <div class="result-label" id="hero-annual-label">Annual Revenue Increase</div>
+                                <div class="result-value" id="hero-annual">$2,700,000</div>
+                            </div>
+                            
+                            <div class="result-item">
+                                <div class="result-label">ROI</div>
+                                <div class="result-value" id="hero-roi">500%</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Utility function to format currency
+            function formatCurrency(value) {
+                return '$' + value.toLocaleString('en-US');
+            }
+            
+            // Utility function to animate value changes
+            function animateValue(element, newValue) {
+                if (!element) return;
+                element.textContent = newValue;
+            }
+            
+            // Add this to your existing JavaScript for sticky navigation
+            window.addEventListener('scroll', function() {
+                const navbar = document.getElementById('navbar');
+                if (window.scrollY > 50) {
+                    navbar.classList.add('sticky');
+                } else {
+                    navbar.classList.remove('sticky');
+                }
+            });
+            
+            // Add fade-in effect when scrolling
+            const fadeInSections = document.querySelectorAll('.features-section, .compliance-section, .calculator-container, .hero-content, .hero-visual, .footer, .feature-card, .hero-section');
+            
+            // Add the fade-in-section class to all elements we want to animate
+            fadeInSections.forEach(section => {
+                section.classList.add('fade-in-section');
+            });
+            
+            // Function to check if elements are in viewport
+            function checkFadeInElements() {
+                const triggerBottom = window.innerHeight * 0.8;
+                
+                fadeInSections.forEach(section => {
+                    const sectionTop = section.getBoundingClientRect().top;
+                    
+                    if (sectionTop < triggerBottom) {
+                        section.classList.add('is-visible');
+                    }
+                });
+            }
+            
+            // Run once on page load
+            checkFadeInElements();
+            
+            // Run on scroll
+            window.addEventListener('scroll', checkFadeInElements);
+            
+            // Mini Calculator Functionality
+            const miniDocsSlider = document.getElementById('mini-docs-slider');
+            const miniDocsValue = document.getElementById('mini-docs-value');
+            const miniSavings = document.getElementById('mini-savings');
+            
+            // Update mini calculator on slider change
+            miniDocsSlider.addEventListener('input', updateMiniCalculator);
+            
+            function updateMiniCalculator() {
+                const docs = parseInt(miniDocsSlider.value);
+                miniDocsValue.textContent = `${docs} docs`;
+                
+                // Simple calculation for a quick estimate (customize as needed)
+                const avgHours = 5; // Assumed average hours per document
+                const avgRate = 250; // Assumed average hourly rate
+                const efficiencyRate = 0.5; // 50% efficiency improvement
+                
+                const monthlySavingsValue = Math.round(docs * avgHours * avgRate * efficiencyRate);
+                
+                // Animate the savings value
+                animateValue(miniSavings, formatCurrency(monthlySavingsValue));
+            }
+            
+            // Initialize the mini calculator
+            updateMiniCalculator();
+            
+            // Smooth scroll to full calculator when mini-calculator CTA is clicked
+            document.querySelector('.mini-calculator-cta .btn').addEventListener('click', function(e) {
+                e.preventDefault();
+                const calculatorSection = document.getElementById('calculator-container');
+                calculatorSection.scrollIntoView({ behavior: 'smooth' });
+            });
+            
+            // Hero Calculator Functionality
+            const heroDocsSlider = document.getElementById('hero-docs-slider');
+            const heroDocsValue = document.getElementById('hero-docs-value');
+            const heroHoursSlider = document.getElementById('hero-hours-slider');
+            const heroHoursValue = document.getElementById('hero-hours-value');
+            const heroRateSlider = document.getElementById('hero-rate-slider');
+            const heroRateValue = document.getElementById('hero-rate-value');
+            const heroSavings = document.getElementById('hero-savings');
+            const heroExpandedSavings = document.getElementById('hero-expanded-savings');
+            const heroTimeSaved = document.getElementById('hero-time-saved');
+            const heroCapacity = document.getElementById('hero-capacity');
+            const heroROI = document.getElementById('hero-roi');
+            const heroAnnual = document.getElementById('hero-annual');
+            const expandButton = document.getElementById('expand-calculator');
+            const expandedCalculator = document.getElementById('expanded-calculator');
+            
+            // Industry data for calculations
+            const industryData = {
+                legal: {
+                    efficiencyRate: 0.5,
+                    costMultiplier: 1.0,
+                    baseROI: 500,
+                    labels: {
+                        hours: "Hours per Case",
+                        capacity: "Additional Cases",
+                        savings: "Revenue Increase"
+                    }
+                },
+                healthcare: {
+                    efficiencyRate: 0.6,
+                    costMultiplier: 0.8,
+                    baseROI: 450,
+                    labels: {
+                        hours: "Processing Hours",
+                        capacity: "Patient Records",
+                        savings: "Cost Savings"
+                    }
+                },
+                finance: {
+                    efficiencyRate: 0.45,
+                    costMultiplier: 1.2,
+                    baseROI: 550,
+                    labels: {
+                        hours: "Analysis Hours",
+                        capacity: "Additional Reports",
+                        savings: "Efficiency Gains"
+                    }
+                }
+            };
+            
+            // Current industry selection
+            let currentIndustry = 'legal';
+            
+            // Update hero calculator
+            function updateHeroCalculator() {
+                // Get values from sliders
+                const docs = parseInt(heroDocsSlider.value);
+                const hours = parseInt(heroHoursSlider.value);
+                const rate = parseInt(heroRateSlider.value);
+                
+                // Update displayed values
+                heroDocsValue.textContent = `${docs} docs`;
+                heroHoursValue.textContent = `${hours} hours`;
+                heroRateValue.textContent = `$${rate}`;
+                
+                // Get industry-specific data
+                const industry = industryData[currentIndustry];
+                
+                // Calculate savings and metrics
+                const efficiencyRate = industry.efficiencyRate;
+                const hoursSaved = Math.round(docs * hours * efficiencyRate);
+                const additionalCapacity = Math.round(docs * efficiencyRate);
+                const monthlySavings = Math.round(hoursSaved * rate * industry.costMultiplier);
+                const annualSavings = monthlySavings * 12;
+                const roi = Math.round(industry.baseROI * (docs / 100));
+                
+                // Update displayed results
+                animateValue(heroSavings, formatCurrency(monthlySavings));
+                animateValue(heroExpandedSavings, formatCurrency(monthlySavings));
+                animateValue(heroTimeSaved, hoursSaved);
+                animateValue(heroCapacity, additionalCapacity);
+                animateValue(heroROI, `${roi}%`);
+                animateValue(heroAnnual, formatCurrency(annualSavings));
+                
+                // Update labels based on industry
+                document.getElementById('hero-result-label').textContent = `Monthly ${industry.labels.savings}`;
+                document.getElementById('hero-expanded-label').textContent = `Monthly ${industry.labels.savings}`;
+                document.getElementById('hero-capacity-label').textContent = industry.labels.capacity;
+                document.getElementById('hero-hours-label').textContent = industry.labels.hours;
+                document.getElementById('hero-annual-label').textContent = `Annual ${industry.labels.savings}`;
+            }
+            
+            // Add event listeners for hero calculator sliders
+            heroDocsSlider.addEventListener('input', updateHeroCalculator);
+            heroHoursSlider.addEventListener('input', updateHeroCalculator);
+            heroRateSlider.addEventListener('input', updateHeroCalculator);
+            
+            // Industry selector functionality
+            const industryOptions = document.querySelectorAll('.industry-option');
+            industryOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    // Remove active class from all options
+                    industryOptions.forEach(opt => opt.classList.remove('active'));
+                    
+                    // Add active class to clicked option
+                    this.classList.add('active');
+                    
+                    // Update current industry
+                    currentIndustry = this.getAttribute('data-industry');
+                    
+                    // Update calculator
+                    updateHeroCalculator();
+                });
+            });
+            
+            // Expand/collapse functionality
+            let isExpanded = false;
+            expandButton.addEventListener('click', function() {
+                isExpanded = !isExpanded;
+                
+                if (isExpanded) {
+                    expandButton.classList.add('expanded');
+                    expandedCalculator.style.height = expandedCalculator.scrollHeight + 'px';
+                } else {
+                    expandButton.classList.remove('expanded');
+                    expandedCalculator.style.height = '0';
+                }
+            });
+            
+            // Initialize hero calculator
+            updateHeroCalculator();
+        });
+    </script>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-top">
+                <div class="footer-column">
+                    <div class="footer-logo">
+                        <img src="aspen-tree-logo.svg" alt="Aspen Grove Logo" class="footer-logo-img">
+                        <div class="footer-logo-text">Aspen Grove</div>
+                    </div>
+                    <p class="footer-tagline">AI-powered document processing with advanced security and compliance</p>
+                    <div class="footer-compliance">
+                        <div class="compliance-badge">
+                            <i class="fas fa-shield-alt"></i> HIPAA Compliant
+                        </div>
+                        <div class="compliance-badge">
+                            <i class="fas fa-lock"></i> SOC 2
+                        </div>
+                    </div>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3 class="footer-heading">Solutions</h3>
+                    <div class="footer-links">
+                        <a href="#" class="footer-link">Healthcare Document Processing</a>
+                        <a href="#" class="footer-link">Legal Document Management</a>
+                        <a href="#" class="footer-link">Financial Document Analysis</a>
+                        <a href="#" class="footer-link">Business Operations</a>
+                        <a href="#" class="footer-link">Real Estate Documentation</a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3 class="footer-heading">Company</h3>
+                    <div class="footer-links">
+                        <a href="#" class="footer-link">About Us</a>
+                        <a href="#" class="footer-link">Careers</a>
+                        <a href="#" class="footer-link">Blog</a>
+                        <a href="#" class="footer-link">Press</a>
+                        <a href="#" class="footer-link">Contact</a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3 class="footer-heading">Resources</h3>
+                    <div class="footer-links">
+                        <a href="#" class="footer-link">ROI Calculator</a>
+                        <a href="#" class="footer-link">HIPAA Compliance Guide</a>
+                        <a href="#" class="footer-link">Security Whitepaper</a>
+                        <a href="#" class="footer-link">Documentation</a>
+                        <a href="#" class="footer-link">API Reference</a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3 class="footer-heading">Contact Us</h3>
+                    <div class="footer-contact-item">
+                        <div class="footer-contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <a href="mailto:info@aspengroveai.com" class="footer-link">info@aspengroveai.com</a>
+                    </div>
+                    <div class="footer-contact-item">
+                        <div class="footer-contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <a href="tel:+18005551234" class="footer-link">+1 (800) 555-1234</a>
+                    </div>
+                    <div class="footer-contact-item">
+                        <div class="footer-contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <span>123 Innovation Way<br>San Francisco, CA 94103</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="copyright">
+                    © 2023 Aspen Grove Solutions. All rights reserved.
+                </div>
+                <div class="footer-bottom-links">
+                    <a href="#" class="footer-bottom-link">Privacy Policy</a>
+                    <a href="#" class="footer-bottom-link">Terms of Service</a>
+                    <a href="#" class="footer-bottom-link">HIPAA Policy</a>
+                    <a href="#" class="footer-bottom-link">Security</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

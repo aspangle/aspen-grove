@@ -312,22 +312,36 @@
 
         .hero-flex-container {
             display: flex;
+            flex-direction: row;
             justify-content: space-between;
-            align-items: center;
+            align-items: flex-start;
             gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .hero-content {
+            flex: 1;
+            max-width: 550px;
+        }
+
+        .hero-visual {
+            flex: 1;
+            max-width: 500px;
         }
 
         @media (max-width: 992px) {
             .hero-flex-container {
                 flex-direction: column;
+                align-items: center;
             }
-        }
-
-        .hero-content {
-            flex: 1;
-            max-width: 600px;
-            position: relative;
-            z-index: 2;
+            
+            .hero-content, 
+            .hero-visual {
+                max-width: 100%;
+                width: 100%;
+            }
         }
 
         .hero-heading {
@@ -391,13 +405,6 @@
         .hero-badge-text {
             font-weight: 600;
             color: var(--forest-green);
-        }
-
-        .hero-visual {
-            flex: 1;
-            max-width: 500px;
-            position: relative;
-            z-index: 2;
         }
 
         .visual-container {
@@ -1672,95 +1679,93 @@
 
     <!-- Hero Section -->
     <section class="hero-section">
-        <div class="container">
-            <div class="hero-flex-container">
-                <div class="hero-content">
-                    <h1 class="hero-heading">
-                        <span class="hero-highlight">AI-Powered</span> Document Processing with <span class="hero-highlight">HIPAA Compliance</span>
-                    </h1>
-                    <div class="hero-subheading">
-                        Our advanced AI platform processes documents through a secure, interconnected network that gets smarter with every file while ensuring complete data isolation and HIPAA compliance.
+        <div class="hero-flex-container">
+            <div class="hero-content">
+                <h1 class="hero-heading">
+                    <span class="hero-highlight">AI-Powered</span> Document Processing with <span class="hero-highlight">HIPAA Compliance</span>
+                </h1>
+                <div class="hero-subheading">
+                    Our advanced AI platform processes documents through a secure, interconnected network that gets smarter with every file while ensuring complete data isolation and HIPAA compliance.
+                </div>
+                <div class="hero-benefits">
+                    <div class="benefit-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Save 85% of document processing time</span>
                     </div>
-                    <div class="hero-benefits">
-                        <div class="benefit-item">
-                            <i class="fas fa-check-circle"></i>
-                            <span>Save 85% of document processing time</span>
-                        </div>
-                        <div class="benefit-item">
-                            <i class="fas fa-check-circle"></i>
-                            <span>99.5% accuracy with AI document extraction</span>
-                        </div>
-                        <div class="benefit-item">
-                            <i class="fas fa-check-circle"></i>
-                            <span>100% HIPAA-compliant secure processing</span>
-                        </div>
+                    <div class="benefit-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>99.5% accuracy with AI document extraction</span>
                     </div>
-                    
-                    <div class="hero-form">
-                        <input type="email" placeholder="Enter your email" aria-label="Email input">
-                        <button class="btn btn-primary">Get Started</button>
-                    </div>
-                    
-                    <div class="hero-badges">
-                        <div class="hero-badge">
-                            <i class="fas fa-shield-alt"></i>
-                            <span class="hero-badge-text">HIPAA Certified</span>
-                        </div>
-                        <div class="hero-badge">
-                            <i class="fas fa-lock"></i>
-                            <span class="hero-badge-text">SOC 2 Compliant</span>
-                        </div>
-                        <div class="hero-badge">
-                            <i class="fas fa-check-circle"></i>
-                            <span class="hero-badge-text">99.9% Uptime</span>
-                        </div>
+                    <div class="benefit-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>100% HIPAA-compliant secure processing</span>
                     </div>
                 </div>
                 
-                <div class="hero-visual">
-                    <div class="visual-container">
-                        <div class="visual-title">AI Document Processing Visualization</div>
-                        <div class="visual-content">
-                            <div class="visual-documents">
-                                <div class="document document-1">
-                                    <div class="document-header"></div>
-                                    <div class="document-line"></div>
-                                    <div class="document-line"></div>
-                                    <div class="document-line short"></div>
-                                    <div class="document-line"></div>
-                                    <div class="document-line short"></div>
-                                    <div class="document-line"></div>
-                                </div>
-                                <div class="document document-2">
-                                    <div class="document-header"></div>
-                                    <div class="document-line"></div>
-                                    <div class="document-line short"></div>
-                                    <div class="document-line"></div>
-                                    <div class="document-line"></div>
-                                    <div class="document-line short"></div>
-                                    <div class="document-line"></div>
-                                </div>
-                                <div class="document document-3">
-                                    <div class="document-header"></div>
-                                    <div class="document-line"></div>
-                                    <div class="document-line"></div>
-                                    <div class="document-line short"></div>
-                                    <div class="document-line"></div>
-                                    <div class="document-line"></div>
-                                    <div class="document-line short"></div>
-                                </div>
+                <div class="hero-form">
+                    <input type="email" placeholder="Enter your email" aria-label="Email input">
+                    <button class="btn btn-primary">Get Started</button>
+                </div>
+                
+                <div class="hero-badges">
+                    <div class="hero-badge">
+                        <i class="fas fa-shield-alt"></i>
+                        <span class="hero-badge-text">HIPAA Certified</span>
+                    </div>
+                    <div class="hero-badge">
+                        <i class="fas fa-lock"></i>
+                        <span class="hero-badge-text">SOC 2 Compliant</span>
+                    </div>
+                    <div class="hero-badge">
+                        <i class="fas fa-check-circle"></i>
+                        <span class="hero-badge-text">99.9% Uptime</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="hero-visual">
+                <div class="visual-container">
+                    <div class="visual-title">AI Document Processing Visualization</div>
+                    <div class="visual-content">
+                        <div class="visual-documents">
+                            <div class="document document-1">
+                                <div class="document-header"></div>
+                                <div class="document-line"></div>
+                                <div class="document-line"></div>
+                                <div class="document-line short"></div>
+                                <div class="document-line"></div>
+                                <div class="document-line short"></div>
+                                <div class="document-line"></div>
                             </div>
-                            <div class="ai-elements">
-                                <div class="scan-line"></div>
-                                <div class="data-point"></div>
-                                <div class="data-point"></div>
-                                <div class="data-point"></div>
-                                <div class="data-line"></div>
-                                <div class="data-line"></div>
-                                <div class="data-line"></div>
+                            <div class="document document-2">
+                                <div class="document-header"></div>
+                                <div class="document-line"></div>
+                                <div class="document-line short"></div>
+                                <div class="document-line"></div>
+                                <div class="document-line"></div>
+                                <div class="document-line short"></div>
+                                <div class="document-line"></div>
                             </div>
-                            <img src="aspen-tree-logo.svg" alt="Aspen Grove Logo" class="aspen-logo-visual">
+                            <div class="document document-3">
+                                <div class="document-header"></div>
+                                <div class="document-line"></div>
+                                <div class="document-line"></div>
+                                <div class="document-line short"></div>
+                                <div class="document-line"></div>
+                                <div class="document-line"></div>
+                                <div class="document-line short"></div>
+                            </div>
                         </div>
+                        <div class="ai-elements">
+                            <div class="scan-line"></div>
+                            <div class="data-point"></div>
+                            <div class="data-point"></div>
+                            <div class="data-point"></div>
+                            <div class="data-line"></div>
+                            <div class="data-line"></div>
+                            <div class="data-line"></div>
+                        </div>
+                        <img src="aspen-tree-logo.svg" alt="Aspen Grove Logo" class="aspen-logo-visual">
                     </div>
                 </div>
             </div>

@@ -84,6 +84,7 @@
             font-size: 1.4em;
             color: var(--forest-green);
             transition: all 0.3s ease;
+            text-decoration: none; /* Remove any underline from the logo text */
         }
 
         .navbar.sticky .logo-text {
@@ -119,30 +120,29 @@
             color: var(--amber-gold);
         }
 
+        /* Remove the underline animation on menu items */
         .menu-item > a::after {
-            content: '';
-            position: absolute;
-            bottom: 15px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 0;
-            height: 2px;
-            background-color: var(--amber-gold);
-            transition: width 0.3s ease;
-        }
-
-        .navbar.sticky .menu-item > a::after {
-            bottom: 12px;
-        }
-
-        .menu-item > a:hover::after,
-        .menu-item.active > a::after {
-            width: 30px;
+            display: none;
         }
 
         .menu-item.active > a {
             color: var(--amber-gold);
             font-weight: 600;
+        }
+
+        /* Add fade-in animation for scrolling elements */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(20px);
+            visibility: hidden;
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            will-change: opacity, visibility;
+        }
+        
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+            visibility: visible;
         }
 
         .dropdown-menu {
@@ -317,6 +317,49 @@
             padding: 50px 0;
             position: relative;
             overflow: hidden;
+        }
+        
+        /* Root system overlay animation */
+        .root-system-overlay path {
+            animation: rootPulse 5s infinite ease-in-out;
+        }
+        
+        .root-system-overlay path:nth-child(2) {
+            animation-delay: 1s;
+        }
+        
+        .root-system-overlay path:nth-child(3) {
+            animation-delay: 2s;
+        }
+        
+        .root-system-overlay path:nth-child(4) {
+            animation-delay: 3s;
+        }
+        
+        .root-system-overlay circle {
+            animation: nodePulse 5s infinite ease-in-out;
+        }
+        
+        .root-system-overlay circle:nth-child(6) {
+            animation-delay: 1s;
+        }
+        
+        .root-system-overlay circle:nth-child(7) {
+            animation-delay: 2s;
+        }
+        
+        .root-system-overlay circle:nth-child(8) {
+            animation-delay: 3s;
+        }
+        
+        @keyframes rootPulse {
+            0%, 100% { opacity: 0.3; stroke-width: 2px; }
+            50% { opacity: 0.7; stroke-width: 3px; }
+        }
+        
+        @keyframes nodePulse {
+            0%, 100% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 0.9; transform: scale(1.3); }
         }
 
         .hero-flex-container {
@@ -1502,6 +1545,107 @@
         .login-btn:hover i {
             transform: translateX(3px);
         }
+
+        /* AI Capabilities Section */
+        .ai-capabilities-section {
+            background-color: var(--white);
+            padding: 60px 0;
+        }
+
+        .capabilities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .capability-card {
+            background-color: var(--white);
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            border: 1px solid var(--light-sage);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .capability-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
+            border-color: var(--amber-gold);
+        }
+
+        .capability-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background-color: var(--amber-gold);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .capability-card:hover::before {
+            opacity: 1;
+        }
+
+        .capability-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 70px;
+            height: 70px;
+            background-color: rgba(122, 145, 141, 0.1);
+            border-radius: 50%;
+            margin-bottom: 25px;
+            color: var(--amber-gold);
+            font-size: 1.8em;
+            transition: all 0.3s ease;
+        }
+
+        .capability-card:hover .capability-icon {
+            background-color: var(--amber-gold);
+            color: var(--white);
+            transform: scale(1.1);
+        }
+
+        .capability-card h3 {
+            color: var(--forest-green);
+            font-size: 1.4em;
+            margin-bottom: 15px;
+        }
+
+        .capability-card p {
+            color: var(--sage-green);
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .capability-stat {
+            display: flex;
+            align-items: center;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid var(--light-sage);
+        }
+
+        .capability-number {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: var(--amber-gold);
+            margin-right: 10px;
+        }
+
+        .capability-label {
+            color: var(--sage-green);
+            font-size: 0.9em;
+            line-height: 1.2;
+        }
     </style>
 </head>
 <body>
@@ -1514,36 +1658,36 @@
 
         <ul class="main-menu" id="mainMenu">
             <li class="menu-item active">
-                <a href="#">Why Aspen Grove</a>
+                <a href="#">Solutions</a>
                 <div class="dropdown-menu">
-                    <div class="dropdown-header">Our Approach</div>
+                    <div class="dropdown-header">Document Processing</div>
                     <a href="#" class="dropdown-item">
-                        <div class="item-icon"><i class="fas fa-tree"></i></div>
+                        <div class="item-icon"><i class="fas fa-file-alt"></i></div>
                         <div class="item-content">
-                            <div class="item-title">The Aspen Advantage</div>
-                            <div class="item-description">AI-powered document processing</div>
+                            <div class="item-title">AI Document Processing</div>
+                            <div class="item-description">Process documents with 99.5% accuracy</div>
                         </div>
                     </a>
                     <a href="#" class="dropdown-item">
-                        <div class="item-icon"><i class="fas fa-network-wired"></i></div>
+                        <div class="item-icon"><i class="fas fa-cogs"></i></div>
                         <div class="item-content">
-                            <div class="item-title">Advanced AI Architecture</div>
-                            <div class="item-description">Innovative knowledge system</div>
+                            <div class="item-title">Workflow Automation</div>
+                            <div class="item-description">Streamline document workflows</div>
                         </div>
                     </a>
-                    <div class="dropdown-header">Tools & Results</div>
+                    <div class="dropdown-header">Integration & Security</div>
                     <a href="#" class="dropdown-item">
-                        <div class="item-icon"><i class="fas fa-chart-line"></i></div>
+                        <div class="item-icon"><i class="fas fa-shield-alt"></i></div>
                         <div class="item-content">
-                            <div class="item-title">ROI Calculator</div>
-                            <div class="item-description">See your potential savings</div>
+                            <div class="item-title">HIPAA Compliance</div>
+                            <div class="item-description">Enterprise-grade security for sensitive data</div>
                         </div>
                     </a>
                     <a href="#" class="dropdown-item">
-                        <div class="item-icon"><i class="fas fa-award"></i></div>
+                        <div class="item-icon"><i class="fas fa-plug"></i></div>
                         <div class="item-content">
-                            <div class="item-title">Success Stories</div>
-                            <div class="item-description">Client case studies</div>
+                            <div class="item-title">Integrations</div>
+                            <div class="item-description">Connect with your existing systems</div>
                         </div>
                     </a>
                 </div>
@@ -1589,62 +1733,27 @@
                 </div>
             </li>
             <li class="menu-item">
-                <a href="#">Features</a>
-                <div class="dropdown-menu">
-                    <div class="dropdown-header">Core Technology</div>
-                    <a href="#" class="dropdown-item">
-                        <div class="item-icon"><i class="fas fa-robot"></i></div>
-                        <div class="item-content">
-                            <div class="item-title">AI Document Processing</div>
-                            <div class="item-description">Process documents with 99.5% accuracy</div>
-                        </div>
-                    </a>
-                    <a href="#" class="dropdown-item">
-                        <div class="item-icon"><i class="fas fa-cogs"></i></div>
-                        <div class="item-content">
-                            <div class="item-title">Workflow Automation</div>
-                            <div class="item-description">Streamline your document workflows</div>
-                        </div>
-                    </a>
-                    <div class="dropdown-header">Security & Integration</div>
-                    <a href="#" class="dropdown-item">
-                        <div class="item-icon"><i class="fas fa-plug"></i></div>
-                        <div class="item-content">
-                            <div class="item-title">Integrations</div>
-                            <div class="item-description">Connect with your existing systems</div>
-                        </div>
-                    </a>
-                </div>
-            </li>
-            <li class="menu-item">
-                <a href="#">HIPAA Compliance</a>
+                <a href="#">Pricing</a>
                 <div class="dropdown-menu">
                     <a href="#" class="dropdown-item">
-                        <div class="item-icon"><i class="fas fa-shield-alt"></i></div>
+                        <div class="item-icon"><i class="fas fa-tag"></i></div>
                         <div class="item-content">
-                            <div class="item-title">100% HIPAA Compliant</div>
-                            <div class="item-description">Our comprehensive compliance guarantee</div>
+                            <div class="item-title">Plan Options</div>
+                            <div class="item-description">Flexible pricing for businesses of all sizes</div>
                         </div>
                     </a>
                     <a href="#" class="dropdown-item">
-                        <div class="item-icon"><i class="fas fa-file-contract"></i></div>
+                        <div class="item-icon"><i class="fas fa-calculator"></i></div>
                         <div class="item-content">
-                            <div class="item-title">Business Associate Agreement</div>
-                            <div class="item-description">How we support your compliance needs</div>
+                            <div class="item-title">ROI Calculator</div>
+                            <div class="item-description">Calculate your potential savings</div>
                         </div>
                     </a>
                     <a href="#" class="dropdown-item">
-                        <div class="item-icon"><i class="fas fa-lock"></i></div>
+                        <div class="item-icon"><i class="fas fa-handshake"></i></div>
                         <div class="item-content">
-                            <div class="item-title">Security Architecture</div>
-                            <div class="item-description">Enterprise-grade protection for sensitive data</div>
-                        </div>
-                    </a>
-                    <a href="#" class="dropdown-item">
-                        <div class="item-icon"><i class="fas fa-clipboard-check"></i></div>
-                        <div class="item-content">
-                            <div class="item-title">Certifications</div>
-                            <div class="item-description">Our compliance credentials and audits</div>
+                            <div class="item-title">Enterprise Solutions</div>
+                            <div class="item-description">Custom pricing for large organizations</div>
                         </div>
                     </a>
                 </div>
@@ -1667,12 +1776,12 @@
                             <div class="item-description">Industry insights and updates</div>
                         </div>
                     </a>
-                    <div class="dropdown-header">Compliance & Security</div>
+                    <div class="dropdown-header">Help Center</div>
                     <a href="#" class="dropdown-item">
-                        <div class="item-icon"><i class="fas fa-shield-alt"></i></div>
+                        <div class="item-icon"><i class="fas fa-headset"></i></div>
                         <div class="item-content">
-                            <div class="item-title">HIPAA Compliance</div>
-                            <div class="item-description">How we protect healthcare data</div>
+                            <div class="item-title">Support Center</div>
+                            <div class="item-description">Get help when you need it</div>
                         </div>
                     </a>
                     <a href="#" class="dropdown-item">
@@ -1682,11 +1791,37 @@
                             <div class="item-description">Our security and privacy practices</div>
                         </div>
                     </a>
+                </div>
+            </li>
+            <li class="menu-item">
+                <a href="#">About Us</a>
+                <div class="dropdown-menu">
                     <a href="#" class="dropdown-item">
-                        <div class="item-icon"><i class="fas fa-headset"></i></div>
+                        <div class="item-icon"><i class="fas fa-users"></i></div>
                         <div class="item-content">
-                            <div class="item-title">Support Center</div>
-                            <div class="item-description">Get help when you need it</div>
+                            <div class="item-title">Our Team</div>
+                            <div class="item-description">Meet the people behind Aspen Grove</div>
+                        </div>
+                    </a>
+                    <a href="#" class="dropdown-item">
+                        <div class="item-icon"><i class="fas fa-medal"></i></div>
+                        <div class="item-content">
+                            <div class="item-title">Awards & Recognition</div>
+                            <div class="item-description">Our industry achievements</div>
+                        </div>
+                    </a>
+                    <a href="#" class="dropdown-item">
+                        <div class="item-icon"><i class="fas fa-handshake"></i></div>
+                        <div class="item-content">
+                            <div class="item-title">Partners</div>
+                            <div class="item-description">Our strategic partnerships</div>
+                        </div>
+                    </a>
+                    <a href="#" class="dropdown-item">
+                        <div class="item-icon"><i class="fas fa-briefcase"></i></div>
+                        <div class="item-content">
+                            <div class="item-title">Careers</div>
+                            <div class="item-description">Join our growing team</div>
                         </div>
                     </a>
                 </div>
@@ -1730,10 +1865,10 @@
         <div class="hero-flex-container">
             <div class="hero-content">
                 <h1 class="hero-heading">
-                    <span class="hero-highlight">AI-Powered</span> Document Processing with <span class="hero-highlight">HIPAA Compliance</span>
+                    <span class="hero-highlight">Interconnected AI</span> for Secure Document Processing
                 </h1>
                 <div class="hero-subheading">
-                    Our advanced AI platform processes documents through a secure, interconnected network that gets smarter with every file while ensuring complete data isolation and HIPAA compliance.
+                    Like aspen trees sharing a unified root system, our AI platform processes documents through a secure network that grows smarter together while maintaining complete data isolation and HIPAA compliance.
                 </div>
                 <div class="hero-benefits">
                     <div class="benefit-item">
@@ -1751,8 +1886,8 @@
                 </div>
                 
                 <div class="hero-form">
-                    <input type="email" placeholder="Enter your email" aria-label="Email input">
-                    <button class="btn btn-primary">Get Started</button>
+                    <input type="email" placeholder="Enter your work email" aria-label="Email input">
+                    <button class="btn btn-primary">Request a Demo</button>
                 </div>
                 
                 <div class="hero-badges">
@@ -1773,7 +1908,7 @@
             
             <div class="hero-visual">
                 <div class="visual-container">
-                    <div class="visual-title">AI Document Processing Visualization</div>
+                    <div class="visual-title">Secure Interconnected Document Processing</div>
                     <div class="visual-content">
                         <div class="visual-documents">
                             <div class="document document-1">
@@ -1812,6 +1947,17 @@
                             <div class="data-line"></div>
                             <div class="data-line"></div>
                             <div class="data-line"></div>
+                            <!-- Adding root system visual elements -->
+                            <svg class="root-system-overlay" viewBox="0 0 400 300" width="100%" height="100%" style="position: absolute; top: 0; left: 0; z-index: 4; opacity: 0.5;">
+                                <path d="M200,50 C200,50 100,150 50,250" stroke="var(--amber-gold)" stroke-width="2" fill="none" stroke-dasharray="5,3"/>
+                                <path d="M200,50 C200,50 180,150 150,250" stroke="var(--amber-gold)" stroke-width="2" fill="none" stroke-dasharray="5,3"/>
+                                <path d="M200,50 C200,50 240,150 220,250" stroke="var(--amber-gold)" stroke-width="2" fill="none" stroke-dasharray="5,3"/>
+                                <path d="M200,50 C200,50 300,150 350,250" stroke="var(--amber-gold)" stroke-width="2" fill="none" stroke-dasharray="5,3"/>
+                                <circle cx="50" cy="250" r="5" fill="var(--forest-green)" opacity="0.7"/>
+                                <circle cx="150" cy="250" r="5" fill="var(--forest-green)" opacity="0.7"/>
+                                <circle cx="220" cy="250" r="5" fill="var(--forest-green)" opacity="0.7"/>
+                                <circle cx="350" cy="250" r="5" fill="var(--forest-green)" opacity="0.7"/>
+                            </svg>
                         </div>
                         <img src="aspen-tree-logo.svg" alt="Aspen Grove Logo" class="aspen-logo-visual">
                     </div>
@@ -1820,6 +1966,50 @@
         </div>
     </section>
 
+    <!-- AI Capabilities Section (New) -->
+    <section class="ai-capabilities-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Powerful AI, Enhanced Security</h2>
+                <p>Our innovative platform combines advanced artificial intelligence with the natural strength of interconnected systems</p>
+            </div>
+            
+            <div class="capabilities-grid">
+                <div class="capability-card">
+                    <div class="capability-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>Smart Document Processing</h3>
+                    <p>Our AI extracts key information from documents with 99.5% accuracy, handling diverse formats from medical records to legal briefs.</p>
+                </div>
+                
+                <div class="capability-card">
+                    <div class="capability-icon">
+                        <i class="fas fa-sync-alt"></i>
+                    </div>
+                    <h3>Continuous Learning</h3>
+                    <p>Like aspen groves that learn and adapt together, our platform becomes more intelligent with each document processed while maintaining strict data isolation.</p>
+                </div>
+                
+                <div class="capability-card">
+                    <div class="capability-icon">
+                        <i class="fas fa-project-diagram"></i>
+                    </div>
+                    <h3>Intelligent Workflows</h3>
+                    <p>Automated routing and processing integrates with your existing systems, creating efficient document pathways that respect security boundaries.</p>
+                </div>
+                
+                <div class="capability-card">
+                    <div class="capability-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Security By Design</h3>
+                    <p>HIPAA-compliant architecture with built-in encryption, access controls, and audit logging to protect sensitive information at every step.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
     <!-- HIPAA Compliance Section -->
     <section class="compliance-section">
         <div class="container">
@@ -2382,6 +2572,33 @@
                     navbar.classList.remove('sticky');
                 }
             });
+            
+            // Add fade-in effect when scrolling
+            const fadeInSections = document.querySelectorAll('.features-section, .compliance-section, .calculator-container, .hero-content, .hero-visual, .footer, .feature-card, .hero-section');
+            
+            // Add the fade-in-section class to all elements we want to animate
+            fadeInSections.forEach(section => {
+                section.classList.add('fade-in-section');
+            });
+            
+            // Function to check if elements are in viewport
+            function checkFadeInElements() {
+                const triggerBottom = window.innerHeight * 0.8;
+                
+                fadeInSections.forEach(section => {
+                    const sectionTop = section.getBoundingClientRect().top;
+                    
+                    if (sectionTop < triggerBottom) {
+                        section.classList.add('is-visible');
+                    }
+                });
+            }
+            
+            // Run once on page load
+            checkFadeInElements();
+            
+            // Run on scroll
+            window.addEventListener('scroll', checkFadeInElements);
         });
     </script>
 

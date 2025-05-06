@@ -1778,6 +1778,294 @@
         .mini-calculator-cta a:hover {
             color: var(--amber-gold);
         }
+
+        /* Hero Expandable Calculator Styles */
+        .hero-calculator {
+            background: var(--white);
+            border-radius: 10px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            transition: all 0.4s ease;
+            overflow: hidden;
+            position: relative;
+            border: 1px solid rgba(122, 145, 141, 0.2);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .calculator-header {
+            padding: 15px 20px;
+            background: var(--forest-green);
+            color: var(--white);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .calculator-title h3 {
+            margin: 0;
+            font-size: 1.2em;
+        }
+        
+        .calculator-title p {
+            margin: 5px 0 0;
+            font-size: 0.85em;
+            opacity: 0.9;
+        }
+        
+        .calculator-simple {
+            padding: 20px;
+        }
+        
+        .simple-inputs {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .calc-control {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        
+        .calc-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9em;
+            color: var(--forest-green);
+            font-weight: 500;
+        }
+        
+        .calc-value {
+            color: var(--amber-gold);
+            font-weight: 600;
+        }
+        
+        .industry-selector {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+        
+        .industry-option {
+            flex: 1;
+            padding: 8px 10px;
+            font-size: 0.8em;
+            text-align: center;
+            background: rgba(122, 145, 141, 0.1);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: var(--forest-green);
+            font-weight: 500;
+            user-select: none;
+        }
+        
+        .industry-option.active {
+            background: var(--amber-gold);
+            color: white;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .results-summary {
+            background: linear-gradient(135deg, var(--white), var(--light-sage));
+            padding: 15px;
+            border-radius: 8px;
+            border: 2px solid var(--amber-gold);
+            text-align: center;
+            margin-top: 15px;
+            position: relative;
+        }
+        
+        .results-summary::before {
+            content: 'With Aspen Grove AI';
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--amber-gold);
+            color: var(--white);
+            padding: 3px 12px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        
+        .main-result {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: var(--amber-gold);
+            margin-bottom: 5px;
+        }
+        
+        .result-description {
+            font-size: 0.9em;
+            color: var(--forest-green);
+        }
+        
+        .calculator-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+            align-items: center;
+        }
+        
+        .toggle-expand {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: var(--forest-green);
+            font-size: 0.9em;
+            padding: 5px 12px;
+            background: rgba(122, 145, 141, 0.1);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            user-select: none;
+        }
+        
+        .toggle-expand:hover {
+            background: rgba(122, 145, 141, 0.2);
+        }
+        
+        .toggle-expand i {
+            font-size: 0.8em;
+            transition: transform 0.3s ease;
+        }
+        
+        .toggle-expand.expanded i {
+            transform: rotate(180deg);
+        }
+        
+        .calculator-expanded {
+            height: 0;
+            overflow: hidden;
+            transition: height 0.4s ease;
+            background: rgba(242, 245, 244, 0.5);
+            border-top: 1px solid rgba(122, 145, 141, 0.2);
+        }
+        
+        .expanded-content {
+            padding: 20px;
+        }
+        
+        .expanded-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .expanded-inputs {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .expanded-results {
+            background: linear-gradient(135deg, var(--white), var(--light-sage));
+            border: 2px solid var(--amber-gold);
+            border-radius: 8px;
+            padding: 15px;
+            position: relative;
+        }
+        
+        .expanded-result-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .expanded-metric {
+            text-align: center;
+            padding: 8px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 8px;
+        }
+        
+        .expanded-metric-value {
+            font-weight: 700;
+            color: var(--forest-green);
+            font-size: 1.1em;
+        }
+        
+        .expanded-metric-label {
+            font-size: 0.8em;
+            color: var(--sage-green);
+        }
+        
+        @media (max-width: 768px) {
+            .expanded-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Button sizes */
+        .btn-sm {
+            padding: 6px 14px;
+            font-size: 0.85em;
+        }
+        
+        /* Additional hero calculator specific styles */
+        .hero-visual .hero-calculator {
+            max-height: 380px;
+            max-width: 500px;
+            margin-left: auto;
+        }
+        
+        .calculator-expanded.active {
+            height: auto;
+        }
+        
+        /* Slider styling improvements */
+        input[type="range"] {
+            width: 100%;
+            height: 6px;
+            border-radius: 3px;
+            background: var(--light-sage);
+            outline: none;
+            -webkit-appearance: none;
+        }
+        
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--amber-gold);
+            cursor: pointer;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+            transition: all 0.2s ease;
+        }
+        
+        input[type="range"]::-webkit-slider-thumb:hover {
+            transform: scale(1.1);
+            background: var(--forest-green);
+        }
+        
+        input[type="range"]::-moz-range-thumb {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--amber-gold);
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+            transition: all 0.2s ease;
+        }
+        
+        input[type="range"]::-moz-range-thumb:hover {
+            transform: scale(1.1);
+            background: var(--forest-green);
+        }
+        
+        @media (max-width: 992px) {
+            .hero-visual .hero-calculator {
+                margin: 30px auto 0;
+            }
+        }
     </style>
 </head>
 <body>
@@ -2058,59 +2346,99 @@
             </div>
             
             <div class="hero-visual">
-                <div class="visual-container">
-                    <div class="visual-title">Secure Interconnected Document Processing</div>
-                    <div class="visual-content">
-                        <div class="visual-documents">
-                            <div class="document document-1">
-                                <div class="document-header"></div>
-                                <div class="document-line"></div>
-                                <div class="document-line"></div>
-                                <div class="document-line short"></div>
-                                <div class="document-line"></div>
-                                <div class="document-line short"></div>
-                                <div class="document-line"></div>
-                            </div>
-                            <div class="document document-2">
-                                <div class="document-header"></div>
-                                <div class="document-line"></div>
-                                <div class="document-line short"></div>
-                                <div class="document-line"></div>
-                                <div class="document-line"></div>
-                                <div class="document-line short"></div>
-                                <div class="document-line"></div>
-                            </div>
-                            <div class="document document-3">
-                                <div class="document-header"></div>
-                                <div class="document-line"></div>
-                                <div class="document-line"></div>
-                                <div class="document-line short"></div>
-                                <div class="document-line"></div>
-                                <div class="document-line"></div>
-                                <div class="document-line short"></div>
+                <div class="hero-calculator">
+                    <!-- Calculator Header -->
+                    <div class="calculator-header">
+                        <div class="calculator-title">
+                            <h3>ROI Calculator</h3>
+                            <p>See your potential savings with Aspen Grove</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Simple Calculator View -->
+                    <div class="calculator-simple">
+                        <!-- Industry Selector -->
+                        <div class="industry-selector">
+                            <div class="industry-option active" data-industry="legal">Legal</div>
+                            <div class="industry-option" data-industry="healthcare">Healthcare</div>
+                            <div class="industry-option" data-industry="finance">Finance</div>
+                        </div>
+                        
+                        <!-- Simple Inputs -->
+                        <div class="simple-inputs">
+                            <div class="calc-control">
+                                <div class="calc-label">
+                                    <span>Monthly Documents</span>
+                                    <span class="calc-value" id="hero-docs-value">50 docs</span>
+                                </div>
+                                <input type="range" id="hero-docs-slider" min="10" max="300" value="50" step="10" class="slider" aria-label="Document volume">
                             </div>
                         </div>
-                        <div class="ai-elements">
-                            <div class="scan-line"></div>
-                            <div class="data-point"></div>
-                            <div class="data-point"></div>
-                            <div class="data-point"></div>
-                            <div class="data-line"></div>
-                            <div class="data-line"></div>
-                            <div class="data-line"></div>
-                            <!-- Adding root system visual elements -->
-                            <svg class="root-system-overlay" viewBox="0 0 400 300" width="100%" height="100%" style="position: absolute; top: 0; left: 0; z-index: 4; opacity: 0.5;">
-                                <path d="M200,50 C200,50 100,150 50,250" stroke="var(--amber-gold)" stroke-width="2" fill="none" stroke-dasharray="5,3"/>
-                                <path d="M200,50 C200,50 180,150 150,250" stroke="var(--amber-gold)" stroke-width="2" fill="none" stroke-dasharray="5,3"/>
-                                <path d="M200,50 C200,50 240,150 220,250" stroke="var(--amber-gold)" stroke-width="2" fill="none" stroke-dasharray="5,3"/>
-                                <path d="M200,50 C200,50 300,150 350,250" stroke="var(--amber-gold)" stroke-width="2" fill="none" stroke-dasharray="5,3"/>
-                                <circle cx="50" cy="250" r="5" fill="var(--forest-green)" opacity="0.7"/>
-                                <circle cx="150" cy="250" r="5" fill="var(--forest-green)" opacity="0.7"/>
-                                <circle cx="220" cy="250" r="5" fill="var(--forest-green)" opacity="0.7"/>
-                                <circle cx="350" cy="250" r="5" fill="var(--forest-green)" opacity="0.7"/>
-                            </svg>
+                        
+                        <!-- Results Summary -->
+                        <div class="results-summary">
+                            <div class="main-result" id="hero-savings">$12,500</div>
+                            <div class="result-description" id="hero-result-label">Monthly Savings</div>
                         </div>
-                        <img src="aspen-tree-logo.svg" alt="Aspen Grove Logo" class="aspen-logo-visual">
+                        
+                        <!-- Calculator Actions -->
+                        <div class="calculator-actions">
+                            <div class="toggle-expand" id="expand-calculator">
+                                Detailed Analysis <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <a href="#" class="btn btn-primary btn-sm">Get Full Report</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Expanded Calculator View -->
+                    <div class="calculator-expanded" id="expanded-calculator">
+                        <div class="expanded-content">
+                            <div class="expanded-grid">
+                                <div class="expanded-inputs">
+                                    <!-- Hours Per Document Slider -->
+                                    <div class="calc-control">
+                                        <div class="calc-label">
+                                            <span id="hero-hours-label">Hours per Document</span>
+                                            <span class="calc-value" id="hero-hours-value">5 hours</span>
+                                        </div>
+                                        <input type="range" id="hero-hours-slider" min="2" max="10" value="5" step="1" class="slider" aria-label="Hours per document">
+                                    </div>
+                                    
+                                    <!-- Hourly Rate Slider -->
+                                    <div class="calc-control">
+                                        <div class="calc-label">
+                                            <span id="hero-rate-label">Hourly Rate</span>
+                                            <span class="calc-value" id="hero-rate-value">$250</span>
+                                        </div>
+                                        <input type="range" id="hero-rate-slider" min="150" max="600" value="250" step="50" class="slider" aria-label="Hourly billing rate">
+                                    </div>
+                                </div>
+                                
+                                <div class="expanded-results">
+                                    <div class="main-result" id="hero-expanded-savings">$12,500</div>
+                                    <div class="result-description" id="hero-expanded-label">Monthly Savings</div>
+                                    
+                                    <div class="expanded-result-grid">
+                                        <div class="expanded-metric">
+                                            <div class="expanded-metric-value" id="hero-time-saved">125</div>
+                                            <div class="expanded-metric-label" id="hero-time-label">Hours Saved</div>
+                                        </div>
+                                        <div class="expanded-metric">
+                                            <div class="expanded-metric-value" id="hero-capacity">25</div>
+                                            <div class="expanded-metric-label" id="hero-capacity-label">Extra Capacity</div>
+                                        </div>
+                                        <div class="expanded-metric">
+                                            <div class="expanded-metric-value" id="hero-roi">605%</div>
+                                            <div class="expanded-metric-label">ROI</div>
+                                        </div>
+                                        <div class="expanded-metric">
+                                            <div class="expanded-metric-value" id="hero-annual">$150,000</div>
+                                            <div class="expanded-metric-label" id="hero-annual-label">Annual Impact</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -2775,6 +3103,138 @@
                 const calculatorSection = document.getElementById('calculator-container');
                 calculatorSection.scrollIntoView({ behavior: 'smooth' });
             });
+            
+            // Hero Calculator Functionality
+            const heroDocsSlider = document.getElementById('hero-docs-slider');
+            const heroDocsValue = document.getElementById('hero-docs-value');
+            const heroHoursSlider = document.getElementById('hero-hours-slider');
+            const heroHoursValue = document.getElementById('hero-hours-value');
+            const heroRateSlider = document.getElementById('hero-rate-slider');
+            const heroRateValue = document.getElementById('hero-rate-value');
+            const heroSavings = document.getElementById('hero-savings');
+            const heroExpandedSavings = document.getElementById('hero-expanded-savings');
+            const heroTimeSaved = document.getElementById('hero-time-saved');
+            const heroCapacity = document.getElementById('hero-capacity');
+            const heroROI = document.getElementById('hero-roi');
+            const heroAnnual = document.getElementById('hero-annual');
+            const expandButton = document.getElementById('expand-calculator');
+            const expandedCalculator = document.getElementById('expanded-calculator');
+            
+            // Industry data for calculations
+            const industryData = {
+                legal: {
+                    efficiencyRate: 0.5,
+                    costMultiplier: 1.0,
+                    baseROI: 500,
+                    labels: {
+                        hours: "Hours per Case",
+                        capacity: "Additional Cases",
+                        savings: "Revenue Increase"
+                    }
+                },
+                healthcare: {
+                    efficiencyRate: 0.6,
+                    costMultiplier: 0.8,
+                    baseROI: 450,
+                    labels: {
+                        hours: "Processing Hours",
+                        capacity: "Patient Records",
+                        savings: "Cost Savings"
+                    }
+                },
+                finance: {
+                    efficiencyRate: 0.45,
+                    costMultiplier: 1.2,
+                    baseROI: 550,
+                    labels: {
+                        hours: "Analysis Hours",
+                        capacity: "Additional Reports",
+                        savings: "Efficiency Gains"
+                    }
+                }
+            };
+            
+            // Current industry selection
+            let currentIndustry = 'legal';
+            
+            // Update hero calculator
+            function updateHeroCalculator() {
+                // Get values from sliders
+                const docs = parseInt(heroDocsSlider.value);
+                const hours = parseInt(heroHoursSlider.value);
+                const rate = parseInt(heroRateSlider.value);
+                
+                // Update displayed values
+                heroDocsValue.textContent = `${docs} docs`;
+                heroHoursValue.textContent = `${hours} hours`;
+                heroRateValue.textContent = `$${rate}`;
+                
+                // Get industry-specific data
+                const industry = industryData[currentIndustry];
+                
+                // Calculate savings and metrics
+                const efficiencyRate = industry.efficiencyRate;
+                const hoursSaved = Math.round(docs * hours * efficiencyRate);
+                const additionalCapacity = Math.round(docs * efficiencyRate);
+                const monthlySavings = Math.round(hoursSaved * rate * industry.costMultiplier);
+                const annualSavings = monthlySavings * 12;
+                const roi = Math.round(industry.baseROI * (docs / 100));
+                
+                // Update displayed results
+                animateValue(heroSavings, formatCurrency(monthlySavings));
+                animateValue(heroExpandedSavings, formatCurrency(monthlySavings));
+                animateValue(heroTimeSaved, hoursSaved);
+                animateValue(heroCapacity, additionalCapacity);
+                animateValue(heroROI, `${roi}%`);
+                animateValue(heroAnnual, formatCurrency(annualSavings));
+                
+                // Update labels based on industry
+                document.getElementById('hero-result-label').textContent = `Monthly ${industry.labels.savings}`;
+                document.getElementById('hero-expanded-label').textContent = `Monthly ${industry.labels.savings}`;
+                document.getElementById('hero-capacity-label').textContent = industry.labels.capacity;
+                document.getElementById('hero-hours-label').textContent = industry.labels.hours;
+                document.getElementById('hero-annual-label').textContent = `Annual ${industry.labels.savings}`;
+            }
+            
+            // Add event listeners for hero calculator sliders
+            heroDocsSlider.addEventListener('input', updateHeroCalculator);
+            heroHoursSlider.addEventListener('input', updateHeroCalculator);
+            heroRateSlider.addEventListener('input', updateHeroCalculator);
+            
+            // Industry selector functionality
+            const industryOptions = document.querySelectorAll('.industry-option');
+            industryOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    // Remove active class from all options
+                    industryOptions.forEach(opt => opt.classList.remove('active'));
+                    
+                    // Add active class to clicked option
+                    this.classList.add('active');
+                    
+                    // Update current industry
+                    currentIndustry = this.getAttribute('data-industry');
+                    
+                    // Update calculator
+                    updateHeroCalculator();
+                });
+            });
+            
+            // Expand/collapse functionality
+            let isExpanded = false;
+            expandButton.addEventListener('click', function() {
+                isExpanded = !isExpanded;
+                
+                if (isExpanded) {
+                    expandButton.classList.add('expanded');
+                    expandedCalculator.style.height = expandedCalculator.scrollHeight + 'px';
+                } else {
+                    expandButton.classList.remove('expanded');
+                    expandedCalculator.style.height = '0';
+                }
+            });
+            
+            // Initialize hero calculator
+            updateHeroCalculator();
         });
     </script>
 

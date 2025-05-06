@@ -1561,6 +1561,16 @@
             padding: 0 20px;
         }
 
+        @media (min-width: 992px) {
+            .capabilities-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .capability-card {
+                min-height: 320px;
+            }
+        }
+
         .capability-card {
             background-color: var(--white);
             border-radius: 12px;
@@ -1645,6 +1655,128 @@
             color: var(--sage-green);
             font-size: 0.9em;
             line-height: 1.2;
+        }
+
+        /* Hero Mini Calculator Styles */
+        .hero-mini-calculator {
+            background: var(--white);
+            border-radius: 8px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+            padding: 20px;
+            margin-top: 25px;
+            border: 1px solid rgba(122, 145, 141, 0.2);
+            position: relative;
+        }
+        
+        .mini-calculator-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 15px;
+            color: var(--forest-green);
+            font-weight: 600;
+        }
+        
+        .mini-calculator-title i {
+            color: var(--amber-gold);
+        }
+        
+        .mini-slider {
+            margin-bottom: 15px;
+        }
+        
+        .mini-slider-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+            font-size: 0.9em;
+            color: var(--forest-green);
+        }
+        
+        .mini-slider-value {
+            font-weight: 600;
+            color: var(--amber-gold);
+        }
+        
+        .mini-slider input[type="range"] {
+            width: 100%;
+            height: 6px;
+            border-radius: 3px;
+            background: var(--light-sage);
+            outline: none;
+            -webkit-appearance: none;
+        }
+        
+        .mini-slider input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--amber-gold);
+            cursor: pointer;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+            transition: all 0.2s ease;
+        }
+        
+        .mini-slider input[type="range"]::-webkit-slider-thumb:hover {
+            transform: scale(1.1);
+            background: var(--forest-green);
+        }
+        
+        .mini-slider input[type="range"]::-moz-range-thumb {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--amber-gold);
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+            transition: all 0.2s ease;
+        }
+        
+        .mini-slider input[type="range"]::-moz-range-thumb:hover {
+            transform: scale(1.1);
+            background: var(--forest-green);
+        }
+        
+        .mini-results {
+            text-align: center;
+            padding: 15px 0;
+            border-top: 1px solid rgba(122, 145, 141, 0.2);
+            margin-top: 15px;
+        }
+        
+        .mini-result-value {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: var(--amber-gold);
+        }
+        
+        .mini-result-label {
+            font-size: 0.9em;
+            color: var(--forest-green);
+        }
+        
+        .mini-calculator-cta {
+            text-align: center;
+            margin-top: 10px;
+        }
+        
+        .mini-calculator-cta .btn {
+            padding: 8px 15px;
+            font-size: 0.9em;
+        }
+        
+        .mini-calculator-cta a {
+            font-size: 0.8em;
+            display: block;
+            margin-top: 5px;
+            color: var(--sage-green);
+            text-decoration: none;
+        }
+        
+        .mini-calculator-cta a:hover {
+            color: var(--amber-gold);
         }
     </style>
 </head>
@@ -1885,9 +2017,28 @@
                     </div>
                 </div>
                 
-                <div class="hero-form">
-                    <input type="email" placeholder="Enter your work email" aria-label="Email input">
-                    <button class="btn btn-primary">Request a Demo</button>
+                <div class="hero-mini-calculator">
+                    <div class="mini-calculator-title">
+                        <i class="fas fa-calculator"></i> Calculate Your Potential Savings
+                    </div>
+                    
+                    <div class="mini-slider">
+                        <div class="mini-slider-label">
+                            <span>Monthly Documents</span>
+                            <span class="mini-slider-value" id="mini-docs-value">50 docs</span>
+                        </div>
+                        <input type="range" id="mini-docs-slider" min="10" max="300" value="50" step="10" class="slider" aria-label="Document volume">
+                    </div>
+                    
+                    <div class="mini-results">
+                        <div class="mini-result-value" id="mini-savings">$12,500</div>
+                        <div class="mini-result-label">Monthly Savings</div>
+                    </div>
+                    
+                    <div class="mini-calculator-cta">
+                        <a href="#calculator-container" class="btn btn-primary">Full ROI Analysis</a>
+                        <a href="#" class="mini-calculator-learn-more">Schedule Demo <i class="fas fa-arrow-right"></i></a>
+                    </div>
                 </div>
                 
                 <div class="hero-badges">
@@ -1998,108 +2149,10 @@
                     <h3>Intelligent Workflows</h3>
                     <p>Automated routing and processing integrates with your existing systems, creating efficient document pathways that respect security boundaries.</p>
                 </div>
-                
-                <div class="capability-card">
-                    <div class="capability-icon">
-                        <i class="fas fa-shield-alt"></i>
-                    </div>
-                    <h3>Security By Design</h3>
-                    <p>HIPAA-compliant architecture with built-in encryption, access controls, and audit logging to protect sensitive information at every step.</p>
-                </div>
             </div>
         </div>
     </section>
     
-    <!-- HIPAA Compliance Section -->
-    <section class="compliance-section">
-        <div class="container">
-            <div class="compliance-content">
-                <div class="compliance-text">
-                    <h2 class="compliance-title">Advanced <span style="color: var(--amber-gold);">HIPAA Compliance</span></h2>
-                    <p class="compliance-description">
-                        Our AI system processes documents securely while maintaining complete data isolation. With security built 
-                        into every layer of our architecture, your sensitive information is protected with military-grade encryption 
-                        and comprehensive audit trails.
-                    </p>
-                    
-                    <div class="compliance-badges">
-                        <div class="compliance-badge">
-                            <div class="compliance-badge-icon">
-                                <i class="fas fa-shield-alt"></i>
-                            </div>
-                            <div class="compliance-badge-title">HIPAA Certified</div>
-                            <div class="compliance-badge-desc">Full healthcare compliance</div>
-                        </div>
-                        
-                        <div class="compliance-badge">
-                            <div class="compliance-badge-icon">
-                                <i class="fas fa-lock"></i>
-                            </div>
-                            <div class="compliance-badge-title">End-to-End</div>
-                            <div class="compliance-badge-desc">Military-grade encryption</div>
-                        </div>
-                        
-                        <div class="compliance-badge">
-                            <div class="compliance-badge-icon">
-                                <i class="fas fa-file-contract"></i>
-                            </div>
-                            <div class="compliance-badge-title">BAA Ready</div>
-                            <div class="compliance-badge-desc">Business Associate Agreement</div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="compliance-visual">
-                    <svg class="aspen-root-system" viewBox="0 0 500 400" xmlns="http://www.w3.org/2000/svg">
-                        <!-- Root system illustration -->
-                        <path d="M250,50 C250,50 100,150 50,300" stroke="var(--amber-gold)" stroke-width="8" fill="none" opacity="0.7"/>
-                        <path d="M250,50 C250,50 180,200 200,350" stroke="var(--amber-gold)" stroke-width="10" fill="none" opacity="0.8"/>
-                        <path d="M250,50 C250,50 300,180 350,300" stroke="var(--amber-gold)" stroke-width="8" fill="none" opacity="0.7"/>
-                        <path d="M250,50 C250,50 400,150 450,280" stroke="var(--amber-gold)" stroke-width="7" fill="none" opacity="0.6"/>
-                        
-                        <!-- Data nodes -->
-                        <circle cx="100" cy="200" r="10" fill="var(--white)" opacity="0.9"/>
-                        <circle cx="150" cy="250" r="8" fill="var(--white)" opacity="0.9"/>
-                        <circle cx="200" cy="180" r="12" fill="var(--white)" opacity="0.9"/>
-                        <circle cx="300" cy="220" r="10" fill="var(--white)" opacity="0.9"/>
-                        <circle cx="350" cy="180" r="8" fill="var(--white)" opacity="0.9"/>
-                        <circle cx="380" cy="260" r="12" fill="var(--white)" opacity="0.9"/>
-                        
-                        <!-- Security shields -->
-                        <g transform="translate(100, 200)">
-                            <path d="M0,-5 L4,0 L0,5 L-4,0 Z" fill="var(--amber-gold)"/>
-                        </g>
-                        <g transform="translate(300, 220)">
-                            <path d="M0,-5 L4,0 L0,5 L-4,0 Z" fill="var(--amber-gold)"/>
-                        </g>
-                        <g transform="translate(380, 260)">
-                            <path d="M0,-5 L4,0 L0,5 L-4,0 Z" fill="var(--amber-gold)"/>
-                        </g>
-                    </svg>
-                    
-                    <!-- Aspen trees -->
-                    <svg class="aspen-tree" style="left: 20%" viewBox="0 0 100 200" xmlns="http://www.w3.org/2000/svg">
-                        <rect x="45" y="70" width="10" height="130" fill="var(--white)" opacity="0.9"/>
-                        <circle cx="50" cy="50" r="40" fill="var(--amber-gold)" opacity="0.7"/>
-                        <circle cx="50" cy="50" r="35" fill="var(--forest-green-light)" opacity="0.9"/>
-                    </svg>
-                    
-                    <svg class="aspen-tree" style="left: 50%; transform: translateX(-50%)" viewBox="0 0 100 200" xmlns="http://www.w3.org/2000/svg">
-                        <rect x="45" y="70" width="10" height="130" fill="var(--white)" opacity="0.9"/>
-                        <circle cx="50" cy="50" r="40" fill="var(--amber-gold)" opacity="0.7"/>
-                        <circle cx="50" cy="50" r="35" fill="var(--forest-green-light)" opacity="0.9"/>
-                    </svg>
-                    
-                    <svg class="aspen-tree" style="right: 20%" viewBox="0 0 100 200" xmlns="http://www.w3.org/2000/svg">
-                        <rect x="45" y="70" width="10" height="130" fill="var(--white)" opacity="0.9"/>
-                        <circle cx="50" cy="50" r="40" fill="var(--amber-gold)" opacity="0.7"/>
-                        <circle cx="50" cy="50" r="35" fill="var(--forest-green-light)" opacity="0.9"/>
-                    </svg>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- ROI Calculator Section -->
     <div class="calculator-container" id="calculator-container">
         <div class="calculator-header">
@@ -2193,6 +2246,96 @@
             </div>
         </div>
     </div>
+    
+    <!-- HIPAA Compliance Section -->
+    <section class="compliance-section">
+        <div class="container">
+            <div class="compliance-content">
+                <div class="compliance-text">
+                    <h2 class="compliance-title">Advanced <span style="color: var(--amber-gold);">HIPAA Compliance</span></h2>
+                    <p class="compliance-description">
+                        Our AI system processes documents securely while maintaining complete data isolation. With security built 
+                        into every layer of our architecture, your sensitive information is protected with military-grade encryption 
+                        and comprehensive audit trails.
+                    </p>
+                    
+                    <div class="compliance-badges">
+                        <div class="compliance-badge">
+                            <div class="compliance-badge-icon">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <div class="compliance-badge-title">HIPAA Certified</div>
+                            <div class="compliance-badge-desc">Full healthcare compliance</div>
+                        </div>
+                        
+                        <div class="compliance-badge">
+                            <div class="compliance-badge-icon">
+                                <i class="fas fa-lock"></i>
+                            </div>
+                            <div class="compliance-badge-title">End-to-End</div>
+                            <div class="compliance-badge-desc">Military-grade encryption</div>
+                        </div>
+                        
+                        <div class="compliance-badge">
+                            <div class="compliance-badge-icon">
+                                <i class="fas fa-file-contract"></i>
+                            </div>
+                            <div class="compliance-badge-title">BAA Ready</div>
+                            <div class="compliance-badge-desc">Business Associate Agreement</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="compliance-visual">
+                    <svg class="aspen-root-system" viewBox="0 0 500 400" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Root system illustration -->
+                        <path d="M250,50 C250,50 100,150 50,300" stroke="var(--amber-gold)" stroke-width="8" fill="none" opacity="0.7"/>
+                        <path d="M250,50 C250,50 180,200 200,350" stroke="var(--amber-gold)" stroke-width="10" fill="none" opacity="0.8"/>
+                        <path d="M250,50 C250,50 300,180 350,300" stroke="var(--amber-gold)" stroke-width="8" fill="none" opacity="0.7"/>
+                        <path d="M250,50 C250,50 400,150 450,280" stroke="var(--amber-gold)" stroke-width="7" fill="none" opacity="0.6"/>
+                        
+                        <!-- Data nodes -->
+                        <circle cx="100" cy="200" r="10" fill="var(--white)" opacity="0.9"/>
+                        <circle cx="150" cy="250" r="8" fill="var(--white)" opacity="0.9"/>
+                        <circle cx="200" cy="180" r="12" fill="var(--white)" opacity="0.9"/>
+                        <circle cx="300" cy="220" r="10" fill="var(--white)" opacity="0.9"/>
+                        <circle cx="350" cy="180" r="8" fill="var(--white)" opacity="0.9"/>
+                        <circle cx="380" cy="260" r="12" fill="var(--white)" opacity="0.9"/>
+                        
+                        <!-- Security shields -->
+                        <g transform="translate(100, 200)">
+                            <path d="M0,-5 L4,0 L0,5 L-4,0 Z" fill="var(--amber-gold)"/>
+                        </g>
+                        <g transform="translate(300, 220)">
+                            <path d="M0,-5 L4,0 L0,5 L-4,0 Z" fill="var(--amber-gold)"/>
+                        </g>
+                        <g transform="translate(380, 260)">
+                            <path d="M0,-5 L4,0 L0,5 L-4,0 Z" fill="var(--amber-gold)"/>
+                        </g>
+                    </svg>
+                    
+                    <!-- Aspen trees -->
+                    <svg class="aspen-tree" style="left: 20%" viewBox="0 0 100 200" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="45" y="70" width="10" height="130" fill="var(--white)" opacity="0.9"/>
+                        <circle cx="50" cy="50" r="40" fill="var(--amber-gold)" opacity="0.7"/>
+                        <circle cx="50" cy="50" r="35" fill="var(--forest-green-light)" opacity="0.9"/>
+                    </svg>
+                    
+                    <svg class="aspen-tree" style="left: 50%; transform: translateX(-50%)" viewBox="0 0 100 200" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="45" y="70" width="10" height="130" fill="var(--white)" opacity="0.9"/>
+                        <circle cx="50" cy="50" r="40" fill="var(--amber-gold)" opacity="0.7"/>
+                        <circle cx="50" cy="50" r="35" fill="var(--forest-green-light)" opacity="0.9"/>
+                    </svg>
+                    
+                    <svg class="aspen-tree" style="right: 20%" viewBox="0 0 100 200" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="45" y="70" width="10" height="130" fill="var(--white)" opacity="0.9"/>
+                        <circle cx="50" cy="50" r="40" fill="var(--amber-gold)" opacity="0.7"/>
+                        <circle cx="50" cy="50" r="35" fill="var(--forest-green-light)" opacity="0.9"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Features Section -->
     <section class="features-section">
@@ -2599,6 +2742,39 @@
             
             // Run on scroll
             window.addEventListener('scroll', checkFadeInElements);
+            
+            // Mini Calculator Functionality
+            const miniDocsSlider = document.getElementById('mini-docs-slider');
+            const miniDocsValue = document.getElementById('mini-docs-value');
+            const miniSavings = document.getElementById('mini-savings');
+            
+            // Update mini calculator on slider change
+            miniDocsSlider.addEventListener('input', updateMiniCalculator);
+            
+            function updateMiniCalculator() {
+                const docs = parseInt(miniDocsSlider.value);
+                miniDocsValue.textContent = `${docs} docs`;
+                
+                // Simple calculation for a quick estimate (customize as needed)
+                const avgHours = 5; // Assumed average hours per document
+                const avgRate = 250; // Assumed average hourly rate
+                const efficiencyRate = 0.5; // 50% efficiency improvement
+                
+                const monthlySavingsValue = Math.round(docs * avgHours * avgRate * efficiencyRate);
+                
+                // Animate the savings value
+                animateValue(miniSavings, formatCurrency(monthlySavingsValue));
+            }
+            
+            // Initialize the mini calculator
+            updateMiniCalculator();
+            
+            // Smooth scroll to full calculator when mini-calculator CTA is clicked
+            document.querySelector('.mini-calculator-cta .btn').addEventListener('click', function(e) {
+                e.preventDefault();
+                const calculatorSection = document.getElementById('calculator-container');
+                calculatorSection.scrollIntoView({ behavior: 'smooth' });
+            });
         });
     </script>
 

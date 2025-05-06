@@ -11,6 +11,7 @@
             --amber-gold: #D4AF37;
             --forest-green: #2F4F4F;
             --light-sage: #E8EDEC;
+            --lighter-sage: #F2F5F4; /* New very light sage color */
             --white: #FFFFFF;
             --hover-green: #5A7A75;
             --shadow-color: rgba(0, 0, 0, 0.1);
@@ -302,38 +303,24 @@
         /* Hero Section */
         .hero-section {
             margin-top: 85px;  /* Increased spacing between menu and hero */
-            background: var(--white);
+            background: var(--lighter-sage);
             color: var(--forest-green);
             padding: 50px 0;
             position: relative;
             overflow: hidden;
         }
 
-        .hero-container {
+        .hero-flex-container {
             display: flex;
-            align-items: center;
             justify-content: space-between;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-            position: relative;
-            z-index: 2;
+            align-items: center;
             gap: 40px;
         }
 
-        /* Add subtle aspen tree background */
-        .hero-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 1000' opacity='0.05'%3E%3Cpath fill='%232F4F4F' d='M500,10 C550,150 600,300 650,450 C600,450 550,450 500,450 C450,450 400,450 350,450 C400,300 450,150 500,10 Z M480,450 L480,950 L520,950 L520,450 Z'/%3E%3C/svg%3E");
-            background-size: 300px;
-            background-repeat: repeat;
-            opacity: 0.05;
-            z-index: 1;
+        @media (max-width: 992px) {
+            .hero-flex-container {
+                flex-direction: column;
+            }
         }
 
         .hero-content {
@@ -609,7 +596,7 @@
         }
 
         @media (max-width: 960px) {
-            .hero-container {
+            .hero-flex-container {
                 flex-direction: column;
                 text-align: center;
             }
@@ -1130,7 +1117,7 @@
 
         /* Responsive styles */
         @media (max-width: 1100px) {
-            .hero-container {
+            .hero-flex-container {
                 flex-direction: column;
                 text-align: center;
             }
@@ -1686,92 +1673,94 @@
     <!-- Hero Section -->
     <section class="hero-section">
         <div class="container">
-            <div class="hero-content">
-                <h1 class="hero-heading">
-                    <span class="hero-highlight">AI-Powered</span> Document Processing with <span class="hero-highlight">HIPAA Compliance</span>
-                </h1>
-                <div class="hero-subheading">
-                    Our advanced AI platform processes documents through a secure, interconnected network that gets smarter with every file while ensuring complete data isolation and HIPAA compliance.
-                </div>
-                <div class="hero-benefits">
-                    <div class="benefit-item">
-                        <i class="fas fa-check-circle"></i>
-                        <span>Save 85% of document processing time</span>
+            <div class="hero-flex-container">
+                <div class="hero-content">
+                    <h1 class="hero-heading">
+                        <span class="hero-highlight">AI-Powered</span> Document Processing with <span class="hero-highlight">HIPAA Compliance</span>
+                    </h1>
+                    <div class="hero-subheading">
+                        Our advanced AI platform processes documents through a secure, interconnected network that gets smarter with every file while ensuring complete data isolation and HIPAA compliance.
                     </div>
-                    <div class="benefit-item">
-                        <i class="fas fa-check-circle"></i>
-                        <span>99.5% accuracy with AI document extraction</span>
+                    <div class="hero-benefits">
+                        <div class="benefit-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Save 85% of document processing time</span>
+                        </div>
+                        <div class="benefit-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>99.5% accuracy with AI document extraction</span>
+                        </div>
+                        <div class="benefit-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>100% HIPAA-compliant secure processing</span>
+                        </div>
                     </div>
-                    <div class="benefit-item">
-                        <i class="fas fa-check-circle"></i>
-                        <span>100% HIPAA-compliant secure processing</span>
+                    
+                    <div class="hero-form">
+                        <input type="email" placeholder="Enter your email" aria-label="Email input">
+                        <button class="btn btn-primary">Get Started</button>
+                    </div>
+                    
+                    <div class="hero-badges">
+                        <div class="hero-badge">
+                            <i class="fas fa-shield-alt"></i>
+                            <span class="hero-badge-text">HIPAA Certified</span>
+                        </div>
+                        <div class="hero-badge">
+                            <i class="fas fa-lock"></i>
+                            <span class="hero-badge-text">SOC 2 Compliant</span>
+                        </div>
+                        <div class="hero-badge">
+                            <i class="fas fa-check-circle"></i>
+                            <span class="hero-badge-text">99.9% Uptime</span>
+                        </div>
                     </div>
                 </div>
                 
-                <div class="hero-form">
-                    <input type="email" placeholder="Enter your email" aria-label="Email input">
-                    <button class="btn btn-primary">Get Started</button>
-                </div>
-                
-                <div class="hero-badges">
-                    <div class="hero-badge">
-                        <i class="fas fa-shield-alt"></i>
-                        <span class="hero-badge-text">HIPAA Certified</span>
-                    </div>
-                    <div class="hero-badge">
-                        <i class="fas fa-lock"></i>
-                        <span class="hero-badge-text">SOC 2 Compliant</span>
-                    </div>
-                    <div class="hero-badge">
-                        <i class="fas fa-check-circle"></i>
-                        <span class="hero-badge-text">99.9% Uptime</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="hero-visual">
-                <div class="visual-container">
-                    <div class="visual-title">AI Document Processing Visualization</div>
-                    <div class="visual-content">
-                        <div class="visual-documents">
-                            <div class="document document-1">
-                                <div class="document-header"></div>
-                                <div class="document-line"></div>
-                                <div class="document-line"></div>
-                                <div class="document-line short"></div>
-                                <div class="document-line"></div>
-                                <div class="document-line short"></div>
-                                <div class="document-line"></div>
+                <div class="hero-visual">
+                    <div class="visual-container">
+                        <div class="visual-title">AI Document Processing Visualization</div>
+                        <div class="visual-content">
+                            <div class="visual-documents">
+                                <div class="document document-1">
+                                    <div class="document-header"></div>
+                                    <div class="document-line"></div>
+                                    <div class="document-line"></div>
+                                    <div class="document-line short"></div>
+                                    <div class="document-line"></div>
+                                    <div class="document-line short"></div>
+                                    <div class="document-line"></div>
+                                </div>
+                                <div class="document document-2">
+                                    <div class="document-header"></div>
+                                    <div class="document-line"></div>
+                                    <div class="document-line short"></div>
+                                    <div class="document-line"></div>
+                                    <div class="document-line"></div>
+                                    <div class="document-line short"></div>
+                                    <div class="document-line"></div>
+                                </div>
+                                <div class="document document-3">
+                                    <div class="document-header"></div>
+                                    <div class="document-line"></div>
+                                    <div class="document-line"></div>
+                                    <div class="document-line short"></div>
+                                    <div class="document-line"></div>
+                                    <div class="document-line"></div>
+                                    <div class="document-line short"></div>
+                                </div>
                             </div>
-                            <div class="document document-2">
-                                <div class="document-header"></div>
-                                <div class="document-line"></div>
-                                <div class="document-line short"></div>
-                                <div class="document-line"></div>
-                                <div class="document-line"></div>
-                                <div class="document-line short"></div>
-                                <div class="document-line"></div>
+                            <div class="ai-elements">
+                                <div class="scan-line"></div>
+                                <div class="data-point"></div>
+                                <div class="data-point"></div>
+                                <div class="data-point"></div>
+                                <div class="data-line"></div>
+                                <div class="data-line"></div>
+                                <div class="data-line"></div>
                             </div>
-                            <div class="document document-3">
-                                <div class="document-header"></div>
-                                <div class="document-line"></div>
-                                <div class="document-line"></div>
-                                <div class="document-line short"></div>
-                                <div class="document-line"></div>
-                                <div class="document-line"></div>
-                                <div class="document-line short"></div>
-                            </div>
+                            <img src="aspen-tree-logo.svg" alt="Aspen Grove Logo" class="aspen-logo-visual">
                         </div>
-                        <div class="ai-elements">
-                            <div class="scan-line"></div>
-                            <div class="data-point"></div>
-                            <div class="data-point"></div>
-                            <div class="data-point"></div>
-                            <div class="data-line"></div>
-                            <div class="data-line"></div>
-                            <div class="data-line"></div>
-                        </div>
-                        <img src="aspen-tree-logo.svg" alt="Aspen Grove Logo" class="aspen-logo-visual">
                     </div>
                 </div>
             </div>

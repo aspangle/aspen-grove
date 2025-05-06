@@ -302,8 +302,8 @@
         /* Hero Section */
         .hero-section {
             margin-top: 85px;  /* Increased spacing between menu and hero */
-            background: linear-gradient(135deg, var(--forest-green), var(--sage-green));
-            color: var(--white);
+            background: var(--white);
+            color: var(--forest-green);
             padding: 50px 0;
             position: relative;
             overflow: hidden;
@@ -321,9 +321,26 @@
             gap: 40px;
         }
 
+        /* Add subtle aspen tree background */
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 1000' opacity='0.05'%3E%3Cpath fill='%232F4F4F' d='M500,10 C550,150 600,300 650,450 C600,450 550,450 500,450 C450,450 400,450 350,450 C400,300 450,150 500,10 Z M480,450 L480,950 L520,950 L520,450 Z'/%3E%3C/svg%3E");
+            background-size: 300px;
+            background-repeat: repeat;
+            opacity: 0.05;
+            z-index: 1;
+        }
+
         .hero-content {
             flex: 1;
             max-width: 600px;
+            position: relative;
+            z-index: 2;
         }
 
         .hero-heading {
@@ -331,6 +348,7 @@
             margin-bottom: 20px;
             font-weight: 700;
             line-height: 1.2;
+            color: var(--forest-green);
         }
 
         .hero-highlight {
@@ -342,6 +360,7 @@
             margin-bottom: 20px;
             line-height: 1.5;
             opacity: 0.9;
+            color: var(--sage-green);
         }
 
         .hero-benefits {
@@ -350,47 +369,15 @@
 
         .benefit-item {
             display: flex;
-            align-items: flex-start;
-            margin-bottom: 20px;
+            align-items: center;
+            margin-bottom: 15px;
+            color: var(--forest-green);
         }
 
-        .benefit-icon {
-            flex-shrink: 0;
-            width: 24px;
-            height: 24px;
-            margin-right: 15px;
-            margin-top: 3px;
+        .benefit-item i {
             color: var(--amber-gold);
-        }
-
-        .benefit-text {
+            margin-right: 12px;
             font-size: 1.1em;
-            opacity: 0.95;
-        }
-
-        .benefit-text strong {
-            color: var(--amber-gold);
-            font-weight: 600;
-        }
-
-        .hero-form {
-            display: flex;
-            margin-top: 30px;
-            max-width: 450px;
-        }
-
-        .hero-form input {
-            flex: 1;
-            padding: 14px 20px;
-            border: none;
-            border-radius: 6px 0 0 6px;
-            font-size: 1em;
-            outline: none;
-        }
-
-        .hero-form .btn {
-            border-radius: 0 6px 6px 0;
-            padding: 14px 25px;
         }
 
         .hero-badges {
@@ -403,7 +390,7 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            background-color: rgba(255, 255, 255, 0.1);
+            background-color: rgba(122, 145, 141, 0.1);
             padding: 8px 15px;
             border-radius: 6px;
             font-size: 0.9em;
@@ -416,31 +403,209 @@
 
         .hero-badge-text {
             font-weight: 600;
+            color: var(--forest-green);
         }
 
         .hero-visual {
             flex: 1;
             max-width: 500px;
+            position: relative;
+            z-index: 2;
         }
 
-        .visual-placeholder {
-            background: rgba(255, 255, 255, 0.1);
+        .visual-container {
+            background: rgba(255, 255, 255, 1);
             border-radius: 12px;
-            height: 300px;  /* Smaller placeholder */
+            height: 340px;
+            width: 100%;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            border: 1px solid rgba(122, 145, 141, 0.2);
+        }
+
+        .visual-content {
+            position: relative;
+            width: 100%;
+            height: 100%;
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
-            color: rgba(255, 255, 255, 0.6);
-            text-align: center;
-            padding: 20px;
-            border: 1px dashed rgba(255, 255, 255, 0.3);
         }
 
-        .aspen-logo-small {
+        .visual-documents {
+            position: absolute;
+            width: 80%;
+            height: 80%;
+        }
+
+        .document {
+            position: absolute;
+            background: white;
+            border-radius: 4px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 130px;
+            height: 180px;
+            display: flex;
+            flex-direction: column;
+            padding: 10px;
+            border: 1px solid rgba(122, 145, 141, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .document-1 {
+            top: 20px;
+            left: 40px;
+            transform: rotate(-5deg);
+            z-index: 3;
+        }
+
+        .document-2 {
+            top: 50px;
+            right: 50px;
+            transform: rotate(3deg);
+            z-index: 2;
+        }
+
+        .document-3 {
+            bottom: 30px;
+            left: 80px;
+            transform: rotate(8deg);
+            z-index: 1;
+        }
+
+        .document-header {
+            height: 12px;
+            background: linear-gradient(to right, var(--sage-green), rgba(122, 145, 141, 0.3));
+            margin-bottom: 10px;
+            border-radius: 2px;
+        }
+
+        .document-line {
+            height: 6px;
+            background: rgba(122, 145, 141, 0.1);
+            margin-bottom: 8px;
+            border-radius: 2px;
+            width: 90%;
+        }
+
+        .document-line.short {
+            width: 60%;
+        }
+
+        .ai-elements {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 5;
+            pointer-events: none;
+        }
+
+        .scan-line {
+            position: absolute;
+            height: 4px;
+            background: linear-gradient(to right, transparent, var(--amber-gold), transparent);
+            width: 100%;
+            top: 50%;
+            opacity: 0.7;
+            animation: scan 3s infinite ease-in-out;
+        }
+
+        .data-point {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: var(--amber-gold);
+            border-radius: 50%;
+            opacity: 0;
+            animation: pulse 3s infinite;
+        }
+
+        .data-point:nth-child(2) {
+            top: 70px;
+            left: 110px;
+            animation-delay: 0.5s;
+        }
+
+        .data-point:nth-child(3) {
+            top: 150px;
+            right: 90px;
+            animation-delay: 1s;
+        }
+
+        .data-point:nth-child(4) {
+            bottom: 60px;
+            left: 130px;
+            animation-delay: 1.5s;
+        }
+
+        .data-line {
+            position: absolute;
+            background: var(--amber-gold);
+            height: 2px;
+            opacity: 0;
+            transform-origin: left center;
+            animation: drawLine 3s infinite;
+        }
+
+        .data-line:nth-child(5) {
+            top: 74px;
+            left: 114px;
             width: 60px;
-            height: 60px;
-            margin-bottom: 15px;
+            transform: rotate(30deg);
+            animation-delay: 0.5s;
+        }
+
+        .data-line:nth-child(6) {
+            top: 154px;
+            right: 94px;
+            width: 70px;
+            transform: rotate(-45deg);
+            animation-delay: 1s;
+            transform-origin: right center;
+        }
+
+        .data-line:nth-child(7) {
+            bottom: 64px;
+            left: 134px;
+            width: 50px;
+            transform: rotate(-15deg);
+            animation-delay: 1.5s;
+        }
+
+        .aspen-logo-visual {
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+            width: 40px;
+            height: 40px;
+            opacity: 0.7;
+        }
+
+        .visual-title {
+            position: absolute;
+            top: 15px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            color: var(--forest-green);
+            font-weight: 600;
+            font-size: 0.9em;
+        }
+
+        @keyframes scan {
+            0%, 100% { top: 30%; opacity: 0; }
+            50% { top: 70%; opacity: 0.7; }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0; }
+            50% { transform: scale(1.5); opacity: 0.7; }
+        }
+
+        @keyframes drawLine {
+            0%, 100% { opacity: 0; transform: scaleX(0.1); }
+            50% { opacity: 0.5; transform: scaleX(1); }
         }
 
         @media (max-width: 960px) {
@@ -1565,10 +1730,49 @@
             </div>
             
             <div class="hero-visual">
-                <div class="visual-placeholder">
-                    <img src="aspen-tree-logo.svg" alt="Aspen Grove Logo" class="aspen-logo-small">
-                    <p>AI-Powered Document Processing</p>
-                    <p style="font-size: 0.9em; margin-top: 10px;">[AI Document Analysis Visualization]</p>
+                <div class="visual-container">
+                    <div class="visual-title">AI Document Processing Visualization</div>
+                    <div class="visual-content">
+                        <div class="visual-documents">
+                            <div class="document document-1">
+                                <div class="document-header"></div>
+                                <div class="document-line"></div>
+                                <div class="document-line"></div>
+                                <div class="document-line short"></div>
+                                <div class="document-line"></div>
+                                <div class="document-line short"></div>
+                                <div class="document-line"></div>
+                            </div>
+                            <div class="document document-2">
+                                <div class="document-header"></div>
+                                <div class="document-line"></div>
+                                <div class="document-line short"></div>
+                                <div class="document-line"></div>
+                                <div class="document-line"></div>
+                                <div class="document-line short"></div>
+                                <div class="document-line"></div>
+                            </div>
+                            <div class="document document-3">
+                                <div class="document-header"></div>
+                                <div class="document-line"></div>
+                                <div class="document-line"></div>
+                                <div class="document-line short"></div>
+                                <div class="document-line"></div>
+                                <div class="document-line"></div>
+                                <div class="document-line short"></div>
+                            </div>
+                        </div>
+                        <div class="ai-elements">
+                            <div class="scan-line"></div>
+                            <div class="data-point"></div>
+                            <div class="data-point"></div>
+                            <div class="data-point"></div>
+                            <div class="data-line"></div>
+                            <div class="data-line"></div>
+                            <div class="data-line"></div>
+                        </div>
+                        <img src="aspen-tree-logo.svg" alt="Aspen Grove Logo" class="aspen-logo-visual">
+                    </div>
                 </div>
             </div>
         </div>

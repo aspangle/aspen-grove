@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Aspen Grove Solutions</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #4B6455; /* Deep sage green */
+            --secondary-color: #7D9D7F; /* Medium sage green */
+            --accent-color: #E8B87D; /* Aspen gold/amber */
+            --dark-text: #2C3A2F; /* Dark green text */
+            --medium-text: #4A5D4E; /* Medium green text */
+            --light-bg: #F4F7F2; /* Light sage background */
+            --white: #FFFFFF;
+            --shadow-color: rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: var(--light-bg);
+            color: var(--dark-text);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Lora', serif;
+            font-weight: 600;
+        }
+
+        /* Navigation Styles */
+        .navbar {
+            background-color: var(--white);
+            box-shadow: 0 4px 15px var(--shadow-color);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 50px;
+            height: 75px;
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .navbar-logo {
+            height: 42px;
+        }
+
+        .navbar-logo-text {
+            font-family: 'Lora', serif;
+            font-weight: 700;
+            font-size: 1.6rem;
+            color: var(--primary-color);
+            letter-spacing: -0.5px;
+        }
+
+        .navbar-menu {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .navbar-menu a {
+            color: var(--medium-text);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+
+        .navbar-menu a:hover {
+            color: var(--primary-color);
+        }
+
+        .navbar-menu a.active {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        /* Dropdown Menu Styles */
+        .navbar-menu .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-toggle {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .dropdown-toggle i {
+            font-size: 0.8rem;
+            transition: transform 0.3s ease;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: var(--white);
+            min-width: 220px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            border-radius: 4px;
+            padding: 12px 0;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+            z-index: 1000;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown:hover .dropdown-toggle i {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu a {
+            display: block;
+            padding: 10px 20px;
+            color: var(--medium-text);
+            font-weight: 400;
+            width: 100%;
+        }
+
+        .dropdown-menu a:hover {
+            background-color: rgba(125, 157, 127, 0.1);
+        }
+
+        .dropdown-divider {
+            height: 1px;
+            background-color: var(--border-color);
+            margin: 8px 0;
+        }
+
+        .navbar-cta {
+            background-color: var(--primary-color);
+            color: var(--white) !important;
+            padding: 9px 20px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        .navbar-cta:hover {
+            background-color: var(--dark-text);
+        }
+
+        .navbar-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--dark-text);
+            cursor: pointer;
+        }
+
+        /* Main Container */
+        .main-container {
+            display: flex;
+            min-height: 100vh;
+            margin-top: 75px;
+        }
+
+        /* Login Section */
+        .login-section {
+            flex: 0 0 40%;
+            background-color: var(--white);
+            padding: 60px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .login-card {
+            width: 100%;
+            max-width: 420px;
+            padding: 20px 10px;
+        }
+
+        .login-header {
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .login-header h2 {
+            color: var(--dark-text);
+            font-size: 2.1rem;
+            margin-bottom: 15px;
+            line-height: 1.3;
+        }
+
+        .login-header p {
+            color: var(--medium-text);
+            font-size: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--dark-text);
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid #DDE2DF;
+            border-radius: 4px;
+            font-size: 1rem;
+            transition: var(--transition);
+            background-color: var(--white);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 3px rgba(125, 157, 127, 0.1);
+        }
+
+        .password-toggle {
+            position: relative;
+        }
+
+        .password-toggle i {
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--medium-text);
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .button-primary {
+            width: 100%;
+            padding: 15px;
+            background-color: var(--primary-color);
+            color: var(--white);
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: 10px;
+            margin-bottom: 25px;
+        }
+
+        .button-primary:hover {
+            background-color: var(--dark-text);
+        }
+
+        .forgot-password {
+            display: inline-block;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-size: 0.9rem;
+            margin-bottom: 30px;
+            transition: var(--transition);
+            text-align: center;
+            width: 100%;
+        }
+
+        .forgot-password:hover {
+            color: var(--accent-color);
+            text-decoration: underline;
+        }
+
+        .login-footer {
+            text-align: center;
+            margin-top: 15px;
+            color: var(--medium-text);
+            font-size: 0.95rem;
+        }
+
+        .login-footer a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .login-footer a:hover {
+            color: var(--accent-color);
+            text-decoration: underline;
+        }
+
+        /* Promo Section */
+        .promo-section {
+            flex: 1;
+            background-color: var(--light-bg);
+            padding: 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .promo-content {
+            max-width: 600px;
+        }
+
+        .promo-icon {
+            width: 90px;
+            height: 90px;
+            margin-bottom: 30px;
+            color: var(--accent-color);
+        }
+
+        .promo-title {
+            font-size: 2.5rem;
+            color: var(--dark-text);
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+
+        .promo-subtitle {
+            font-size: 1.1rem;
+            color: var(--medium-text);
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        .features-container {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            margin-bottom: 40px;
+            text-align: left;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .feature-icon {
+            color: var(--accent-color);
+            font-size: 1.8rem;
+            width: 35px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .feature-text {
+            flex: 1;
+        }
+
+        .feature-text h4 {
+            font-weight: 600;
+            margin-bottom: 5px;
+            font-size: 1.05rem;
+            color: var(--dark-text);
+        }
+
+        .feature-text p {
+            margin: 0;
+            color: var(--medium-text);
+            font-size: 0.95rem;
+        }
+
+        .button-secondary {
+            display: inline-block;
+            padding: 15px 30px;
+            background-color: var(--accent-color);
+            color: var(--white);
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+        .button-secondary:hover {
+            background-color: var(--dark-text);
+        }
+
+        /* Decorative elements */
+        .aspen-leaf {
+            position: absolute;
+            opacity: 0.05;
+            z-index: 0;
+        }
+
+        .leaf-top-right {
+            top: 50px;
+            right: 30px;
+            transform: rotate(45deg);
+            width: 120px;
+        }
+
+        .leaf-bottom-left {
+            bottom: 50px;
+            left: 30px;
+            transform: rotate(-15deg);
+            width: 90px;
+        }
+
+        /* Media Queries */
+        @media (max-width: 1200px) {
+            .promo-section {
+                padding: 40px;
+            }
+        }
+
+        @media (max-width: 991px) {
+            .main-container {
+                flex-direction: column;
+            }
+            
+            .login-section {
+                flex: 0 0 auto;
+                padding: 50px 20px;
+            }
+            
+            .promo-section {
+                padding: 50px 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 0 20px;
+            }
+
+            .navbar-menu {
+                display: none;
+                position: absolute;
+                top: 75px;
+                left: 0;
+                right: 0;
+                flex-direction: column;
+                background-color: var(--white);
+                box-shadow: 0 5px 10px var(--shadow-color);
+                padding: 20px;
+                z-index: 1000;
+                align-items: flex-start;
+            }
+
+            .navbar-menu.active {
+                display: flex;
+            }
+
+            .navbar-toggle {
+                display: block;
+            }
+            
+            .navbar-menu a, 
+            .dropdown-toggle {
+                padding: 12px 0;
+                width: 100%;
+            }
+
+            .dropdown {
+                width: 100%;
+            }
+
+            .dropdown-menu {
+                position: static;
+                box-shadow: none;
+                padding-left: 20px;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                display: none;
+                min-width: 100%;
+            }
+
+            .dropdown.active .dropdown-menu {
+                display: block;
+            }
+
+            .dropdown.active .dropdown-toggle i {
+                transform: rotate(180deg);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .login-header h2 {
+                font-size: 1.8rem;
+            }
+            
+            .promo-title {
+                font-size: 2rem;
+            }
+            
+            .button-secondary {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar with refined dropdowns -->
+    <nav class="navbar" id="navbar">
+        <a href="index.html" class="navbar-brand">
+            <svg class="navbar-logo" width="42" height="42" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                <!-- Sophisticated Aspen Grove Logo -->
+                <circle cx="100" cy="100" r="95" fill="#4B6455" stroke="#F4F7F2" stroke-width="2" />
+                
+                <!-- Aspen Trees -->
+                <g id="trees">
+                    <!-- Tree 1 (center) -->
+                    <line x1="100" y1="140" x2="100" y2="60" stroke="#F4F7F2" stroke-width="4" />
+                    <!-- Branches -->
+                    <line x1="100" y1="80" x2="85" y2="65" stroke="#F4F7F2" stroke-width="2" />
+                    <line x1="100" y1="90" x2="115" y2="75" stroke="#F4F7F2" stroke-width="2" />
+                    <line x1="100" y1="110" x2="80" y2="95" stroke="#F4F7F2" stroke-width="2" />
+                    <line x1="100" y1="125" x2="118" y2="110" stroke="#F4F7F2" stroke-width="2" />
+                    
+                    <!-- Tree 2 (left) -->
+                    <line x1="70" y1="145" x2="70" y2="75" stroke="#F4F7F2" stroke-width="4" />
+                    <!-- Branches -->
+                    <line x1="70" y1="85" x2="55" y2="75" stroke="#F4F7F2" stroke-width="2" />
+                    <line x1="70" y1="100" x2="85" y2="85" stroke="#F4F7F2" stroke-width="2" />
+                    <line x1="70" y1="120" x2="55" y2="105" stroke="#F4F7F2" stroke-width="2" />
+                    
+                    <!-- Tree 3 (right) -->
+                    <line x1="130" y1="145" x2="130" y2="75" stroke="#F4F7F2" stroke-width="4" />
+                    <!-- Branches -->
+                    <line x1="130" y1="90" x2="145" y2="75" stroke="#F4F7F2" stroke-width="2" />
+                    <line x1="130" y1="110" x2="115" y2="95" stroke="#F4F7F2" stroke-width="2" />
+                    <line x1="130" y1="125" x2="145" y2="110" stroke="#F4F7F2" stroke-width="2" />
+                </g>
+                
+                <!-- Leaves -->
+                <g id="leaves">
+                    <!-- Center Tree Leaves -->
+                    <circle cx="100" cy="60" r="8" fill="#7D9D7F" />
+                    <circle cx="85" cy="65" r="6" fill="#7D9D7F" />
+                    <circle cx="115" cy="75" r="7" fill="#7D9D7F" />
+                    <circle cx="80" cy="95" r="6" fill="#7D9D7F" />
+                    <circle cx="118" cy="110" r="6" fill="#7D9D7F" />
+                    
+                    <!-- Left Tree Leaves -->
+                    <circle cx="70" cy="75" r="7" fill="#7D9D7F" />
+                    <circle cx="55" cy="75" r="6" fill="#7D9D7F" />
+                    <circle cx="85" cy="85" r="6" fill="#7D9D7F" />
+                    <circle cx="55" cy="105" r="6" fill="#7D9D7F" />
+                    
+                    <!-- Right Tree Leaves -->
+                    <circle cx="130" cy="75" r="7" fill="#7D9D7F" />
+                    <circle cx="145" cy="75" r="6" fill="#7D9D7F" />
+                    <circle cx="115" cy="95" r="6" fill="#7D9D7F" />
+                    <circle cx="145" cy="110" r="6" fill="#7D9D7F" />
+                </g>
+                
+                <!-- Root System -->
+                <path d="M60,145 C70,160 90,165 100,160 C110,165 130,160 140,145" stroke="#F4F7F2" stroke-width="3" fill="none" />
+                
+                <!-- Accent Elements -->
+                <circle cx="145" cy="75" r="2" fill="#E8B87D" />
+                <circle cx="85" cy="65" r="2" fill="#E8B87D" />
+                <circle cx="55" cy="105" r="2" fill="#E8B87D" />
+                <circle cx="118" cy="110" r="2" fill="#E8B87D" />
+            </svg>
+            <span class="navbar-logo-text">Aspen Grove</span>
+        </a>
+        
+        <div class="navbar-menu" id="mainMenu">
+            <!-- Features Dropdown -->
+            <div class="dropdown">
+                <div class="dropdown-toggle">
+                    <a href="features.html">Features</a>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="dropdown-menu">
+                    <a href="features/document-automation.html">Document Automation</a>
+                    <a href="features/practice-automation.html">Practice Automation</a>
+                    <a href="features/integrations.html">Integrations & Compliance</a>
+                    <a href="features/security.html">Enterprise Security</a>
+                </div>
+            </div>
+            
+            <a href="pricing.html">Pricing</a>
+            
+            <!-- Resources Dropdown -->
+            <div class="dropdown">
+                <div class="dropdown-toggle">
+                    <a href="resources.html">Resources</a>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="dropdown-menu">
+                    <a href="resources/blog.html">Blog</a>
+                    <a href="resources/documentation.html">Documentation</a>
+                    <a href="resources/case-studies.html">Case Studies</a>
+                    <div class="dropdown-divider"></div>
+                    <a href="resources/videos.html">Videos</a>
+                    <a href="resources/webinars.html">Webinars</a>
+                </div>
+            </div>
+            
+            <!-- About Dropdown -->
+            <div class="dropdown">
+                <div class="dropdown-toggle">
+                    <a href="about.html">About</a>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="dropdown-menu">
+                    <a href="about/company.html">Company</a>
+                    <a href="about/team.html">Our Team</a>
+                    <a href="about/contact.html">Contact Us</a>
+                    <div class="dropdown-divider"></div>
+                    <a href="about/privacy.html">Privacy Policy</a>
+                    <a href="about/terms.html">Terms of Service</a>
+                </div>
+            </div>
+            
+            <a href="login.html" class="active">Login</a>
+            <a href="free-trial.html" class="navbar-cta">Free Trial</a>
+        </div>
+        
+        <button class="navbar-toggle" id="navbarToggle" aria-label="Toggle menu">
+            <i class="fas fa-bars"></i>
+        </button>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Login Section -->
+        <section class="login-section">
+            <!-- Decorative elements -->
+            <svg class="aspen-leaf leaf-top-right" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+                <path fill="#4B6455" d="M50,0 C40,30 20,50 0,50 C20,50 40,70 50,100 C60,70 80,50 100,50 C80,50 60,30 50,0 Z"/>
+            </svg>
+            <svg class="aspen-leaf leaf-bottom-left" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+                <path fill="#4B6455" d="M50,0 C40,30 20,50 0,50 C20,50 40,70 50,100 C60,70 80,50 100,50 C80,50 60,30 50,0 Z"/>
+            </svg>
+            
+            <div class="login-card">
+                <div class="login-header">
+                    <h2>Welcome Back to Aspen Grove</h2>
+                    <p>Log in to access your secure document portal</p>
+                </div>
+                
+                <form id="login-form">
+                    <div class="form-group">
+                        <label for="login-email" class="form-label">Email address</label>
+                        <input type="email" id="login-email" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="login-password" class="form-label">Password</label>
+                        <div class="password-toggle">
+                            <input type="password" id="login-password" class="form-control" required>
+                            <i class="fas fa-eye" onclick="togglePassword('login-password')"></i>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="button-primary">Sign In</button>
+                    
+                    <a href="#" class="forgot-password">Forgot your password?</a>
+                    
+                    <div class="login-footer">
+                        Don't have an account yet?<br>
+                        <a href="free-trial.html">Start your 10-day free trial</a>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <!-- Promo Section -->
+        <section class="promo-section">
+            <div class="promo-content">
+                <svg class="promo-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M0 0h24v24H0z" fill="none"/>
+                    <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/>
+                </svg>
+                
+                <h1 class="promo-title">Simplify Document Processing</h1>
+                <p class="promo-subtitle">Transform how you handle documents with our AI-powered solution that saves time, reduces errors, and improves accuracy.</p>
+                
+                <div class="features-container">
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-file-invoice"></i>
+                        </div>
+                        <div class="feature-text">
+                            <h4>Smart Document Analysis</h4>
+                            <p>Our AI technology automatically extracts key information from complex documents, reducing manual data entry by up to 80%.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-cogs"></i>
+                        </div>
+                        <div class="feature-text">
+                            <h4>Intelligent Workflows</h4>
+                            <p>Streamline your processes with customizable workflows that route documents to the right people at the right time.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <div class="feature-text">
+                            <h4>Enterprise-Grade Security</h4>
+                            <p>Keep your sensitive data protected with AES-256 encryption, role-based access controls, and HIPAA compliance.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <a href="free-trial.html" class="button-secondary">Try Free for 10 Days</a>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        function togglePassword(inputId) {
+            const input = document.getElementById(inputId);
+            const icon = input.nextElementSibling;
+            
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                input.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        }
+
+        // Form submission handler
+        document.getElementById('login-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            // Add login logic here
+            console.log('Login form submitted');
+            // Redirect to dashboard or show loading state
+            window.location.href = 'dashboard.html';
+        });
+        
+        // Mobile menu toggle
+        document.querySelector('.navbar-toggle').addEventListener('click', function() {
+            const menu = document.querySelector('.navbar-menu');
+            menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
+        });
+
+        // Mobile menu functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const navbarToggle = document.getElementById('navbarToggle');
+            const mainMenu = document.getElementById('mainMenu');
+            const dropdowns = document.querySelectorAll('.dropdown');
+
+            // Toggle mobile menu
+            navbarToggle.addEventListener('click', function() {
+                mainMenu.classList.toggle('active');
+            });
+
+            // Handle dropdowns in mobile view
+            dropdowns.forEach(dropdown => {
+                const toggle = dropdown.querySelector('.dropdown-toggle');
+                toggle.addEventListener('click', function(e) {
+                    if (window.innerWidth <= 768) {
+                        e.preventDefault();
+                        dropdown.classList.toggle('active');
+                    }
+                });
+            });
+
+            // Close mobile menu when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('.navbar') && mainMenu.classList.contains('active')) {
+                    mainMenu.classList.remove('active');
+                }
+            });
+
+            // Handle window resize
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 768) {
+                    mainMenu.classList.remove('active');
+                    dropdowns.forEach(dropdown => dropdown.classList.remove('active'));
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - Aspen Grove Solutions</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #4B6455; /* Deep sage green */
+            --secondary-color: #7D9D7F; /* Medium sage green */
+            --accent-color: #E8B87D; /* Aspen gold/amber */
+            --dark-text: #2C3A2F; /* Dark green text */
+            --medium-text: #4A5D4E; /* Medium green text */
+            --light-bg: #F4F7F2; /* Light sage background */
+            --white: #FFFFFF;
+            --shadow-color: rgba(0, 0, 0, 0.08);
+            --border-color: #E0E6E3;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: var(--light-bg);
+            color: var(--dark-text);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Lora', serif;
+            font-weight: 600;
+            color: var(--dark-text);
+        }
+
+        /* Navigation Styles */
+        .navbar {
+            background-color: var(--white);
+            box-shadow: 0 4px 15px var(--shadow-color);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 50px;
+            height: 75px;
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .navbar-logo {
+            height: 42px;
+        }
+
+        .navbar-logo-text {
+            font-family: 'Lora', serif;
+            font-weight: 700;
+            font-size: 1.6rem;
+            color: var(--primary-color);
+            letter-spacing: -0.5px;
+        }
+
+        .navbar-menu {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .navbar-menu a {
+            color: var(--medium-text);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+
+        .navbar-menu a:hover {
+            color: var(--primary-color);
+        }
+
+        .navbar-menu a.active {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .navbar-cta {
+            background-color: var(--primary-color);
+            color: var(--white) !important;
+            padding: 9px 20px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        .navbar-cta:hover {
+            background-color: var(--dark-text);
+        }
+
+        .navbar-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--dark-text);
+            cursor: pointer;
+        }
+
+        /* Main Container */
+        .main-container {
+            margin-top: 75px;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        /* Header Banner */
+        .header-banner {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .header-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .header-title {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--white);
+        }
+
+        .header-subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Legal Content Section */
+        .legal-section {
+            padding: 60px 20px;
+        }
+
+        .legal-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: var(--white);
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 5px 20px var(--shadow-color);
+        }
+
+        .legal-navigation {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .legal-nav-item {
+            background-color: var(--light-bg);
+            color: var(--medium-text);
+            padding: 8px 16px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .legal-nav-item:hover {
+            background-color: var(--accent-color);
+            color: var(--dark-text);
+        }
+
+        .legal-nav-item.active {
+            background-color: var(--primary-color);
+            color: var(--white);
+        }
+
+        .legal-last-updated {
+            font-size: 0.9rem;
+            color: var(--medium-text);
+            font-style: italic;
+            margin-bottom: 30px;
+        }
+
+        .legal-content h2 {
+            font-size: 1.6rem;
+            margin: 30px 0 15px;
+            color: var(--dark-text);
+        }
+
+        .legal-content h3 {
+            font-size: 1.3rem;
+            margin: 25px 0 15px;
+            color: var(--dark-text);
+        }
+
+        .legal-content p {
+            margin-bottom: 15px;
+            font-size: 1rem;
+        }
+
+        .legal-content ul, .legal-content ol {
+            margin: 15px 0;
+            padding-left: 20px;
+        }
+
+        .legal-content li {
+            margin-bottom: 8px;
+        }
+
+        .legal-content a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .legal-content a:hover {
+            color: var(--accent-color);
+            text-decoration: underline;
+        }
+
+        .legal-content .highlight {
+            background-color: rgba(232, 184, 125, 0.2);
+            padding: 20px;
+            border-radius: 6px;
+            margin: 20px 0;
+        }
+
+        .legal-content .highlight h3 {
+            margin-top: 0;
+        }
+
+        .legal-footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.9rem;
+            color: var(--medium-text);
+        }
+
+        .legal-footer p {
+            margin-bottom: 10px;
+        }
+
+        .contact-btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 10px 20px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            margin-top: 15px;
+        }
+
+        .contact-btn:hover {
+            background-color: var(--dark-text);
+        }
+
+        /* Data Table Styles */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .data-table th, 
+        .data-table td {
+            padding: 12px 15px;
+            border: 1px solid var(--border-color);
+        }
+
+        .data-table th {
+            background-color: var(--light-bg);
+            font-weight: 600;
+            text-align: left;
+        }
+
+        .data-table tr:nth-child(even) {
+            background-color: rgba(244, 247, 242, 0.5);
+        }
+
+        .data-table tr:hover {
+            background-color: rgba(125, 157, 127, 0.05);
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--dark-text);
+            color: var(--white);
+            padding: 60px 20px 30px;
+            margin-top: auto;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .footer-logo img {
+            height: 40px;
+        }
+
+        .footer-logo-text {
+            font-family: 'Lora', serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--white);
+        }
+
+        .footer-about {
+            margin-bottom: 20px;
+            opacity: 0.8;
+            font-size: 0.95rem;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--white);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .social-icon:hover {
+            background-color: var(--accent-color);
+            color: var(--dark-text);
+        }
+
+        .footer-heading {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: var(--white);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-link {
+            margin-bottom: 12px;
+        }
+
+        .footer-link a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: 0.95rem;
+        }
+
+        .footer-link a:hover {
+            color: var(--accent-color);
+        }
+
+        .footer-contact {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.95rem;
+        }
+
+        .footer-contact i {
+            color: var(--accent-color);
+            font-size: 1rem;
+        }
+
+        .footer-bottom {
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Media Queries */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 0 20px;
+            }
+            
+            .navbar-menu {
+                display: none;
+                position: absolute;
+                top: 75px;
+                left: 0;
+                right: 0;
+                flex-direction: column;
+                background-color: var(--white);
+                padding: 20px;
+                box-shadow: 0 5px 10px var(--shadow-color);
+            }
+
+            .navbar-menu.active {
+                display: flex;
+            }
+            
+            .navbar-toggle {
+                display: block;
+            }
+
+            .header-title {
+                font-size: 2rem;
+            }
+
+            .legal-container {
+                padding: 30px 20px;
+            }
+
+            .legal-navigation {
+                justify-content: center;
+            }
+            
+            .data-table {
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-banner {
+                padding: 40px 20px;
+            }
+
+            .header-title {
+                font-size: 1.8rem;
+            }
+
+            .legal-section {
+                padding: 40px 15px;
+            }
+
+            .legal-container {
+                padding: 25px 15px;
+            }
+
+            .legal-content h2 {
+                font-size: 1.4rem;
+            }
+
+            .legal-content h3 {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <a href="index.html" class="navbar-brand">
+            <svg class="navbar-logo" width="42" height="42" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                <!-- Sophisticated Aspen Grove Logo -->
+                <circle cx="100" cy="100" r="95" fill="#4B6455" stroke="#F4F7F2" stroke-width="2" />
+                
+                <!-- Aspen Trees -->
+                <g id="trees">
+                    <!-- Tree 1 (center) -->
+                    <line x1="100" y1="140" x2="100" y2="60" stroke="#F4F7F2" stroke-width="4" />
+                    <!-- Branches -->
+                    <line x1="100" y1="80" x2="85" y2="65" stroke="#F4F7F2" stroke-width="2" />
+                    <line x1="100" y1="90" x2="115" y2="75" stroke="#F4F7F2" stroke-width="2" />
+                    <line x1="100" y1="110" x2="80" y2="95" stroke="#F4F7F2" stroke-width="2" />
+                    <line x1="100" y1="125" x2="118" y2="110" stroke="#F4F7F2" stroke-width="2" />
+                    
+                    <!-- Tree 2 (left) -->
+                    <line x1="70" y1="145" x2="70" y2="75" stroke="#F4F7F2" stroke-width="4" />
+                    <!-- Branches -->
+                    <line x1="70" y1="85" x2="55" y2="75" stroke="#F4F7F2" stroke-width="2" />
+                    <line x1="70" y1="100" x2="85" y2="85" stroke="#F4F7F2" stroke-width="2" />
+                    <line x1="70" y1="120" x2="55" y2="105" stroke="#F4F7F2" stroke-width="2" />
+                    
+                    <!-- Tree 3 (right) -->
+                    <line x1="130" y1="145" x2="130" y2="75" stroke="#F4F7F2" stroke-width="4" />
+                    <!-- Branches -->
+                    <line x1="130" y1="90" x2="145" y2="75" stroke="#F4F7F2" stroke-width="2" />
+                    <line x1="130" y1="110" x2="115" y2="95" stroke="#F4F7F2" stroke-width="2" />
+                    <line x1="130" y1="125" x2="145" y2="110" stroke="#F4F7F2" stroke-width="2" />
+                </g>
+                
+                <!-- Leaves -->
+                <g id="leaves">
+                    <!-- Center Tree Leaves -->
+                    <circle cx="100" cy="60" r="8" fill="#7D9D7F" />
+                    <circle cx="85" cy="65" r="6" fill="#7D9D7F" />
+                    <circle cx="115" cy="75" r="7" fill="#7D9D7F" />
+                    <circle cx="80" cy="95" r="6" fill="#7D9D7F" />
+                    <circle cx="118" cy="110" r="6" fill="#7D9D7F" />
+                    
+                    <!-- Left Tree Leaves -->
+                    <circle cx="70" cy="75" r="7" fill="#7D9D7F" />
+                    <circle cx="55" cy="75" r="6" fill="#7D9D7F" />
+                    <circle cx="85" cy="85" r="6" fill="#7D9D7F" />
+                    <circle cx="55" cy="105" r="6" fill="#7D9D7F" />
+                    
+                    <!-- Right Tree Leaves -->
+                    <circle cx="130" cy="75" r="7" fill="#7D9D7F" />
+                    <circle cx="145" cy="75" r="6" fill="#7D9D7F" />
+                    <circle cx="115" cy="95" r="6" fill="#7D9D7F" />
+                    <circle cx="145" cy="110" r="6" fill="#7D9D7F" />
+                </g>
+                
+                <!-- Root System -->
+                <path d="M60,145 C70,160 90,165 100,160 C110,165 130,160 140,145" stroke="#F4F7F2" stroke-width="3" fill="none" />
+                
+                <!-- Accent Elements -->
+                <circle cx="145" cy="75" r="2" fill="#E8B87D" />
+                <circle cx="85" cy="65" r="2" fill="#E8B87D" />
+                <circle cx="55" cy="105" r="2" fill="#E8B87D" />
+                <circle cx="118" cy="110" r="2" fill="#E8B87D" />
+            </svg>
+            <span class="navbar-logo-text">Aspen Grove</span>
+        </a>
+        
+        <div class="navbar-menu">
+            <a href="features.html">Features</a>
+            <a href="pricing.html">Pricing</a>
+            <a href="resources.html">Resources</a>
+            <a href="about.html">About</a>
+            <a href="login.html">Login</a>
+            <a href="free-trial.html" class="navbar-cta">Free Trial</a>
+        </div>
+        
+        <button class="navbar-toggle" aria-label="Toggle menu">
+            <i class="fas fa-bars"></i>
+        </button>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Header Banner -->
+        <section class="header-banner">
+            <div class="header-container">
+                <h1 class="header-title">Privacy Policy</h1>
+                <p class="header-subtitle">We are committed to protecting your privacy and ensuring the security of your information.</p>
+            </div>
+        </section>
+
+        <!-- Legal Content Section -->
+        <section class="legal-section">
+            <div class="legal-container">
+                <div class="legal-navigation">
+                    <a href="terms.html" class="legal-nav-item">Terms of Service</a>
+                    <a href="privacy.html" class="legal-nav-item active">Privacy Policy</a>
+                    <a href="security.html" class="legal-nav-item">Security Information</a>
+                    <a href="hipaa.html" class="legal-nav-item">HIPAA Compliance</a>
+                </div>
+                
+                <div class="legal-last-updated">
+                    Last Updated: May 1, 2025
+                </div>
+                
+                <div class="legal-content">
+                    <h2>1. Introduction</h2>
+                    <p>Aspen Grove Solutions, Inc. ("Aspen Grove," "we," "our," or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our website, mobile application, and other online services (collectively, the "Services").</p>
+                    
+                    <p>Please read this Privacy Policy carefully. By accessing or using our Services, you acknowledge that you have read, understood, and agree to be bound by this Privacy Policy.</p>
+                    
+                    <div class="highlight">
+                        <h3>Special Notice for Legal and Healthcare Professionals</h3>
+                        <p>Our Services are designed for professional use within the legal and healthcare sectors. We understand the sensitive nature of the information processed through our platform and have implemented specialized safeguards to protect this data. This policy details our approach to data security, including our HIPAA compliance measures for healthcare-related information.</p>
+                    </div>
+                    
+                    <h2>2. Information We Collect</h2>
+                    <p>We collect information in different ways from users of our Services:</p>
+                    
+                    <h3>2.1 Information You Provide to Us</h3>
+                    <p>We collect information that you voluntarily provide to us, including:</p>
+                    <ul>
+                        <li><strong>Account Information:</strong> When you register for an account, we collect your name, email address, password, and professional information.</li>
+                        <li><strong>Profile Information:</strong> Information you provide in your user profile, such as job title, organization, and professional credentials.</li>
+                        <li><strong>Billing Information:</strong> Payment details, billing address, and other information necessary for processing payments.</li>
+                        <li><strong>User Content:</strong> Documents, files, and data that you upload, input, or otherwise submit to the Services.</li>
+                        <li><strong>Communications:</strong> Information you provide when you contact us for support or other inquiries.</li>
+                    </ul>
+                    
+                    <h3>2.2 Information We Collect Automatically</h3>
+                    <p>When you use our Services, we automatically collect certain information, including:</p>
+                    <ul>
+                        <li><strong>Usage Information:</strong> Information about how you use our Services, such as features accessed, time spent on the platform, and actions taken.</li>
+                        <li><strong>Device Information:</strong> Information about the device you use to access our Services, including hardware model, operating system, browser type, and IP address.</li>
+                        <li><strong>Location Information:</strong> General location information based on IP address.</li>
+                        <li><strong>Log Data:</strong> Information that web browsers, mobile devices, and servers typically provide, such as browser type, referring/exit pages, operating system, date/time stamp, and clickstream data.</li>
+                        <li><strong>Cookies and Similar Technologies:</strong> We use cookies and similar technologies to collect information about your browsing behaviors and to enhance your experience using our Services.</li>
+                    </ul>
+                    
+                    <h2>3. How We Use Your Information</h2>
+                    <p>We use the information we collect for various purposes, including:</p>
+                    
+                    <h3>3.1 Providing, Maintaining, and Improving Our Services</h3>
+                    <ul>
+                        <li>To create and manage your account</li>
+                        <li>To process and fulfill your subscription</li>
+                        <li>To provide the features and functionality of our Services</li>
+                        <li>To improve and enhance our Services</li>
+                        <li>To develop new products, services, and features</li>
+                        <li>To understand how users interact with our Services</li>
+                    </ul>
+                    
+                    <h3>3.2 Communications</h3>
+                    <ul>
+                        <li>To communicate with you about your account or subscription</li>
+                        <li>To respond to your inquiries and provide customer support</li>
+                        <li>To send you technical notices, updates, security alerts, and administrative messages</li>
+                        <li>To provide you with information about new features, products, and services</li>
+                    </ul>
+                    
+                    <h3>3.3 Legal and Security</h3>
+                    <ul>
+                        <li>To protect the security and integrity of our Services</li>
+                        <li>To detect, prevent, and address technical issues, security breaches, and fraudulent or illegal activity</li>
+                        <li>To enforce our Terms of Service and other legal rights</li>
+                        <li>To comply with legal obligations</li>
+                    </ul>
+                    
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Data Category</th>
+                                <th>Purpose of Processing</th>
+                                <th>Legal Basis (for EU/UK Users)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Account Information</td>
+                                <td>Account creation and management, authentication, customer support</td>
+                                <td>Contractual necessity, Legitimate interests</td>
+                            </tr>
+                            <tr>
+                                <td>Billing Information</td>
+                                <td>Processing payments, fraud prevention</td>
+                                <td>Contractual necessity, Legal obligation</td>
+                            </tr>
+                            <tr>
+                                <td>User Content</td>
+                                <td>Providing core service functionality</td>
+                                <td>Contractual necessity</td>
+                            </tr>
+                            <tr>
+                                <td>Usage Information</td>
+                                <td>Service improvement, analytics</td>
+                                <td>Legitimate interests</td>
+                            </tr>
+                            <tr>
+                                <td>Device Information</td>
+                                <td>Security, troubleshooting</td>
+                                <td>Legitimate interests</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <h2>4. How We Share Your Information</h2>
+                    <p>We may share your information in the following circumstances:</p>
+                    
+                    <h3>4.1 With Your Consent</h3>
+                    <p>We may share your information when you specifically authorize us to do so.</p>
+                    
+                    <h3>4.2 Service Providers</h3>
+                    <p>We may share your information with third-party vendors, consultants, and other service providers who need access to such information to perform work on our behalf. These service providers are subject to strict data protection requirements and are prohibited from using your information for any purpose other than to provide services to us.</p>
+                    
+                    <h3>4.3 Compliance with Laws</h3>
+                    <p>We may disclose your information if required to do so by law or in response to valid legal requests, such as subpoenas, court orders, or government regulations. We may also disclose information when we believe disclosure is necessary to protect our rights, protect your safety or the safety of others, investigate fraud, or respond to a government request.</p>
+                    
+                    <h3>4.4 Business Transfers</h3>
+                    <p>If Aspen Grove is involved in a merger, acquisition, or sale of all or a portion of its assets, your information may be transferred as part of that transaction. We will notify you via email and/or a prominent notice on our website of any change in ownership or uses of your information, as well as any choices you may have regarding your information.</p>
+                    
+                    <h3>4.5 Aggregated or De-identified Data</h3>
+                    <p>We may share aggregated or de-identified information that cannot reasonably be used to identify you with third parties for various purposes, including to improve our Services and for business or marketing purposes.</p>
+                    
+                    <h2>5. Data Storage and Security</h2>
+                    <p>We use industry-standard security measures to protect your information:</p>
+                    <ul>
+                        <li>All data is encrypted both in transit and at rest using strong encryption protocols</li>
+                        <li>We maintain physical, electronic, and procedural safeguards designed to protect your information</li>
+                        <li>Access to your information is restricted to authorized personnel only, based on the principle of least privilege</li>
+                        <li>We regularly review our information collection, storage, and processing practices, including physical security measures, to prevent unauthorized access</li>
+                    </ul>
+                    
+                    <p>While we strive to protect your information, no method of transmission over the Internet or method of electronic storage is 100% secure. Therefore, we cannot guarantee its absolute security. For more detailed information about our security practices, please refer to our <a href="security.html">Security Information</a> page.</p>
+                    
+                    <h2>6. Data Retention</h2>
+                    <p>We retain your information for as long as your account is active or as needed to provide you with our Services. We will retain and use your information as necessary to comply with our legal obligations, resolve disputes, and enforce our agreements, but in all cases, we will retain your personal information only for as long as is necessary for the purposes set out in this Privacy Policy.</p>
+                    
+                    <p>Upon request, we will delete or anonymize your account and personal information so that it no longer identifies you, unless we are legally allowed or required to maintain certain information.</p>
+                    
+                    <h2>7. Your Rights and Choices</h2>
+                    <p>Depending on your location, you may have certain rights regarding your personal information:</p>
+                    
+                    <h3>7.1 Account Information</h3>
+                    <p>You can access, update, or delete your account information at any time by logging into your account settings. If you cannot access certain information or have questions about the information we have on file about you, please contact us using the information in the "Contact Us" section below.</p>
+                    
+                    <h3>7.2 Location Information</h3>
+                    <p>You can prevent us from collecting precise location information through your device settings. However, this may limit your ability to use certain features of our Services.</p>
+                    
+                    <h3>7.3 Cookies</h3>
+                    <p>Most web browsers are set to accept cookies by default. If you prefer, you can usually set your browser to remove or reject cookies. Please note that removing or rejecting cookies could affect the availability and functionality of our Services.</p>
+                    
+                    <h3>7.4 Communications Preferences</h3>
+                    <p>You can opt out of receiving promotional communications from us by following the unsubscribe instructions included in those communications. Note that you may continue to receive service-related and other non-promotional communications.</p>
+                    
+                    <h3>7.5 Additional Rights for Certain Jurisdictions</h3>
+                    <p>If you are located in certain jurisdictions, such as the European Economic Area (EEA), United Kingdom, or California, you may have additional rights under applicable data protection laws, including:</p>
+                    <ul>
+                        <li>Right to access and receive a copy of your personal information</li>
+                        <li>Right to rectify inaccurate or incomplete personal information</li>
+                        <li>Right to erasure of your personal information under certain circumstances</li>
+                        <li>Right to restrict processing of your personal information</li>
+                        <li>Right to data portability</li>
+                        <li>Right to object to processing based on legitimate interests</li>
+                        <li>Right to withdraw consent (where processing is based on consent)</li>
+                        <li>Right not to be subject to automated decision-making, including profiling, with significant legal effects</li>
+                    </ul>
+                    
+                    <p>To exercise these rights, please contact us using the information provided in the "Contact Us" section below.</p>
+                    
+                    <h2>8. Children's Privacy</h2>
+                    <p>Our Services are not directed to children under the age of 16, and we do not knowingly collect personal information from children under 16. If we learn that we have collected personal information from a child under 16, we will take steps to delete such information as quickly as possible. If you believe that we might have any information from or about a child under 16, please contact us.</p>
+                    
+                    <h2>9. International Data Transfers</h2>
+                    <p>Aspen Grove is based in the United States, and we process and store information on servers located in the United States and other countries. As such, we and our service providers may transfer your information to, or store or access it in, jurisdictions that may not provide equivalent levels of data protection as your home jurisdiction.</p>
+                    
+                    <p>If you are located in the EEA, UK, or Switzerland, we will ensure that transfers of your personal information to any country outside the EEA, UK, or Switzerland are adequately protected. We may use specific contractual provisions approved by the European Commission, UK, or Swiss authorities (as appropriate) that provide the same level of protection to the data as it had in the EEA, UK, or Switzerland.</p>
+                    
+                    <h2>10. Changes to This Privacy Policy</h2>
+                    <p>We may update this Privacy Policy from time to time to reflect changes to our information practices. If we make material changes, we will notify you by email (if we have your email address) or by means of a notice on our website prior to the changes becoming effective. We encourage you to periodically review this page for the latest information on our privacy practices.</p>
+                    
+                    <h2>11. HIPAA Compliance</h2>
+                    <p>For users who are Covered Entities or Business Associates under the Health Insurance Portability and Accountability Act ("HIPAA"), please refer to our <a href="hipaa.html">HIPAA Compliance</a> page for specific information about how we handle Protected Health Information (PHI).</p>
+                    
+                    <div class="legal-footer">
+                        <p>If you have any questions or concerns about this Privacy Policy or our data practices, please contact us at:</p>
+                        <p>Privacy Office<br>
+                        Aspen Grove Solutions, Inc.<br>
+                        123 Tech Avenue, Suite 200<br>
+                        Boston, MA 02108<br>
+                        Email: privacy@aspengrove.com<br>
+                        Phone: (800) 555-1234</p>
+                        
+                        <a href="contact.html" class="contact-btn">Contact Us</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-container">
+                <div>
+                    <div class="footer-logo">
+                        <svg width="40" height="40" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Stylized Aspen Grove Logo -->
+                            <circle cx="100" cy="100" r="95" fill="#4B6455" stroke="#F4F7F2" stroke-width="2" />
+                            
+                            <!-- Tree elements -->
+                            <g>
+                                <line x1="100" y1="140" x2="100" y2="60" stroke="#F4F7F2" stroke-width="4" />
+                                <line x1="70" y1="145" x2="70" y2="75" stroke="#F4F7F2" stroke-width="4" />
+                                <line x1="130" y1="145" x2="130" y2="75" stroke="#F4F7F2" stroke-width="4" />
+                                <!-- Branches and leaves would go here -->
+                            </g>
+                            
+                            <!-- Accent element -->
+                            <circle cx="145" cy="75" r="4" fill="#E8B87D" />
+                        </svg>
+                        <span class="footer-logo-text">Aspen Grove</span>
+                    </div>
+                    
+                    <p class="footer-about">
+                        Aspen Grove Solutions provides AI-powered document processing technology to streamline workflows for legal and healthcare professionals.
+                    </p>
+                    
+                    <div class="footer-social">
+                        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="footer-heading">Solutions</h3>
+                    <ul class="footer-links">
+                        <li class="footer-link"><a href="#">Document Automation</a></li>
+                        <li class="footer-link"><a href="#">Practice Automation</a></li>
+                        <li class="footer-link"><a href="#">Integrations & Compliance</a></li>
+                        <li class="footer-link"><a href="#">AI Workflows</a></li>
+                        <li class="footer-link"><a href="#">Smart Templates</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="footer-heading">Company</h3>
+                    <ul class="footer-links">
+                        <li class="footer-link"><a href="about.html">About Us</a></li>
+                        <li class="footer-link"><a href="#">Careers</a></li>
+                        <li class="footer-link"><a href="#">Blog</a></li>
+                        <li class="footer-link"><a href="#">Press</a></li>
+                        <li class="footer-link"><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="footer-heading">Legal</h3>
+                    <ul class="footer-links">
+                        <li class="footer-link"><a href="terms.html">Terms of Service</a></li>
+                        <li class="footer-link"><a href="privacy.html">Privacy Policy</a></li>
+                        <li class="footer-link"><a href="security.html">Security Information</a></li>
+                        <li class="footer-link"><a href="hipaa.html">HIPAA Compliance</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Aspen Grove Solutions. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Toggle mobile menu
+            const navbarToggle = document.querySelector('.navbar-toggle');
+            const navbarMenu = document.querySelector('.navbar-menu');
+            
+            navbarToggle.addEventListener('click', function() {
+                navbarMenu.classList.toggle('active');
+                
+                // Change icon
+                const icon = this.querySelector('i');
+                if (navbarMenu.classList.contains('active')) {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-times');
+                } else {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

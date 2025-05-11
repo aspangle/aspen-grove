@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Trial - Aspen Grove Solutions</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #4B6455; /* Deep sage green */
+            --secondary-color: #7D9D7F; /* Medium sage green */
+            --accent-color: #E8B87D; /* Aspen gold/amber */
+            --dark-text: #2C3A2F; /* Dark green text */
+            --medium-text: #4A5D4E; /* Medium green text */
+            --light-bg: #F4F7F2; /* Light sage background */
+            --white: #FFFFFF;
+            --shadow-color: rgba(0, 0, 0, 0.08);
+            --border-color: #DDE2DF;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: var(--light-bg);
+            color: var(--dark-text);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Lora', serif;
+            font-weight: 600;
+        }
+
+        /* Navigation Styles */
+        .navbar {
+            background-color: var(--white);
+            box-shadow: 0 4px 15px var(--shadow-color);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 50px;
+            height: 75px;
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .navbar-logo {
+            height: 42px;
+        }
+
+        .navbar-logo-text {
+            font-family: 'Lora', serif;
+            font-weight: 700;
+            font-size: 1.6rem;
+            color: var(--primary-color);
+            letter-spacing: -0.5px;
+        }
+
+        .navbar-menu {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .navbar-menu a {
+            color: var(--medium-text);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+
+        .navbar-menu a:hover {
+            color: var(--primary-color);
+        }
+
+        .navbar-menu a.active {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        /* Dropdown Menu Styles */
+        .navbar-menu .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-toggle {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .dropdown-toggle i {
+            font-size: 0.8rem;
+            transition: transform 0.3s ease;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: var(--white);
+            min-width: 220px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            border-radius: 4px;
+            padding: 12px 0;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+            z-index: 1000;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown:hover .dropdown-toggle i {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu a {
+            display: block;
+            padding: 10px 20px;
+            color: var(--medium-text);
+            font-weight: 400;
+            width: 100%;
+        }
+
+        .dropdown-menu a:hover {
+            background-color: rgba(125, 157, 127, 0.1);
+        }
+
+        .dropdown-divider {
+            height: 1px;
+            background-color: var(--border-color);
+            margin: 8px 0;
+        }
+
+        .navbar-cta {
+            background-color: var(--primary-color);
+            color: var(--white) !important;
+            padding: 9px 20px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        .navbar-cta:hover {
+            background-color: var(--dark-text);
+        }
+
+        .navbar-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--dark-text);
+            cursor: pointer;
+        }
+
+        /* Main Container */
+        .main-container {
+            display: flex;
+            margin-top: 75px;
+            min-height: calc(100vh - 75px);
+        }
+
+        /* Free Trial Grid Layout - FLIPPED */
+        .trial-container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        /* Left Column - Sign Up Form (was right before) */
+        .signup-column {
+            background-color: var(--white);
+            border-radius: 8px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            order: 1; /* Change order to come first */
+        }
+
+        /* Right Column - Features (was left before) */
+        .features-column {
+            background-color: var(--white);
+            border-radius: 8px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            order: 2; /* Change order to come second */
+        }
+
+        .features-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .features-header h1 {
+            color: var(--dark-text);
+            font-size: 2.3rem;
+            margin-bottom: 15px;
+        }
+
+        .features-header p {
+            color: var(--medium-text);
+            font-size: 1.1rem;
+            max-width: 80%;
+            margin: 0 auto;
+        }
+
+        .trial-badge {
+            display: inline-block;
+            background-color: rgba(232, 184, 125, 0.15);
+            color: var(--accent-color);
+            padding: 8px 16px;
+            border-radius: 50px;
+            margin: 20px 0;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .features-list {
+            margin-top: 30px;
+            flex-grow: 1;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .feature-item:last-child {
+            border-bottom: none;
+        }
+
+        .feature-icon {
+            flex-shrink: 0;
+            width: 50px;
+            height: 50px;
+            background-color: rgba(75, 100, 85, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+            color: var(--primary-color);
+            font-size: 1.3rem;
+        }
+
+        .feature-content h3 {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--dark-text);
+            font-size: 1.1rem;
+        }
+
+        .feature-content p {
+            color: var(--medium-text);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .testimonial {
+            margin-top: auto;
+            padding: 25px;
+            background-color: var(--light-bg);
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .testimonial-quote {
+            color: var(--dark-text);
+            font-style: italic;
+            margin-bottom: 15px;
+            position: relative;
+            padding-left: 25px;
+        }
+
+        .testimonial-quote:before {
+            content: '"';
+            position: absolute;
+            left: 0;
+            top: 0;
+            font-size: 40px;
+            line-height: 1;
+            color: var(--accent-color);
+            font-family: Georgia, serif;
+            opacity: 0.7;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+
+        .author-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            margin-right: 10px;
+        }
+
+        .author-info h4 {
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 2px;
+        }
+
+        .author-info p {
+            color: var(--medium-text);
+            font-size: 0.8rem;
+        }
+
+        .signup-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .signup-header h2 {
+            color: var(--dark-text);
+            font-size: 1.6rem;
+            margin-bottom: 10px;
+        }
+
+        .signup-header p {
+            color: var(--medium-text);
+            font-size: 0.95rem;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--dark-text);
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-size: 1rem;
+            transition: var(--transition);
+            background-color: var(--white);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 3px rgba(125, 157, 127, 0.1);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .password-toggle {
+            position: relative;
+        }
+
+        .password-toggle i {
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--medium-text);
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .password-strength {
+            height: 4px;
+            margin-top: 8px;
+            border-radius: 2px;
+            background: #E9ECE9;
+            overflow: hidden;
+        }
+
+        .password-strength-bar {
+            height: 100%;
+            width: 0;
+            transition: var(--transition);
+        }
+
+        .strength-weak {
+            background-color: #FF6B6B;
+            width: 33.33%;
+        }
+
+        .strength-medium {
+            background-color: #FFD166;
+            width: 66.66%;
+        }
+
+        .strength-strong {
+            background-color: #06D6A0;
+            width: 100%;
+        }
+
+        .terms-check {
+            display: flex;
+            align-items: flex-start;
+            margin: 25px 0;
+        }
+
+        .terms-check input {
+            margin-right: 10px;
+            margin-top: 6px;
+            width: 16px;
+            height: 16px;
+            accent-color: var(--primary-color);
+        }
+
+        .terms-check label {
+            font-size: 0.85rem;
+            line-height: 1.5;
+            color: var(--medium-text);
+        }
+
+        .terms-check a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .terms-check a:hover {
+            color: var(--accent-color);
+            text-decoration: underline;
+        }
+
+        .button-primary {
+            width: 100%;
+            padding: 16px;
+            background-color: var(--primary-color);
+            color: var(--white);
+            border: none;
+            border-radius: 4px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            margin: 10px 0;
+        }
+
+        .button-primary:hover {
+            background-color: var(--dark-text);
+        }
+
+        .form-footer {
+            text-align: center;
+            margin-top: 20px;
+            color: var(--medium-text);
+            font-size: 0.9rem;
+        }
+
+        .form-footer a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .form-footer a:hover {
+            text-decoration: underline;
+        }
+
+        .security-badges {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+            gap: 20px;
+        }
+
+        .security-badge {
+            display: flex;
+            align-items: center;
+            background-color: var(--light-bg);
+            padding: 10px 15px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--medium-text);
+        }
+
+        .security-badge i {
+            color: var(--primary-color);
+            margin-right: 8px;
+            font-size: 1rem;
+        }
+
+        /* Media Queries */
+        @media (max-width: 992px) {
+            .trial-container {
+                grid-template-columns: 1fr;
+                gap: 30px;
+                padding: 40px 20px;
+            }
+            
+            /* For mobile, keep the logical order of content */
+            .signup-column {
+                order: 2;
+            }
+            
+            .features-column {
+                order: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 0 20px;
+            }
+            
+            .navbar-menu {
+                display: none;
+                position: absolute;
+                top: 75px;
+                left: 0;
+                right: 0;
+                flex-direction: column;
+                background-color: var(--white);
+                box-shadow: 0 5px 10px var(--shadow-color);
+                padding: 20px;
+                z-index: 1000;
+                align-items: flex-start;
+            }
+            
+            .navbar-menu.active {
+                display: flex;
+            }
+            
+            .navbar-toggle {
+                display: block;
+            }
+            
+            .navbar-menu a, 
+            .dropdown-toggle {
+                padding: 12px 0;
+                width: 100%;
+            }
+            
+            .dropdown {
+                width: 100%;
+            }
+            
+            .dropdown-menu {
+                position: static;
+                box-shadow: none;
+                padding-left: 20px;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                display: none;
+                min-width: 100%;
+            }
+            
+            .dropdown.active .dropdown-menu {
+                display: block;
+            }
+            
+            .dropdown.active .dropdown-toggle i {
+                transform: rotate(180deg);
+            }
+            
+            .features-column,
+            .signup-column {
+                padding: 30px 20px;
+            }
+            
+            .features-header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .features-header p {
+                max-width: 100%;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+            
+            .security-badges {
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .features-header h1 {
+                font-size: 1.6rem;
+            }
+            
+            .testimonial {
+                padding: 20px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar with refined dropdowns -->
+    <nav class="navbar" id="navbar">
+        <a href="index.html" class="navbar-brand">
+            <svg class="navbar-logo" width="42" height="42" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                <!-- Sophisticated Aspen Grove Logo -->
+                <circle cx="100" cy="100" r="95" fill="#4B6455" stroke="#F4F7F2" stroke-width="2" />
+                
+                <!-- Aspen Trees -->
+                <g id="trees">
+                    <!-- Tree 1 (center) -->
+                    <line x1="100" y1="140" x2="100" y2="60" stroke="#F4F7F2" stroke-width="4" />
+                    <!-- Branches -->
+                    <line x1="100" y1="80" x2="85" y2="65" stroke="#F4F7F2" stroke-width="2" />
+                    <line x1="100" y1="90" x2="115" y2="75" stroke="#F4F7F2" stroke-width="2" />
+                    <line x1="100" y1="110" x2="80" y2="95" stroke="#F4F7F2" stroke-width="2" />
+                    <line x1="100" y1="125" x2="118" y2="110" stroke="#F4F7F2" stroke-width="2" />
+                    
+                    <!-- Tree 2 (left) -->
+                    <line x1="70" y1="145" x2="70" y2="75" stroke="#F4F7F2" stroke-width="4" />
+                    <!-- Branches -->
+                    <line x1="70" y1="85" x2="55" y2="75" stroke="#F4F7F2" stroke-width="2" />
+                    <line x1="70" y1="100" x2="85" y2="85" stroke="#F4F7F2" stroke-width="2" />
+                    <line x1="70" y1="120" x2="55" y2="105" stroke="#F4F7F2" stroke-width="2" />
+                    
+                    <!-- Tree 3 (right) -->
+                    <line x1="130" y1="145" x2="130" y2="75" stroke="#F4F7F2" stroke-width="4" />
+                    <!-- Branches -->
+                    <line x1="130" y1="90" x2="145" y2="75" stroke="#F4F7F2" stroke-width="2" />
+                    <line x1="130" y1="110" x2="115" y2="95" stroke="#F4F7F2" stroke-width="2" />
+                    <line x1="130" y1="125" x2="145" y2="110" stroke="#F4F7F2" stroke-width="2" />
+                </g>
+                
+                <!-- Leaves -->
+                <g id="leaves">
+                    <!-- Center Tree Leaves -->
+                    <circle cx="100" cy="60" r="8" fill="#7D9D7F" />
+                    <circle cx="85" cy="65" r="6" fill="#7D9D7F" />
+                    <circle cx="115" cy="75" r="7" fill="#7D9D7F" />
+                    <circle cx="80" cy="95" r="6" fill="#7D9D7F" />
+                    <circle cx="118" cy="110" r="6" fill="#7D9D7F" />
+                    
+                    <!-- Left Tree Leaves -->
+                    <circle cx="70" cy="75" r="7" fill="#7D9D7F" />
+                    <circle cx="55" cy="75" r="6" fill="#7D9D7F" />
+                    <circle cx="85" cy="85" r="6" fill="#7D9D7F" />
+                    <circle cx="55" cy="105" r="6" fill="#7D9D7F" />
+                    
+                    <!-- Right Tree Leaves -->
+                    <circle cx="130" cy="75" r="7" fill="#7D9D7F" />
+                    <circle cx="145" cy="75" r="6" fill="#7D9D7F" />
+                    <circle cx="115" cy="95" r="6" fill="#7D9D7F" />
+                    <circle cx="145" cy="110" r="6" fill="#7D9D7F" />
+                </g>
+                
+                <!-- Root System -->
+                <path d="M60,145 C70,160 90,165 100,160 C110,165 130,160 140,145" stroke="#F4F7F2" stroke-width="3" fill="none" />
+                
+                <!-- Accent Elements -->
+                <circle cx="145" cy="75" r="2" fill="#E8B87D" />
+                <circle cx="85" cy="65" r="2" fill="#E8B87D" />
+                <circle cx="55" cy="105" r="2" fill="#E8B87D" />
+                <circle cx="118" cy="110" r="2" fill="#E8B87D" />
+            </svg>
+            <span class="navbar-logo-text">Aspen Grove</span>
+        </a>
+        
+        <div class="navbar-menu" id="mainMenu">
+            <!-- Features Dropdown -->
+            <div class="dropdown">
+                <div class="dropdown-toggle">
+                    <a href="features.html">Features</a>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="dropdown-menu">
+                    <a href="features/document-automation.html">Document Automation</a>
+                    <a href="features/practice-automation.html">Practice Automation</a>
+                    <a href="features/integrations.html">Integrations & Compliance</a>
+                    <a href="features/security.html">Enterprise Security</a>
+                </div>
+            </div>
+            
+            <a href="pricing.html">Pricing</a>
+            
+            <!-- Resources Dropdown -->
+            <div class="dropdown">
+                <div class="dropdown-toggle">
+                    <a href="resources.html">Resources</a>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="dropdown-menu">
+                    <a href="resources/blog.html">Blog</a>
+                    <a href="resources/documentation.html">Documentation</a>
+                    <a href="resources/case-studies.html">Case Studies</a>
+                    <div class="dropdown-divider"></div>
+                    <a href="resources/videos.html">Videos</a>
+                    <a href="resources/webinars.html">Webinars</a>
+                </div>
+            </div>
+            
+            <!-- About Dropdown -->
+            <div class="dropdown">
+                <div class="dropdown-toggle">
+                    <a href="about.html">About</a>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="dropdown-menu">
+                    <a href="about/company.html">Company</a>
+                    <a href="about/team.html">Our Team</a>
+                    <a href="about/contact.html">Contact Us</a>
+                    <div class="dropdown-divider"></div>
+                    <a href="about/privacy.html">Privacy Policy</a>
+                    <a href="about/terms.html">Terms of Service</a>
+                </div>
+            </div>
+            
+            <a href="login.html">Login</a>
+            <a href="free-trial.html" class="navbar-cta active">Free Trial</a>
+        </div>
+        
+        <button class="navbar-toggle" id="navbarToggle" aria-label="Toggle menu">
+            <i class="fas fa-bars"></i>
+        </button>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <div class="trial-container">
+            <!-- Left Column - Sign Up Form (FLIPPED) -->
+            <section class="signup-column">
+                <div class="signup-header">
+                    <h2>Start Your Free Trial Today</h2>
+                    <p>No credit card required. Get full access for 10 days.</p>
+                </div>
+                
+                <form id="register-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="first-name" class="form-label">First Name</label>
+                            <input type="text" id="first-name" class="form-control" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="last-name" class="form-label">Last Name</label>
+                            <input type="text" id="last-name" class="form-control" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="firm-name" class="form-label">Firm/Organization Name</label>
+                        <input type="text" id="firm-name" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email" class="form-label">Work Email</label>
+                        <input type="email" id="email" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone" class="form-label">Phone Number</label>
+                        <input type="tel" id="phone" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="password" class="form-label">Password</label>
+                        <div class="password-toggle">
+                            <input type="password" id="password" class="form-control" required>
+                            <i class="fas fa-eye" onclick="togglePassword('password')"></i>
+                        </div>
+                        <div class="password-strength">
+                            <div class="password-strength-bar"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="confirm-password" class="form-label">Confirm Password</label>
+                        <div class="password-toggle">
+                            <input type="password" id="confirm-password" class="form-control" required>
+                            <i class="fas fa-eye" onclick="togglePassword('confirm-password')"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="terms-check">
+                        <input type="checkbox" id="terms" required>
+                        <label for="terms">
+                            By clicking "Start Free Trial", I agree to Aspen Grove's <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>. I understand how my personal data is collected, stored, and used.
+                        </label>
+                    </div>
+                    
+                    <button type="submit" class="button-primary">Start Your Free Trial</button>
+                    
+                    <div class="form-footer">
+                        Already have an account? <a href="login.html">Sign in here</a>
+                    </div>
+                    
+                    <div class="security-badges">
+                        <div class="security-badge">
+                            <i class="fas fa-lock"></i>
+                            HIPAA Compliant
+                        </div>
+                        <div class="security-badge">
+                            <i class="fas fa-shield-alt"></i>
+                            256-bit Encryption
+                        </div>
+                    </div>
+                </form>
+            </section>
+            
+            <!-- Right Column - Features (FLIPPED) -->
+            <section class="features-column">
+                <div class="features-header">
+                    <h1>Transform Your Practice</h1>
+                    <div class="trial-badge">10-day free trial • No credit card required</div>
+                    <p>Experience how Aspen Grove's AI-powered document analysis can streamline your workflow</p>
+                </div>
+                
+                <div class="features-list">
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <div class="feature-content">
+                            <h3>Smart Document Processing</h3>
+                            <p>AI automatically extracts key information from medical records, employment history, and other relevant documents to create detailed, persuasive reports that support TDIU claims.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <div class="feature-content">
+                            <h3>Intelligent Automation</h3>
+                            <p>Reduce manual document review by up to 75% with our automated document analysis, allowing you to focus on strategic case planning rather than searching through records.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="feature-content">
+                            <h3>Save Valuable Time</h3>
+                            <p>What used to take days now takes hours. Our platform helps you organize and process complex document sets with unprecedented efficiency and accuracy.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <div class="feature-content">
+                            <h3>Enterprise-Grade Security</h3>
+                            <p>HIPAA-compliant platform with AES-256 encryption for all data at rest and in transit ensures your clients' sensitive information is always protected.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial">
+                    <p class="testimonial-quote">Aspen Grove's TDIU report service has revolutionized our practice. What used to take days now takes hours, and the quality of the reports has helped us win more cases for our veteran clients.</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">RS</div>
+                        <div class="author-info">
+                            <h4>Robert Smith</h4>
+                            <p>Veterans Law Attorney</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script>
+        function togglePassword(inputId) {
+            const input = document.getElementById(inputId);
+            const icon = input.nextElementSibling;
+            
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                input.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        }
+
+        function checkPasswordStrength(password) {
+            const strengthBar = document.querySelector('.password-strength-bar');
+            let strength = 0;
+            
+            if (password.length >= 8) strength++;
+            if (password.match(/[a-z]/) && password.match(/[A-Z]/)) strength++;
+            if (password.match(/\d/) && password.match(/[^a-zA-Z\d]/)) strength++;
+            
+            strengthBar.className = 'password-strength-bar';
+            if (strength === 1) strengthBar.classList.add('strength-weak');
+            else if (strength === 2) strengthBar.classList.add('strength-medium');
+            else if (strength === 3) strengthBar.classList.add('strength-strong');
+        }
+
+        // Monitor password strength
+        document.getElementById('password').addEventListener('input', function(e) {
+            checkPasswordStrength(e.target.value);
+        });
+
+        // Form submission handler
+        document.getElementById('register-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Validate password match
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+            
+            if (password !== confirmPassword) {
+                alert('Passwords do not match');
+                return;
+            }
+            
+            // Add registration logic here
+            console.log('Registration form submitted');
+            
+            // Redirect to dashboard or confirmation page
+            window.location.href = 'welcome.html';
+        });
+        
+        // Mobile menu toggle
+        document.querySelector('.navbar-toggle').addEventListener('click', function() {
+            const menu = document.querySelector('.navbar-menu');
+            if (menu.style.display === 'flex') {
+                menu.style.display = 'none';
+            } else {
+                menu.style.display = 'flex';
+            }
+        });
+    </script>
+</body>
+</html>

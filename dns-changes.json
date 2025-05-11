@@ -1,0 +1,58 @@
+{
+    "ChangeBatch": {
+        "Changes": [
+            {
+                "Action": "UPSERT",
+                "ResourceRecordSet": {
+                    "Name": "aspengroveservices.com.",
+                    "Type": "MX",
+                    "TTL": 300,
+                    "ResourceRecords": [
+                        {
+                            "Value": "10 inbound-smtp.us-east-1.amazonaws.com."
+                        }
+                    ]
+                }
+            },
+            {
+                "Action": "UPSERT",
+                "ResourceRecordSet": {
+                    "Name": "_amazonses.aspengroveservices.com.",
+                    "Type": "TXT",
+                    "TTL": 300,
+                    "ResourceRecords": [
+                        {
+                            "Value": "\"QC26PXoxbcTSxor/2lNKvTPI+c9SP2KWZvBBwrLCZig=\""
+                        }
+                    ]
+                }
+            },
+            {
+                "Action": "UPSERT",
+                "ResourceRecordSet": {
+                    "Name": "autodiscover.aspengroveservices.com.",
+                    "Type": "CNAME",
+                    "TTL": 300,
+                    "ResourceRecords": [
+                        {
+                            "Value": "autodiscover.mail.us-east-1.awsapps.com."
+                        }
+                    ]
+                }
+            },
+            {
+                "Action": "UPSERT",
+                "ResourceRecordSet": {
+                    "Name": "6ij3ody4lbiywot5m5yawcdipx4xbwei._domainkey.aspengroveservices.com.",
+                    "Type": "CNAME",
+                    "TTL": 300,
+                    "ResourceRecords": [
+                        {
+                            "Value": "6ij3ody4lbiywot5m5yawcdipx4xbwei.dkim.amazonses.com."
+                        }
+                    ]
+                }
+            }
+        ]
+    }
+}

@@ -1,0 +1,12 @@
+{
+    "Name": "aspengroveservices.com",
+    "Password": "YourSecurePassword123!",
+    "Size": "Small",
+    "VpcSettings": {
+        "VpcId": "vpc-042aa97ec5a00574e",
+        "SubnetIds": [
+            "subnet-0671815aadb331a86",
+            "subnet-08c902411fd14b40f"
+        ]
+    }
+}

@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-aspen-dev-016d5-authRole",
+      "UnauthRoleArn": "arn:aws:iam::168527630152:role/amplify-aspen-dev-016d5-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::168527630152:role/amplify-aspen-dev-016d5-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-aspen-dev-016d5-deployment",
+      "UnauthRoleName": "amplify-aspen-dev-016d5-unauthRole",
+      "StackName": "amplify-aspen-dev-016d5",
+      "StackId": "arn:aws:cloudformation:us-east-1:168527630152:stack/amplify-aspen-dev-016d5/aaa80030-2e7a-11f0-9f11-0affc56c5a05",
+      "AmplifyAppId": "d1k43g8e77k93g"
+    },
+    "categories": {
+      "hosting": {
+        "S3AndCloudFront": {}
+      }
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+    "Changes": [
+        {
+            "Action": "CREATE",
+            "ResourceRecordSet": {
+                "Name": "aspengroveservices.com",
+                "Type": "A",
+                "AliasTarget": {
+                    "HostedZoneId": "Z2FDTNDATAQYW2",
+                    "DNSName": "dfj45qod4496s.cloudfront.net",
+                    "EvaluateTargetHealth": false
+                }
+            }
+        }
+    ]
+}

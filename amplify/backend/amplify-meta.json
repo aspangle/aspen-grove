@@ -1,0 +1,37 @@
+{
+  "providers": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-aspen-dev-016d5-authRole",
+      "UnauthRoleArn": "arn:aws:iam::168527630152:role/amplify-aspen-dev-016d5-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::168527630152:role/amplify-aspen-dev-016d5-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-aspen-dev-016d5-deployment",
+      "UnauthRoleName": "amplify-aspen-dev-016d5-unauthRole",
+      "StackName": "amplify-aspen-dev-016d5",
+      "StackId": "arn:aws:cloudformation:us-east-1:168527630152:stack/amplify-aspen-dev-016d5/aaa80030-2e7a-11f0-9f11-0affc56c5a05",
+      "AmplifyAppId": "d1k43g8e77k93g"
+    }
+  },
+  "hosting": {
+    "S3AndCloudFront": {
+      "service": "S3AndCloudFront",
+      "providerPlugin": "awscloudformation",
+      "output": {
+        "CloudFrontSecureURL": "https://dfj45qod4496s.cloudfront.net",
+        "S3BucketSecureURL": "https://aspengrove-services-hosting-dev.s3.amazonaws.com",
+        "CloudFrontOriginAccessIdentity": "EISM5ZM7B2TD1",
+        "WebsiteURL": "http://aspengrove-services-hosting-dev.s3-website-us-east-1.amazonaws.com",
+        "CloudFrontDistributionID": "E15KRJ79LEVS6G",
+        "Region": "us-east-1",
+        "HostingBucketName": "aspengrove-services-hosting-dev",
+        "CloudFrontDomainName": "dfj45qod4496s.cloudfront.net"
+      },
+      "lastPushTimeStamp": "2025-05-11T18:10:53.630Z",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-aspen-dev-016d5-deployment/amplify-cfn-templates/hosting/template.json",
+        "logicalId": "hostingS3AndCloudFront"
+      },
+      "lastPushDirHash": "bYDaaHg6ALDR7X/5NzPSvN2t3T0="
+    }
+  }
+}

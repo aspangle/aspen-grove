@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HIPAA Compliance - Aspen Grove Solutions</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #4B6455; /* Deep sage green */
+            --secondary-color: #7D9D7F; /* Medium sage green */
+            --accent-color: #E8B87D; /* Aspen gold/amber */
+            --dark-text: #2C3A2F; /* Dark green text */
+            --medium-text: #4A5D4E; /* Medium green text */
+            --light-bg: #F4F7F2; /* Light sage background */
+            --white: #FFFFFF;
+            --shadow-color: rgba(0, 0, 0, 0.08);
+            --border-color: #E0E6E3;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: var(--light-bg);
+            color: var(--dark-text);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Lora', serif;
+            font-weight: 600;
+            color: var(--dark-text);
+        }
+
+        /* Navigation Styles */
+        .navbar {
+            background-color: var(--white);
+            box-shadow: 0 4px 15px var(--shadow-color);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 50px;
+            height: 75px;
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .navbar-logo {
+            height: 42px;
+        }
+
+        .navbar-logo-text {
+            font-family: 'Lora', serif;
+            font-weight: 700;
+            font-size: 1.6rem;
+            color: var(--primary-color);
+            letter-spacing: -0.5px;
+        }
+
+        .navbar-menu {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .navbar-menu a {
+            color: var(--medium-text);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+
+        .navbar-menu a:hover {
+            color: var(--primary-color);
+        }
+
+        .navbar-menu a.active {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .navbar-cta {
+            background-color: var(--primary-color);
+            color: var(--white) !important;
+            padding: 9px 20px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        .navbar-cta:hover {
+            background-color: var(--dark-text);
+        }
+
+        .navbar-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--dark-text);
+            cursor: pointer;
+        }
+
+        /* Main Container */
+        .main-container {
+            margin-top: 75px;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        /* Header Banner */
+        .header-banner {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .header-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .header-title {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--white);
+        }
+
+        .header-subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Legal Content Section */
+        .legal-section {
+            padding: 60px 20px;
+        }
+
+        .legal-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: var(--white);
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 5px 20px var(--shadow-color);
+        }
+
+        .legal-navigation {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .legal-nav-item {
+            background-color: var(--light-bg);
+            color: var(--medium-text);
+            padding: 8px 16px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .legal-nav-item:hover {
+            background-color: var(--accent-color);
+            color: var(--dark-text);
+        }
+
+        .legal-nav-item.active {
+            background-color: var(--primary-color);
+            color: var(--white);
+        }
+
+        .legal-last-updated {
+            font-size: 0.9rem;
+            color: var(--medium-text);
+            font-style: italic;
+            margin-bottom: 30px;
+        }
+
+        .legal-content h2 {
+            font-size: 1.6rem;
+            margin: 30px 0 15px;
+            color: var(--dark-text);
+        }
+
+        .legal-content h3 {
+            font-size: 1.3rem;
+            margin: 25px 0 15px;
+            color: var(--dark-text);
+        }
+
+        .legal-content p {
+            margin-bottom: 15px;
+            font-size: 1rem;
+        }
+
+        .legal-content ul, .legal-content ol {
+            margin: 15px 0;
+            padding-left: 20px;
+        }
+
+        .legal-content li {
+            margin-bottom: 8px;
+        }
+
+        .legal-content a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .legal-content a:hover {
+            color: var(--accent-color);
+            text-decoration: underline;
+        }
+
+        .legal-content .highlight {
+            background-color: rgba(232, 184, 125, 0.2);
+            padding: 20px;
+            border-radius: 6px;
+            margin: 20px 0;
+        }
+
+        .legal-content .highlight h3 {
+            margin-top: 0;
+        }
+
+        .legal-footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.9rem;
+            color: var(--medium-text);
+        }
+
+        .legal-footer p {
+            margin-bottom: 10px;
+        }
+
+        .contact-btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 10px 20px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            margin-top: 15px;
+        }
+
+        .contact-btn:hover {
+            background-color: var(--dark-text);
+        }
+
+        /* HIPAA-specific styles */
+        .hipaa-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .hipaa-box {
+            background-color: var(--light-bg);
+            border-radius: 8px;
+            padding: 25px;
+            box-shadow: 0 3px 10px var(--shadow-color);
+            display: flex;
+            flex-direction: column;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .hipaa-box h3 {
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--primary-color);
+        }
+
+        .hipaa-box h3 i {
+            font-size: 1.5rem;
+        }
+
+        .hipaa-box p {
+            margin-top: 10px;
+        }
+
+        .safeguard-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+
+        .safeguard-item {
+            background-color: var(--white);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 8px var(--shadow-color);
+        }
+
+        .safeguard-item h4 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .safeguard-item h4 i {
+            color: var(--accent-color);
+        }
+
+        .baa-box {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 25px;
+            border-radius: 8px;
+            margin: 30px 0;
+        }
+
+        .baa-box h3 {
+            color: var(--white);
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+
+        .baa-box p {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .baa-box ul {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .baa-btn {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: var(--dark-text);
+            padding: 10px 20px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            margin-top: 15px;
+        }
+
+        .baa-btn:hover {
+            background-color: var(--white);
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--dark-text);
+            color: var(--white);
+            padding: 60px 20px 30px;
+            margin-top: auto;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .footer-logo img {
+            height: 40px;
+        }
+
+        .footer-logo-text {
+            font-family: 'Lora', serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--white);
+        }
+
+        .footer-about {
+            margin-bottom: 20px;
+            opacity: 0.8;
+            font-size: 0.95rem;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--white);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .social-icon:hover {
+            background-color: var(--accent-color);
+            color: var(--dark-text);
+        }
+
+        .footer-heading {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: var(--white);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-link {
+            margin-bottom: 12px;
+        }
+
+        .footer-link a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: 0.95rem;
+        }
+
+        .footer-link a:hover {
+            color: var(--accent-color);
+        }
+
+        .footer-contact {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.95rem;
+        }
+
+        .footer-contact i {
+            color: var(--accent-color);
+            font-size: 1rem;
+        }
+
+        .footer-bottom {
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Media Queries */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 0 20px;
+            }
+            
+            .navbar-menu {
+                display: none;
+                position: absolute;
+                top: 75px;
+                left: 0;
+                right: 0;
+                flex-direction: column;
+                background-color: var(--white);
+                padding: 20px;
+                box-shadow: 0 5px 10px var(--shadow-color);
+            }
+
+            .navbar-menu.active {
+                display: flex;
+            }
+            
+            .navbar-toggle {
+                display: block;
+            }
+
+            .header-title {
+                font-size: 2rem;
+            }
+
+            .legal-container {
+                padding: 30px 20px;
+            }
+
+            .legal-navigation {
+                justify-content: center;
+            }
+            
+            .hipaa-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .safeguard-list {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-banner {
+                padding: 40px 20px;
+            }
+
+            .header-title {
+                font-size: 1.8rem;
+            }
+
+            .legal-section {
+                padding: 40px 15px;
+            }
+
+            .legal-container {
+                padding: 25px 15px;
+            }
+
+            .legal-content h2 {
+                font-size: 1.4rem;
+            }
+
+            .legal-content h3 {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <a href="index.html" class="navbar-brand">
+            <svg class="navbar-logo" width="42" height="42" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                <!-- Sophisticated Aspen Grove Logo -->
+                <circle cx="100" cy="100" r="95" fill="#4B6455" stroke="#F4F7F2" stroke-width="2" />
+                
+                <!-- Aspen Trees -->
+                <g id="trees">
+                    <!-- Tree 1 (center) -->
+                    <line x1="100" y1="140" x2="100" y2="60" stroke="#F4F7F2" stroke-width="4" />
+                    <!-- Branches -->
+                    <line x1="100" y1="80" x2="85" y2="65" stroke="#F4F7F2" stroke-width="2" />
+                    <line x1="100" y1="90" x2="115" y2="75" stroke="#F4F7F2" stroke-width="2" />
+                    <line x1="100" y1="110" x2="80" y2="95" stroke="#F4F7F2" stroke-width="2" />
+                    <line x1="100" y1="125" x2="118" y2="110" stroke="#F4F7F2" stroke-width="2" />
+                    
+                    <!-- Tree 2 (left) -->
+                    <line x1="70" y1="145" x2="70" y2="75" stroke="#F4F7F2" stroke-width="4" />
+                    <!-- Branches -->
+                    <line x1="70" y1="85" x2="55" y2="75" stroke="#F4F7F2" stroke-width="2" />
+                    <line x1="70" y1="100" x2="85" y2="85" stroke="#F4F7F2" stroke-width="2" />
+                    <line x1="70" y1="120" x2="55" y2="105" stroke="#F4F7F2" stroke-width="2" />
+                    
+                    <!-- Tree 3 (right) -->
+                    <line x1="130" y1="145" x2="130" y2="75" stroke="#F4F7F2" stroke-width="4" />
+                    <!-- Branches -->
+                    <line x1="130" y1="90" x2="145" y2="75" stroke="#F4F7F2" stroke-width="2" />
+                    <line x1="130" y1="110" x2="115" y2="95" stroke="#F4F7F2" stroke-width="2" />
+                    <line x1="130" y1="125" x2="145" y2="110" stroke="#F4F7F2" stroke-width="2" />
+                </g>
+                
+                <!-- Leaves -->
+                <g id="leaves">
+                    <!-- Center Tree Leaves -->
+                    <circle cx="100" cy="60" r="8" fill="#7D9D7F" />
+                    <circle cx="85" cy="65" r="6" fill="#7D9D7F" />
+                    <circle cx="115" cy="75" r="7" fill="#7D9D7F" />
+                    <circle cx="80" cy="95" r="6" fill="#7D9D7F" />
+                    <circle cx="118" cy="110" r="6" fill="#7D9D7F" />
+                    
+                    <!-- Left Tree Leaves -->
+                    <circle cx="70" cy="75" r="7" fill="#7D9D7F" />
+                    <circle cx="55" cy="75" r="6" fill="#7D9D7F" />
+                    <circle cx="85" cy="85" r="6" fill="#7D9D7F" />
+                    <circle cx="55" cy="105" r="6" fill="#7D9D7F" />
+                    
+                    <!-- Right Tree Leaves -->
+                    <circle cx="130" cy="75" r="7" fill="#7D9D7F" />
+                    <circle cx="145" cy="75" r="6" fill="#7D9D7F" />
+                    <circle cx="115" cy="95" r="6" fill="#7D9D7F" />
+                    <circle cx="145" cy="110" r="6" fill="#7D9D7F" />
+                </g>
+                
+                <!-- Root System -->
+                <path d="M60,145 C70,160 90,165 100,160 C110,165 130,160 140,145" stroke="#F4F7F2" stroke-width="3" fill="none" />
+                
+                <!-- Accent Elements -->
+                <circle cx="145" cy="75" r="2" fill="#E8B87D" />
+                <circle cx="85" cy="65" r="2" fill="#E8B87D" />
+                <circle cx="55" cy="105" r="2" fill="#E8B87D" />
+                <circle cx="118" cy="110" r="2" fill="#E8B87D" />
+            </svg>
+            <span class="navbar-logo-text">Aspen Grove</span>
+        </a>
+        
+        <div class="navbar-menu">
+            <a href="features.html">Features</a>
+            <a href="pricing.html">Pricing</a>
+            <a href="resources.html">Resources</a>
+            <a href="about.html">About</a>
+            <a href="login.html">Login</a>
+            <a href="free-trial.html" class="navbar-cta">Free Trial</a>
+        </div>
+        
+        <button class="navbar-toggle" aria-label="Toggle menu">
+            <i class="fas fa-bars"></i>
+        </button>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Header Banner -->
+        <section class="header-banner">
+            <div class="header-container">
+                <h1 class="header-title">HIPAA Compliance</h1>
+                <p class="header-subtitle">Learn how Aspen Grove Solutions ensures compliance with healthcare privacy and security regulations.</p>
+            </div>
+        </section>
+
+        <!-- Legal Content Section -->
+        <section class="legal-section">
+            <div class="legal-container">
+                <div class="legal-navigation">
+                    <a href="terms.html" class="legal-nav-item">Terms of Service</a>
+                    <a href="privacy.html" class="legal-nav-item">Privacy Policy</a>
+                    <a href="security.html" class="legal-nav-item">Security Information</a>
+                    <a href="hipaa.html" class="legal-nav-item active">HIPAA Compliance</a>
+                </div>
+                
+                <div class="legal-last-updated">
+                    Last Updated: May 1, 2025
+                </div>
+                
+                <div class="legal-content">
+                    <h2>Our HIPAA Commitment</h2>
+                    <p>Aspen Grove Solutions is committed to helping healthcare organizations and their business associates maintain compliance with the Health Insurance Portability and Accountability Act (HIPAA). We understand the critical importance of protecting Protected Health Information (PHI) and take our responsibilities as a Business Associate seriously.</p>
+                    
+                    <div class="highlight">
+                        <h3>HIPAA Business Associate</h3>
+                        <p>Aspen Grove Solutions acts as a Business Associate to Covered Entities as defined by HIPAA regulations. We are prepared to execute a Business Associate Agreement (BAA) with Covered Entities and other Business Associates who use our Services to process, store, or transmit PHI.</p>
+                    </div>
+                    
+                    <h2>Understanding HIPAA</h2>
+                    <p>HIPAA consists of a set of regulations designed to protect the privacy and security of certain health information. These regulations are divided into several rules:</p>
+                    
+                    <div class="hipaa-grid">
+                        <div class="hipaa-box">
+                            <h3><i class="fas fa-user-shield"></i> Privacy Rule</h3>
+                            <p>The HIPAA Privacy Rule establishes national standards to protect individuals' medical records and other personal health information. It sets limits on how PHI can be used and disclosed and gives patients rights over their health information.</p>
+                        </div>
+                        
+                        <div class="hipaa-box">
+                            <h3><i class="fas fa-lock"></i> Security Rule</h3>
+                            <p>The HIPAA Security Rule establishes national standards to protect electronic personal health information that is created, received, used, or maintained by a covered entity. It requires appropriate administrative, physical, and technical safeguards.</p>
+                        </div>
+                        
+                        <div class="hipaa-box">
+                            <h3><i class="fas fa-exclamation-triangle"></i> Breach Notification Rule</h3>
+                            <p>The HIPAA Breach Notification Rule requires covered entities and their business associates to provide notification following a breach of unsecured protected health information.</p>
+                        </div>
+                    </div>
+                    
+                    <h2>How Aspen Grove Supports Your HIPAA Compliance</h2>
+                    <p>Our platform is designed with HIPAA compliance in mind, incorporating safeguards at every level to help you maintain compliance while efficiently processing healthcare documents. Here's how we support your compliance efforts:</p>
+                    
+                    <h3>Administrative Safeguards</h3>
+                    <p>We implement comprehensive administrative safeguards to protect PHI:</p>
+                    
+                    <div class="safeguard-list">
+                        <div class="safeguard-item">
+                            <h4><i class="fas fa-clipboard-check"></i> Risk Assessment</h4>
+                            <p>Regular comprehensive risk assessments to identify and mitigate potential vulnerabilities that could affect the confidentiality, integrity, and availability of PHI.</p>
+                        </div>
+                        
+                        <div class="safeguard-item">
+                            <h4><i class="fas fa-user-lock"></i> Access Management</h4>
+                            <p>Strict role-based access controls to ensure only authorized personnel can access PHI, with regular access reviews and prompt termination when access is no longer needed.</p>
+                        </div>
+                        
+                        <div class="safeguard-item">
+                            <h4><i class="fas fa-graduation-cap"></i> Staff Training</h4>
+                            <p>Comprehensive HIPAA training for all staff members who may come into contact with PHI, with ongoing education about privacy and security best practices.</p>
+                        </div>
+                        
+                        <div class="safeguard-item">
+                            <h4><i class="fas fa-shield-virus"></i> Incident Response</h4>
+                            <p>Documented incident response procedures that comply with HIPAA's Breach Notification Rule, ensuring timely and appropriate responses to potential security incidents.</p>
+                        </div>
+                    </div>
+                    
+                    <h3>Technical Safeguards</h3>
+                    <p>Our platform employs robust technical safeguards to protect electronic PHI:</p>
+                    
+                    <div class="safeguard-list">
+                        <div class="safeguard-item">
+                            <h4><i class="fas fa-lock"></i> Encryption</h4>
+                            <p>Strong encryption for all PHI both in transit and at rest, meeting or exceeding HIPAA requirements and industry best practices.</p>
+                        </div>
+                        
+                        <div class="safeguard-item">
+                            <h4><i class="fas fa-user-check"></i> Authentication</h4>
+                            <p>Multi-factor authentication options to verify that users accessing PHI are who they claim to be, with additional identity verification for sensitive actions.</p>
+                        </div>
+                        
+                        <div class="safeguard-item">
+                            <h4><i class="fas fa-history"></i> Audit Controls</h4>
+                            <p>Comprehensive audit logs that track all actions taken on PHI, including access, modification, and transmission, to support accountability and compliance verification.</p>
+                        </div>
+                        
+                        <div class="safeguard-item">
+                            <h4><i class="fas fa-shield-alt"></i> Integrity Controls</h4>
+                            <p>Technical measures to ensure that PHI is not improperly altered or destroyed, including checksums, version control, and secure backup systems.</p>
+                        </div>
+                    </div>
+                    
+                    <h3>Physical Safeguards</h3>
+                    <p>Our infrastructure includes physical safeguards to protect PHI:</p>
+                    
+                    <div class="safeguard-list">
+                        <div class="safeguard-item">
+                            <h4><i class="fas fa-building"></i> Facility Security</h4>
+                            <p>Our data centers maintain strict physical security controls, including biometric access systems, 24/7 security personnel, and continuous video surveillance.</p>
+                        </div>
+                        
+                        <div class="safeguard-item">
+                            <h4><i class="fas fa-desktop"></i> Workstation Security</h4>
+                            <p>Policies and technical controls governing the use of workstations that may access PHI, including automatic screen locks, privacy screens, and clean desk policies.</p>
+                        </div>
+                        
+                        <div class="safeguard-item">
+                            <h4><i class="fas fa-trash-alt"></i> Media Disposal</h4>
+                            <p>Secure procedures for the final disposition of electronic media containing PHI, ensuring that data cannot be recovered even after deletion.</p>
+                        </div>
+                    </div>
+                    
+                    <h2>Business Associate Agreement (BAA)</h2>
+                    <div class="baa-box">
+                        <h3>BAA Execution Process</h3>
+                        <p>As required by HIPAA, Aspen Grove Solutions is prepared to enter into a Business Associate Agreement (BAA) with Covered Entities and other Business Associates before handling any PHI. Our standard BAA addresses all HIPAA requirements, including:</p>
+                        <ul>
+                            <li>Permitted and required uses of PHI</li>
+                            <li>Prohibitions on uses and disclosures</li>
+                            <li>Appropriate safeguards for protecting PHI</li>
+                            <li>Reporting obligations for security incidents and breaches</li>
+                            <li>Obligations to return or destroy PHI when the agreement ends</li>
+                            <li>Obligations to make books and records available to HHS for compliance investigations</li>
+                        </ul>
+                        <a href="#" class="baa-btn">Request Sample BAA</a>
+                    </div>
+                    
+                    <h2>HIPAA Compliance Validation</h2>
+                    <p>Aspen Grove Solutions regularly validates our HIPAA compliance through:</p>
+                    <ul>
+                        <li><strong>Third-Party Assessments:</strong> Regular independent assessments of our HIPAA compliance by qualified third parties</li>
+                        <li><strong>HITRUST Certification:</strong> Adherence to the HITRUST CSF, a comprehensive security framework that incorporates HIPAA requirements</li>
+                        <li><strong>SOC 2 Type II Audits:</strong> Regular SOC 2 Type II audits that include HIPAA compliance controls</li>
+                        <li><strong>Penetration Testing:</strong> Regular penetration tests to identify and remediate potential security vulnerabilities</li>
+                        <li><strong>Internal Audits:</strong> Continuous internal auditing and monitoring of our compliance with HIPAA requirements</li>
+                    </ul>
+                    
+                    <h2>Your Responsibilities</h2>
+                    <p>While Aspen Grove provides a HIPAA-compliant platform, it's important to remember that compliance is a shared responsibility. Covered Entities and Business Associates using our platform should:</p>
+                    <ul>
+                        <li>Execute a BAA with Aspen Grove before uploading or processing any PHI</li>
+                        <li>Configure user access and permissions according to the principle of least privilege</li>
+                        <li>Train staff on proper PHI handling and your organization's specific policies</li>
+                        <li>Develop and maintain your own HIPAA compliance program</li>
+                        <li>Report any potential security incidents or breaches immediately</li>
+                        <li>Use available security features like two-factor authentication and audit logging</li>
+                    </ul>
+                    
+                    <div class="legal-footer">
+                        <p>For more information about our HIPAA compliance program or to request a BAA, please contact us at:</p>
+                        <p>Compliance Officer<br>
+                        Aspen Grove Solutions, Inc.<br>
+                        123 Tech Avenue, Suite 200<br>
+                        Boston, MA 02108<br>
+                        Email: hipaa@aspengrove.com<br>
+                        Phone: (800) 555-5678</p>
+                        
+                        <a href="contact.html" class="contact-btn">Contact Compliance Team</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-container">
+                <div>
+                    <div class="footer-logo">
+                        <svg width="40" height="40" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Stylized Aspen Grove Logo -->
+                            <circle cx="100" cy="100" r="95" fill="#4B6455" stroke="#F4F7F2" stroke-width="2" />
+                            
+                            <!-- Tree elements -->
+                            <g>
+                                <line x1="100" y1="140" x2="100" y2="60" stroke="#F4F7F2" stroke-width="4" />
+                                <line x1="70" y1="145" x2="70" y2="75" stroke="#F4F7F2" stroke-width="4" />
+                                <line x1="130" y1="145" x2="130" y2="75" stroke="#F4F7F2" stroke-width="4" />
+                                <!-- Branches and leaves would go here -->
+                            </g>
+                            
+                            <!-- Accent element -->
+                            <circle cx="145" cy="75" r="4" fill="#E8B87D" />
+                        </svg>
+                        <span class="footer-logo-text">Aspen Grove</span>
+                    </div>
+                    
+                    <p class="footer-about">
+                        Aspen Grove Solutions provides AI-powered document processing technology to streamline workflows for legal and healthcare professionals.
+                    </p>
+                    
+                    <div class="footer-social">
+                        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="footer-heading">Solutions</h3>
+                    <ul class="footer-links">
+                        <li class="footer-link"><a href="#">Document Automation</a></li>
+                        <li class="footer-link"><a href="#">Practice Automation</a></li>
+                        <li class="footer-link"><a href="#">Integrations & Compliance</a></li>
+                        <li class="footer-link"><a href="#">AI Workflows</a></li>
+                        <li class="footer-link"><a href="#">Smart Templates</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="footer-heading">Company</h3>
+                    <ul class="footer-links">
+                        <li class="footer-link"><a href="about.html">About Us</a></li>
+                        <li class="footer-link"><a href="#">Careers</a></li>
+                        <li class="footer-link"><a href="#">Blog</a></li>
+                        <li class="footer-link"><a href="#">Press</a></li>
+                        <li class="footer-link"><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="footer-heading">Legal</h3>
+                    <ul class="footer-links">
+                        <li class="footer-link"><a href="terms.html">Terms of Service</a></li>
+                        <li class="footer-link"><a href="privacy.html">Privacy Policy</a></li>
+                        <li class="footer-link"><a href="security.html">Security Information</a></li>
+                        <li class="footer-link"><a href="hipaa.html">HIPAA Compliance</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Aspen Grove Solutions. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Toggle mobile menu
+            const navbarToggle = document.querySelector('.navbar-toggle');
+            const navbarMenu = document.querySelector('.navbar-menu');
+            
+            navbarToggle.addEventListener('click', function() {
+                navbarMenu.classList.toggle('active');
+                
+                // Change icon
+                const icon = this.querySelector('i');
+                if (navbarMenu.classList.contains('active')) {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-times');
+                } else {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

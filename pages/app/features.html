@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Features - Aspen Grove Solutions</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/shared.css">
+    <style>
+        /* Page-specific styles that extend shared styles */
+        .features-hero {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            color: var(--white);
+            padding: 120px 20px 80px;
+            text-align: center;
+        }
+
+        .features-hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .features-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .features-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 40px;
+        }
+
+        .feature-block {
+            composes: card;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-block::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--accent-color);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(232, 184, 125, 0.1);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 25px;
+            font-size: 2.5rem;
+            color: var(--accent-color);
+        }
+
+        .feature-block h2 {
+            font-size: 1.8rem;
+            color: var(--dark-text);
+            margin-bottom: 15px;
+        }
+
+        .feature-description {
+            font-size: 1.1rem;
+            color: var(--medium-text);
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .feature-list {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+
+        .feature-list li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            font-size: 1rem;
+            color: var(--dark-text);
+        }
+
+        .feature-list li i {
+            color: var(--success-color);
+            margin-right: 12px;
+            font-size: 1.1rem;
+        }
+
+        .feature-image {
+            width: 100%;
+            height: 300px;
+            background: var(--lighter-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .feature-image img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .integration-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 30px;
+            align-items: center;
+        }
+
+        .integration-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .integration-item img {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+            filter: grayscale(100%);
+            opacity: 0.7;
+            transition: var(--transition);
+        }
+
+        .integration-item:hover img {
+            filter: grayscale(0%);
+            opacity: 1;
+        }
+
+        .integration-item span {
+            font-size: 0.9rem;
+            color: var(--medium-text);
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: var(--white);
+            box-shadow: 0 4px 15px rgba(75, 100, 85, 0.2);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(75, 100, 85, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary-color);
+            color: var(--white);
+        }
+
+        @media (max-width: 992px) {
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .feature-block {
+                max-width: 800px;
+                margin: 0 auto;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .feature-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 2rem;
+            }
+
+            .feature-image {
+                height: 250px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .feature-image {
+                height: 200px;
+            }
+
+            .integration-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <a href="/" class="navbar-brand">
+            <svg class="navbar-logo" width="42" height="42" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="100" cy="100" r="95" fill="#4B6455" stroke="#F4F7F2" stroke-width="2" />
+                <!-- Add your logo SVG content here -->
+            </svg>
+            <span class="navbar-logo-text">Aspen Grove</span>
+        </a>
+        
+        <div class="navbar-menu" id="mainMenu">
+            <!-- Features Dropdown -->
+            <div class="dropdown">
+                <div class="dropdown-toggle">
+                    <a href="/features" class="active">Features</a>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="dropdown-menu">
+                    <a href="/solutions/document-management">Document Management</a>
+                    <a href="/solutions/practice-automation">Practice Automation</a>
+                    <a href="/solutions/hipaa-compliance">HIPAA Compliance</a>
+                    <a href="/solutions/secure-communication">Secure Communication</a>
+                </div>
+            </div>
+            
+            <a href="/pricing">Pricing</a>
+            
+            <!-- Resources Dropdown -->
+            <div class="dropdown">
+                <div class="dropdown-toggle">
+                    <a href="/resources">Resources</a>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="dropdown-menu">
+                    <a href="/resources/blog">Blog</a>
+                    <a href="/resources/documentation">Documentation</a>
+                    <a href="/resources/case-studies">Case Studies</a>
+                    <div class="dropdown-divider"></div>
+                    <a href="/resources/videos">Videos</a>
+                    <a href="/resources/webinars">Webinars</a>
+                </div>
+            </div>
+            
+            <!-- About Dropdown -->
+            <div class="dropdown">
+                <div class="dropdown-toggle">
+                    <a href="/about">About</a>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="dropdown-menu">
+                    <a href="/about/company">Company</a>
+                    <a href="/about/team">Our Team</a>
+                    <a href="/about/contact">Contact Us</a>
+                    <div class="dropdown-divider"></div>
+                    <a href="/about/privacy">Privacy Policy</a>
+                    <a href="/about/terms">Terms of Service</a>
+                </div>
+            </div>
+            
+            <a href="/login">Login</a>
+            <a href="/free-trial" class="navbar-cta">Free Trial</a>
+        </div>
+        
+        <button class="navbar-toggle" id="navbarToggle" aria-label="Toggle menu">
+            <i class="fas fa-bars"></i>
+        </button>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="features-hero">
+            <div class="section-container">
+                <h1 class="section-title">Powerful Features for Modern Practices</h1>
+                <p class="section-subtitle">
+                    Discover how Aspen Grove's AI-powered platform transforms document processing for legal and healthcare professionals.
+                </p>
+            </div>
+        </section>
+
+        <!-- Main Features Section -->
+        <section class="section bg-light">
+            <div class="section-container">
+                <div class="features-grid">
+                    <!-- Document Processing -->
+                    <div class="feature-block">
+                        <div class="feature-icon">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <h2>Smart Document Processing</h2>
+                        <p class="feature-description">
+                            Our AI-powered system automatically extracts, analyzes, and organizes information from your documents with 99.4% accuracy.
+                        </p>
+                        <ul class="feature-list">
+                            <li>
+                                <i class="fas fa-check-circle"></i>
+                                <span>Extract data from multiple document formats</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-check-circle"></i>
+                                <span>Automatically classify and categorize documents</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-check-circle"></i>
+                                <span>Identify and tag key information</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-check-circle"></i>
+                                <span>Generate detailed summaries and reports</span>
+                            </li>
+                        </ul>
+                        <div class="feature-image">
+                            <img src="/images/features/document-processing.svg" alt="Document Processing Interface" />
+                        </div>
+                    </div>
+
+                    <!-- AI Analysis -->
+                    <div class="feature-block">
+                        <div class="feature-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <h2>Advanced AI Analysis</h2>
+                        <p class="feature-description">
+                            Leverage cutting-edge artificial intelligence to gain deeper insights from your documents and make better decisions.
+                        </p>
+                        <ul class="feature-list">
+                            <li>
+                                <i class="fas fa-check-circle"></i>
+                                <span>Natural language processing for context understanding</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-check-circle"></i>
+                                <span>Pattern recognition for trend identification</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-check-circle"></i>
+                                <span>Predictive analytics for case outcomes</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-check-circle"></i>
+                                <span>Continuous learning and improvement</span>
+                            </li>
+                        </ul>
+                        <div class="feature-image">
+                            <img src="/images/features/ai-analysis.svg" alt="AI Analysis Dashboard" />
+                        </div>
+                    </div>
+
+                    <!-- Workflow Automation -->
+                    <div class="feature-block">
+                        <div class="feature-icon">
+                            <i class="fas fa-cogs"></i>
+                        </div>
+                        <h2>Intelligent Workflow Automation</h2>
+                        <p class="feature-description">
+                            Streamline your document processing workflow with customizable automation rules and smart routing.
+                        </p>
+                        <ul class="feature-list">
+                            <li>
+                                <i class="fas fa-check-circle"></i>
+                                <span>Custom workflow templates</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-check-circle"></i>
+                                <span>Automated task assignment and routing</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-check-circle"></i>
+                                <span>Integration with existing systems</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-check-circle"></i>
+                                <span>Real-time progress tracking</span>
+                            </li>
+                        </ul>
+                        <div class="feature-image">
+                            <img src="/images/features/workflow-automation.svg" alt="Workflow Automation Interface" />
+                        </div>
+                    </div>
+
+                    <!-- Security & Compliance -->
+                    <div class="feature-block">
+                        <div class="feature-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h2>Enterprise-Grade Security</h2>
+                        <p class="feature-description">
+                            Rest easy knowing your sensitive data is protected with our comprehensive security and compliance features.
+                        </p>
+                        <ul class="feature-list">
+                            <li>
+                                <i class="fas fa-check-circle"></i>
+                                <span>HIPAA compliance built-in</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-check-circle"></i>
+                                <span>End-to-end encryption</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-check-circle"></i>
+                                <span>Role-based access control</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-check-circle"></i>
+                                <span>Comprehensive audit logging</span>
+                            </li>
+                        </ul>
+                        <div class="feature-image">
+                            <img src="/images/features/security-compliance.svg" alt="Security and Compliance Dashboard" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Integration Section -->
+        <section class="section bg-white">
+            <div class="section-container">
+                <div class="section-header">
+                    <h2 class="section-title">Seamless Integration</h2>
+                    <p class="section-subtitle">
+                        Aspen Grove integrates with your existing systems and tools, making it easy to incorporate AI-powered document processing into your current workflow.
+                    </p>
+                </div>
+                <div class="integration-grid">
+                    <div class="integration-item">
+                        <img src="/images/integrations/aws.svg" alt="AWS Integration" />
+                        <span>AWS</span>
+                    </div>
+                    <div class="integration-item">
+                        <img src="/images/integrations/microsoft.svg" alt="Microsoft Integration" />
+                        <span>Microsoft 365</span>
+                    </div>
+                    <div class="integration-item">
+                        <img src="/images/integrations/google.svg" alt="Google Integration" />
+                        <span>Google Workspace</span>
+                    </div>
+                    <div class="integration-item">
+                        <img src="/images/integrations/salesforce.svg" alt="Salesforce Integration" />
+                        <span>Salesforce</span>
+                    </div>
+                    <div class="integration-item">
+                        <img src="/images/integrations/slack.svg" alt="Slack Integration" />
+                        <span>Slack</span>
+                    </div>
+                    <div class="integration-item">
+                        <img src="/images/integrations/zapier.svg" alt="Zapier Integration" />
+                        <span>Zapier</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="section bg-light">
+            <div class="section-container text-center">
+                <h2 class="section-title">Ready to Transform Your Document Processing?</h2>
+                <p class="section-subtitle">Start your 10-day free trial today. No credit card required.</p>
+                <div class="cta-buttons">
+                    <a href="/free-trial" class="btn btn-primary">
+                        <i class="fas fa-rocket"></i> Start Free Trial
+                    </a>
+                    <a href="/schedule-demo" class="btn btn-secondary">
+                        <i class="fas fa-calendar-alt"></i> Schedule Demo
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Load Router -->
+    <script src="/js/router.js"></script>
+    
+    <!-- Mobile Menu Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu toggle
+            const navbarToggle = document.getElementById('navbarToggle');
+            const navbarMenu = document.getElementById('mainMenu');
+            
+            navbarToggle.addEventListener('click', function() {
+                navbarMenu.classList.toggle('active');
+                const icon = this.querySelector('i');
+                if (navbarMenu.classList.contains('active')) {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-times');
+                } else {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            });
+            
+            // Mobile dropdowns toggle
+            if (window.innerWidth <= 768) {
+                const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
+                
+                dropdownToggles.forEach(toggle => {
+                    toggle.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        const dropdown = this.closest('.dropdown');
+                        dropdown.classList.toggle('active');
+                        
+                        // Close other dropdowns
+                        document.querySelectorAll('.dropdown').forEach(item => {
+                            if (item !== dropdown) {
+                                item.classList.remove('active');
+                            }
+                        });
+                    });
+                });
+            }
+            
+            // Close mobile menu when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('.navbar') && navbarMenu.classList.contains('active')) {
+                    navbarMenu.classList.remove('active');
+                    const icon = navbarToggle.querySelector('i');
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            });
+            
+            // Handle window resize
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 768) {
+                    navbarMenu.classList.remove('active');
+                    document.querySelectorAll('.dropdown').forEach(dropdown => {
+                        dropdown.classList.remove('active');
+                    });
+                    const icon = navbarToggle.querySelector('i');
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            });
+
+            // Animation on scroll
+            const animateOnScroll = () => {
+                const elements = document.querySelectorAll('.feature-block, .integration-item');
+                
+                elements.forEach(element => {
+                    const elementTop = element.getBoundingClientRect().top;
+                    const elementBottom = element.getBoundingClientRect().bottom;
+                    const windowHeight = window.innerHeight;
+                    
+                    if (elementTop < windowHeight - 100 && elementBottom > 0) {
+                        element.classList.add('visible');
+                    }
+                });
+            };
+
+            // Initialize animations
+            document.querySelectorAll('.feature-block, .integration-item').forEach(element => {
+                element.classList.add('fade-in');
+            });
+
+            // Listen for scroll
+            window.addEventListener('scroll', animateOnScroll);
+            
+            // Trigger once on load
+            window.addEventListener('load', animateOnScroll);
+        });
+    </script>
+</body>
+</html> 

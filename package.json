@@ -1,0 +1,21 @@
+{
+  "name": "aspen-grove-solutions",
+  "version": "1.0.0",
+  "description": "Aspen Grove Solutions - AI-Powered Document Processing Platform",
+  "scripts": {
+    "start": "serve pages/public",
+    "build": "echo 'No build step required for static site'",
+    "test": "echo 'No tests specified'",
+    "lint": "echo 'No linting configured'"
+  },
+  "dependencies": {
+    "serve": "^14.2.1"
+  },
+  "devDependencies": {
+    "@aws-amplify/cli": "^12.10.0"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "private": true
+} 

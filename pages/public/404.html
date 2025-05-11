@@ -1,0 +1,106 @@
+<!-- 404 Error Page -->
+<div class="error-container">
+    <div class="error-content">
+        <h1 class="error-code">404</h1>
+        <h2 class="error-title">Page Not Found</h2>
+        <p class="error-message">The page you're looking for doesn't exist or has been moved.</p>
+        <div class="error-actions">
+            <a href="/" class="button-primary">Return Home</a>
+            <a href="/contact" class="button-secondary">Contact Support</a>
+        </div>
+    </div>
+</div>
+
+<style>
+    .error-container {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        background-color: var(--light-bg);
+    }
+    
+    .error-content {
+        text-align: center;
+        max-width: 600px;
+        padding: 40px;
+        background-color: var(--white);
+        border-radius: 8px;
+        box-shadow: 0 4px 15px var(--shadow-color);
+    }
+    
+    .error-code {
+        font-size: 6rem;
+        font-weight: 700;
+        color: var(--primary-color);
+        margin: 0;
+        line-height: 1;
+    }
+    
+    .error-title {
+        font-size: 2rem;
+        color: var(--dark-text);
+        margin: 20px 0;
+    }
+    
+    .error-message {
+        font-size: 1.1rem;
+        color: var(--medium-text);
+        margin-bottom: 30px;
+    }
+    
+    .error-actions {
+        display: flex;
+        gap: 15px;
+        justify-content: center;
+    }
+    
+    .button-primary,
+    .button-secondary {
+        padding: 12px 24px;
+        border-radius: 4px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+    
+    .button-primary {
+        background-color: var(--primary-color);
+        color: var(--white);
+    }
+    
+    .button-primary:hover {
+        background-color: var(--dark-text);
+    }
+    
+    .button-secondary {
+        background-color: var(--light-bg);
+        color: var(--dark-text);
+        border: 1px solid var(--border-color);
+    }
+    
+    .button-secondary:hover {
+        background-color: var(--border-color);
+    }
+    
+    @media (max-width: 768px) {
+        .error-code {
+            font-size: 4rem;
+        }
+        
+        .error-title {
+            font-size: 1.5rem;
+        }
+        
+        .error-actions {
+            flex-direction: column;
+        }
+        
+        .button-primary,
+        .button-secondary {
+            width: 100%;
+            text-align: center;
+        }
+    }
+</style> 

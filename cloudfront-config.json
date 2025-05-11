@@ -1,0 +1,8 @@
+{
+    "DistributionConfig": {
+        "Aliases": {
+            "Quantity": 1,
+            "Items": ["aspengroveservices.com"]
+        }
+    }
+}

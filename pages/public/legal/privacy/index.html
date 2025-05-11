@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - Aspen Grove Solutions</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #4B6455;
+            --secondary-color: #7D9D7F;
+            --accent-color: #E8B87D;
+            --dark-text: #2C3A2F;
+            --medium-text: #4A5D4E;
+            --light-bg: #F4F7F2;
+            --lighter-bg: #F9FCF8;
+            --white: #FFFFFF;
+            --shadow-color: rgba(0, 0, 0, 0.08);
+            --border-color: #E0E6E3;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: var(--light-bg);
+            color: var(--dark-text);
+            line-height: 1.6;
+        }
+
+        .header-section {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 120px 20px 60px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(75, 100, 85, 0.95) 0%, rgba(44, 58, 47, 0.95) 100%);
+            z-index: 1;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .header-title {
+            font-family: 'Lora', serif;
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+        }
+
+        .header-subtitle {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            margin-bottom: 30px;
+        }
+
+        .content-section {
+            padding: 80px 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .policy-section {
+            background: var(--white);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px var(--shadow-color);
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-family: 'Lora', serif;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--dark-text);
+        }
+
+        .section-subtitle {
+            font-family: 'Lora', serif;
+            font-size: 1.4rem;
+            margin: 30px 0 15px;
+            color: var(--dark-text);
+        }
+
+        .policy-text {
+            color: var(--medium-text);
+            font-size: 1rem;
+            margin-bottom: 20px;
+        }
+
+        .policy-list {
+            list-style: none;
+            margin: 20px 0;
+            padding-left: 20px;
+        }
+
+        .policy-item {
+            color: var(--medium-text);
+            font-size: 1rem;
+            margin-bottom: 10px;
+            position: relative;
+            padding-left: 25px;
+        }
+
+        .policy-item::before {
+            content: '•';
+            color: var(--accent-color);
+            font-size: 1.5rem;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+
+        .last-updated {
+            font-style: italic;
+            color: var(--medium-text);
+            font-size: 0.9rem;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .contact-section {
+            background-color: var(--lighter-bg);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px var(--shadow-color);
+            margin-top: 60px;
+        }
+
+        .contact-title {
+            font-family: 'Lora', serif;
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            color: var(--dark-text);
+        }
+
+        .contact-info {
+            color: var(--medium-text);
+            font-size: 1rem;
+        }
+
+        .contact-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .contact-link:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .header-title {
+                font-size: 2.2rem;
+            }
+
+            .header-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .section-title {
+                font-size: 1.6rem;
+            }
+
+            .section-subtitle {
+                font-size: 1.2rem;
+            }
+
+            .policy-section,
+            .contact-section {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Include your navigation bar here -->
+    
+    <section class="header-section">
+        <div class="header-content">
+            <h1 class="header-title">Privacy Policy</h1>
+            <p class="header-subtitle">How we collect, use, and protect your information</p>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="policy-section">
+            <h2 class="section-title">Introduction</h2>
+            <p class="policy-text">
+                At Aspen Grove Solutions, we take your privacy seriously. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our services. Please read this privacy policy carefully. If you do not agree with the terms of this privacy policy, please do not access the site.
+            </p>
+
+            <h3 class="section-subtitle">Information We Collect</h3>
+            <p class="policy-text">
+                We collect information that you provide directly to us, including:
+            </p>
+            <ul class="policy-list">
+                <li class="policy-item">Personal identification information (Name, email address, phone number, etc.)</li>
+                <li class="policy-item">Professional information (Practice name, role, specialty, etc.)</li>
+                <li class="policy-item">Account credentials</li>
+                <li class="policy-item">Payment information</li>
+            </ul>
+
+            <h3 class="section-subtitle">How We Use Your Information</h3>
+            <p class="policy-text">
+                We use the information we collect to:
+            </p>
+            <ul class="policy-list">
+                <li class="policy-item">Provide, maintain, and improve our services</li>
+                <li class="policy-item">Process transactions and send related information</li>
+                <li class="policy-item">Send administrative information, such as updates and security alerts</li>
+                <li class="policy-item">Respond to comments and questions</li>
+                <li class="policy-item">Monitor and analyze trends and usage</li>
+            </ul>
+
+            <h3 class="section-subtitle">Information Sharing and Disclosure</h3>
+            <p class="policy-text">
+                We may share your information in the following situations:
+            </p>
+            <ul class="policy-list">
+                <li class="policy-item">With service providers who perform services on our behalf</li>
+                <li class="policy-item">To comply with legal obligations</li>
+                <li class="policy-item">To protect and defend our rights and property</li>
+                <li class="policy-item">With your consent or at your direction</li>
+            </ul>
+
+            <h3 class="section-subtitle">Data Security</h3>
+            <p class="policy-text">
+                We implement appropriate technical and organizational security measures to protect your personal information, including:
+            </p>
+            <ul class="policy-list">
+                <li class="policy-item">Encryption of data in transit and at rest</li>
+                <li class="policy-item">Regular security assessments</li>
+                <li class="policy-item">Access controls and authentication</li>
+                <li class="policy-item">Secure data storage and backup procedures</li>
+            </ul>
+
+            <h3 class="section-subtitle">Your Rights</h3>
+            <p class="policy-text">
+                You have the right to:
+            </p>
+            <ul class="policy-list">
+                <li class="policy-item">Access your personal information</li>
+                <li class="policy-item">Correct inaccurate information</li>
+                <li class="policy-item">Request deletion of your information</li>
+                <li class="policy-item">Object to processing of your information</li>
+                <li class="policy-item">Request restriction of processing</li>
+                <li class="policy-item">Data portability</li>
+            </ul>
+
+            <h3 class="section-subtitle">Cookies and Tracking Technologies</h3>
+            <p class="policy-text">
+                We use cookies and similar tracking technologies to track activity on our service and hold certain information. You can instruct your browser to refuse all cookies or to indicate when a cookie is being sent.
+            </p>
+
+            <h3 class="section-subtitle">Changes to This Privacy Policy</h3>
+            <p class="policy-text">
+                We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the "Last Updated" date.
+            </p>
+
+            <p class="last-updated">Last Updated: March 15, 2024</p>
+        </div>
+
+        <div class="contact-section">
+            <h3 class="contact-title">Contact Us</h3>
+            <p class="contact-info">
+                If you have any questions about this Privacy Policy, please contact us at:
+                <br><br>
+                Email: <a href="mailto:privacy@aspengroveservices.com" class="contact-link">privacy@aspengroveservices.com</a>
+                <br>
+                Phone: <a href="tel:+18005551234" class="contact-link">(800) 555-1234</a>
+                <br><br>
+                Address:<br>
+                Aspen Grove Solutions<br>
+                123 Healthcare Way<br>
+                Suite 100<br>
+                Denver, CO 80202
+            </p>
+        </div>
+    </section>
+
+    <!-- Include your footer here -->
+</body>
+</html> 

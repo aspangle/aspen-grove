@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Team - Aspen Grove Solutions</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #4B6455;
+            --secondary-color: #7D9D7F;
+            --accent-color: #E8B87D;
+            --dark-text: #2C3A2F;
+            --medium-text: #4A5D4E;
+            --light-bg: #F4F7F2;
+            --lighter-bg: #F9FCF8;
+            --white: #FFFFFF;
+            --shadow-color: rgba(0, 0, 0, 0.08);
+            --border-color: #E0E6E3;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: var(--light-bg);
+            color: var(--dark-text);
+            line-height: 1.6;
+        }
+
+        .team-header {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 120px 20px 60px;
+            text-align: center;
+        }
+
+        .team-header h1 {
+            font-family: 'Lora', serif;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .team-header p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+
+        .team-section {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .team-member {
+            background: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px var(--shadow-color);
+            transition: transform 0.3s ease;
+        }
+
+        .team-member:hover {
+            transform: translateY(-10px);
+        }
+
+        .member-image {
+            width: 100%;
+            height: 300px;
+            background-color: var(--light-bg);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .member-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .member-info {
+            padding: 25px;
+        }
+
+        .member-name {
+            font-family: 'Lora', serif;
+            font-size: 1.4rem;
+            color: var(--dark-text);
+            margin-bottom: 5px;
+        }
+
+        .member-role {
+            color: var(--accent-color);
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .member-bio {
+            color: var(--medium-text);
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+        }
+
+        .member-social {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-link {
+            color: var(--medium-text);
+            font-size: 1.2rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-link:hover {
+            color: var(--accent-color);
+        }
+
+        .values-section {
+            background-color: var(--lighter-bg);
+            padding: 80px 20px;
+            margin-top: 40px;
+        }
+
+        .values-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .value-card {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px var(--shadow-color);
+            text-align: center;
+        }
+
+        .value-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(232, 184, 125, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: var(--accent-color);
+            font-size: 1.8rem;
+        }
+
+        .value-title {
+            font-family: 'Lora', serif;
+            font-size: 1.3rem;
+            color: var(--dark-text);
+            margin-bottom: 15px;
+        }
+
+        .value-description {
+            color: var(--medium-text);
+            font-size: 0.95rem;
+        }
+
+        @media (max-width: 768px) {
+            .team-header {
+                padding: 100px 20px 40px;
+            }
+
+            .team-header h1 {
+                font-size: 2rem;
+            }
+
+            .team-header p {
+                font-size: 1.1rem;
+            }
+
+            .team-section {
+                padding: 40px 20px;
+            }
+
+            .team-grid {
+                gap: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Include your navigation bar here -->
+    
+    <header class="team-header">
+        <h1>Meet Our Team</h1>
+        <p>Dedicated professionals combining expertise in AI, healthcare, and legal technology to transform document processing.</p>
+    </header>
+
+    <section class="team-section">
+        <div class="team-grid">
+            <div class="team-member">
+                <div class="member-image">
+                    <img src="/images/team/sarah-johnson.jpg" alt="Sarah Johnson">
+                </div>
+                <div class="member-info">
+                    <h3 class="member-name">Sarah Johnson</h3>
+                    <p class="member-role">Chief Executive Officer</p>
+                    <p class="member-bio">Former healthcare technology executive with 15+ years of experience in AI and machine learning applications for document processing.</p>
+                    <div class="member-social">
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="team-member">
+                <div class="member-image">
+                    <img src="/images/team/michael-chen.jpg" alt="Michael Chen">
+                </div>
+                <div class="member-info">
+                    <h3 class="member-name">Michael Chen</h3>
+                    <p class="member-role">Chief Technology Officer</p>
+                    <p class="member-bio">AI and machine learning expert with a background in natural language processing and document analysis systems.</p>
+                    <div class="member-social">
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="team-member">
+                <div class="member-image">
+                    <img src="/images/team/emily-rodriguez.jpg" alt="Emily Rodriguez">
+                </div>
+                <div class="member-info">
+                    <h3 class="member-name">Emily Rodriguez</h3>
+                    <p class="member-role">Head of Healthcare Solutions</p>
+                    <p class="member-bio">Healthcare compliance expert with extensive experience in HIPAA regulations and medical document management.</p>
+                    <div class="member-social">
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="values-section">
+        <div class="values-container">
+            <h2 style="text-align: center; margin-bottom: 20px;">Our Values</h2>
+            <div class="values-grid">
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3 class="value-title">Security First</h3>
+                    <p class="value-description">We prioritize the security and privacy of our clients' data, implementing industry-leading protection measures.</p>
+                </div>
+
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3 class="value-title">Innovation</h3>
+                    <p class="value-description">We continuously push the boundaries of what's possible with AI and automation technology.</p>
+                </div>
+
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3 class="value-title">Client Success</h3>
+                    <p class="value-description">We measure our success by the success of our clients and their ability to serve their patients better.</p>
+                </div>
+
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h3 class="value-title">Partnership</h3>
+                    <p class="value-description">We build long-term partnerships with our clients, working together to achieve their goals.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Include your footer here -->
+</body>
+</html> 

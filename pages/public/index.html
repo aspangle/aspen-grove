@@ -1695,54 +1695,62 @@
 
     <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // Sticky navigation
+        // Navigation menu functionality
         const navbar = document.getElementById('navbar');
+        const navbarMenu = document.getElementById('mainMenu');
+        const navbarToggle = document.createElement('button');
+        navbarToggle.className = 'navbar-toggle';
+        navbarToggle.innerHTML = '<i class="fas fa-bars"></i>';
+        navbar.appendChild(navbarToggle);
+
+        // Handle mobile menu toggle
+        navbarToggle.addEventListener('click', function() {
+            navbarMenu.classList.toggle('active');
+            const icon = this.querySelector('i');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
+        });
+
+        // Handle dropdown menus on mobile
+        const dropdowns = document.querySelectorAll('.dropdown');
+        dropdowns.forEach(dropdown => {
+            const toggle = dropdown.querySelector('.dropdown-toggle');
+            toggle.addEventListener('click', function(e) {
+                if (window.innerWidth <= 768) {
+                    e.preventDefault();
+                    dropdown.classList.toggle('active');
+                }
+            });
+        });
+
+        // Handle navbar scroll effect
+        let lastScroll = 0;
         window.addEventListener('scroll', function() {
-            if (window.scrollY > 50) {
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll <= 0) {
+                navbar.classList.remove('sticky');
+                return;
+            }
+            
+            if (currentScroll > lastScroll && currentScroll > 75) {
                 navbar.classList.add('sticky');
             } else {
                 navbar.classList.remove('sticky');
             }
+            
+            lastScroll = currentScroll;
         });
 
-        // Mobile menu toggle
-        const navbarToggle = document.getElementById('navbarToggle');
-        const navbarMenu = document.getElementById('mainMenu');
-        
-        navbarToggle.addEventListener('click', function() {
-            navbarMenu.classList.toggle('active');
-            const icon = this.querySelector('i');
-            if (navbarMenu.classList.contains('active')) {
-                icon.classList.remove('fa-bars');
-                icon.classList.add('fa-times');
-            } else {
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!navbar.contains(e.target) && navbarMenu.classList.contains('active')) {
+                navbarMenu.classList.remove('active');
+                const icon = navbarToggle.querySelector('i');
                 icon.classList.remove('fa-times');
                 icon.classList.add('fa-bars');
             }
         });
-        
-        // Mobile dropdowns toggle
-        if (window.innerWidth <= 768) {
-            const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
-            
-            dropdownToggles.forEach(toggle => {
-                toggle.addEventListener('click', function(e) {
-                    // Prevent the click from triggering the parent link
-                    e.preventDefault();
-                    
-                    // Toggle active class on the parent dropdown
-                    const dropdown = this.closest('.dropdown');
-                    dropdown.classList.toggle('active');
-                    
-                    // Close other open dropdowns
-                    document.querySelectorAll('.dropdown').forEach(item => {
-                        if (item !== dropdown) {
-                            item.classList.remove('active');
-                        }
-                    });
-                });
-            });
-        }
 
         // Get DOM elements
         const calculatorContainer = document.getElementById('calculatorContainer');

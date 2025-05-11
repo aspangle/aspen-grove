@@ -50,3 +50,18 @@ coverage/
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+# AWS Configuration
+*-config.json
+*-changes.json
+*-settings.json
+*-records.json
+*-alias.json
+AWS+Business+Associate+Addendum*.pdf
+
+# Sensitive Information
+**/secrets/
+**/credentials/
+**/keys/
+**/certificates/
+**/private/

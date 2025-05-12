@@ -65,6 +65,7 @@
             align-items: center;
             padding: 0 50px;
             height: var(--header-height);
+            border-bottom: 2px solid var(--accent-color);
         }
 
         .navbar.sticky {
@@ -108,29 +109,30 @@
             align-items: center;
         }
 
-        /* Dropdown Menu Styles */
-        .navbar-menu .dropdown {
-            position: relative;
-            display: inline-block;
-        }
-
         .navbar-menu a {
             color: var(--medium-text);
             text-decoration: none;
             font-weight: 500;
             font-size: 0.95rem;
-            transition: var(--transition);
+            transition: color 0.3s ease;
             display: inline-block;
             padding: 28px 0;
         }
 
         .navbar-menu a:hover {
-            color: var(--primary-color);
+            color: var(--accent-color);
+            font-weight: 500;
         }
 
         .navbar-menu a.active {
             color: var(--primary-color);
-            font-weight: 600;
+            font-weight: 500;
+        }
+
+        /* Dropdown Menu Styles */
+        .navbar-menu .dropdown {
+            position: relative;
+            display: inline-block;
         }
 
         .dropdown-toggle {
@@ -138,68 +140,222 @@
             display: flex;
             align-items: center;
             gap: 5px;
+            padding: 28px 0;
+            transition: color 0.3s ease;
+            font-weight: 500;
+            font-size: 0.95rem;
+            color: var(--medium-text);
+        }
+
+        .dropdown-toggle:hover {
+            color: var(--accent-color);
+            font-weight: 500;
+        }
+
+        .dropdown-toggle a {
+            padding: 0;
+            color: inherit;
+            font-weight: inherit;
+            font-size: inherit;
         }
 
         .dropdown-toggle i {
             font-size: 0.8rem;
             transition: transform 0.3s ease;
+            margin-left: 4px;
+            color: inherit;
         }
 
-        .dropdown-menu {
+        /* Vertical dropdown styles for other menus */
+        .dropdown-menu:not(.solutions-menu) {
             position: absolute;
             top: 100%;
-            left: 0;
+            left: 50%;
+            transform: translateX(-50%) translateY(10px);
             background-color: var(--white);
             min-width: 220px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-            border-radius: 4px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            border-radius: 8px;
             padding: 12px 0;
             opacity: 0;
             visibility: hidden;
-            transform: translateY(10px);
-            transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
-            z-index: 1000;
+            transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+            z-index: 1001;
+            display: block;
+            pointer-events: none;
+            border: 1px solid var(--border-color);
         }
 
-        .dropdown:hover .dropdown-menu {
+        .dropdown.active .dropdown-menu:not(.solutions-menu) {
             opacity: 1;
             visibility: visible;
-            transform: translateY(0);
+            transform: translateX(-50%) translateY(0);
+            pointer-events: auto;
         }
 
-        .dropdown:hover .dropdown-toggle i {
-            transform: rotate(180deg);
-        }
-
-        .dropdown-menu a {
-            display: block;
+        .dropdown-menu:not(.solutions-menu) a {
             padding: 10px 20px;
+            display: block;
             color: var(--medium-text);
             font-weight: 400;
+            font-size: 0.95rem;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
+        .dropdown-menu:not(.solutions-menu) a:hover {
+            background-color: rgba(232, 184, 125, 0.1);
+            color: var(--primary-color);
+            font-weight: 400;
+        }
+
+        /* Solutions dropdown specific styles */
+        .dropdown-menu.solutions-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%) translateY(10px);
+            background-color: var(--white);
+            min-width: 800px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            border-radius: 8px;
+            padding: 25px;
+            z-index: 1001;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            border: 1px solid var(--border-color);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+            pointer-events: none;
+        }
+
+        .dropdown-menu.solutions-menu .dropdown-section {
+            padding: 0;
+            position: relative;
+        }
+
+        .dropdown-menu.solutions-menu .dropdown-section h3 {
+            font-size: 1.25rem !important;
+            font-weight: 700 !important;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--accent-color);
+            line-height: 1.3;
+        }
+
+        .dropdown-menu.solutions-menu .dropdown-section h3 a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+            display: block;
             width: 100%;
+            font-size: inherit;
+            font-weight: inherit;
         }
 
-        .dropdown-menu a:hover {
-            background-color: rgba(125, 157, 127, 0.1);
+        .dropdown-menu.solutions-menu .dropdown-section h3 a:hover {
+            color: var(--primary-color);
+            background-color: rgba(232, 184, 125, 0.1);
+            font-weight: inherit;
         }
 
-        .dropdown-divider {
-            height: 1px;
-            background-color: var(--border-color);
-            margin: 8px 0;
+        .dropdown-menu.solutions-menu .dropdown-section a {
+            display: block;
+            color: var(--medium-text);
+            text-decoration: none;
+            padding: 6px 0;
+            font-size: 0.95rem;
+            font-weight: 400;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            position: relative;
         }
 
-        /* Update navbar-cta to match login.html */
+        .dropdown-menu.solutions-menu .dropdown-section a:hover {
+            color: var(--primary-color);
+            background-color: rgba(232, 184, 125, 0.1);
+            font-weight: 400;
+        }
+
+        .dropdown.active .dropdown-menu.solutions-menu {
+            display: grid;
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
+            pointer-events: auto;
+        }
+
+        .dropdown.active .dropdown-toggle i {
+            transform: rotate(180deg);
+            transition: transform 0.2s ease;
+        }
+
+        /* Mobile menu styles */
+        @media (max-width: 768px) {
+            .navbar-menu {
+                display: none;
+                position: absolute;
+                top: 75px;
+                left: 0;
+                right: 0;
+                flex-direction: column;
+                background-color: var(--white);
+                box-shadow: 0 5px 10px var(--shadow-color);
+                padding: 20px;
+                z-index: 1000;
+                align-items: flex-start;
+            }
+
+            .navbar-menu.active {
+                display: flex;
+            }
+
+            .navbar-menu a, 
+            .dropdown-toggle {
+                padding: 12px 0;
+                width: 100%;
+            }
+
+            .dropdown {
+                width: 100%;
+            }
+
+            .dropdown-menu.solutions-menu {
+                position: static;
+                box-shadow: none;
+                padding-left: 20px;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                display: none;
+                min-width: 100%;
+                left: 0;
+                border: none;
+                pointer-events: auto;
+            }
+
+            .dropdown.active .dropdown-menu {
+                display: block;
+            }
+        }
+
+        /* Update navbar-cta to include gold accent */
         .navbar-cta {
             background-color: var(--primary-color);
             color: var(--white) !important;
             padding: 9px 20px !important;
             border-radius: 4px;
             font-weight: 600;
+            transition: color 0.3s ease;
         }
 
         .navbar-cta:hover {
-            background-color: var(--dark-text);
+            color: var(--accent-color) !important;
+            transform: none;
+            box-shadow: none;
         }
 
         .navbar-toggle {
@@ -1053,68 +1209,6 @@
             }
         }
 
-        @media (max-width: 768px) {
-            .navbar-menu {
-                display: none;
-                position: absolute;
-                top: 75px;
-                left: 0;
-                right: 0;
-                flex-direction: column;
-                background-color: var(--white);
-                box-shadow: 0 5px 10px var(--shadow-color);
-                padding: 20px;
-                z-index: 1000;
-                align-items: flex-start;
-            }
-
-            .navbar-menu.active {
-                display: flex;
-            }
-
-            .navbar-toggle {
-                display: block;
-            }
-            
-            .navbar-menu a, 
-            .dropdown-toggle {
-                padding: 12px 0;
-                width: 100%;
-            }
-
-            .dropdown {
-                width: 100%;
-            }
-
-            .dropdown-menu {
-                position: static;
-                box-shadow: none;
-                padding-left: 20px;
-                opacity: 1;
-                visibility: visible;
-                transform: none;
-                display: none;
-                min-width: 100%;
-            }
-
-            .dropdown.active .dropdown-menu {
-                display: block;
-            }
-
-            .dropdown.active .dropdown-toggle i {
-                transform: rotate(180deg);
-            }
-
-            .metrics-grid, 
-            .results-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .cta-buttons {
-                flex-direction: column;
-            }
-        }
-
         @media (max-width: 480px) {
             .section {
                 padding: 50px 20px;
@@ -1152,6 +1246,110 @@
                 font-size: 1rem;
             }
         }
+
+        /* Solutions dropdown specific styles */
+        .dropdown-menu.solutions-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%) translateY(10px);
+            background-color: var(--white);
+            min-width: 800px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            border-radius: 8px;
+            padding: 25px;
+            z-index: 1001;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            border: 1px solid var(--border-color);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+            pointer-events: none;
+        }
+
+        .dropdown-menu.solutions-menu .dropdown-section {
+            padding: 0;
+            position: relative;
+        }
+
+        .dropdown-menu.solutions-menu .dropdown-section h3 {
+            font-size: 1.25rem !important;
+            font-weight: 700 !important;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--accent-color);
+            line-height: 1.3;
+        }
+
+        .dropdown-menu.solutions-menu .dropdown-section h3 a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+            display: block;
+            width: 100%;
+            font-size: inherit;
+            font-weight: inherit;
+        }
+
+        .dropdown-menu.solutions-menu .dropdown-section h3 a:hover {
+            color: var(--primary-color);
+            background-color: rgba(232, 184, 125, 0.1);
+            font-weight: inherit;
+        }
+
+        .dropdown-menu.solutions-menu .dropdown-section a {
+            display: block;
+            color: var(--medium-text);
+            text-decoration: none;
+            padding: 6px 0;
+            font-size: 0.95rem;
+            font-weight: 400;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            position: relative;
+        }
+
+        .dropdown-menu.solutions-menu .dropdown-section a:hover {
+            color: var(--primary-color);
+            background-color: rgba(232, 184, 125, 0.1);
+            font-weight: 400;
+        }
+
+        .dropdown.active .dropdown-menu.solutions-menu {
+            display: grid;
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
+            pointer-events: auto;
+        }
+
+        .dropdown.active .dropdown-toggle i {
+            transform: rotate(180deg);
+            transition: transform 0.2s ease;
+        }
+
+        /* Mobile adjustments for solutions menu */
+        @media (max-width: 768px) {
+            .dropdown-menu.solutions-menu {
+                min-width: 100%;
+                padding: 20px;
+                gap: 20px;
+                transition: opacity 0.15s ease, transform 0.15s ease, visibility 0.15s ease;
+            }
+
+            .dropdown-menu.solutions-menu .dropdown-section h3 {
+                font-size: 1.15rem !important;
+                margin-bottom: 12px;
+                padding-bottom: 8px;
+            }
+
+            .dropdown-menu.solutions-menu .dropdown-section a {
+                font-size: 0.9rem;
+                padding: 5px 0;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1183,10 +1381,10 @@
                     <a href="/solutions">Solutions</a>
                     <i class="fas fa-chevron-down"></i>
                 </div>
-                <div class="dropdown-menu">
+                <div class="dropdown-menu solutions-menu">
                     <!-- Document Management -->
                     <div class="dropdown-section">
-                        <h3>Document Management</h3>
+                        <h3><a href="/solutions/document-management.html">Document Management</a></h3>
                         <a href="/solutions/document-management-storage.html">Document Storage</a>
                         <a href="/solutions/document-management-email.html">Email Integration</a>
                         <a href="/solutions/document-management-organization.html">Document Organization</a>
@@ -1194,7 +1392,7 @@
                     
                     <!-- Case Management -->
                     <div class="dropdown-section">
-                        <h3>Case Management</h3>
+                        <h3><a href="/solutions/case-management.html">Case Management</a></h3>
                         <a href="/solutions/case-management-workflow.html">Workflow Automation</a>
                         <a href="/solutions/case-management-calendar.html">Calendaring</a>
                         <a href="/solutions/case-management-reports.html">Report Generation</a>
@@ -1202,7 +1400,7 @@
                     
                     <!-- Client Communications -->
                     <div class="dropdown-section">
-                        <h3>Client Communications</h3>
+                        <h3><a href="/solutions/client-communications.html">Client Communications</a></h3>
                         <a href="/solutions/client-portal.html">Client Portal</a>
                         <a href="/solutions/secure-messaging.html">Secure Messaging</a>
                         <a href="/solutions/document-sharing.html">Document Sharing</a>
@@ -1210,7 +1408,7 @@
                     
                     <!-- Billing & Payments -->
                     <div class="dropdown-section">
-                        <h3>Billing & Payments</h3>
+                        <h3><a href="/solutions/billing-payments.html">Billing & Payments</a></h3>
                         <a href="/solutions/billing-invoicing.html">Billing & Invoicing</a>
                         <a href="/solutions/time-tracking.html">Time Tracking</a>
                         <a href="/solutions/payment-processing.html">Payment Processing</a>
@@ -1218,7 +1416,7 @@
                     
                     <!-- AI Solutions -->
                     <div class="dropdown-section">
-                        <h3>AI Solutions</h3>
+                        <h3><a href="/solutions/ai-solutions.html">AI Solutions</a></h3>
                         <a href="/solutions/ai-document-analysis.html">Document Analysis</a>
                         <a href="/solutions/ai-legal-research.html">Legal Research Assistant</a>
                         <a href="/solutions/ai-predictive-analytics.html">Predictive Analytics</a>
@@ -1266,8 +1464,8 @@
                 </div>
             </div>
             
-            <a href="/login" class="nav-link">Login</a>
-            <a href="/free-trial" class="navbar-cta">Free Trial</a>
+            <a href="login.html" class="nav-link">Login</a>
+            <a href="free-trial.html" class="navbar-cta">Free Trial</a>
         </div>
         
         <button class="navbar-toggle" id="navbarToggle" aria-label="Toggle menu">
@@ -1677,10 +1875,8 @@
         // Navigation menu functionality
         const navbar = document.getElementById('navbar');
         const navbarMenu = document.getElementById('mainMenu');
-        const navbarToggle = document.createElement('button');
-        navbarToggle.className = 'navbar-toggle';
-        navbarToggle.innerHTML = '<i class="fas fa-bars"></i>';
-        navbar.appendChild(navbarToggle);
+        const navbarToggle = document.getElementById('navbarToggle');
+        const dropdowns = document.querySelectorAll('.dropdown');
 
         // Handle mobile menu toggle
         navbarToggle.addEventListener('click', function() {
@@ -1690,40 +1886,53 @@
             icon.classList.toggle('fa-times');
         });
 
-        // Handle dropdown menus on mobile
-        const dropdowns = document.querySelectorAll('.dropdown');
+        // Handle dropdown menus
         dropdowns.forEach(dropdown => {
             const toggle = dropdown.querySelector('.dropdown-toggle');
+            const menu = dropdown.querySelector('.dropdown-menu');
+            
+            // Click handler for dropdown toggle
             toggle.addEventListener('click', function(e) {
-                if (window.innerWidth <= 768) {
-                    e.preventDefault();
-                    dropdown.classList.toggle('active');
-                }
+                e.preventDefault();
+                e.stopPropagation();
+                
+                // Close other dropdowns
+                dropdowns.forEach(otherDropdown => {
+                    if (otherDropdown !== dropdown) {
+                        otherDropdown.classList.remove('active');
+                    }
+                });
+                
+                // Toggle current dropdown
+                dropdown.classList.toggle('active');
+            });
+            
+            // Ensure links are clickable
+            const links = menu.querySelectorAll('a');
+            links.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    // Close dropdown after clicking a link
+                    dropdown.classList.remove('active');
+                });
             });
         });
 
-        // Handle navbar scroll effect
-        let lastScroll = 0;
-        window.addEventListener('scroll', function() {
-            const currentScroll = window.pageYOffset;
-            
-            if (currentScroll <= 0) {
-                navbar.classList.remove('sticky');
-                return;
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.dropdown')) {
+                dropdowns.forEach(dropdown => {
+                    dropdown.classList.remove('active');
+                });
             }
-            
-            if (currentScroll > lastScroll && currentScroll > 75) {
-                navbar.classList.add('sticky');
-            } else {
-                navbar.classList.remove('sticky');
-            }
-            
-            lastScroll = currentScroll;
         });
 
-        // Close mobile menu when clicking outside
-        document.addEventListener('click', function(e) {
-            if (!navbar.contains(e.target) && navbarMenu.classList.contains('active')) {
+        // Handle window resize
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 768) {
+                dropdowns.forEach(dropdown => {
+                    dropdown.classList.remove('active');
+                });
                 navbarMenu.classList.remove('active');
                 const icon = navbarToggle.querySelector('i');
                 icon.classList.remove('fa-times');
@@ -2002,22 +2211,6 @@
         
         // Trigger once on load
         window.addEventListener('load', animateOnScroll);
-        
-        // Handle window resize
-        window.addEventListener('resize', function() {
-            if (window.innerWidth > 768) {
-                // Reset any mobile-specific states when returning to desktop view
-                document.querySelectorAll('.dropdown').forEach(dropdown => {
-                    dropdown.classList.remove('active');
-                });
-                
-                // Reset mobile menu if open
-                navbarMenu.classList.remove('active');
-                const icon = navbarToggle.querySelector('i');
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
-            }
-        });
     });
     </script>
 </body>

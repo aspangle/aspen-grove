@@ -36,12 +36,16 @@
 
         body {
             font-family: 'Open Sans', sans-serif;
-            background-color: var(--light-bg);
-            color: var(--dark-text);
+            background-color: #F4F7F2;
+            color: #2C3A2F;
             line-height: 1.6;
-            min-height: 100vh;
+            margin: 0;
+            padding: 0;
             display: flex;
-            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            text-align: center;
         }
 
         /* Navigation Styles */
@@ -204,8 +208,12 @@
         }
 
         .container {
-            max-width: 1200px;
-            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: 20px;
         }
 
         .page-header {
@@ -381,266 +389,16 @@
     </style>
 </head>
 <body>
-    <!-- Navigation Bar -->
-    <nav class="navbar" id="navbar">
-        <a href="https://www.aspengroveservices.com" class="navbar-brand">
-            <svg class="navbar-logo" width="42" height="42" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-                <!-- Sophisticated Aspen Grove Logo -->
-                <circle cx="100" cy="100" r="95" fill="#4B6455" stroke="#F4F7F2" stroke-width="2" />
-                
-                <!-- Aspen Trees -->
-                <g id="trees">
-                    <!-- Tree 1 (center) -->
-                    <line x1="100" y1="140" x2="100" y2="60" stroke="#F4F7F2" stroke-width="4" />
-                    <!-- Branches -->
-                    <line x1="100" y1="80" x2="85" y2="65" stroke="#F4F7F2" stroke-width="2" />
-                    <line x1="100" y1="90" x2="115" y2="75" stroke="#F4F7F2" stroke-width="2" />
-                    <line x1="100" y1="110" x2="80" y2="95" stroke="#F4F7F2" stroke-width="2" />
-                    <line x1="100" y1="125" x2="118" y2="110" stroke="#F4F7F2" stroke-width="2" />
-                    
-                    <!-- Tree 2 (left) -->
-                    <line x1="70" y1="145" x2="70" y2="75" stroke="#F4F7F2" stroke-width="4" />
-                    <!-- Branches -->
-                    <line x1="70" y1="85" x2="55" y2="75" stroke="#F4F7F2" stroke-width="2" />
-                    <line x1="70" y1="100" x2="85" y2="85" stroke="#F4F7F2" stroke-width="2" />
-                    <line x1="70" y1="120" x2="55" y2="105" stroke="#F4F7F2" stroke-width="2" />
-                    
-                    <!-- Tree 3 (right) -->
-                    <line x1="130" y1="145" x2="130" y2="75" stroke="#F4F7F2" stroke-width="4" />
-                    <!-- Branches -->
-                    <line x1="130" y1="90" x2="145" y2="75" stroke="#F4F7F2" stroke-width="2" />
-                    <line x1="130" y1="110" x2="115" y2="95" stroke="#F4F7F2" stroke-width="2" />
-                    <line x1="130" y1="125" x2="145" y2="110" stroke="#F4F7F2" stroke-width="2" />
-                </g>
-                
-                <!-- Leaves -->
-                <g id="leaves">
-                    <!-- Center Tree Leaves -->
-                    <circle cx="100" cy="60" r="8" fill="#7D9D7F" />
-                    <circle cx="85" cy="65" r="6" fill="#7D9D7F" />
-                    <circle cx="115" cy="75" r="7" fill="#7D9D7F" />
-                    <circle cx="80" cy="95" r="6" fill="#7D9D7F" />
-                    <circle cx="118" cy="110" r="6" fill="#7D9D7F" />
-                    
-                    <!-- Left Tree Leaves -->
-                    <circle cx="70" cy="75" r="7" fill="#7D9D7F" />
-                    <circle cx="55" cy="75" r="6" fill="#7D9D7F" />
-                    <circle cx="85" cy="85" r="6" fill="#7D9D7F" />
-                    <circle cx="55" cy="105" r="6" fill="#7D9D7F" />
-                    
-                    <!-- Right Tree Leaves -->
-                    <circle cx="130" cy="75" r="7" fill="#7D9D7F" />
-                    <circle cx="145" cy="75" r="6" fill="#7D9D7F" />
-                    <circle cx="115" cy="95" r="6" fill="#7D9D7F" />
-                    <circle cx="145" cy="110" r="6" fill="#7D9D7F" />
-                </g>
-                
-                <!-- Root System -->
-                <path d="M60,145 C70,160 90,165 100,160 C110,165 130,160 140,145" stroke="#F4F7F2" stroke-width="3" fill="none" />
-                
-                <!-- Accent Elements -->
-                <circle cx="145" cy="75" r="2" fill="#E8B87D" />
-                <circle cx="85" cy="65" r="2" fill="#E8B87D" />
-                <circle cx="55" cy="105" r="2" fill="#E8B87D" />
-                <circle cx="118" cy="110" r="2" fill="#E8B87D" />
-            </svg>
-            <span class="navbar-logo-text">Aspen Grove</span>
+    <div class="container">
+        <div class="icon">
+            <i class="fas fa-tools"></i>
+        </div>
+        <h1>Document Management</h1>
+        <p>This page is under construction. We're working hard to bring you comprehensive information about our document management solutions.</p>
+        <a href="/" class="back-link">
+            <i class="fas fa-arrow-left"></i>
+            Back to Home
         </a>
-        
-        <div class="navbar-menu" id="mainMenu">
-            <!-- Solutions Dropdown -->
-            <div class="dropdown">
-                <div class="dropdown-toggle">
-                    <a href="/solutions">Solutions</a>
-                    <i class="fas fa-chevron-down"></i>
-                </div>
-                <div class="dropdown-menu">
-                    <a href="/solutions/ai-document-processing">AI Document Processing</a>
-                    <a href="/solutions/practice-automation">Practice Automation</a>
-                    <a href="/solutions/hipaa-compliance">HIPAA Compliance</a>
-                    <a href="/solutions/secure-communication">Secure Communication</a>
-                    <a href="/solutions/document-management">Document Management</a>
-                    <a href="/solutions/workflow-automation">Workflow Automation</a>
-                </div>
-            </div>
-            
-            <a href="/pricing">Pricing</a>
-            
-            <!-- Resources Dropdown -->
-            <div class="dropdown">
-                <div class="dropdown-toggle">
-                    <a href="/resources">Resources</a>
-                    <i class="fas fa-chevron-down"></i>
-                </div>
-                <div class="dropdown-menu">
-                    <a href="/resources/healthcare-solutions">Healthcare Solutions</a>
-                    <a href="/resources/hipaa-resources">HIPAA Resources</a>
-                    <a href="/resources/documentation">Documentation</a>
-                    <a href="/resources/case-studies">Case Studies</a>
-                    <a href="/resources/webinars">Webinars</a>
-                    <a href="/resources/ai-automation-guides">AI & Automation Guides</a>
-                    <a href="/resources/compliance-checklists">Compliance Checklists</a>
-                </div>
-            </div>
-            
-            <!-- About Dropdown -->
-            <div class="dropdown">
-                <div class="dropdown-toggle">
-                    <a href="/about">About</a>
-                    <i class="fas fa-chevron-down"></i>
-                </div>
-                <div class="dropdown-menu">
-                    <a href="/about/company">Company</a>
-                    <a href="/about/team">Our Team</a>
-                    <a href="/about/contact">Contact Us</a>
-                    <a href="/about/partners">Partners</a>
-                    <a href="/about/careers">Careers</a>
-                </div>
-            </div>
-
-            <!-- Legal Dropdown -->
-            <div class="dropdown">
-                <div class="dropdown-toggle">
-                    <a href="/legal">Legal</a>
-                    <i class="fas fa-chevron-down"></i>
-                </div>
-                <div class="dropdown-menu">
-                    <a href="/legal/privacy">Privacy Policy</a>
-                    <a href="/legal/terms">Terms of Service</a>
-                    <a href="/legal/hipaa">HIPAA Compliance</a>
-                    <a href="/legal/security">Security</a>
-                    <a href="/legal/compliance-certifications">Compliance Certifications</a>
-                </div>
-            </div>
-            
-            <a href="/login">Login</a>
-            <a href="/free-trial" class="navbar-cta">Free Trial</a>
-        </div>
-        
-        <button class="navbar-toggle" id="navbarToggle" aria-label="Toggle menu">
-            <i class="fas fa-bars"></i>
-        </button>
-    </nav>
-
-    <!-- Main Content -->
-    <main class="main-content">
-        <div class="container">
-            <header class="page-header">
-                <h1 class="page-title">Document Management</h1>
-                <p class="page-subtitle">Secure, efficient, and intelligent document management solutions for your practice</p>
-            </header>
-
-            <div class="features-grid">
-                <!-- Document Storage -->
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-database"></i>
-                    </div>
-                    <h2 class="feature-title">Document Storage</h2>
-                    <p class="feature-description">Secure, centralized storage for all your practice documents with advanced search and organization capabilities.</p>
-                    <a href="/solutions/document-management-storage" class="feature-link">
-                        Learn More
-                        <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
-
-                <!-- Email Integration -->
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-envelope"></i>
-                    </div>
-                    <h2 class="feature-title">Email Integration</h2>
-                    <p class="feature-description">Seamlessly integrate and manage email communications within your document management system.</p>
-                    <a href="/solutions/document-management-email" class="feature-link">
-                        Learn More
-                        <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
-
-                <!-- Document Organization -->
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-folder-tree"></i>
-                    </div>
-                    <h2 class="feature-title">Document Organization</h2>
-                    <p class="feature-description">Intelligent document organization with customizable workflows and automated categorization.</p>
-                    <a href="/solutions/document-management-organization" class="feature-link">
-                        Learn More
-                        <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </main>
-
-    <!-- Footer (from template.html) -->
-    <footer class="footer">
-        <div class="footer-content">
-            <p class="footer-text">&copy; 2025 Aspen Grove Solutions. All rights reserved.</p>
-        </div>
-    </footer>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Sticky navigation
-            const navbar = document.getElementById('navbar');
-            window.addEventListener('scroll', function() {
-                if (window.scrollY > 50) {
-                    navbar.classList.add('sticky');
-                } else {
-                    navbar.classList.remove('sticky');
-                }
-            });
-
-            // Mobile menu toggle
-            const navbarToggle = document.getElementById('navbarToggle');
-            const navbarMenu = document.getElementById('mainMenu');
-            
-            navbarToggle.addEventListener('click', function() {
-                navbarMenu.classList.toggle('active');
-                const icon = this.querySelector('i');
-                if (navbarMenu.classList.contains('active')) {
-                    icon.classList.remove('fa-bars');
-                    icon.classList.add('fa-times');
-                } else {
-                    icon.classList.remove('fa-times');
-                    icon.classList.add('fa-bars');
-                }
-            });
-            
-            // Mobile dropdowns toggle
-            if (window.innerWidth <= 768) {
-                const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
-                
-                dropdownToggles.forEach(toggle => {
-                    toggle.addEventListener('click', function(e) {
-                        e.preventDefault();
-                        const dropdown = this.closest('.dropdown');
-                        dropdown.classList.toggle('active');
-                        
-                        document.querySelectorAll('.dropdown').forEach(item => {
-                            if (item !== dropdown) {
-                                item.classList.remove('active');
-                            }
-                        });
-                    });
-                });
-            }
-
-            // Handle window resize
-            window.addEventListener('resize', function() {
-                if (window.innerWidth > 768) {
-                    document.querySelectorAll('.dropdown').forEach(dropdown => {
-                        dropdown.classList.remove('active');
-                    });
-                    
-                    navbarMenu.classList.remove('active');
-                    const icon = navbarToggle.querySelector('i');
-                    icon.classList.remove('fa-times');
-                    icon.classList.add('fa-bars');
-                }
-            });
-        });
-    </script>
+    </div>
 </body>
 </html> 

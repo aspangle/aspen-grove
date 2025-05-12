@@ -314,6 +314,70 @@
                 font-size: 2rem;
             }
         }
+
+        /* Additional styles for the landing page */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .feature-card {
+            background: var(--white);
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 4px 15px var(--shadow-color);
+            transition: var(--transition);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px var(--shadow-color);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+        }
+
+        .feature-title {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+
+        .feature-description {
+            color: var(--medium-text);
+            margin-bottom: 20px;
+        }
+
+        .feature-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .feature-link:hover {
+            color: var(--accent-color);
+            gap: 12px;
+        }
+
+        .coming-soon-badge {
+            display: inline-block;
+            background: var(--accent-color);
+            color: var(--white);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-left: 10px;
+        }
     </style>
 </head>
 <body>
@@ -463,17 +527,58 @@
         <div class="container">
             <header class="page-header">
                 <h1 class="page-title">Document Management</h1>
-                <p class="page-subtitle">Streamline your document workflow with our intelligent document management system</p>
+                <p class="page-subtitle">Secure, efficient, and intelligent document management solutions for your practice</p>
             </header>
 
-            <!-- Under Construction Notice -->
-            <div class="construction-notice">
-                <i class="fas fa-hard-hat"></i>
-                <h2>Page Under Construction</h2>
-                <p>This page is currently being developed. Please check back soon for updates.</p>
+            <div class="features-grid">
+                <!-- Document Storage -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <h2 class="feature-title">Document Storage</h2>
+                    <p class="feature-description">Secure, centralized storage for all your practice documents with advanced search and organization capabilities.</p>
+                    <a href="/solutions/document-management-storage" class="feature-link">
+                        Learn More
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <!-- Email Integration -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h2 class="feature-title">Email Integration</h2>
+                    <p class="feature-description">Seamlessly integrate and manage email communications within your document management system.</p>
+                    <a href="/solutions/document-management-email" class="feature-link">
+                        Learn More
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <!-- Document Organization -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-folder-tree"></i>
+                    </div>
+                    <h2 class="feature-title">Document Organization</h2>
+                    <p class="feature-description">Intelligent document organization with customizable workflows and automated categorization.</p>
+                    <a href="/solutions/document-management-organization" class="feature-link">
+                        Learn More
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
             </div>
         </div>
     </main>
+
+    <!-- Footer (from template.html) -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p class="footer-text">&copy; 2025 Aspen Grove Solutions. All rights reserved.</p>
+        </div>
+    </footer>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {

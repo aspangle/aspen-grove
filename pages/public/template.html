@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>[Page Title] - Aspen Grove Solutions</title>
+    <title>{{PAGE_TITLE}} - Aspen Grove Solutions</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -42,6 +42,12 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Lora', serif;
+            font-weight: 600;
+            color: var(--dark-text);
         }
 
         /* Navigation Styles */
@@ -198,59 +204,81 @@
         }
 
         /* Main Content Styles */
-        .main-content {
+        .main-container {
             margin-top: var(--header-height);
-            padding: 80px 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            text-align: center;
         }
 
-        .container {
+        .construction-content {
+            max-width: 800px;
+            background: var(--white);
+            padding: 60px 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px var(--shadow-color);
+            margin: 40px auto;
+        }
+
+        .construction-icon {
+            font-size: 4rem;
+            color: var(--accent-color);
+            margin-bottom: 30px;
+        }
+
+        .construction-title {
+            font-size: 2.4rem;
+            margin-bottom: 20px;
+            color: var(--dark-text);
+        }
+
+        .construction-subtitle {
+            font-size: 1.2rem;
+            color: var(--medium-text);
+            margin-bottom: 30px;
+        }
+
+        .construction-message {
+            font-size: 1.1rem;
+            color: var(--medium-text);
+            margin-bottom: 40px;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .back-link:hover {
+            color: var(--accent-color);
+            transform: translateX(-5px);
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--dark-text);
+            color: var(--white);
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        .footer-content {
             max-width: 1200px;
             margin: 0 auto;
         }
 
-        .page-header {
-            text-align: center;
-            margin-bottom: 60px;
-        }
-
-        .page-title {
-            font-family: 'Lora', serif;
-            font-size: 2.5rem;
-            color: var(--primary-color);
-            margin-bottom: 20px;
-        }
-
-        .page-subtitle {
-            font-size: 1.2rem;
-            color: var(--medium-text);
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        /* Under Construction Notice */
-        .construction-notice {
-            text-align: center;
-            padding: 40px;
-            background: var(--white);
-            border-radius: 8px;
-            box-shadow: 0 4px 15px var(--shadow-color);
-            margin: 40px auto;
-            max-width: 600px;
-        }
-
-        .construction-notice i {
-            font-size: 3rem;
-            color: var(--accent-color);
-            margin-bottom: 20px;
-        }
-
-        .construction-notice h2 {
-            color: var(--primary-color);
-            margin-bottom: 15px;
-        }
-
-        .construction-notice p {
-            color: var(--medium-text);
+        .footer-text {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
         }
 
         /* Media Queries */
@@ -310,8 +338,67 @@
                 transform: rotate(180deg);
             }
 
-            .page-title {
+            .construction-content {
+                padding: 40px 20px;
+                margin: 20px;
+            }
+
+            .construction-title {
                 font-size: 2rem;
+            }
+
+            .construction-subtitle {
+                font-size: 1.1rem;
+            }
+        }
+
+        /* Add styles for the mega menu */
+        .dropdown-menu {
+            padding: 20px;
+            min-width: 600px;
+        }
+
+        .dropdown-section {
+            margin-bottom: 15px;
+        }
+
+        .dropdown-section h3 {
+            color: var(--primary-color);
+            font-size: 1rem;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .dropdown-section a {
+            display: block;
+            padding: 6px 0;
+            color: var(--medium-text);
+            font-size: 0.9rem;
+        }
+
+        .dropdown-section a:hover {
+            color: var(--primary-color);
+            background: none;
+        }
+
+        @media (max-width: 768px) {
+            .dropdown-menu {
+                min-width: 100%;
+                padding: 10px;
+            }
+
+            .dropdown-section {
+                margin-bottom: 10px;
+            }
+
+            .dropdown-section h3 {
+                font-size: 0.95rem;
+                margin-bottom: 5px;
+            }
+
+            .dropdown-section a {
+                padding: 4px 0;
+                font-size: 0.85rem;
             }
         }
     </style>
@@ -319,66 +406,117 @@
 <body>
     <!-- Navigation Bar -->
     <nav class="navbar" id="navbar">
-        <div class="container">
-            <a href="/" class="navbar-brand">
-                <img src="/assets/images/logo.svg" alt="Aspen Grove Solutions" class="logo">
-            </a>
-            
-            <div class="nav-links">
-                <div class="nav-group">
-                    <a href="/solutions" class="nav-link">Solutions</a>
-                    <div class="dropdown-menu">
-                        <a href="/solutions/ai-document-processing">AI Document Processing</a>
-                        <a href="/solutions/practice-automation">Practice Automation</a>
-                        <a href="/solutions/hipaa-compliance">HIPAA Compliance</a>
-                        <a href="/solutions/secure-communication">Secure Communication</a>
-                        <a href="/solutions/document-management">Document Management</a>
-                        <a href="/solutions/workflow-automation">Workflow Automation</a>
-                    </div>
+        <a href="https://www.aspengroveservices.com" class="navbar-brand">
+            <svg class="navbar-logo" width="42" height="42" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                <!-- Sophisticated Aspen Grove Logo -->
+                <circle cx="100" cy="100" r="95" fill="#4B6455" stroke="#F4F7F2" stroke-width="2" />
+                
+                <!-- Aspen Trees -->
+                <g id="trees">
+                    <!-- Tree 1 (center) -->
+                    <line x1="100" y1="140" x2="100" y2="60" stroke="#F4F7F2" stroke-width="4" />
+                    <!-- Branches -->
+                    <line x1="100" y1="80" x2="85" y2="65" stroke="#F4F7F2" stroke-width="2" />
+                    <line x1="100" y1="90" x2="115" y2="75" stroke="#F4F7F2" stroke-width="2" />
+                    <line x1="100" y1="110" x2="80" y2="95" stroke="#F4F7F2" stroke-width="2" />
+                    <line x1="100" y1="125" x2="118" y2="110" stroke="#F4F7F2" stroke-width="2" />
+                </g>
+            </svg>
+            <span class="navbar-logo-text">Aspen Grove</span>
+        </a>
+        
+        <div class="navbar-menu" id="mainMenu">
+            <!-- Solutions Dropdown -->
+            <div class="dropdown">
+                <div class="dropdown-toggle">
+                    <a href="/solutions">Solutions</a>
+                    <i class="fas fa-chevron-down"></i>
                 </div>
-                
-                <a href="/pricing" class="nav-link">Pricing</a>
-                
-                <div class="nav-group">
-                    <a href="/resources" class="nav-link">Resources</a>
-                    <div class="dropdown-menu">
-                        <a href="/resources/healthcare-solutions">Healthcare Solutions</a>
-                        <a href="/resources/hipaa-resources">HIPAA Resources</a>
-                        <a href="/resources/documentation">Documentation</a>
-                        <a href="/resources/case-studies">Case Studies</a>
-                        <a href="/resources/webinars">Webinars</a>
-                        <a href="/resources/ai-automation-guides">AI & Automation Guides</a>
-                        <a href="/resources/compliance-checklists">Compliance Checklists</a>
+                <div class="dropdown-menu">
+                    <!-- Document Management -->
+                    <div class="dropdown-section">
+                        <h3>Document Management</h3>
+                        <a href="/solutions/document-management-storage">Document Storage</a>
+                        <a href="/solutions/document-management-email">Email Integration</a>
+                        <a href="/solutions/document-management-organization">Document Organization</a>
                     </div>
-                </div>
-                
-                <div class="nav-group">
-                    <a href="/about" class="nav-link">About</a>
-                    <div class="dropdown-menu">
-                        <a href="/about/company">Company</a>
-                        <a href="/about/team">Our Team</a>
-                        <a href="/about/contact">Contact Us</a>
-                        <a href="/about/partners">Partners</a>
-                        <a href="/about/careers">Careers</a>
+                    
+                    <!-- Case Management -->
+                    <div class="dropdown-section">
+                        <h3>Case Management</h3>
+                        <a href="/solutions/case-management-workflow">Workflow Automation</a>
+                        <a href="/solutions/case-management-calendar">Calendaring</a>
+                        <a href="/solutions/case-management-reports">Report Generation</a>
                     </div>
-                </div>
-                
-                <div class="nav-group">
-                    <a href="/legal" class="nav-link">Legal</a>
-                    <div class="dropdown-menu">
-                        <a href="/legal/privacy">Privacy Policy</a>
-                        <a href="/legal/terms">Terms of Service</a>
-                        <a href="/legal/hipaa">HIPAA Compliance</a>
-                        <a href="/legal/security">Security</a>
-                        <a href="/legal/compliance-certifications">Compliance Certifications</a>
+                    
+                    <!-- Client Communications -->
+                    <div class="dropdown-section">
+                        <h3>Client Communications</h3>
+                        <a href="/solutions/client-portal">Client Portal</a>
+                        <a href="/solutions/secure-messaging">Secure Messaging</a>
+                        <a href="/solutions/document-sharing">Document Sharing</a>
+                    </div>
+                    
+                    <!-- Billing & Payments -->
+                    <div class="dropdown-section">
+                        <h3>Billing & Payments</h3>
+                        <a href="/solutions/billing-invoicing">Billing & Invoicing</a>
+                        <a href="/solutions/time-tracking">Time Tracking</a>
+                        <a href="/solutions/financial-reporting">Financial Reporting</a>
+                    </div>
+                    
+                    <!-- AI Solutions -->
+                    <div class="dropdown-section">
+                        <h3>AI Solutions</h3>
+                        <a href="/solutions/document-ai">Document AI</a>
+                        <a href="/solutions/template-generation">Template Generation</a>
+                        <a href="/solutions/ai-writing">AI Writing Assistant</a>
                     </div>
                 </div>
             </div>
             
-            <div class="nav-actions">
-                <a href="/login" class="nav-link">Login</a>
-                <a href="/free-trial" class="btn btn-primary">Free Trial</a>
+            <a href="/pricing">Pricing</a>
+            
+            <!-- Resources Dropdown -->
+            <div class="dropdown">
+                <div class="dropdown-toggle">
+                    <a href="/resources">Resources</a>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="dropdown-menu">
+                    <a href="/resources/blog">Blog</a>
+                    <a href="/resources/guides">Guides & Handbooks</a>
+                    <a href="/resources/reports">Reports</a>
+                </div>
             </div>
+            
+            <!-- About Dropdown -->
+            <div class="dropdown">
+                <div class="dropdown-toggle">
+                    <a href="/about">About</a>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="dropdown-menu">
+                    <a href="/about/company">Company</a>
+                    <a href="/about/contact">Contact</a>
+                </div>
+            </div>
+
+            <!-- Legal Dropdown -->
+            <div class="dropdown">
+                <div class="dropdown-toggle">
+                    <a href="/legal">Legal</a>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="dropdown-menu">
+                    <a href="/legal/privacy">Privacy Policy</a>
+                    <a href="/legal/terms">Terms of Service</a>
+                    <a href="/legal/hipaa">HIPAA Compliance</a>
+                </div>
+            </div>
+            
+            <a href="/login">Login</a>
+            <a href="/free-trial" class="navbar-cta">Free Trial</a>
         </div>
         
         <button class="navbar-toggle" id="navbarToggle" aria-label="Toggle menu">
@@ -387,21 +525,27 @@
     </nav>
 
     <!-- Main Content -->
-    <main class="main-content">
-        <div class="container">
-            <header class="page-header">
-                <h1 class="page-title">[Page Title]</h1>
-                <p class="page-subtitle">[Page Subtitle]</p>
-            </header>
-
-            <!-- Under Construction Notice -->
-            <div class="construction-notice">
+    <div class="main-container">
+        <div class="construction-content">
+            <div class="construction-icon">
                 <i class="fas fa-hard-hat"></i>
-                <h2>Page Under Construction</h2>
-                <p>This page is currently being developed. Please check back soon for updates.</p>
             </div>
+            <h1 class="construction-title">{{PAGE_TITLE}}</h1>
+            <p class="construction-subtitle">{{PAGE_SUBTITLE}}</p>
+            <p class="construction-message">This page is currently being developed. Please check back soon for updates.</p>
+            <a href="/" class="back-link">
+                <i class="fas fa-arrow-left"></i>
+                Back to Home
+            </a>
         </div>
-    </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p class="footer-text">&copy; 2025 Aspen Grove Solutions. All rights reserved.</p>
+        </div>
+    </footer>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {

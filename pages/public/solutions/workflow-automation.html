@@ -332,22 +332,166 @@
                     <line x1="100" y1="80" x2="85" y2="65" stroke="#F4F7F2" stroke-width="2" />
                     <line x1="100" y1="90" x2="115" y2="75" stroke="#F4F7F2" stroke-width="2" />
                     <line x1="100" y1="110" x2="80" y2="95" stroke="#F4F7F2" stroke-width="2" />
-    // ... existing navbar code ...
+                    <line x1="100" y1="125" x2="118" y2="110" stroke="#F4F7F2" stroke-width="2" />
+                </g>
+            </svg>
+            <span class="navbar-logo-text">Aspen Grove</span>
+        </a>
+        
+        <div class="navbar-menu" id="mainMenu">
+            <!-- Solutions Dropdown -->
+            <div class="dropdown">
+                <div class="dropdown-toggle">
+                    <a href="/solutions">Solutions</a>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="dropdown-menu">
+                    <a href="/solutions/ai-document-processing">AI Document Processing</a>
+                    <a href="/solutions/document-management">Document Management</a>
+                    <a href="/solutions/workflow-automation">Workflow Automation</a>
+                    <a href="/solutions/hipaa-compliance">HIPAA Compliance</a>
+                </div>
+            </div>
+            
+            <a href="/pricing">Pricing</a>
+            
+            <!-- Resources Dropdown -->
+            <div class="dropdown">
+                <div class="dropdown-toggle">
+                    <a href="/resources">Resources</a>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="dropdown-menu">
+                    <a href="/resources/documentation">Documentation</a>
+                    <a href="/resources/case-studies">Case Studies</a>
+                    <a href="/resources/hipaa-resources">HIPAA Resources</a>
+                </div>
+            </div>
+            
+            <!-- About Dropdown -->
+            <div class="dropdown">
+                <div class="dropdown-toggle">
+                    <a href="/about">About</a>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="dropdown-menu">
+                    <a href="/about/company">Company</a>
+                    <a href="/about/contact">Contact Us</a>
+                </div>
+            </div>
+
+            <!-- Legal Dropdown -->
+            <div class="dropdown">
+                <div class="dropdown-toggle">
+                    <a href="/legal">Legal</a>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="dropdown-menu">
+                    <a href="/legal/privacy">Privacy Policy</a>
+                    <a href="/legal/terms">Terms of Service</a>
+                    <a href="/legal/hipaa">HIPAA Compliance</a>
+                </div>
+            </div>
+            
+            <a href="/login">Login</a>
+            <a href="/free-trial" class="navbar-cta">Free Trial</a>
+        </div>
+        
+        <button class="navbar-toggle" id="navbarToggle" aria-label="Toggle menu">
+            <i class="fas fa-bars"></i>
+        </button>
+    </nav>
+
     <main class="main-content">
         <div class="container">
             <header class="page-header">
                 <h1 class="page-title">Workflow Automation</h1>
-                <p class="page-subtitle">Automate your practice workflows to increase efficiency and reduce manual tasks</p>
+                <p class="page-subtitle">Streamline your practice workflows with intelligent automation solutions</p>
             </header>
 
-            <!-- Under Construction Notice -->
-            <div class="construction-notice">
-                <i class="fas fa-hard-hat"></i>
-                <h2>Page Under Construction</h2>
-                <p>This page is currently being developed. Please check back soon for updates.</p>
+            <div class="construction-content">
+                <div class="construction-icon">
+                    <i class="fas fa-hard-hat"></i>
+                </div>
+                <h1 class="construction-title">Workflow Automation</h1>
+                <p class="construction-subtitle">Intelligent automation solutions for healthcare practices</p>
+                <p class="construction-message">This page is currently being developed. Please check back soon for updates.</p>
+                <a href="/" class="back-link">
+                    <i class="fas fa-arrow-left"></i>
+                    Back to Home
+                </a>
             </div>
         </div>
     </main>
-    // ... existing script code ...
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p class="footer-text">&copy; 2025 Aspen Grove Solutions. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Sticky navigation
+            const navbar = document.getElementById('navbar');
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('sticky');
+                } else {
+                    navbar.classList.remove('sticky');
+                }
+            });
+
+            // Mobile menu toggle
+            const navbarToggle = document.getElementById('navbarToggle');
+            const navbarMenu = document.getElementById('mainMenu');
+            
+            navbarToggle.addEventListener('click', function() {
+                navbarMenu.classList.toggle('active');
+                const icon = this.querySelector('i');
+                if (navbarMenu.classList.contains('active')) {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-times');
+                } else {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            });
+            
+            // Mobile dropdowns toggle
+            if (window.innerWidth <= 768) {
+                const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
+                
+                dropdownToggles.forEach(toggle => {
+                    toggle.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        const dropdown = this.closest('.dropdown');
+                        dropdown.classList.toggle('active');
+                        
+                        document.querySelectorAll('.dropdown').forEach(item => {
+                            if (item !== dropdown) {
+                                item.classList.remove('active');
+                            }
+                        });
+                    });
+                });
+            }
+
+            // Handle window resize
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 768) {
+                    document.querySelectorAll('.dropdown').forEach(dropdown => {
+                        dropdown.classList.remove('active');
+                    });
+                    
+                    navbarMenu.classList.remove('active');
+                    const icon = navbarToggle.querySelector('i');
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            });
+        });
+    </script>
 </body>
 </html> 

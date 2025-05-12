@@ -1171,71 +1171,12 @@
                     <line x1="100" y1="90" x2="115" y2="75" stroke="#F4F7F2" stroke-width="2" />
                     <line x1="100" y1="110" x2="80" y2="95" stroke="#F4F7F2" stroke-width="2" />
                     <line x1="100" y1="125" x2="118" y2="110" stroke="#F4F7F2" stroke-width="2" />
-                    
-                    <!-- Tree 2 (left) -->
-                    <line x1="70" y1="145" x2="70" y2="75" stroke="#F4F7F2" stroke-width="4" />
-                    <!-- Branches -->
-                    <line x1="70" y1="85" x2="55" y2="75" stroke="#F4F7F2" stroke-width="2" />
-                    <line x1="70" y1="100" x2="85" y2="85" stroke="#F4F7F2" stroke-width="2" />
-                    <line x1="70" y1="120" x2="55" y2="105" stroke="#F4F7F2" stroke-width="2" />
-                    
-                    <!-- Tree 3 (right) -->
-                    <line x1="130" y1="145" x2="130" y2="75" stroke="#F4F7F2" stroke-width="4" />
-                    <!-- Branches -->
-                    <line x1="130" y1="90" x2="145" y2="75" stroke="#F4F7F2" stroke-width="2" />
-                    <line x1="130" y1="110" x2="115" y2="95" stroke="#F4F7F2" stroke-width="2" />
-                    <line x1="130" y1="125" x2="145" y2="110" stroke="#F4F7F2" stroke-width="2" />
                 </g>
-                
-                <!-- Leaves -->
-                <g id="leaves">
-                    <!-- Center Tree Leaves -->
-                    <circle cx="100" cy="60" r="8" fill="#7D9D7F" />
-                    <circle cx="85" cy="65" r="6" fill="#7D9D7F" />
-                    <circle cx="115" cy="75" r="7" fill="#7D9D7F" />
-                    <circle cx="80" cy="95" r="6" fill="#7D9D7F" />
-                    <circle cx="118" cy="110" r="6" fill="#7D9D7F" />
-                    
-                    <!-- Left Tree Leaves -->
-                    <circle cx="70" cy="75" r="7" fill="#7D9D7F" />
-                    <circle cx="55" cy="75" r="6" fill="#7D9D7F" />
-                    <circle cx="85" cy="85" r="6" fill="#7D9D7F" />
-                    <circle cx="55" cy="105" r="6" fill="#7D9D7F" />
-                    
-                    <!-- Right Tree Leaves -->
-                    <circle cx="130" cy="75" r="7" fill="#7D9D7F" />
-                    <circle cx="145" cy="75" r="6" fill="#7D9D7F" />
-                    <circle cx="115" cy="95" r="6" fill="#7D9D7F" />
-                    <circle cx="145" cy="110" r="6" fill="#7D9D7F" />
-                </g>
-                
-                <!-- Root System -->
-                <path d="M60,145 C70,160 90,165 100,160 C110,165 130,160 140,145" stroke="#F4F7F2" stroke-width="3" fill="none" />
-                
-                <!-- Accent Elements -->
-                <circle cx="145" cy="75" r="2" fill="#E8B87D" />
-                <circle cx="85" cy="65" r="2" fill="#E8B87D" />
-                <circle cx="55" cy="105" r="2" fill="#E8B87D" />
-                <circle cx="118" cy="110" r="2" fill="#E8B87D" />
             </svg>
             <span class="navbar-logo-text">Aspen Grove</span>
         </a>
         
         <div class="navbar-menu" id="mainMenu">
-            <!-- About Dropdown -->
-            <div class="dropdown">
-                <div class="dropdown-toggle">
-                    <a href="/about">About</a>
-                    <i class="fas fa-chevron-down"></i>
-                </div>
-                <div class="dropdown-menu">
-                    <a href="/about/about-page.html">Company</a>
-                    <a href="/about/contact-page.html">Contact Us</a>
-                    <a href="/about/partners.html">Partners</a>
-                    <a href="/about/careers.html">Careers</a>
-                </div>
-            </div>
-            
             <!-- Solutions Dropdown -->
             <div class="dropdown">
                 <div class="dropdown-toggle">
@@ -1243,11 +1184,45 @@
                     <i class="fas fa-chevron-down"></i>
                 </div>
                 <div class="dropdown-menu">
-                    <a href="/solutions/practice-automation.html">Practice Automation</a>
-                    <a href="/solutions/hipaa-compliance.html">HIPAA Compliance</a>
-                    <a href="/solutions/secure-communication.html">Secure Communication</a>
-                    <a href="/solutions/ai-document-processing.html">AI Document Processing</a>
-                    <a href="/solutions/document-management.html">Document Management</a>
+                    <!-- Document Management -->
+                    <div class="dropdown-section">
+                        <h3>Document Management</h3>
+                        <a href="/solutions/document-management-storage">Document Storage</a>
+                        <a href="/solutions/document-management-email">Email Integration</a>
+                        <a href="/solutions/document-management-organization">Document Organization</a>
+                    </div>
+                    
+                    <!-- Case Management -->
+                    <div class="dropdown-section">
+                        <h3>Case Management</h3>
+                        <a href="/solutions/case-management-workflow">Workflow Automation</a>
+                        <a href="/solutions/case-management-calendar">Calendaring</a>
+                        <a href="/solutions/case-management-reports">Report Generation</a>
+                    </div>
+                    
+                    <!-- Client Communications -->
+                    <div class="dropdown-section">
+                        <h3>Client Communications</h3>
+                        <a href="/solutions/client-portal">Client Portal</a>
+                        <a href="/solutions/secure-messaging">Secure Messaging</a>
+                        <a href="/solutions/document-sharing">Document Sharing</a>
+                    </div>
+                    
+                    <!-- Billing & Payments -->
+                    <div class="dropdown-section">
+                        <h3>Billing & Payments</h3>
+                        <a href="/solutions/billing-invoicing">Billing & Invoicing</a>
+                        <a href="/solutions/time-tracking">Time Tracking</a>
+                        <a href="/solutions/financial-reporting">Financial Reporting</a>
+                    </div>
+                    
+                    <!-- AI Solutions -->
+                    <div class="dropdown-section">
+                        <h3>AI Solutions</h3>
+                        <a href="/solutions/document-ai">Document AI</a>
+                        <a href="/solutions/template-generation">Template Generation</a>
+                        <a href="/solutions/ai-writing">AI Writing Assistant</a>
+                    </div>
                 </div>
             </div>
             
@@ -1260,16 +1235,24 @@
                     <i class="fas fa-chevron-down"></i>
                 </div>
                 <div class="dropdown-menu">
-                    <a href="/resources/healthcare-solutions/">Healthcare Solutions</a>
-                    <a href="/resources/hipaa-resources/">HIPAA Resources</a>
-                    <a href="/resources/documentation/">Documentation</a>
-                    <a href="/resources/case-studies/">Case Studies</a>
-                    <a href="/resources/webinars/">Webinars</a>
-                    <a href="/resources/ai-automation-guides.html">AI & Automation Guides</a>
-                    <a href="/resources/compliance-checklists.html">Compliance Checklists</a>
+                    <a href="/resources/blog">Blog</a>
+                    <a href="/resources/guides">Guides & Handbooks</a>
+                    <a href="/resources/reports">Reports</a>
                 </div>
             </div>
             
+            <!-- About Dropdown -->
+            <div class="dropdown">
+                <div class="dropdown-toggle">
+                    <a href="/about">About</a>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="dropdown-menu">
+                    <a href="/about/company">Company</a>
+                    <a href="/about/contact">Contact</a>
+                </div>
+            </div>
+
             <!-- Legal Dropdown -->
             <div class="dropdown">
                 <div class="dropdown-toggle">
@@ -1277,11 +1260,9 @@
                     <i class="fas fa-chevron-down"></i>
                 </div>
                 <div class="dropdown-menu">
-                    <a href="/legal/privacy/">Privacy Policy</a>
-                    <a href="/legal/terms/">Terms of Service</a>
-                    <a href="/legal/hipaa/">HIPAA Compliance</a>
-                    <a href="/legal/security.html">Security</a>
-                    <a href="/legal/compliance-certifications.html">Compliance Certifications</a>
+                    <a href="/legal/privacy">Privacy Policy</a>
+                    <a href="/legal/terms">Terms of Service</a>
+                    <a href="/legal/hipaa">HIPAA Compliance</a>
                 </div>
             </div>
             

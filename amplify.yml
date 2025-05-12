@@ -8,11 +8,25 @@ applications:
         build:
           commands:
             - npm run build
+            # Add cache control headers to HTML files
+            - find . -type f -name "*.html" -exec sh -c 'echo "Cache-Control: no-cache, no-store, must-revalidate" > {}.headers' \;
+            # Add cache control headers to static assets
+            - find . -type f \( -name "*.js" -o -name "*.css" -o -name "*.png" -o -name "*.jpg" -o -name "*.svg" \) -exec sh -c 'echo "Cache-Control: public, max-age=31536000" > {}.headers' \;
       artifacts:
         baseDirectory: pages/public
         files:
           - '**/*'
+          - '**/*.headers'
       cache:
         paths:
           - node_modules/**/*
+      customHeaders:
+        - pattern: '**/*.html'
+          headers:
+            - key: 'Cache-Control'
+              value: 'no-cache, no-store, must-revalidate'
+        - pattern: '**/*.{js,css,png,jpg,svg}'
+          headers:
+            - key: 'Cache-Control'
+              value: 'public, max-age=31536000'
     appRoot: . 

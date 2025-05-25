@@ -1,0 +1,2362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aspen Grove Solutions - Professional Service Management Platform</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #4B6455; /* Deep sage green */
+            --secondary-color: #7D9D7F; /* Medium sage green */
+            --accent-color: #E8B87D; /* Aspen gold/amber */
+            --accent-light: #F2E3CD; /* Light amber for backgrounds */
+            --dark-text: #2C3A2F; /* Dark green text */
+            --medium-text: #4A5D4E; /* Medium green text */
+            --light-bg: #F4F7F2; /* Light sage background */
+            --lighter-bg: #F9FCF8; /* Even lighter background */
+            --white: #FFFFFF;
+            --shadow-color: rgba(0, 0, 0, 0.08);
+            --border-color: #E0E6E3;
+            --success-color: #4CAF50;
+            --warning-color: #FFC107;
+            --danger-color: #F44336;
+            --info-color: #2196F3;
+            --transition: all 0.3s ease;
+            --header-height: 75px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: var(--light-bg);
+            color: var(--dark-text);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Lora', serif;
+            font-weight: 600;
+            color: var(--dark-text);
+        }
+
+        /* Navigation Styles - Simplified */
+        .navbar {
+            background-color: var(--white);
+            box-shadow: 0 4px 15px var(--shadow-color);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 50px;
+            height: var(--header-height);
+            border-bottom: 2px solid var(--accent-color);
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .navbar-logo {
+            height: 42px;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-logo-text {
+            font-family: 'Lora', serif;
+            font-weight: 700;
+            font-size: 1.6rem;
+            color: var(--primary-color);
+            letter-spacing: -0.5px;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-menu {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .navbar-menu a {
+            color: var(--medium-text);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+            display: inline-block;
+            padding: 28px 0;
+        }
+
+        .navbar-menu a:hover {
+            color: var(--accent-color);
+        }
+
+        .navbar-menu a.active {
+            color: var(--primary-color);
+        }
+
+        /* Click-based dropdown styles */
+        .navbar-menu .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-toggle {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 28px 0;
+            transition: color 0.3s ease;
+            font-weight: 500;
+            font-size: 0.95rem;
+            color: var(--medium-text);
+        }
+
+        .dropdown-toggle:hover {
+            color: var(--accent-color);
+        }
+
+        .dropdown-toggle i {
+            font-size: 0.8rem;
+            transition: transform 0.3s ease;
+            margin-left: 4px;
+            color: inherit;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%) translateY(10px);
+            background-color: var(--white);
+            min-width: 180px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            border-radius: 8px;
+            padding: 12px 0;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+            z-index: 1001;
+            pointer-events: none;
+            border: 1px solid var(--border-color);
+        }
+
+        .dropdown.active .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
+            pointer-events: auto;
+        }
+
+        .dropdown.active .dropdown-toggle i {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu a {
+            padding: 10px 20px;
+            display: block;
+            color: var(--medium-text);
+            font-weight: 400;
+            font-size: 0.95rem;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
+        .dropdown-menu a:hover {
+            background-color: rgba(232, 184, 125, 0.1);
+            color: var(--primary-color);
+        }
+
+        /* CTA Button */
+        .navbar-cta {
+            background-color: var(--accent-color);
+            color: var(--dark-text) !important;
+            padding: 9px 20px !important;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(232, 184, 125, 0.3);
+        }
+
+        .navbar-cta:hover {
+            background-color: var(--primary-color);
+            color: var(--white) !important;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(75, 100, 85, 0.3);
+        }
+
+        /* Mobile toggle */
+        .navbar-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--dark-text);
+            cursor: pointer;
+        }
+
+        /* Main Container */
+        .main-container {
+            margin-top: 75px;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background-color: var(--lighter-bg);
+            background-image: linear-gradient(135deg, rgba(249, 252, 248, 0.95) 0%, rgba(244, 247, 242, 0.95) 100%);
+            padding: 40px 20px;
+            position: relative;
+            overflow: hidden;
+            min-height: calc(100vh - var(--header-height));
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+            width: 100%;
+        }
+
+        .hero-text {
+            width: 100%;
+            max-width: none;
+            padding: 40px 40px 40px 0;
+        }
+
+        .hero-text h1 {
+            font-size: 3rem;
+            margin-top: 0;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            color: var(--dark-text);
+        }
+
+        .hero-subhead {
+            font-size: 1.4rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .hero-subtitle {
+            font-size: 1.1rem;
+            color: var(--medium-text);
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        /* Fixed the gold accent color */
+        .gold-text {
+            color: var(--accent-color);
+        }
+
+        /* Security badges */
+        .security-badges {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin: 30px 0;
+        }
+
+        .security-badge {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 15px;
+            background: rgba(75, 100, 85, 0.1);
+            border-radius: 8px;
+            border-left: 3px solid var(--primary-color);
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--dark-text);
+        }
+
+        .security-badge i {
+            color: var(--primary-color);
+            font-size: 1.1rem;
+        }
+
+        /* CTA Buttons */
+        .hero-cta-group {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .hero-cta-group .btn-primary,
+        .hero-cta-group .btn-secondary {
+            width: 100%;
+            justify-content: center;
+            padding: 15px 20px;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 30px;
+            background: var(--accent-color);
+            color: var(--dark-text);
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            box-shadow: 0 4px 10px rgba(232, 184, 125, 0.3);
+            font-size: 1.1rem;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-color);
+            color: var(--white);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(75, 100, 85, 0.3);
+        }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 28px;
+            background: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+            border-radius: 6px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: 1.1rem;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(75, 100, 85, 0.1);
+            transform: translateY(-3px);
+        }
+
+        /* Calculator styles - from improved-index */
+        .calculator-container {
+            background: var(--white);
+            border-radius: 12px;
+            box-shadow: 0 10px 30px var(--shadow-color);
+            padding: 60px 40px 60px 40px;
+            position: relative;
+            overflow: hidden;
+            height: fit-content;
+            border: 1px solid var(--border-color);
+            flex: 1;
+            width: 100% !important;
+            max-width: none !important;
+        }
+
+        .calculator-header {
+            text-align: center;
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .calculator-header h2,
+        .calculator-header p {
+            text-align: center;
+        }
+
+        .time-toggle {
+            position: absolute;
+            top: 0;
+            right: 0;
+            display: flex;
+            background: var(--light-bg);
+            padding: 4px;
+            border-radius: 30px;
+            width: fit-content;
+            margin: 0;
+        }
+
+        .toggle-btn {
+            padding: 8px 20px;
+            border: none;
+            background: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 600;
+            color: var(--medium-text);
+        }
+
+        .toggle-btn.active {
+            background: var(--white);
+            color: var(--primary-color);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Metric Groups */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px !important;
+            margin-bottom: 25px;
+        }
+
+        .metric-group {
+            position: relative;
+        }
+
+        .metric-group label {
+            display: block;
+            color: var(--dark-text);
+            font-weight: 600;
+            margin-bottom: 16px !important;
+            font-size: 1.05rem !important;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .info-icon {
+            color: var(--medium-text);
+            font-size: 0.9rem;
+            cursor: help;
+            position: relative;
+            display: inline-block;
+            margin-left: 4px;
+        }
+
+        .value-controls {
+            display: flex;
+            align-items: center;
+            background: var(--lighter-bg);
+            border-radius: 6px;
+            padding: 5px;
+            margin-bottom: 15px;
+            border: 1px solid var(--border-color);
+        }
+
+        .value-controls button {
+            background: var(--light-bg);
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            color: var(--medium-text);
+            transition: var(--transition);
+        }
+
+        .value-controls button:hover {
+            background: var(--primary-color);
+            color: var(--white);
+        }
+
+        .value-controls input {
+            flex: 1;
+            border: none;
+            background: transparent;
+            text-align: center;
+            font-weight: 600;
+            color: var(--dark-text);
+            padding: 5px;
+            font-size: 1.1rem;
+        }
+
+        .value-controls input:focus {
+            outline: none;
+        }
+
+        .value-controls input::-webkit-inner-spin-button,
+        .value-controls input::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        .value-controls input[type=number] {
+            -moz-appearance: textfield;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            height: 6px;
+            background: var(--light-bg);
+            border-radius: 3px;
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 18px;
+            height: 18px;
+            background: var(--accent-color);
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid var(--white);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        input[type="range"]::-webkit-slider-thumb:hover {
+            transform: scale(1.1);
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        input[type="range"]:focus {
+            outline: none;
+        }
+
+        /* Results Section */
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px !important;
+            margin: 25px 0;
+            min-width: 0; /* Prevents grid from overflowing */
+        }
+
+        .result-card {
+            background: var(--lighter-bg);
+            padding: 20px 15px;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid rgba(232, 184, 125, 0.3);
+            min-width: 0; /* Prevents flex items from overflowing */
+        }
+
+        .result-card h3 {
+            color: var(--medium-text);
+            font-size: 1.1rem !important;
+            margin-bottom: 10px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            white-space: nowrap;
+            flex-wrap: nowrap;
+        }
+
+        .result-card h3 .info-icon {
+            flex-shrink: 0;
+        }
+
+        .result-card p {
+            color: var(--dark-text);
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .result-card .unit-text {
+            color: var(--medium-text);
+            font-size: 0.85rem;
+            font-weight: 500;
+            display: block;
+            margin-top: 2px;
+        }
+
+        .calculator-footer {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 24px;
+            background: var(--accent-color);
+            color: var(--dark-text);
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            box-shadow: 0 4px 10px rgba(232, 184, 125, 0.3);
+        }
+
+        .btn:hover {
+            background: var(--primary-color);
+            color: var(--white);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(75, 100, 85, 0.3);
+        }
+
+        .disclaimer {
+            font-size: 0.8rem;
+            color: var(--medium-text);
+            margin-top: 15px;
+            font-style: italic;
+        }
+
+        /* Custom tooltip */
+        .custom-tooltip {
+            position: fixed;
+            background: rgba(47, 79, 79, 0.95);
+            color: var(--white);
+            font-size: 0.8rem;
+            line-height: 1.4;
+            border-radius: 4px;
+            white-space: normal;
+            max-width: 260px;
+            min-width: 120px;
+            padding: 8px 12px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.2s, visibility 0.2s;
+            z-index: 9999;
+            text-align: left;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            pointer-events: none;
+        }
+
+        .custom-tooltip.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Responsive styles */
+        @media (max-width: 992px) {
+            .navbar {
+                padding: 0 20px;
+            }
+
+            .navbar-toggle {
+                display: block;
+            }
+
+            .navbar-menu {
+            display: none;
+                position: absolute;
+                top: 75px;
+                left: 0;
+                right: 0;
+                flex-direction: column;
+                background-color: var(--white);
+                box-shadow: 0 5px 10px var(--shadow-color);
+                padding: 20px;
+                z-index: 1000;
+                align-items: flex-start;
+            }
+
+            .navbar-menu.active {
+                display: flex;
+            }
+
+            .navbar-menu a, 
+            .dropdown-toggle {
+                padding: 12px 0;
+                width: 100%;
+            }
+
+            .dropdown {
+                width: 100%;
+            }
+
+            .dropdown-menu {
+                position: static;
+                box-shadow: none;
+                padding-left: 20px;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                display: none;
+                min-width: 100%;
+                left: 0;
+                border: none;
+                pointer-events: auto;
+            }
+
+            .dropdown.active .dropdown-menu {
+                display: block;
+            }
+
+            .hero-content {
+                grid-template-columns: 1fr;
+            text-align: center;
+                gap: 40px;
+            }
+
+            .hero-section {
+                padding: 20px 20px 60px;
+            }
+
+            .hero-text {
+                max-width: 100%;
+            }
+
+            .hero-cta-group {
+                justify-content: center;
+            }
+
+            .hero-text h1 {
+                font-size: 2.4rem;
+            }
+
+            .hero-subhead {
+                font-size: 1.2rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+
+            .metrics-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            }
+
+            .results-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-text h1 {
+                font-size: 2rem;
+            }
+
+            .hero-cta-group {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+
+            .hero-cta-group .btn-primary,
+            .hero-cta-group .btn-secondary {
+                padding: 12px 20px;
+            }
+
+            .calculator-container {
+                padding: 20px;
+            }
+
+            .result-card p {
+                font-size: 1.5rem;
+            }
+
+            .security-badges {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .navbar-logo-text {
+                font-size: 1.3rem;
+            }
+        }
+
+        /* Add these styles to maintain the current look while supporting the new dropdown structure */
+        .dropdown-menu.solutions-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%) translateY(10px);
+            background-color: var(--white);
+            min-width: 600px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            border-radius: 8px;
+            padding: 25px;
+            z-index: 1001;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            border: 1px solid var(--border-color);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+            pointer-events: none;
+            transform-origin: top center;
+        }
+
+        .dropdown.active .dropdown-menu.solutions-menu {
+            display: grid;
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
+            pointer-events: auto;
+            animation: fadeIn 0.3s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateX(-50%) translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+
+        @keyframes fadeOut {
+            from {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+            to {
+                opacity: 0;
+                transform: translateX(-50%) translateY(10px);
+            }
+        }
+
+        .dropdown-menu.solutions-menu .dropdown-section {
+            padding: 0;
+            position: relative;
+        }
+
+        .dropdown-menu.solutions-menu .dropdown-section h3 {
+            font-size: 1.25rem !important;
+            font-weight: 700 !important;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--accent-color);
+            line-height: 1.3;
+        }
+
+        .dropdown-menu.solutions-menu .dropdown-section h3 a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+            display: block;
+            width: 100%;
+            font-size: inherit;
+            font-weight: inherit;
+        }
+
+        .dropdown-menu.solutions-menu .dropdown-section h3 a:hover {
+            color: var(--primary-color);
+            background-color: rgba(232, 184, 125, 0.1);
+            font-weight: inherit;
+        }
+
+        .dropdown-menu.solutions-menu .dropdown-section a {
+            display: block;
+            color: var(--medium-text);
+            text-decoration: none;
+            padding: 6px 0;
+            font-size: 0.95rem;
+            font-weight: 400;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            position: relative;
+        }
+
+        .dropdown-menu.solutions-menu .dropdown-section a:hover {
+            color: var(--primary-color);
+            background-color: rgba(232, 184, 125, 0.1);
+            font-weight: 400;
+        }
+
+        /* Mobile adjustments for solutions menu */
+        @media (max-width: 768px) {
+            .dropdown-menu.solutions-menu {
+                min-width: 100%;
+                padding: 20px;
+                gap: 20px;
+                transition: opacity 0.15s ease, transform 0.15s ease, visibility 0.15s ease;
+            }
+
+            .dropdown-menu.solutions-menu .dropdown-section h3 {
+                font-size: 1.15rem !important;
+                margin-bottom: 12px;
+                padding-bottom: 8px;
+            }
+
+            .dropdown-menu.solutions-menu .dropdown-section a {
+            font-size: 0.9rem;
+                padding: 5px 0;
+            }
+        }
+
+        /* Add overlay styles */
+        .dropdown-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.15s ease, visibility 0.15s ease;
+            z-index: 999;
+            pointer-events: none;
+        }
+
+        .dropdown-overlay.active {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+
+        .dropdown-menu.solutions-menu {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%) translateY(10px);
+            background-color: var(--white);
+            min-width: 600px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+            border-radius: 8px;
+            padding: 25px;
+            z-index: 1001;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            border: 1px solid var(--border-color);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.15s ease, transform 0.15s ease, visibility 0.15s ease;
+            pointer-events: none;
+            transform-origin: top center;
+        }
+
+        @keyframes fadeOut {
+            from {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+            to {
+                opacity: 0;
+                transform: translateX(-50%) translateY(10px);
+            }
+        }
+
+        /* How It Works Section Styles */
+        .how-it-works-section {
+            padding: 100px 20px;
+            background-color: var(--white);
+        }
+
+        .section-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .section-title {
+            font-size: 2.4rem;
+            margin-bottom: 20px;
+            color: var(--dark-text);
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: var(--medium-text);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* Process Steps */
+        .process-steps {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 40px;
+            position: relative;
+        }
+
+        /* Connecting line between steps */
+        .process-steps::before {
+            content: '';
+            position: absolute;
+            top: 100px;
+            left: 50px;
+            right: 50px;
+            height: 3px;
+            background-color: var(--accent-light);
+            z-index: 0;
+        }
+
+        .process-step {
+            flex: 1;
+            min-width: 200px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .step-icon {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 30px;
+            background-color: var(--lighter-bg);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: var(--accent-color);
+            border: 3px solid var(--accent-color);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .step-number {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 35px;
+            height: 35px;
+            background-color: var(--primary-color);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .process-step:hover .step-icon {
+            transform: translateY(-10px);
+            background-color: var(--white);
+        }
+
+        .step-title {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--dark-text);
+        }
+
+        .step-description {
+            color: var(--medium-text);
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .step-link {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: var(--transition);
+            padding: 5px 0;
+        }
+
+        .step-link:hover {
+            color: var(--primary-color);
+            gap: 8px;
+        }
+
+        .step-link i {
+            font-size: 0.8rem;
+        }
+
+        /* Mobile Adjustments for How It Works */
+        @media (max-width: 992px) {
+            .process-steps::before {
+                display: none;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .section-subtitle {
+                font-size: 1.1rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .process-step {
+                min-width: 300px;
+            }
+            
+            .step-icon {
+                width: 100px;
+                height: 100px;
+                font-size: 2rem;
+            }
+            
+            .step-number {
+                width: 30px;
+                height: 30px;
+                font-size: 1rem;
+            }
+        }
+
+        /* FAQ Section Styles */
+        .faq-section {
+            padding: 100px 20px;
+            background-color: var(--white);
+        }
+
+        .faq-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .faq-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .faq-title {
+            font-size: 2.4rem;
+            margin-bottom: 20px;
+            color: var(--dark-text);
+        }
+
+        .faq-subtitle {
+            font-size: 1.2rem;
+            color: var(--medium-text);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .faq-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .faq-item {
+            background-color: var(--lighter-bg);
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .faq-item:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            transform: translateY(-2px);
+        }
+
+        .faq-question {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 25px;
+            cursor: pointer;
+            text-align: left;
+        }
+
+        .faq-question h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--dark-text);
+            margin: 0;
+            padding-right: 30px;
+            line-height: 1.4;
+        }
+
+        .faq-icon {
+            color: var(--accent-color);
+            font-size: 1.1rem;
+            transition: transform 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            display: none;
+            padding: 0 25px 20px;
+            color: var(--medium-text);
+            line-height: 1.6;
+            text-align: left;
+        }
+
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+
+        .faq-answer p {
+            margin: 0;
+            font-size: 1rem;
+        }
+
+        /* Mobile Adjustments for FAQ */
+        @media (max-width: 768px) {
+            .faq-section {
+                padding: 60px 20px;
+            }
+
+            .faq-header {
+                margin-bottom: 40px;
+            }
+
+            .faq-title {
+                font-size: 2rem;
+            }
+
+            .faq-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .faq-question {
+                padding: 15px 20px;
+            }
+
+            .faq-question h3 {
+                font-size: 1rem;
+            }
+
+            .faq-answer {
+                padding: 0 20px 15px;
+            }
+
+            .faq-answer p {
+                font-size: 0.95rem;
+            }
+        }
+
+        /* Final CTA Section */
+        .final-cta-section {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 80px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.05;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60"><circle cx="30" cy="30" r="25" fill="%23FFFFFF"/></svg>');
+            background-size: 60px;
+        }
+
+        .cta-container {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-title {
+            font-family: 'Lora', serif;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--white);
+            font-weight: 600;
+        }
+
+        .cta-subtitle {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 40px;
+            line-height: 1.7;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn-white {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 30px;
+            background: var(--white);
+            color: var(--primary-color);
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: 1.1rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-white:hover {
+            background: var(--accent-color);
+            color: var(--dark-text);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-outline {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 30px;
+            background: transparent;
+            color: var(--white);
+            border: 2px solid var(--white);
+            border-radius: 6px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+                font-size: 1.1rem;
+            }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .cta-note {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Minimal Footer */
+        .footer {
+            background-color: var(--dark-text);
+            color: var(--white);
+            padding: 60px 20px 30px;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+
+        .footer-brand {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .footer-logo-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-logo {
+            height: 40px;
+        }
+
+        .footer-logo-text {
+            font-family: 'Lora', serif;
+            font-weight: 700;
+                font-size: 1.5rem;
+            color: var(--white);
+        }
+
+        .footer-tagline {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.5;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .footer-link {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+
+        .footer-link:hover {
+            color: var(--accent-color);
+        }
+
+        .footer-contact {
+            text-align: right;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 10px;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.95rem;
+        }
+
+        .contact-item i {
+            color: var(--accent-color);
+            font-size: 1rem;
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 40px auto 0;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+        }
+
+        .footer-copyright {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+        }
+
+        .footer-copyright a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            margin: 0 5px;
+            transition: var(--transition);
+        }
+
+        .footer-copyright a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Mobile responsiveness for footer */
+        @media (max-width: 992px) {
+            .footer-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 30px;
+            }
+
+            .footer-contact {
+                text-align: center;
+            }
+
+            .contact-item {
+                justify-content: center;
+            }
+
+            .cta-title {
+                font-size: 2rem;
+            }
+
+            .cta-subtitle {
+                font-size: 1.1rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .final-cta-section {
+                padding: 60px 20px;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn-white,
+            .btn-outline {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+
+            .footer-links {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+    <script type="module">
+        import { initializeRouteGuard } from '/js/route-guard.js';
+        document.addEventListener('DOMContentLoaded', initializeRouteGuard);
+    </script>
+</head>
+<body>
+    <!-- Add overlay element -->
+    <div class="dropdown-overlay" id="dropdownOverlay"></div>
+    
+    <!-- Navigation Bar -->
+    <nav class="navbar" id="navbar">
+        <div class="navbar-brand">
+            <a href="/">
+                <img src="/assets/logo.png" alt="Aspen Grove Solutions" class="navbar-logo">
+                <span class="navbar-logo-text">Aspen Grove</span>
+            </a>
+        </div>
+        
+        <div class="navbar-menu">
+            <a href="/" class="nav-link">Home</a>
+            <a href="/login.html" class="nav-link">Login</a>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Hero Section with updated messaging -->
+        <section class="hero-section">
+            <div class="hero-content">
+                    <div class="hero-text">
+                    <h1>Professional Service Management Platform</h1>
+                    <p class="hero-subhead">Connect. Communicate. Collaborate. Securely.</p>
+                        <p class="hero-subtitle">
+                        Secure document storage, service request management, and direct communication with providers - <span class="gold-text">all in one integrated platform.</span>
+                    </p>
+                    
+                    <!-- Security badges -->
+                    <div class="security-badges">
+                        <div class="security-badge">
+                                    <i class="fas fa-shield-alt"></i>
+                            <span>HIPAA Compliant</span>
+                                </div>
+                        <div class="security-badge">
+                            <i class="fas fa-certificate"></i>
+                            <span>SOC 2 Certified</span>
+                                </div>
+                        <div class="security-badge">
+                            <i class="fas fa-lock"></i>
+                            <span>Bank-Grade Encryption</span>
+                            </div>
+                        <div class="security-badge">
+                            <i class="fab fa-aws"></i>
+                            <span>AWS Infrastructure</span>
+                                </div>
+                                </div>
+                    
+                    <div class="hero-cta-group">
+                        <a href="#free-trial" class="btn-primary">
+                            <i class="fas fa-rocket"></i> Start Free Trial
+                        </a>
+                        <a href="#how-it-works" class="btn-secondary">
+                            <i class="fas fa-play-circle"></i> See How It Works
+                        </a>
+                        </div>
+                    </div>
+                    
+                <!-- ROI Calculator -->
+                    <div class="calculator-container" id="calculatorContainer">
+                        <div class="calculator-header">
+                        <h2>ROI Calculator</h2>
+                        <p>See potential savings with our platform</p>
+                            <div class="time-toggle">
+                                <button class="toggle-btn active" data-period="monthly">Monthly</button>
+                                <button class="toggle-btn" data-period="annual">Annual</button>
+                            </div>
+                        </div>
+                        
+                        <div class="calculator-body">
+                            <div class="metrics-grid">
+                                <div class="metric-group">
+                                    <label>
+                                    Monthly Requests
+                                    <span class="info-icon" data-tooltip="The number of service requests you process each month.">ⓘ</span>
+                                    </label>
+                                    <div class="value-controls">
+                                        <button class="decrease">
+                                            <i class="fas fa-minus"></i>
+                                        </button>
+                                        <input type="number" id="volumeDisplay" value="250" min="1" max="500" step="1">
+                                        <button class="increase">
+                                            <i class="fas fa-plus"></i>
+                                        </button>
+                                    </div>
+                                    <input type="range" id="volumeSlider" min="1" max="500" value="250" step="1">
+                                </div>
+                                
+                                <div class="metric-group">
+                                    <label>
+                                    Hourly Rate
+                                    <span class="info-icon" data-tooltip="Your typical hourly rate for these services.">ⓘ</span>
+                                    </label>
+                                    <div class="value-controls">
+                                        <button class="decrease">
+                                            <i class="fas fa-minus"></i>
+                                        </button>
+                                        <input type="number" id="rateDisplay" value="250" min="50" max="500" step="1">
+                                        <button class="increase">
+                                            <i class="fas fa-plus"></i>
+                                        </button>
+                                    </div>
+                                    <input type="range" id="rateSlider" min="50" max="500" value="250" step="1">
+                                </div>
+                                
+                                <div class="metric-group">
+                                    <label>
+                                    Hours Per Request
+                                    <span class="info-icon" data-tooltip="Average time spent per service request.">ⓘ</span>
+                                    </label>
+                                    <div class="value-controls">
+                                        <button class="decrease">
+                                            <i class="fas fa-minus"></i>
+                                        </button>
+                                        <input type="number" id="hoursDisplay" value="2.0" min="0.5" max="5" step="0.5">
+                                        <button class="increase">
+                                            <i class="fas fa-plus"></i>
+                                        </button>
+                                    </div>
+                                    <input type="range" id="hoursSlider" min="0.5" max="5" value="2" step="0.5">
+                                </div>
+                            </div>
+                            
+                            <div class="results-grid">
+                                <div class="result-card">
+                                    <h3>
+                                    Cost Savings
+                                    <span class="info-icon" data-tooltip="Total cost savings from using our platform.">ⓘ</span>
+                                    </h3>
+                                    <p id="savingsDisplay">$125,000</p>
+                                <span class="unit-text">per month</span>
+                                </div>
+                                <div class="result-card">
+                                    <h3>
+                                    Time Saved
+                                    <span class="info-icon" data-tooltip="Total hours saved by streamlining your workflow.">ⓘ</span>
+                                    </h3>
+                                    <p id="timeDisplay">450</p>
+                                <span class="unit-text">hours per month</span>
+                                </div>
+                                <div class="result-card">
+                                    <h3>
+                                    Additional Capacity
+                                    <span class="info-icon" data-tooltip="Additional requests you can handle with time saved.">ⓘ</span>
+                                    </h3>
+                                <p id="capacityDisplay">12</p>
+                                <span class="unit-text">new cases per month</span>
+                                </div>
+                            </div>
+
+                            <div class="calculator-footer">
+                                <p class="disclaimer">* Estimates based on industry averages and may vary based on your specific needs.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- How It Works Section -->
+        <section class="how-it-works-section" id="how-it-works">
+            <div class="section-container">
+                <div class="section-header">
+                    <h2 class="section-title">How Aspen Grove Works</h2>
+                    <p class="section-subtitle">Our platform connects professionals and service providers in a seamless workflow</p>
+                </div>
+                
+                <div class="process-steps">
+                    <div class="process-step">
+                        <div class="step-icon">
+                            <i class="fas fa-tasks"></i>
+                            <div class="step-number">1</div>
+                        </div>
+                        <h3 class="step-title">Request Services</h3>
+                        <p class="step-description">Submit service requests through an intuitive dashboard with all necessary details and attachments.</p>
+                        <a href="#request-services" class="step-link">
+                            Learn More <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                    
+                    <div class="process-step">
+                        <div class="step-icon">
+                            <i class="fas fa-file-alt"></i>
+                            <div class="step-number">2</div>
+                        </div>
+                        <h3 class="step-title">Document Processing</h3>
+                        <p class="step-description">Documents are organized and prepared for review with secure handling throughout the process.</p>
+                        <a href="#document-processing" class="step-link">
+                            Learn More <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                    
+                    <div class="process-step">
+                        <div class="step-icon">
+                            <i class="fas fa-handshake"></i>
+                            <div class="step-number">3</div>
+                        </div>
+                        <h3 class="step-title">Service Delivery</h3>
+                        <p class="step-description">Providers review, process, and fulfill requests with real-time updates on progress and milestones.</p>
+                        <a href="#service-delivery" class="step-link">
+                            Learn More <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                    
+                    <div class="process-step">
+                        <div class="step-icon">
+                            <i class="fas fa-comments"></i>
+                            <div class="step-number">4</div>
+                        </div>
+                        <h3 class="step-title">Secure Communication</h3>
+                        <p class="step-description">Direct messaging, notifications, and file sharing keep everyone on the same page throughout the process.</p>
+                        <a href="#secure-communication" class="step-link">
+                            Learn More <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="faq-section">
+            <div class="faq-container">
+                <div class="faq-header">
+                    <h2 class="faq-title">Frequently Asked Questions</h2>
+                    <p class="faq-subtitle">Find answers to common questions about Aspen Grove's secure professional service management platform.</p>
+                </div>
+                
+                <div class="faq-list">
+                    <div class="faq-item active">
+                        <div class="faq-question">
+                            <h3>What services can I request through the platform?</h3>
+                            <div class="faq-icon">
+                                <i class="fas fa-chevron-down"></i>
+                        </div>
+                            </div>
+                        <div class="faq-answer">
+                            <p>Our platform connects you with trusted service providers for various professional services including document processing, analysis, consulting, and specialized business services. Services vary by provider but commonly include document review, research, reporting, and consultation services across legal, healthcare, insurance, and business sectors.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>How secure is my data on the platform?</h3>
+                            <div class="faq-icon">
+                                <i class="fas fa-chevron-down"></i>
+                        </div>
+                            </div>
+                        <div class="faq-answer">
+                            <p>Security is our top priority. We use bank-grade encryption (AES-256) for all data, maintain HIPAA compliance, and are SOC 2 certified. All communications are encrypted end-to-end, access is controlled with role-based permissions, and detailed audit logs track all platform activity. Your data is hosted on secure AWS infrastructure with 99.9% uptime.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>Can professionals from any industry use this platform?</h3>
+                            <div class="faq-icon">
+                                <i class="fas fa-chevron-down"></i>
+                        </div>
+                            </div>
+                        <div class="faq-answer">
+                            <p>Yes! Aspen Grove is designed to work across industries. We serve professionals in legal, healthcare, insurance, real estate, finance, and many other sectors. The platform adapts to your industry's specific needs while maintaining universal features like secure document management, communication tools, and service request tracking.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>How does pricing work?</h3>
+                            <div class="faq-icon">
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                        </div>
+                        <div class="faq-answer">
+                            <p>We offer flexible subscription plans based on your usage needs and team size. Plans include features like secure document storage, service request management, and communication tools. Pricing varies between clients (who request services) and service providers (who fulfill requests). Contact us for a customized quote based on your specific requirements.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>What compliance standards does the platform meet?</h3>
+                            <div class="faq-icon">
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Aspen Grove meets multiple industry compliance standards including HIPAA for healthcare data, SOC 2 for security controls, and follows best practices for financial services and legal industries. We conduct regular security audits, maintain detailed audit logs, and provide compliance reporting to help you meet your regulatory requirements.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final CTA Section -->
+        <section class="final-cta-section">
+            <div class="cta-pattern"></div>
+            <div class="cta-container">
+                <h2 class="cta-title">Ready to Get Started?</h2>
+                <p class="cta-subtitle">Join professionals who trust Aspen Grove for secure service management</p>
+                
+                <div class="cta-buttons">
+                    <a href="#free-trial" class="btn-white">
+                        <i class="fas fa-rocket"></i> Start Free Trial
+                    </a>
+                    <a href="#contact" class="btn-outline">
+                        <i class="fas fa-phone"></i> Contact Sales
+                    </a>
+                </div>
+                
+                <p class="cta-note">No credit card required • 10-day free trial</p>
+            </div>
+        </section>
+
+        <!-- Minimal Footer -->
+        <footer class="footer">
+            <div class="footer-container">
+                    <div class="footer-brand">
+                    <div class="footer-logo-group">
+                        <svg class="footer-logo" width="40" height="40" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Aspen Grove Logo -->
+                            <circle cx="100" cy="100" r="95" fill="#4B6455" stroke="#F4F7F2" stroke-width="2" />
+                            <g>
+                                <line x1="100" y1="140" x2="100" y2="60" stroke="#F4F7F2" stroke-width="4" />
+                                <line x1="70" y1="145" x2="70" y2="75" stroke="#F4F7F2" stroke-width="4" />
+                                <line x1="130" y1="145" x2="130" y2="75" stroke="#F4F7F2" stroke-width="4" />
+                                <circle cx="100" cy="60" r="8" fill="#7D9D7F" />
+                                <circle cx="70" cy="75" r="7" fill="#7D9D7F" />
+                                <circle cx="130" cy="75" r="7" fill="#7D9D7F" />
+                            </g>
+                            <circle cx="100" cy="60" r="3" fill="#E8B87D" />
+                        </svg>
+                        <span class="footer-logo-text">Aspen Grove</span>
+                    </div>
+                    <p class="footer-tagline">Professional service management, simplified.</p>
+                </div>
+                
+                <div class="footer-links">
+                    <a href="#privacy" class="footer-link">Privacy Policy</a>
+                    <a href="#terms" class="footer-link">Terms of Service</a>
+                    <a href="#security" class="footer-link">Security</a>
+                    <a href="#help" class="footer-link">Help Center</a>
+                    <a href="#blog" class="footer-link">Blog</a>
+                </div>
+                
+                    <div class="footer-contact">
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>support@aspengrove.com</span>
+                        </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>(555) 123-4567</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Boston, MA</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    © 2025 Aspen Grove Solutions. All rights reserved.
+                    <a href="#hipaa">HIPAA Compliant</a> •
+                    <a href="#soc2">SOC 2 Certified</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Tooltip Element -->
+    <div class="custom-tooltip" id="tooltip"></div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Navigation menu functionality
+        const navbar = document.getElementById('navbar');
+        const navbarMenu = document.getElementById('mainMenu');
+        const navbarToggle = document.getElementById('navbarToggle');
+        const dropdowns = document.querySelectorAll('.dropdown');
+        const overlay = document.getElementById('dropdownOverlay');
+
+        // Handle mobile menu toggle
+        navbarToggle.addEventListener('click', function() {
+            navbarMenu.classList.toggle('active');
+            const icon = this.querySelector('i');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
+        });
+
+        // Handle dropdown menus - updated with consistent quick transitions
+        dropdowns.forEach(dropdown => {
+            const toggle = dropdown.querySelector('.dropdown-toggle');
+            const menu = dropdown.querySelector('.dropdown-menu');
+            
+            toggle.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                // Close other dropdowns with quick fade out
+                dropdowns.forEach(otherDropdown => {
+                    if (otherDropdown !== dropdown && otherDropdown.classList.contains('active')) {
+                        const otherMenu = otherDropdown.querySelector('.dropdown-menu');
+                        otherMenu.style.animation = 'fadeOut 0.15s ease forwards'; // Quick fade out
+                        setTimeout(() => {
+                        otherDropdown.classList.remove('active');
+                            otherMenu.style.animation = '';
+                            overlay.classList.remove('active');
+                        }, 150); // Reduced timeout to match animation
+                    }
+                });
+                
+                // Toggle current dropdown with quick transitions
+                if (dropdown.classList.contains('active')) {
+                    menu.style.animation = 'fadeOut 0.15s ease forwards'; // Quick fade out
+                    setTimeout(() => {
+                        dropdown.classList.remove('active');
+                        menu.style.animation = '';
+                        overlay.classList.remove('active');
+                    }, 150); // Reduced timeout to match animation
+                } else {
+                    dropdown.classList.add('active');
+                    overlay.classList.add('active');
+                    menu.style.animation = 'fadeIn 0.15s ease forwards';
+                }
+            });
+        });
+
+        // Close dropdowns when clicking overlay - updated with quick fade
+        overlay.addEventListener('click', function() {
+            dropdowns.forEach(dropdown => {
+                if (dropdown.classList.contains('active')) {
+                    const menu = dropdown.querySelector('.dropdown-menu');
+                    menu.style.animation = 'fadeOut 0.15s ease forwards'; // Quick fade out
+                    setTimeout(() => {
+                    dropdown.classList.remove('active');
+                        menu.style.animation = '';
+                        overlay.classList.remove('active');
+                    }, 150); // Reduced timeout to match animation
+                }
+            });
+        });
+
+        // Close dropdowns when clicking outside - updated with quick fade
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.dropdown')) {
+                dropdowns.forEach(dropdown => {
+                    if (dropdown.classList.contains('active')) {
+                        const menu = dropdown.querySelector('.dropdown-menu');
+                        menu.style.animation = 'fadeOut 0.15s ease forwards'; // Quick fade out
+                        setTimeout(() => {
+                    dropdown.classList.remove('active');
+                            menu.style.animation = '';
+                            overlay.classList.remove('active');
+                        }, 150); // Reduced timeout to match animation
+                    }
+                });
+            }
+        });
+
+        // Calculator functionality
+        const calculatorContainer = document.getElementById('calculatorContainer');
+        const volumeSlider = document.getElementById('volumeSlider');
+        const hoursSlider = document.getElementById('hoursSlider');
+        const rateSlider = document.getElementById('rateSlider');
+        
+        const volumeDisplay = document.getElementById('volumeDisplay');
+        const hoursDisplay = document.getElementById('hoursDisplay');
+        const rateDisplay = document.getElementById('rateDisplay');
+        
+        const savingsDisplay = document.getElementById('savingsDisplay');
+        const timeDisplay = document.getElementById('timeDisplay');
+        const capacityDisplay = document.getElementById('capacityDisplay');
+        
+        // Format currency with proper locale
+        function formatCurrency(value) {
+            return new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: 'USD',
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0
+            }).format(value);
+        }
+
+        // Animate value changes
+        function animateValue(element, newValue) {
+            element.classList.add('changed');
+            element.textContent = newValue;
+            setTimeout(() => element.classList.remove('changed'), 1000);
+        }
+
+        // Update slider appearance with smooth transition
+        function updateSlider(slider) {
+            requestAnimationFrame(() => {
+                const value = (slider.value - slider.min) / (slider.max - slider.min) * 100;
+                slider.style.setProperty('--range-progress', `${value}%`);
+                slider.style.background = `linear-gradient(to right, 
+                    var(--secondary-color) 0%, 
+                    var(--secondary-color) var(--range-progress), 
+                    var(--light-bg) var(--range-progress), 
+                    var(--light-bg) 100%)`;
+            });
+        }
+
+        // Update display values
+        function updateDisplayValues(slider, display, step) {
+            const value = parseFloat(slider.value);
+            display.value = step === 0.5 ? value.toFixed(1) : value;
+        }
+
+        // Remove debounced calculator updates and make them immediate
+        function updateCalculator(period = 'monthly') {
+                const volume = parseInt(volumeSlider.value);
+                const hours = parseFloat(hoursSlider.value);
+                const rate = parseInt(rateSlider.value);
+                
+                // Calculate metrics
+                const monthlyHours = hours * volume;
+                const monthlyCost = monthlyHours * rate;
+            const platformCost = volume * 10; // $10 per request
+            const monthlySavings = monthlyCost - platformCost;
+                const annualSavings = monthlySavings * 12;
+            const timeSaved = (hours - 0.2) * volume; // Platform reduces time to 0.2 hours per request
+            
+            // Calculate additional capacity
+            const avgServiceHours = 10;
+            const additionalCapacity = Math.round((timeSaved * (period === 'annual' ? 12 : 1)) / avgServiceHours);
+            
+            // Update result displays immediately
+                const multiplier = period === 'annual' ? 12 : 1;
+            const periodText = period === 'annual' ? 'per year' : 'per month';
+            
+            // Update values without animation for immediate feedback
+            savingsDisplay.textContent = formatCurrency(period === 'annual' ? annualSavings : monthlySavings);
+            document.querySelector('.result-card:nth-child(1) .unit-text').textContent = periodText;
+            
+            timeDisplay.textContent = Math.round(timeSaved * multiplier).toLocaleString();
+            document.querySelector('.result-card:nth-child(2) .unit-text').textContent = 
+                `hours ${periodText}`;
+            
+            capacityDisplay.textContent = additionalCapacity.toLocaleString();
+            document.querySelector('.result-card:nth-child(3) .unit-text').textContent = 
+                `new cases ${periodText}`;
+        }
+
+        // Set up value controls with immediate updates
+        function setupValueControls(slider, display, step) {
+            if (!slider || !display) return;
+            
+            const parent = slider.closest('.metric-group');
+            const decreaseBtn = parent.querySelector('.decrease');
+            const increaseBtn = parent.querySelector('.increase');
+            
+            let holdTimeout = null;
+            let isHolding = false;
+            const HOLD_DELAY = 500; // Changed from 2000ms to 500ms (half a second)
+            
+            function updateValue(increment) {
+                const currentValue = parseFloat(slider.value);
+                const newValue = increment ? 
+                    Math.min(parseFloat(slider.max), currentValue + step) :
+                    Math.max(parseFloat(slider.min), currentValue - step);
+                
+                if (newValue !== currentValue) {
+                    slider.value = newValue;
+                    display.value = step === 0.5 ? newValue.toFixed(1) : newValue;
+                    updateSlider(slider);
+                    updateCalculator();
+                }
+            }
+
+            function startContinuousUpdate(increment) {
+                if (!isHolding) {
+                    isHolding = true;
+                    holdTimeout = setInterval(() => updateValue(increment), 50);
+                }
+            }
+
+            function stopContinuousUpdate() {
+                // Clear both the timeout and interval
+                if (holdTimeout) {
+                    clearInterval(holdTimeout);
+                    holdTimeout = null;
+                }
+                isHolding = false;
+            }
+
+            // Click handler for single increment/decrement
+            decreaseBtn.addEventListener('click', () => updateValue(false));
+            increaseBtn.addEventListener('click', () => updateValue(true));
+
+            // Mouse down handler with delay
+            decreaseBtn.addEventListener('mousedown', () => {
+                // Clear any existing timeout
+                if (holdTimeout) {
+                    clearInterval(holdTimeout);
+                    holdTimeout = null;
+                }
+                // Set new timeout
+                holdTimeout = setTimeout(() => startContinuousUpdate(false), HOLD_DELAY);
+            });
+            
+            increaseBtn.addEventListener('mousedown', () => {
+                // Clear any existing timeout
+                if (holdTimeout) {
+                    clearInterval(holdTimeout);
+                    holdTimeout = null;
+                }
+                // Set new timeout
+                holdTimeout = setTimeout(() => startContinuousUpdate(true), HOLD_DELAY);
+            });
+            
+            // Stop continuous update on mouseup or mouseleave
+            [decreaseBtn, increaseBtn].forEach(btn => {
+                btn.addEventListener('mouseup', () => {
+                    // Clear the timeout that would start continuous updates
+                    if (holdTimeout) {
+                        clearTimeout(holdTimeout);
+                        holdTimeout = null;
+                    }
+                    // Stop any ongoing continuous updates
+                    stopContinuousUpdate();
+                });
+                btn.addEventListener('mouseleave', () => {
+                    // Clear the timeout that would start continuous updates
+                    if (holdTimeout) {
+                        clearTimeout(holdTimeout);
+                        holdTimeout = null;
+                    }
+                    // Stop any ongoing continuous updates
+                    stopContinuousUpdate();
+                });
+            });
+
+            // Touch events for mobile
+            decreaseBtn.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                // Clear any existing timeout
+                if (holdTimeout) {
+                    clearInterval(holdTimeout);
+                    holdTimeout = null;
+                }
+                // Set new timeout
+                holdTimeout = setTimeout(() => startContinuousUpdate(false), HOLD_DELAY);
+            });
+            
+            increaseBtn.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                // Clear any existing timeout
+                if (holdTimeout) {
+                    clearInterval(holdTimeout);
+                    holdTimeout = null;
+                }
+                // Set new timeout
+                holdTimeout = setTimeout(() => startContinuousUpdate(true), HOLD_DELAY);
+            });
+            
+            [decreaseBtn, increaseBtn].forEach(btn => {
+                btn.addEventListener('touchend', () => {
+                    // Clear the timeout that would start continuous updates
+                    if (holdTimeout) {
+                        clearTimeout(holdTimeout);
+                        holdTimeout = null;
+                    }
+                    // Stop any ongoing continuous updates
+                    stopContinuousUpdate();
+                });
+                btn.addEventListener('touchcancel', () => {
+                    // Clear the timeout that would start continuous updates
+                    if (holdTimeout) {
+                        clearTimeout(holdTimeout);
+                        holdTimeout = null;
+                    }
+                    // Stop any ongoing continuous updates
+                    stopContinuousUpdate();
+                });
+            });
+
+            // Input validation and synchronization
+            display.addEventListener('change', function() {
+                let value = parseFloat(this.value);
+                if (isNaN(value)) {
+                    value = parseFloat(slider.value);
+                }
+                value = Math.max(parseFloat(slider.min), Math.min(parseFloat(slider.max), value));
+                this.value = step === 0.5 ? value.toFixed(1) : value;
+                slider.value = value;
+                updateSlider(slider);
+                updateCalculator();
+            });
+            
+            // Sync display with slider
+            slider.addEventListener('input', function() {
+                display.value = step === 0.5 ? parseFloat(this.value).toFixed(1) : this.value;
+                updateSlider(this);
+                updateCalculator();
+            });
+
+            // Prevent invalid input
+            display.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    let value = parseFloat(display.value);
+                    if (isNaN(value)) {
+                        value = parseFloat(slider.value);
+                    }
+                    value = Math.max(parseFloat(slider.min), Math.min(parseFloat(slider.max), value));
+                    display.value = step === 0.5 ? value.toFixed(1) : value;
+                    slider.value = value;
+                    updateSlider(slider);
+                    updateCalculator();
+                }
+            });
+        }
+
+        // Set up all sliders
+        setupValueControls(volumeSlider, volumeDisplay, 1);
+        setupValueControls(hoursSlider, hoursDisplay, 0.5);
+        setupValueControls(rateSlider, rateDisplay, 1);
+
+        // Time period toggle
+        const toggleBtns = document.querySelectorAll('.toggle-btn');
+        toggleBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                toggleBtns.forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                const period = this.dataset.period;
+                calculatorContainer.setAttribute('data-period', period);
+                updateCalculator(period);
+            });
+        });
+
+        // Initialize calculator
+        requestAnimationFrame(() => {
+            updateSlider(volumeSlider);
+            updateSlider(hoursSlider);
+            updateSlider(rateSlider);
+            updateCalculator();
+        });
+        
+        // Tooltip functionality
+        const tooltip = document.getElementById('tooltip');
+        const infoIcons = document.querySelectorAll('.info-icon');
+        
+        infoIcons.forEach(icon => {
+            icon.addEventListener('mouseenter', function() {
+                const tooltipText = this.getAttribute('data-tooltip');
+                tooltip.textContent = tooltipText;
+                tooltip.classList.add('active');
+                
+                // Position the tooltip
+                const iconRect = this.getBoundingClientRect();
+                tooltip.style.top = (iconRect.top - tooltip.offsetHeight - 10) + 'px';
+                tooltip.style.left = (iconRect.left + (iconRect.width / 2) - (tooltip.offsetWidth / 2)) + 'px';
+                
+                // Keep tooltip on screen
+                const tooltipRect = tooltip.getBoundingClientRect();
+                if (tooltipRect.left < 10) {
+                    tooltip.style.left = '10px';
+                } else if (tooltipRect.right > window.innerWidth - 10) {
+                    tooltip.style.left = (window.innerWidth - tooltip.offsetWidth - 10) + 'px';
+                }
+                
+                if (tooltipRect.top < 10) {
+                    tooltip.style.top = (iconRect.bottom + 10) + 'px';
+                }
+            });
+            
+            icon.addEventListener('mouseleave', function() {
+                tooltip.classList.remove('active');
+            });
+            
+            // For touch devices
+            icon.addEventListener('touchstart', function(e) {
+                e.preventDefault();
+                const tooltipText = this.getAttribute('data-tooltip');
+                tooltip.textContent = tooltipText;
+                tooltip.classList.add('active');
+                
+                // Position the tooltip
+                const iconRect = this.getBoundingClientRect();
+                tooltip.style.top = (iconRect.bottom + 10) + 'px';
+                tooltip.style.left = (iconRect.left + (iconRect.width / 2) - (tooltip.offsetWidth / 2)) + 'px';
+                
+                // Keep tooltip on screen
+                const tooltipRect = tooltip.getBoundingClientRect();
+                if (tooltipRect.left < 10) {
+                    tooltip.style.left = '10px';
+                } else if (tooltipRect.right > window.innerWidth - 10) {
+                    tooltip.style.left = (window.innerWidth - tooltip.offsetWidth - 10) + 'px';
+                }
+            });
+            
+            document.addEventListener('touchstart', function(e) {
+                if (!icon.contains(e.target)) {
+                    tooltip.classList.remove('active');
+                }
+            });
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // FAQ accordion functionality
+        const faqItems = document.querySelectorAll('.faq-item');
+        
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            
+            question.addEventListener('click', function() {
+                // Get currently active item
+                const isCurrentlyActive = item.classList.contains('active');
+                
+                // Close all items
+                faqItems.forEach(faq => {
+                    faq.classList.remove('active');
+                });
+                
+                // If the clicked item wasn't active, open it
+                if (!isCurrentlyActive) {
+                    item.classList.add('active');
+                }
+            });
+        });
+
+        // Keyboard accessibility for FAQ
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            
+            question.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    question.click();
+                }
+            });
+            
+            // Make focusable for keyboard navigation
+            question.setAttribute('tabindex', '0');
+        });
+    });
+    </script>
+</body>
+</html>

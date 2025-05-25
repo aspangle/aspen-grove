@@ -1,0 +1,1554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Aspen Grove Solutions</title>
+    <!-- Add AWS Amplify dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/aws-amplify@5.3.12/dist/aws-amplify.min.js"></script>
+    <script src="/aws-exports.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #4B6455;
+            --secondary-color: #7D9D7F;
+            --accent-color: #E8B87D;
+            --accent-light: #F2E3CD;
+            --dark-text: #2C3A2F;
+            --medium-text: #4A5D4E;
+            --light-bg: #F4F7F2;
+            --lighter-bg: #F9FCF8;
+            --white: #FFFFFF;
+            --shadow-color: rgba(0, 0, 0, 0.08);
+            --border-color: #E0E6E3;
+            --success-color: #4CAF50;
+            --warning-color: #FFC107;
+            --danger-color: #F44336;
+            --info-color: #2196F3;
+            --transition: all 0.3s ease;
+            --header-height: 75px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: var(--light-bg);
+            color: var(--dark-text);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Lora', serif;
+            font-weight: 600;
+            color: var(--dark-text);
+        }
+
+        /* Navigation Styles */
+        .navbar {
+            background-color: var(--white);
+            box-shadow: 0 4px 15px var(--shadow-color);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 50px;
+            height: var(--header-height);
+            border-bottom: 2px solid var(--accent-color);
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .navbar-logo {
+            height: 42px;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-logo-text {
+            font-family: 'Lora', serif;
+            font-weight: 700;
+            font-size: 1.6rem;
+            color: var(--primary-color);
+            letter-spacing: -0.5px;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-menu {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .navbar-menu a {
+            color: var(--medium-text);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+            padding: 28px 0;
+        }
+
+        .navbar-menu a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Main Container - Horizontal Layout */
+        .main-container {
+            margin-top: var(--header-height);
+            flex: 1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: calc(100vh - var(--header-height));
+            overflow: hidden;
+        }
+
+        /* Welcome Panel */
+        .welcome-panel {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--white);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .welcome-panel::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60"><circle cx="30" cy="30" r="25" fill="%23FFFFFF" opacity="0.05"/></svg>');
+            background-size: 60px;
+        }
+
+        .welcome-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            max-width: 450px;
+        }
+
+        .welcome-title {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            color: var(--white);
+        }
+
+        .welcome-subtitle {
+            font-size: 1rem;
+            opacity: 0.95;
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+
+        .welcome-features {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+
+        .welcome-features li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+
+        .welcome-features i {
+            color: var(--accent-color);
+            font-size: 1rem;
+            width: 18px;
+        }
+
+        .security-indicators {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .security-item {
+            text-align: center;
+        }
+
+        .security-item i {
+            font-size: 1.5rem;
+            color: var(--accent-color);
+            margin-bottom: 6px;
+        }
+
+        .security-item span {
+            display: block;
+            font-size: 0.8rem;
+            opacity: 0.9;
+        }
+
+        /* Demo Section on Welcome Panel */
+        .demo-section-welcome {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            text-align: center;
+        }
+
+        .demo-title-welcome {
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+            color: var(--white);
+            font-weight: 600;
+        }
+
+        .demo-description-welcome {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .btn-demo-welcome {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: var(--accent-color);
+            color: var(--dark-text);
+            border: none;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+        .btn-demo-welcome:hover {
+            background: var(--white);
+            color: var(--primary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3);
+        }
+
+        /* Form Panel */
+        .form-panel {
+            background-color: var(--lighter-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .auth-container {
+            background: var(--white);
+            border-radius: 12px;
+            box-shadow: 0 15px 35px var(--shadow-color);
+            padding: 25px;
+            width: 100%;
+            max-width: 450px;
+            border: 1px solid var(--border-color);
+        }
+
+        .auth-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .auth-title {
+            font-size: 1.6rem;
+            margin-bottom: 6px;
+            color: var(--primary-color);
+        }
+
+        .auth-subtitle {
+            color: var(--medium-text);
+            font-size: 0.9rem;
+        }
+
+        /* User Type Toggle - Compact */
+        .user-type-toggle {
+            margin-bottom: 18px;
+        }
+
+        .user-type-label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--dark-text);
+            font-size: 0.85rem;
+        }
+
+        .toggle-container {
+            display: flex;
+            background: var(--light-bg);
+            border-radius: 8px;
+            padding: 3px;
+            border: 1px solid var(--border-color);
+        }
+
+        .toggle-option {
+            flex: 1;
+            padding: 8px 12px;
+            text-align: center;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 600;
+            font-size: 0.8rem;
+        }
+
+        .toggle-option.active {
+            background: var(--accent-color);
+            color: var(--dark-text);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .toggle-option:not(.active) {
+            color: var(--medium-text);
+        }
+
+        .toggle-option:hover:not(.active) {
+            background: rgba(232, 184, 125, 0.1);
+        }
+
+        /* Contextual Explanation - Compact */
+        .user-type-explanation {
+            margin-top: 6px;
+            padding: 6px 10px;
+            background: rgba(75, 100, 85, 0.05);
+            border-radius: 6px;
+            font-size: 0.75rem;
+            color: var(--medium-text);
+            opacity: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .user-type-explanation.show {
+            opacity: 1;
+            max-height: 50px;
+        }
+
+        /* Form Styles - Compact */
+        .auth-form {
+            margin-bottom: 18px;
+        }
+
+        .form-group {
+            margin-bottom: 14px;
+        }
+
+        .form-label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: var(--dark-text);
+            font-size: 0.85rem;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 9px 12px;
+            border: 2px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 0.9rem;
+            transition: var(--transition);
+            background: var(--white);
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px rgba(232, 184, 125, 0.1);
+        }
+
+        .form-input.error {
+            border-color: var(--danger-color);
+        }
+
+        /* Compact Form Elements */
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .password-container {
+            position: relative;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--medium-text);
+            cursor: pointer;
+            font-size: 0.85rem;
+            padding: 4px;
+        }
+
+        .password-toggle:hover {
+            color: var(--accent-color);
+        }
+
+        /* Password Strength - Minimal */
+        .password-strength {
+            margin-top: 4px;
+            display: none;
+        }
+
+        .password-strength.show {
+            display: block;
+        }
+
+        .strength-bar {
+            width: 100%;
+            height: 3px;
+            background: var(--light-bg);
+            border-radius: 2px;
+            overflow: hidden;
+            margin-bottom: 4px;
+        }
+
+        .strength-fill {
+            height: 100%;
+            transition: var(--transition);
+            border-radius: 2px;
+        }
+
+        .strength-fill.weak {
+            width: 33%;
+            background: var(--danger-color);
+        }
+
+        .strength-fill.medium {
+            width: 66%;
+            background: var(--warning-color);
+        }
+
+        .strength-fill.strong {
+            width: 100%;
+            background: var(--success-color);
+        }
+
+        .strength-text {
+            font-size: 0.7rem;
+            color: var(--medium-text);
+        }
+
+        /* Error Messages */
+        .error-message {
+            color: var(--danger-color);
+            font-size: 0.75rem;
+            margin-top: 3px;
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        /* Form Options - Compact */
+        .form-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 14px;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.8rem;
+        }
+
+        .forgot-password {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .forgot-password:hover {
+            text-decoration: underline;
+        }
+
+        /* Buttons - Compact */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 9px 18px;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            width: 100%;
+            justify-content: center;
+        }
+
+        .btn-primary {
+            background: var(--accent-color);
+            color: var(--dark-text);
+            box-shadow: 0 3px 10px rgba(232, 184, 125, 0.3);
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            background: var(--primary-color);
+            color: var(--white);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(75, 100, 85, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+
+        .btn-secondary:hover:not(:disabled) {
+            background: rgba(75, 100, 85, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .btn-loading {
+            position: relative;
+        }
+
+        .btn-loading::after {
+            content: '';
+            position: absolute;
+            width: 14px;
+            height: 14px;
+            border: 2px solid transparent;
+            border-top: 2px solid currentColor;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Form Toggle */
+        .form-toggle {
+            text-align: center;
+            margin-top: 14px;
+        }
+
+        .form-toggle p {
+            color: var(--medium-text);
+            margin-bottom: 6px;
+            font-size: 0.8rem;
+        }
+
+        .form-toggle-link {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .form-toggle-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Demo Section */
+        .demo-section {
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+        }
+
+        .demo-title {
+            font-size: 0.95rem;
+            margin-bottom: 6px;
+            color: var(--primary-color);
+        }
+
+        .demo-description {
+            font-size: 0.75rem;
+            color: var(--medium-text);
+            margin-bottom: 12px;
+        }
+
+        /* Additional Forms - Compact */
+        .additional-info {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .additional-info.show {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Success Messages */
+        .success-message {
+            color: var(--success-color);
+            font-size: 0.8rem;
+            text-align: center;
+            margin-top: 12px;
+            padding: 8px;
+            background: rgba(76, 175, 80, 0.1);
+            border-radius: 6px;
+            display: none;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        /* Loading Overlay */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.9);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+
+        .loading-overlay.show {
+            display: flex;
+        }
+
+        .loading-spinner {
+            width: 35px;
+            height: 35px;
+            border: 3px solid var(--light-bg);
+            border-top: 3px solid var(--accent-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .main-container {
+                grid-template-columns: 1fr;
+                overflow-y: auto;
+            }
+            
+            .welcome-panel {
+                display: none;
+            }
+            
+            .form-panel {
+                padding: 15px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 0 20px;
+            }
+
+            .form-panel {
+                padding: 10px;
+            }
+
+            .auth-container {
+                padding: 20px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .form-options {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .auth-container {
+                padding: 15px;
+            }
+
+            .navbar-logo-text {
+                font-size: 1.3rem;
+            }
+        }
+
+        /* Select styling */
+        .form-input select,
+        select.form-input {
+            padding: 9px 12px;
+            background: var(--white);
+            border: 2px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 0.9rem;
+            color: var(--dark-text);
+        }
+
+        select.form-input option {
+            padding: 6px;
+        }
+
+        /* Checkbox styling */
+        input[type="checkbox"] {
+            accent-color: var(--accent-color);
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <a href="/" class="navbar-brand">
+            <svg class="navbar-logo" width="42" height="42" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="100" cy="100" r="95" fill="#4B6455" stroke="#F4F7F2" stroke-width="2" />
+                <g id="trees">
+                    <line x1="100" y1="140" x2="100" y2="60" stroke="#F4F7F2" stroke-width="4" />
+                    <line x1="100" y1="80" x2="85" y2="65" stroke="#F4F7F2" stroke-width="2" />
+                    <line x1="100" y1="90" x2="115" y2="75" stroke="#F4F7F2" stroke-width="2" />
+                    <line x1="100" y1="125" x2="118" y2="110" stroke="#F4F7F2" stroke-width="2" />
+                </g>
+            </svg>
+            <span class="navbar-logo-text">Aspen Grove</span>
+        </a>
+        
+        <div class="navbar-menu">
+            <a href="/">Home</a>
+            <a href="/pricing.html">Pricing</a>
+            <a href="/about.html">About</a>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Welcome Panel -->
+        <div class="welcome-panel">
+            <div class="welcome-content">
+                <h1 class="welcome-title">Welcome to Aspen Grove</h1>
+                <p class="welcome-subtitle">The secure professional service management platform trusted by attorneys and service providers.</p>
+                
+                <ul class="welcome-features">
+                    <li>
+                        <i class="fas fa-shield-alt"></i>
+                        <span>HIPAA compliant document management</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-users"></i>
+                        <span>Seamless attorney-provider collaboration</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-clock"></i>
+                        <span>Streamlined workflows save 80% time</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-brain"></i>
+                        <span>AI-powered document analysis</span>
+                    </li>
+                </ul>
+                
+                <div class="security-indicators">
+                    <div class="security-item">
+                        <i class="fas fa-lock"></i>
+                        <span>256-bit Encryption</span>
+                    </div>
+                    <div class="security-item">
+                        <i class="fas fa-certificate"></i>
+                        <span>SOC 2 Certified</span>
+                    </div>
+                    <div class="security-item">
+                        <i class="fas fa-server"></i>
+                        <span>99.9% Uptime</span>
+                    </div>
+                </div>
+                
+                <div class="demo-section-welcome">
+                    <h3 class="demo-title-welcome">Try Before You Buy</h3>
+                    <p class="demo-description-welcome">Get a demo account to explore Aspen Grove risk-free</p>
+                    <button class="btn-demo-welcome" onclick="showDemoForm()">
+                        <i class="fas fa-play-circle"></i>
+                        Request Demo Account
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Form Panel -->
+        <div class="form-panel">
+            <div class="auth-container" id="authContainer">
+                <!-- Login Form -->
+                <div class="auth-form-container" id="loginForm">
+                    <div class="auth-header">
+                        <h1 class="auth-title">Sign In</h1>
+                        <p class="auth-subtitle">Access your Aspen Grove account</p>
+                    </div>
+
+                    <div class="user-type-toggle">
+                        <label class="user-type-label">I am a:</label>
+                        <div class="toggle-container">
+                            <div class="toggle-option active" data-type="requester">
+                                Service Requester
+                            </div>
+                            <div class="toggle-option" data-type="provider">
+                                Service Provider
+                            </div>
+                        </div>
+                        <div class="user-type-explanation" id="userTypeExplanation">
+                            I request professional services (legal research, document analysis, consulting, expert reports)
+                        </div>
+                    </div>
+
+                    <form class="auth-form" id="loginFormElement">
+                        <div class="form-group">
+                            <label class="form-label" for="loginEmail">Email Address</label>
+                            <input type="email" id="loginEmail" class="form-input" required>
+                            <div class="error-message" id="loginEmailError"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="loginPassword">Password</label>
+                            <div class="password-container">
+                                <input type="password" id="loginPassword" class="form-input" required>
+                                <button type="button" class="password-toggle" onclick="togglePassword('loginPassword')">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                            <div class="error-message" id="loginPasswordError"></div>
+                        </div>
+
+                        <div class="form-options">
+                            <label class="remember-me">
+                                <input type="checkbox" id="rememberMe">
+                                <span>Remember me</span>
+                            </label>
+                            <a href="#" class="forgot-password" onclick="showForgotPassword()">Forgot Password?</a>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-sign-in-alt"></i>
+                            Sign In
+                        </button>
+                    </form>
+
+                    <div class="form-toggle">
+                        <p>Don't have an account?</p>
+                        <a href="#" class="form-toggle-link" onclick="showRegistrationForm()">Create Account</a>
+                    </div>
+                </div>
+
+                <!-- Registration Form -->
+                <div class="auth-form-container" id="registrationForm" style="display: none;">
+                    <div class="auth-header">
+                        <h1 class="auth-title">Create Account</h1>
+                        <p class="auth-subtitle">Join the Aspen Grove platform</p>
+                    </div>
+
+                    <div class="user-type-toggle">
+                        <label class="user-type-label">I am a:</label>
+                        <div class="toggle-container">
+                            <div class="toggle-option active" data-type="requester">
+                                Service Requester
+                            </div>
+                            <div class="toggle-option" data-type="provider">
+                                Service Provider
+                            </div>
+                        </div>
+                        <div class="user-type-explanation" id="regUserTypeExplanation">
+                            I request professional services (legal research, document analysis, consulting, expert reports)
+                        </div>
+                    </div>
+
+                    <form class="auth-form" id="registrationFormElement">
+                        <div class="form-group">
+                            <label class="form-label" for="regEmail">Email Address</label>
+                            <input type="email" id="regEmail" class="form-input" required>
+                            <div class="error-message" id="regEmailError"></div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label" for="firstName">First Name</label>
+                                <input type="text" id="firstName" class="form-input" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="lastName">Last Name</label>
+                                <input type="text" id="lastName" class="form-input" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="company">Company/Firm</label>
+                            <input type="text" id="company" class="form-input">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="regPassword">Password</label>
+                            <div class="password-container">
+                                <input type="password" id="regPassword" class="form-input" required>
+                                <button type="button" class="password-toggle" onclick="togglePassword('regPassword')">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                            <div class="password-strength" id="passwordStrength">
+                                <div class="strength-bar">
+                                    <div class="strength-fill" id="strengthFill"></div>
+                                </div>
+                                <div class="strength-text" id="strengthText">Enter a password</div>
+                            </div>
+                            <div class="error-message" id="regPasswordError"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="remember-me">
+                                <input type="checkbox" id="agreeTerms" required>
+                                <span>I agree to the <a href="/terms.html" target="_blank">Terms</a> and <a href="/privacy.html" target="_blank">Privacy Policy</a></span>
+                            </label>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-user-plus"></i>
+                            Create Account
+                        </button>
+                    </form>
+
+                    <div class="form-toggle">
+                        <p>Already have an account?</p>
+                        <a href="#" class="form-toggle-link" onclick="showLoginForm()">Sign In</a>
+                    </div>
+                </div>
+
+                <!-- Demo Request Form -->
+                <div class="auth-form-container" id="demoForm" style="display: none;">
+                    <div class="auth-header">
+                        <h1 class="auth-title">Request Demo</h1>
+                        <p class="auth-subtitle">Try Aspen Grove risk-free with full access</p>
+                    </div>
+
+                    <div class="user-type-toggle">
+                        <label class="user-type-label">I am a:</label>
+                        <div class="toggle-container">
+                            <div class="toggle-option active" data-type="requester">
+                                Service Requester
+                            </div>
+                            <div class="toggle-option" data-type="provider">
+                                Service Provider
+                            </div>
+                        </div>
+                        <div class="user-type-explanation" id="demoUserTypeExplanation">
+                            I request professional services (legal research, document analysis, consulting, expert reports)
+                        </div>
+                    </div>
+
+                    <form class="auth-form" id="demoFormElement">
+                        <div class="form-group">
+                            <label class="form-label" for="demoEmail">Email Address</label>
+                            <input type="email" id="demoEmail" class="form-input" required>
+                            <div class="error-message" id="demoEmailError"></div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label" for="demoName">Full Name</label>
+                                <input type="text" id="demoName" class="form-input" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="demoCompany">Company/Firm</label>
+                                <input type="text" id="demoCompany" class="form-input">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="demoServices">Services of Interest</label>
+                            <select id="demoServices" class="form-input" required>
+                                <option value="">Select service type</option>
+                                <option value="document-analysis">Document Analysis</option>
+                                <option value="legal-research">Legal Research</option>
+                                <option value="expert-reports">Expert Reports</option>
+                                <option value="consulting">Professional Consulting</option>
+                                <option value="case-management">Case Management</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-envelope"></i>
+                            Send Demo Request
+                        </button>
+                    </form>
+
+                    <div class="form-toggle">
+                        <p>Ready to create a full account?</p>
+                        <a href="#" class="form-toggle-link" onclick="showRegistrationForm()">Sign Up Now</a>
+                    </div>
+                </div>
+
+                <!-- Forgot Password Form -->
+                <div class="auth-form-container" id="forgotPasswordForm" style="display: none;">
+                    <div class="auth-header">
+                        <h1 class="auth-title">Reset Password</h1>
+                        <p class="auth-subtitle">Enter your email to receive reset instructions</p>
+                    </div>
+
+                    <form class="auth-form" id="forgotPasswordFormElement">
+                        <div class="form-group">
+                            <label class="form-label" for="forgotEmail">Email Address</label>
+                            <input type="email" id="forgotEmail" class="form-input" required>
+                            <div class="error-message" id="forgotEmailError"></div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-envelope"></i>
+                            Send Reset Instructions
+                        </button>
+                    </form>
+
+                    <div class="form-toggle">
+                        <p>Remember your password?</p>
+                        <a href="#" class="form-toggle-link" onclick="showLoginForm()">Back to Sign In</a>
+                    </div>
+                </div>
+
+                <!-- Success Message -->
+                <div class="success-message" id="successMessage"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize AWS Amplify
+        Amplify.configure(awsconfig);
+
+        // State Management
+        let currentForm = 'login';
+        let currentUserType = 'requester';
+        const demoRequests = [];
+
+        // User Type Explanations
+        const explanations = {
+            requester: "I request professional services (legal research, document analysis, consulting, expert reports)",
+            provider: "I provide professional services to attorneys and other professionals (consulting, analysis, specialized reports)"
+        };
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', async function() {
+            try {
+                // Check if user is already authenticated
+                const user = await Auth.currentAuthenticatedUser();
+                if (user) {
+                    window.location.href = '/app/updated_dashboard.html';
+                }
+            } catch (error) {
+                // User is not authenticated, continue with login page
+                console.log('User not authenticated');
+            }
+            
+            initializeEventListeners();
+            // Initialize user type explanations for all forms
+            document.querySelectorAll('.user-type-toggle').forEach(toggle => {
+                const explanation = toggle.querySelector('.user-type-explanation');
+                if (explanation) {
+                    explanation.textContent = explanations[currentUserType];
+                    explanation.classList.add('show');
+                }
+            });
+            loadSavedDemoRequests();
+        });
+
+        // Event Listeners
+        function initializeEventListeners() {
+            // User type toggles
+            document.querySelectorAll('.toggle-option').forEach(option => {
+                option.addEventListener('click', handleUserTypeChange);
+            });
+
+            // Form submissions
+            document.getElementById('loginFormElement').addEventListener('submit', handleLogin);
+            document.getElementById('registrationFormElement').addEventListener('submit', handleRegistration);
+            document.getElementById('demoFormElement').addEventListener('submit', handleDemoRequest);
+            document.getElementById('forgotPasswordFormElement').addEventListener('submit', handleForgotPassword);
+
+            // Password strength checking
+            document.getElementById('regPassword').addEventListener('input', checkPasswordStrength);
+
+            // Email validation
+            document.getElementById('regEmail').addEventListener('blur', validateEmail);
+            document.getElementById('loginEmail').addEventListener('blur', validateEmail);
+            document.getElementById('demoEmail').addEventListener('blur', validateEmail);
+            document.getElementById('forgotEmail').addEventListener('blur', validateEmail);
+        }
+
+        // User Type Management
+        function handleUserTypeChange(event) {
+            const option = event.target;
+            const container = option.closest('.user-type-toggle');
+            const type = option.dataset.type;
+            
+            // Update active state for all toggles
+            document.querySelectorAll('.toggle-option').forEach(opt => {
+                if (opt.dataset.type === type) {
+                    opt.classList.add('active');
+                } else {
+                    opt.classList.remove('active');
+                }
+            });
+            
+            // Update current user type
+            currentUserType = type;
+            
+            // Update all explanations
+            document.querySelectorAll('.user-type-explanation').forEach(explanation => {
+                explanation.textContent = explanations[type];
+                explanation.classList.add('show');
+            });
+        }
+
+        // Form Navigation
+        function showLoginForm() {
+            hideAllForms();
+            document.getElementById('loginForm').style.display = 'block';
+            currentForm = 'login';
+            resetFormStates();
+        }
+
+        function showRegistrationForm() {
+            hideAllForms();
+            document.getElementById('registrationForm').style.display = 'block';
+            currentForm = 'registration';
+            resetFormStates();
+        }
+
+        function showDemoForm() {
+            hideAllForms();
+            document.getElementById('demoForm').style.display = 'block';
+            currentForm = 'demo';
+            resetFormStates();
+        }
+
+        function showForgotPassword() {
+            hideAllForms();
+            document.getElementById('forgotPasswordForm').style.display = 'block';
+            currentForm = 'forgot';
+            resetFormStates();
+        }
+
+        function hideAllForms() {
+            document.querySelectorAll('.auth-form-container').forEach(form => {
+                form.style.display = 'none';
+            });
+        }
+
+        function resetFormStates() {
+            // Clear all error messages
+            document.querySelectorAll('.error-message').forEach(msg => {
+                msg.classList.remove('show');
+                msg.textContent = '';
+            });
+            
+            // Clear all form inputs
+            document.querySelectorAll('.form-input').forEach(input => {
+                input.classList.remove('error');
+            });
+            
+            // Reset password strength
+            const passwordStrength = document.getElementById('passwordStrength');
+            if (passwordStrength) {
+                passwordStrength.classList.remove('show');
+            }
+        }
+
+        // Password Management
+        function togglePassword(inputId) {
+            const input = document.getElementById(inputId);
+            const button = input.nextElementSibling;
+            const icon = button.querySelector('i');
+            
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                input.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        }
+
+        function checkPasswordStrength() {
+            const password = document.getElementById('regPassword').value;
+            const strengthElement = document.getElementById('passwordStrength');
+            const fillElement = document.getElementById('strengthFill');
+            const textElement = document.getElementById('strengthText');
+            
+            if (password.length === 0) {
+                strengthElement.classList.remove('show');
+                return;
+            }
+            
+            strengthElement.classList.add('show');
+            
+            let strength = 0;
+            let feedback = [];
+            
+            // Length check
+            if (password.length >= 8) strength++;
+            else feedback.push('8+ chars');
+            
+            // Uppercase check
+            if (/[A-Z]/.test(password)) strength++;
+            else feedback.push('uppercase');
+            
+            // Lowercase check
+            if (/[a-z]/.test(password)) strength++;
+            else feedback.push('lowercase');
+            
+            // Number check
+            if (/[0-9]/.test(password)) strength++;
+            else feedback.push('number');
+            
+            // Special character check
+            if (/[^A-Za-z0-9]/.test(password)) strength++;
+            else feedback.push('special char');
+            
+            // Update UI based on strength
+            fillElement.className = 'strength-fill';
+            if (strength < 3) {
+                fillElement.classList.add('weak');
+                textElement.textContent = `Weak - Add: ${feedback.join(', ')}`;
+                textElement.style.color = 'var(--danger-color)';
+            } else if (strength < 5) {
+                fillElement.classList.add('medium');
+                textElement.textContent = `Medium - Add: ${feedback.join(', ')}`;
+                textElement.style.color = 'var(--warning-color)';
+            } else {
+                fillElement.classList.add('strong');
+                textElement.textContent = 'Strong password!';
+                textElement.style.color = 'var(--success-color)';
+            }
+        }
+
+        // Email Validation
+        function validateEmail(event) {
+            const email = event.target.value;
+            const input = event.target;
+            const errorElement = input.nextElementSibling;
+            
+            if (!email) return;
+            
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            
+            if (!emailRegex.test(email)) {
+                errorElement.textContent = 'Please enter a valid email address';
+                errorElement.classList.add('show');
+                input.classList.add('error');
+            } else {
+                errorElement.classList.remove('show');
+                input.classList.remove('error');
+                
+                // Check for common typos
+                checkEmailTypos(email, errorElement);
+            }
+        }
+
+        function checkEmailTypos(email, errorElement) {
+            const commonDomains = {
+                'gmai.com': 'gmail.com',
+                'gmial.com': 'gmail.com',
+                'gmail.co': 'gmail.com',
+                'yahooo.com': 'yahoo.com',
+                'yahoo.co': 'yahoo.com',
+                'hotmai.com': 'hotmail.com',
+                'hotmal.com': 'hotmail.com'
+            };
+            
+            const domain = email.split('@')[1];
+            if (domain && commonDomains[domain]) {
+                errorElement.textContent = `Did you mean ${email.split('@')[0]}@${commonDomains[domain]}?`;
+                errorElement.classList.add('show');
+                errorElement.style.color = 'var(--warning-color)';
+            }
+        }
+
+        // Form Submissions
+        async function handleLogin(event) {
+            event.preventDefault();
+            
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            const rememberMe = document.getElementById('rememberMe').checked;
+            
+            // Show loading
+            showLoading(true);
+            
+            try {
+                // Use AWS Amplify Auth
+                const user = await Auth.signIn(email, password);
+                if (rememberMe) {
+                    await Auth.rememberDevice();
+                }
+                
+                // Add user type to attributes if needed
+                await Auth.updateUserAttributes(user, {
+                    'custom:userType': currentUserType
+                });
+                
+                showSuccessMessage('Login successful! Redirecting...');
+                setTimeout(() => {
+                    window.location.href = '/app/updated_dashboard.html';
+                }, 1500);
+                
+            } catch (error) {
+                console.error('Login error:', error);
+                if (error.code === 'UserNotConfirmedException') {
+                    showError('loginEmailError', 'Please verify your email address');
+                } else if (error.code === 'NotAuthorizedException') {
+                    showError('loginPasswordError', 'Incorrect username or password');
+                } else {
+                    showError('loginPasswordError', 'Login failed. Please try again.');
+                }
+            } finally {
+                showLoading(false);
+            }
+        }
+
+        async function handleRegistration(event) {
+            event.preventDefault();
+            
+            const email = document.getElementById('regEmail').value;
+            const password = document.getElementById('regPassword').value;
+            const firstName = document.getElementById('firstName').value;
+            const lastName = document.getElementById('lastName').value;
+            const company = document.getElementById('company').value;
+            
+            // Show loading
+            showLoading(true);
+            
+            try {
+                // Use AWS Amplify Auth
+                const { user } = await Auth.signUp({
+                    username: email,
+                    password: password,
+                    attributes: {
+                        email: email,
+                        given_name: firstName,
+                        family_name: lastName,
+                        'custom:userType': currentUserType,
+                        'custom:company': company
+                    }
+                });
+                
+                showSuccessMessage('Account created! Please check your email to verify your account.');
+                
+            } catch (error) {
+                console.error('Registration error:', error);
+                if (error.code === 'UsernameExistsException') {
+                    showError('regEmailError', 'An account with this email already exists');
+                } else if (error.code === 'InvalidPasswordException') {
+                    showError('regPasswordError', 'Password does not meet requirements');
+                } else {
+                    showError('regEmailError', 'Registration failed. Please try again.');
+                }
+            } finally {
+                showLoading(false);
+            }
+        }
+
+        async function handleDemoRequest(event) {
+            event.preventDefault();
+            
+            const email = document.getElementById('demoEmail').value;
+            const name = document.getElementById('demoName').value;
+            const company = document.getElementById('demoCompany').value;
+            const services = document.getElementById('demoServices').value;
+            
+            // Show loading
+            showLoading(true);
+            
+            try {
+                // Generate demo code
+                const demoCode = generateDemoCode();
+                
+                // Store demo request
+                const demoRequest = {
+                    email,
+                    name,
+                    company,
+                    services,
+                    userType: currentUserType,
+                    demoCode,
+                    requestDate: new Date().toISOString(),
+                    expiryDate: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000).toISOString() // 14 days from now
+                };
+                
+                // Save to localStorage for demo (would be saved to DynamoDB in production)
+                demoRequests.push(demoRequest);
+                storage.setItem('demoRequests', JSON.stringify(demoRequests));
+                
+                // Simulate API call
+                await simulateApiCall();
+                
+                showSuccessMessage(`Demo request submitted! Your demo code is ${demoCode}. Check your email for access instructions.`);
+                
+                // Reset form
+                document.getElementById('demoFormElement').reset();
+                
+            } catch (error) {
+                console.error('Demo request error:', error);
+                showError('demoEmailError', 'Failed to submit demo request. Please try again.');
+            } finally {
+                showLoading(false);
+            }
+        }
+
+        async function handleForgotPassword(event) {
+            event.preventDefault();
+            
+            const email = document.getElementById('forgotEmail').value;
+            
+            // Show loading
+            showLoading(true);
+            
+            try {
+                // Use AWS Amplify Auth
+                await Auth.forgotPassword(email);
+                showSuccessMessage('Password reset instructions sent to your email.');
+                
+            } catch (error) {
+                console.error('Forgot password error:', error);
+                if (error.code === 'UserNotFoundException') {
+                    showError('forgotEmailError', 'No account found with this email address');
+                } else {
+                    showError('forgotEmailError', 'Failed to send reset instructions. Please try again.');
+                }
+            } finally {
+                showLoading(false);
+            }
+        }
+
+        // Utility Functions
+        function generateDemoCode() {
+            return 'DEMO-' + Math.random().toString(36).substr(2, 9).toUpperCase();
+        }
+
+        function simulateApiCall() {
+            return new Promise(resolve => setTimeout(resolve, 1500));
+        }
+
+        function showLoading(show) {
+            const overlay = document.getElementById('loadingOverlay');
+            if (show) {
+                overlay.classList.add('show');
+            } else {
+                overlay.classList.remove('show');
+            }
+        }
+
+        function showError(elementId, message) {
+            const errorElement = document.getElementById(elementId);
+            const inputElement = errorElement.previousElementSibling;
+            
+            errorElement.textContent = message;
+            errorElement.classList.add('show');
+            inputElement.classList.add('error');
+        }
+
+        function showSuccessMessage(message) {
+            const successElement = document.getElementById('successMessage');
+            successElement.textContent = message;
+            successElement.classList.add('show');
+            
+            setTimeout(() => {
+                successElement.classList.remove('show');
+            }, 5000);
+        }
+
+        function loadSavedDemoRequests() {
+            const saved = storage.getItem('demoRequests');
+            if (saved) {
+                demoRequests.push(...JSON.parse(saved));
+            }
+        }
+
+        // Auto-save form data
+        document.addEventListener('input', (event) => {
+            if (event.target.classList.contains('form-input')) {
+                const form = event.target.closest('form');
+                if (form) {
+                    const formData = new FormData(form);
+                    const data = Object.fromEntries(formData.entries());
+                    saveFormData(currentForm, data);
+                }
+            }
+        });
+
+        function saveFormData(formType, data) {
+            localStorage.setItem(`formData_${formType}`, JSON.stringify(data));
+        }
+
+        function loadFormData(formType) {
+            const saved = localStorage.getItem(`formData_${formType}`);
+            return saved ? JSON.parse(saved) : null;
+        }
+
+        // Load saved form data on page load
+        window.addEventListener('load', () => {
+            const savedData = loadFormData(currentForm);
+            if (savedData) {
+                Object.entries(savedData).forEach(([key, value]) => {
+                    const input = document.getElementById(key);
+                    if (input) {
+                        input.value = value;
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

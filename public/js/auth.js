@@ -68,7 +68,7 @@ class AuthManager {
     }
 
     redirectToLogin() {
-        window.location.href = '/login.html';
+        window.location.href = '/public/login.html';
     }
 
     async getCurrentUser() {
@@ -92,4 +92,25 @@ class AuthManager {
     }
 }
 
-export const authManager = new AuthManager(); 
+export const authManager = new AuthManager();
+
+function handleSignOut() {
+    Auth.signOut()
+        .then(() => {
+            window.location.href = '/public/login.html';
+        })
+        .catch(error => {
+            console.error('Error signing out:', error);
+        });
+}
+
+function handleSignIn(username, password) {
+    Auth.signIn(username, password)
+        .then(user => {
+            window.location.href = '/app/updated_dashboard.html';
+        })
+        .catch(error => {
+            console.error('Error signing in:', error);
+            // Handle error appropriately
+        });
+} 

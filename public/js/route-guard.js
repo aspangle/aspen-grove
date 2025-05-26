@@ -3,9 +3,8 @@ import { Auth } from 'aws-amplify';
 
 // List of allowed public pages that don't require authentication
 const PUBLIC_PAGES = [
-    '/',
-    '/index.html',
-    '/login.html'
+    '/public/index.html',
+    '/public/login.html'
 ];
 
 // List of allowed authenticated pages

@@ -1496,10 +1496,6 @@
             }
         }
     </style>
-    <script type="module">
-        import { initializeRouteGuard } from '/js/route-guard.js';
-        document.addEventListener('DOMContentLoaded', initializeRouteGuard);
-    </script>
 </head>
 <body>
     <!-- Add overlay element -->
@@ -1507,17 +1503,112 @@
     
     <!-- Navigation Bar -->
     <nav class="navbar" id="navbar">
-        <div class="navbar-brand">
-            <a href="/">
-                <img src="/assets/logo.png" alt="Aspen Grove Solutions" class="navbar-logo">
-                <span class="navbar-logo-text">Aspen Grove</span>
-            </a>
+        <a href="/" class="navbar-brand">
+            <svg class="navbar-logo" width="42" height="42" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                <!-- Aspen Grove Logo -->
+                <circle cx="100" cy="100" r="95" fill="#4B6455" stroke="#F4F7F2" stroke-width="2" />
+                
+                <!-- Aspen Trees -->
+                <g id="trees">
+                    <!-- Tree 1 (center) -->
+                    <line x1="100" y1="140" x2="100" y2="60" stroke="#F4F7F2" stroke-width="4" />
+                    <!-- Branches -->
+                    <line x1="100" y1="80" x2="85" y2="65" stroke="#F4F7F2" stroke-width="2" />
+                    <line x1="100" y1="90" x2="115" y2="75" stroke="#F4F7F2" stroke-width="2" />
+                    <line x1="100" y1="110" x2="80" y2="95" stroke="#F4F7F2" stroke-width="2" />
+                    <line x1="100" y1="125" x2="118" y2="110" stroke="#F4F7F2" stroke-width="2" />
+                </g>
+            </svg>
+            <span class="navbar-logo-text">Aspen Grove</span>
+        </a>
+        
+        <div class="navbar-menu" id="mainMenu">
+            <!-- Features Dropdown -->
+            <div class="dropdown">
+                <div class="dropdown-toggle">
+                    <span>Features</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="dropdown-menu solutions-menu">
+                    <!-- Left Column -->
+                    <div class="dropdown-section">
+                        <h3><a href="/solutions/document-management.html">Document Management</a></h3>
+                        <a href="/solutions/document-management-storage.html">Secure Document Storage</a>
+                        <a href="/solutions/document-management-email.html">Email Integration</a>
+                        <a href="/solutions/document-management-organization.html">Document Organization</a>
+                    </div>
+                    
+                    <div class="dropdown-section">
+                        <h3><a href="/solutions/case-management.html">Case Management</a></h3>
+                        <a href="/solutions/case-management-workflow.html">Service Request Management</a>
+                        <a href="/solutions/case-management-calendar.html">Case Calendaring</a>
+                        <a href="/solutions/case-management-reports.html">Case Reports</a>
+                    </div>
+                    
+                    <!-- Right Column -->
+                    <div class="dropdown-section">
+                        <h3><a href="/solutions/client-communications.html">Client Communications</a></h3>
+                        <a href="/solutions/client-portal.html">Client Portal</a>
+                        <a href="/solutions/secure-messaging.html">Secure Messaging</a>
+                        <a href="/solutions/document-sharing.html">Secure Document Sharing</a>
+                    </div>
+                    
+                    <div class="dropdown-section">
+                        <h3><a href="/solutions/billing-payments.html">Billing & Payments</a></h3>
+                        <a href="/solutions/billing-invoicing.html">Billing & Invoicing</a>
+                        <a href="/solutions/time-tracking.html">Time Tracking</a>
+                        <a href="/solutions/payment-processing.html">Payment Processing</a>
+                    </div>
+                </div>
+            </div>
+            
+            <a href="/pricing.html" class="nav-link">Pricing</a>
+            
+            <!-- Resources Dropdown -->
+            <div class="dropdown">
+                <div class="dropdown-toggle">
+                    <span>Resources</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="dropdown-menu">
+                    <a href="/resources/blog.html">Blog</a>
+                    <a href="/resources/guides.html">Guides</a>
+                    <a href="/resources/reports.html">Reports</a>
+                </div>
+            </div>
+            
+            <!-- About Dropdown -->
+            <div class="dropdown">
+                <div class="dropdown-toggle">
+                    <span>About</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="dropdown-menu">
+                    <a href="/about/company.html">Company</a>
+                    <a href="/about/contact.html">Contact</a>
+                </div>
+            </div>
+
+            <!-- Legal Dropdown -->
+            <div class="dropdown">
+                <div class="dropdown-toggle">
+                    <span>Legal</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="dropdown-menu">
+                    <a href="/legal/privacy-policy.html">Privacy Policy</a>
+                    <a href="/legal/terms.html">Terms of Service</a>
+                    <a href="/legal/hipaa.html">HIPAA Compliance</a>
+                </div>
+            </div>
+            
+            <a href="/login.html" class="nav-link">Login</a>
+            <a href="/free-trial.html" class="navbar-cta">Free Trial</a>
         </div>
         
-        <div class="navbar-menu">
-            <a href="/" class="nav-link">Home</a>
-            <a href="/login.html" class="nav-link">Login</a>
-        </div>
+        <button class="navbar-toggle" id="navbarToggle" aria-label="Toggle menu">
+            <i class="fas fa-bars"></i>
+        </button>
     </nav>
 
     <!-- Main Container -->

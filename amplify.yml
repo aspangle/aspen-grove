@@ -13,7 +13,7 @@ applications:
             # Add cache control headers to static assets
             - find . -type f \( -name "*.js" -o -name "*.css" -o -name "*.png" -o -name "*.jpg" -o -name "*.svg" \) -exec sh -c 'echo "Cache-Control: public, max-age=31536000" > {}.headers' \;
       artifacts:
-        baseDirectory: pages/public
+        baseDirectory: public
         files:
           - '**/*'
           - '**/*.headers'

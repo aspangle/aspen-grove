@@ -9,7 +9,10 @@
     "lint": "echo 'No linting configured'"
   },
   "dependencies": {
-    "serve": "^14.2.1"
+    "serve": "^14.2.1",
+    "pdf-lib": "^1.17.1",
+    "mammoth": "^1.6.0",
+    "pdf.js-extract": "^0.2.1"
   },
   "devDependencies": {
     "@aws-amplify/cli": "^12.10.0"
@@ -17,5 +20,6 @@
   "engines": {
     "node": ">=16.0.0"
   },
-  "private": true
+  "private": true,
+  "type": "module"
 } 
